@@ -8,6 +8,7 @@ import { units } from '@/data/units'
 import { events } from '@/data/events'
 import { reviews } from '@/data/reviews'
 import { spots } from '@/data/neighborhood'
+import { getLodgingBusinessSchema } from '@/lib/schema'
 
 export default function HomePage() {
   const upcomingEvents = events.slice(0, 5)
@@ -15,6 +16,10 @@ export default function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getLodgingBusinessSchema()) }}
+      />
       {/* Hero */}
       <section className="relative min-h-screen flex" id="booking">
         {/* Left: Brand + unit strip */}
