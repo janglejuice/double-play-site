@@ -23,22 +23,23 @@ export default function NavBar() {
         <Link href="/" aria-label="Double Play at Wrigley" style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 14,
+          gap: 0,
           color: '#fff',
           textDecoration: 'none',
         }}>
-          <span style={{ width: 52, height: 58, flex: 'none', display: 'grid', placeItems: 'center' }}>
-            <Image src="/logo-mark.png" alt="" width={52} height={58} style={{ objectFit: 'contain', filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.35))' }} />
+          <span style={{ width: 170, height: 150, flex: 'none', display: 'grid', placeItems: 'center' }}>
+            <Image src="/logo-mark.png" alt="" width={170} height={150} style={{ objectFit: 'contain', filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.35))' }} />
           </span>
           <span style={{
             fontFamily: "'DM Serif Display', Georgia, serif",
-            fontSize: 30,
-            lineHeight: 1.02,
+            fontSize: 48,
+            lineHeight: 1,
             letterSpacing: '-0.01em',
             color: '#fff',
+            marginLeft: -32,
           }}>
             Double Play
-            <span style={{ display: 'block', fontSize: 18, fontStyle: 'italic', fontWeight: 400, marginTop: 2 }}>at Wrigley</span>
+            <span style={{ display: 'block', fontSize: 28, fontStyle: 'italic', fontWeight: 400, marginTop: 4 }}>at Wrigley</span>
           </span>
         </Link>
 

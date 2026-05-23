@@ -36,8 +36,8 @@ export default function HomePage() {
           backgroundImage: 'url(/wrigley-hero.png)',
           backgroundPosition: 'center 35%',
           backgroundSize: 'cover',
-          filter: 'blur(1.2px)',
-          transform: 'scale(1.02)',
+          filter: 'blur(0.8px)',
+          transform: 'scale(1.01)',
         }} aria-label="View of Wrigley Field" role="img" />
         {/* Gradient overlays */}
         <div style={{
@@ -75,6 +75,26 @@ export default function HomePage() {
               }}>
                 Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago. Book direct and skip the booking fees.
               </p>
+
+              {/* Save $200+ callout — under hero subtitle */}
+              <div style={{
+                display: 'inline-block',
+                background: '#E85A2C',
+                color: '#fff',
+                padding: '16px 22px',
+                borderRadius: 14,
+                boxShadow: '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)',
+                marginTop: 24,
+                fontFamily: 'Manrope',
+                maxWidth: 520,
+              }}>
+                <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.06em', marginBottom: 4 }}>
+                  SAVE $200+ BOOKING DIRECT
+                </div>
+                <div style={{ fontSize: 13, lineHeight: 1.5, opacity: 0.95 }}>
+                  Guests save an average of $200+ vs. Airbnb &amp; VRBO on a 3-night stay.
+                </div>
+              </div>
             </div>
 
             {/* Booking Panel */}
@@ -125,26 +145,6 @@ export default function HomePage() {
                 </div>
               </div>
             </aside>
-
-            {/* Save $200+ callout below booking panel */}
-            <div style={{
-              gridColumn: 2,
-              background: '#E85A2C',
-              color: '#fff',
-              padding: '18px 22px',
-              borderRadius: 14,
-              boxShadow: '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)',
-              marginTop: 14,
-              fontFamily: 'Manrope',
-              alignSelf: 'start',
-            }}>
-              <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.06em', marginBottom: 4 }}>
-                SAVE $200+ BOOKING DIRECT
-              </div>
-              <div style={{ fontSize: 13, lineHeight: 1.5, opacity: 0.95 }}>
-                Guests save an average of $200+ vs. Airbnb &amp; VRBO on a 3-night stay.
-              </div>
-            </div>
 
           </div>
         </div>
@@ -248,12 +248,85 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ BROADER CHICAGO APPEAL ============ */}
+      <section id="chicago" style={{ padding: '96px 0', background: '#15375c', color: '#fff' }}>
+        <div style={WRAP}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>
+                Beyond the Ballpark
+              </div>
+              <h2 style={{
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontWeight: 400,
+                fontSize: 44,
+                letterSpacing: '-0.01em',
+                lineHeight: 1.1,
+                margin: '0 0 24px',
+              }}>
+                You came for the game. Stay for the city.
+              </h2>
+              <p style={{ fontSize: 17, lineHeight: 1.7, color: 'rgba(255,255,255,0.9)', margin: '0 0 20px' }}>
+                Our apartments aren&apos;t just steps from Wrigley Field — they&apos;re a 3-minute walk from the Addison Red
+                Line, which puts you in <strong>downtown Chicago in 15 minutes</strong>. The Bean. The Art Institute.
+                The Riverwalk. Magnificent Mile. Lake Michigan&apos;s beaches. All without renting a car.
+              </p>
+              <p style={{ fontSize: 17, lineHeight: 1.7, color: 'rgba(255,255,255,0.9)', margin: '0 0 28px' }}>
+                We hand every guest a personal guide to the rest of Chicago — where to get real deep dish, which
+                museum is worth a full day, and how to spend an afternoon on the lakefront like a local.
+              </p>
+              <Link
+                href="/neighborhood#beyond-wrigleyville"
+                style={{
+                  display: 'inline-block',
+                  background: '#E85A2C',
+                  color: '#fff',
+                  padding: '14px 28px',
+                  borderRadius: 8,
+                  fontSize: 13,
+                  fontWeight: 800,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  textDecoration: 'none',
+                }}
+              >
+                Read the full guide →
+              </Link>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              {[
+                { label: 'The Loop & The Bean', time: '15 min' },
+                { label: 'Lake Michigan', time: '10 min walk' },
+                { label: 'Magnificent Mile', time: '20 min' },
+                { label: 'Art Institute', time: '20 min' },
+                { label: 'Lincoln Park Zoo', time: '5 min' },
+                { label: "O'Hare Airport", time: '60 min' },
+              ].map(d => (
+                <div key={d.label} style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  borderRadius: 10,
+                  padding: '20px 18px',
+                }}>
+                  <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.15em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 6 }}>
+                    {d.time}
+                  </div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', lineHeight: 1.25 }}>
+                    {d.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============ NEIGHBORHOOD ============ */}
       <section id="guide" style={{ padding: '96px 0', background: '#f5f6f8' }}>
         <div style={WRAP}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Explore Wrigleyville</h2>
-            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Find out more about the full neighborhood guide.</p>
+            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>The pre-game bars, late-night slices, and weekend brunch spots we&apos;ve sent hundreds of guests to. Full guide inside.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
             {[

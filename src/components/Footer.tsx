@@ -14,13 +14,13 @@ export default function Footer() {
         }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#fff', textDecoration: 'none' }}>
-              <span style={{ width: 52, height: 58, flex: 'none', display: 'grid', placeItems: 'center' }}>
-                <Image src="/logo-mark.png" alt="" width={52} height={58} style={{ objectFit: 'contain' }} />
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 0, color: '#fff', textDecoration: 'none' }}>
+              <span style={{ width: 170, height: 150, flex: 'none', display: 'grid', placeItems: 'center' }}>
+                <Image src="/logo-mark.png" alt="" width={170} height={150} style={{ objectFit: 'contain' }} />
               </span>
-              <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 30, lineHeight: 1.02, color: '#fff' }}>
+              <span style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 48, lineHeight: 1, color: '#fff', marginLeft: -32 }}>
                 Double Play
-                <span style={{ display: 'block', fontSize: 18, fontStyle: 'italic', fontWeight: 400, marginTop: 2 }}>at Wrigley</span>
+                <span style={{ display: 'block', fontSize: 28, fontStyle: 'italic', fontWeight: 400, marginTop: 4 }}>at Wrigley</span>
               </span>
             </Link>
             <p style={{ color: '#9fb0c5', fontSize: 14, marginTop: 20, maxWidth: 300, lineHeight: 1.6 }}>
