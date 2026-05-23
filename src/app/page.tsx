@@ -1,121 +1,242 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import BookingWidget from '@/components/BookingWidget'
-import UnitCard from '@/components/UnitCard'
-import EventCard from '@/components/EventCard'
-import ReviewCard from '@/components/ReviewCard'
 import { units } from '@/data/units'
 import { events } from '@/data/events'
 import { reviews } from '@/data/reviews'
-import { spots } from '@/data/neighborhood'
 import { getLodgingBusinessSchema } from '@/lib/schema'
 
+const WRAP = { maxWidth: 1320, margin: '0 auto', padding: '0 32px' }
+
+const SHADOW_CARD = '0 1px 2px rgba(15,42,72,0.04), 0 12px 28px -12px rgba(15,42,72,0.18)'
+const SHADOW_PANEL = '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)'
+
+function formatDate(iso: string) {
+  const d = new Date(iso)
+  return {
+    dow: d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(),
+    day: d.getDate(),
+    mon: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
+  }
+}
+
 export default function HomePage() {
-  const upcomingEvents = events.slice(0, 5)
-  const featuredReviews = reviews.slice(0, 3)
+  const upcomingEvents = events.slice(0, 4)
+  const featuredReviews = reviews.slice(0, 4)
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(getLodgingBusinessSchema()) }}
-      />
-      {/* Hero */}
-      <section className="relative min-h-screen flex" id="booking">
-        {/* Left: Brand + unit strip */}
-        <div className="flex-1 flex flex-col justify-between p-10 md:p-16">
-          <div className="text-xs tracking-widest text-muted uppercase">
-            Wrigleyville · Chicago, IL
-          </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getLodgingBusinessSchema()) }} />
 
-          <div>
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-none text-primary mb-4">
-              STEPS FROM<br />THE FIELD.
-            </h1>
-            <p className="text-secondary text-sm tracking-wide">
-              Three private apartments. Zero service fees.
-            </p>
-          </div>
+      {/* ============ HERO ============ */}
+      <section style={{ position: 'relative', minHeight: 880, overflow: 'hidden', background: '#0c1d33' }}>
+        {/* Background photo with blur */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundImage: 'url(/wrigley-hero.png)',
+          backgroundPosition: 'center 35%',
+          backgroundSize: 'cover',
+          filter: 'blur(1.2px)',
+          transform: 'scale(1.02)',
+        }} aria-label="View of Wrigley Field" role="img" />
+        {/* Gradient overlays */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `
+            linear-gradient(180deg, rgba(10,22,38,0.55) 0%, rgba(10,22,38,0.20) 18%, rgba(10,22,38,0) 32%, rgba(10,22,38,0) 55%, rgba(10,22,38,0.65) 100%),
+            linear-gradient(90deg, rgba(10,22,38,0.45) 0%, rgba(10,22,38,0) 48%)
+          `,
+        }} />
 
-          {/* Unit photo strip */}
-          <div className="grid grid-cols-3 gap-3">
-            {units.map((unit) => (
-              <Link key={unit.slug} href={`/units/${unit.slug}`} className="group relative aspect-video overflow-hidden bg-surface">
-                <Image src={unit.photos[0]} alt={unit.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <div className="text-xs font-bold text-primary">{unit.name}</div>
-                  <div className="text-xs text-secondary">{unit.floor}</div>
+        {/* Content */}
+        <div style={{ ...WRAP, position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 220, minHeight: 880, display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 48, alignItems: 'start', flex: 1 }}>
+
+            {/* Headline */}
+            <div style={{ alignSelf: 'end', color: '#fff', maxWidth: 720 }}>
+              <h1 style={{
+                fontFamily: "'DM Serif Display', Georgia, serif",
+                fontWeight: 400,
+                fontSize: 64,
+                lineHeight: 1.05,
+                margin: '0 0 8px',
+                letterSpacing: '-0.01em',
+                textShadow: '0 2px 30px rgba(0,0,0,0.35)',
+              }}>
+                Across the street<br />from Wrigley Field
+              </h1>
+              <p style={{
+                fontSize: 17,
+                lineHeight: 1.5,
+                color: 'rgba(255,255,255,0.92)',
+                margin: '18px 0 0',
+                maxWidth: 520,
+                textShadow: '0 1px 14px rgba(0,0,0,0.5)',
+              }}>
+                Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago.<br />
+                Book direct and skip the booking fees.
+              </p>
+            </div>
+
+            {/* Booking Panel */}
+            <aside aria-label="Booking panel" style={{
+              width: 380,
+              background: '#fff',
+              borderRadius: 14,
+              boxShadow: SHADOW_PANEL,
+              overflow: 'hidden',
+              alignSelf: 'start',
+            }}>
+              <div style={{ background: '#15375c', color: '#fff', textAlign: 'left', padding: '20px 24px', fontFamily: 'Manrope', fontWeight: 700, fontSize: 18, letterSpacing: '-0.005em' }}>
+                Check Dates and Book
+              </div>
+              <div style={{ padding: '24px 24px 28px' }}>
+                {/* Check-in */}
+                <div style={{ marginBottom: 18 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', color: '#15375c', textTransform: 'uppercase', marginBottom: 8 }}>Check-in date</label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', border: '1.5px solid #e6e8ec', borderRadius: 6, padding: '0 14px', height: 48, background: '#fff' }}>
+                    <input type="text" defaultValue="" placeholder="Select date" style={{ width: '100%', border: 0, outline: 0, background: 'transparent', fontFamily: 'inherit', color: '#1c2433', fontWeight: 600, fontSize: 15 }} />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15375c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none', marginLeft: 8, opacity: 0.85 }}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+                  </div>
                 </div>
-              </Link>
+                {/* Check-out */}
+                <div style={{ marginBottom: 18 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', color: '#15375c', textTransform: 'uppercase', marginBottom: 8 }}>Check-out date</label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', border: '1.5px solid #e6e8ec', borderRadius: 6, padding: '0 14px', height: 48, background: '#fff' }}>
+                    <input type="text" defaultValue="" placeholder="Select date" style={{ width: '100%', border: 0, outline: 0, background: 'transparent', fontFamily: 'inherit', color: '#1c2433', fontWeight: 600, fontSize: 15 }} />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#15375c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none', marginLeft: 8, opacity: 0.85 }}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+                  </div>
+                </div>
+                {/* Guests */}
+                <div style={{ marginBottom: 18 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, letterSpacing: '0.16em', color: '#15375c', textTransform: 'uppercase', marginBottom: 8 }}>Guests</label>
+                  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', border: '1.5px solid #e6e8ec', borderRadius: 6, padding: '0 14px', height: 48, background: '#fff' }}>
+                    <select defaultValue="2 guests" style={{ width: '100%', border: 0, outline: 0, background: 'transparent', fontFamily: 'inherit', color: '#1c2433', fontWeight: 600, fontSize: 15, appearance: 'none', paddingRight: 22 }}>
+                      {[1,2,3,4,5,6].map(n => <option key={n}>{n} guest{n > 1 ? 's' : ''}</option>)}
+                    </select>
+                    <span style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%) rotate(45deg)', width: 7, height: 7, borderRight: '2px solid #15375c', borderBottom: '2px solid #15375c', pointerEvents: 'none' }} />
+                  </div>
+                </div>
+                <button type="button" style={{ display: 'block', width: '100%', background: '#E85A2C', color: '#fff', textAlign: 'center', padding: '16px 18px', borderRadius: 6, fontWeight: 700, fontSize: 16, letterSpacing: '0.005em', marginTop: 10, border: 0, cursor: 'pointer', fontFamily: 'inherit' }}>
+                  Search &amp; Book
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 14, fontSize: 12, color: '#6b7585', fontWeight: 600 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#23a06b', display: 'inline-block' }} />
+                  Instant confirmation · No service fees
+                </div>
+              </div>
+            </aside>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ============ APARTMENTS — overlaps hero ============ */}
+      <section id="apartments" style={{ position: 'relative', zIndex: 5, marginTop: -140, paddingBottom: 120 }}>
+        <div style={WRAP}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, maxWidth: 1190, margin: '0 auto' }}>
+            {units.map(unit => (
+              <article key={unit.slug} style={{ background: '#fff', borderRadius: 8, boxShadow: SHADOW_CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '5px solid #fff', outline: '5px solid #fff' }}>
+                <div style={{ aspectRatio: '16/10', background: '#e8eaee', position: 'relative', overflow: 'hidden' }}>
+                  <Image src={unit.photos[0]} alt={unit.name} fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div style={{ padding: '28px 28px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <h3 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 24, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 12px' }}>{unit.name}</h3>
+                  <p style={{ color: '#6b7585', fontSize: 15, lineHeight: 1.5, margin: '0 0 24px' }}>{unit.tagline}</p>
+                  <div style={{ fontSize: 15, color: '#1c2433', marginBottom: 28 }}>
+                    <b style={{ fontSize: 24, fontWeight: 700, color: '#15375c', marginRight: 6, letterSpacing: '-0.015em' }}>${unit.pricePerNight}</b>
+                    <span style={{ color: '#6b7585' }}>per night</span>
+                  </div>
+                  <Link href={`/units/${unit.slug}`} style={{ display: 'block', textAlign: 'center', background: '#15375c', color: '#fff', padding: '17px 16px', borderRadius: 8, fontWeight: 700, fontSize: 15, letterSpacing: '0.005em', marginTop: 'auto', textDecoration: 'none' }}>
+                    View Apartment
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Right: Booking panel */}
-        <div className="w-72 bg-surface border-l border-border flex-col justify-center p-6 hidden md:flex">
-          <div className="text-xs tracking-widest text-muted uppercase mb-6">Book Direct</div>
-          <BookingWidget compact />
-          <p className="text-xs text-muted text-center mt-4">No service fees · Instant confirmation</p>
+      {/* ============ EVENTS ============ */}
+      <section id="calendar" style={{ padding: '96px 0', background: '#f5f6f8' }}>
+        <div style={WRAP}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Schedule</div>
+            <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Upcoming Events at Wrigley</h2>
+            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Direct Booking, No Service Fees.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            {upcomingEvents.map((event, i) => {
+              const { dow, day, mon } = formatDate(event.date)
+              return (
+                <article key={i} style={{ background: '#fff', borderRadius: 14, boxShadow: SHADOW_CARD, padding: '26px 24px 24px', display: 'flex', flexDirection: 'column', border: '1px solid #eef0f3' }}>
+                  <div style={{ background: '#f1f4f9', borderRadius: 10, padding: '14px 10px', textAlign: 'center', marginBottom: 18, color: '#15375c' }}>
+                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#E85A2C' }}>{dow}</div>
+                    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 46, lineHeight: 1, margin: '2px 0', letterSpacing: '-0.02em' }}>{day}</div>
+                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#15375c' }}>{mon}</div>
+                  </div>
+                  <h3 style={{ fontWeight: 700, color: '#15375c', fontSize: 18, lineHeight: 1.3, letterSpacing: '-0.01em', margin: '0 0 14px', minHeight: 48 }}>{event.title}</h3>
+                  <Link href={`/units/sluggers-suite?checkin=${event.date}`} style={{ display: 'block', textAlign: 'center', border: '1.5px solid #E85A2C', color: '#E85A2C', padding: '12px 14px', borderRadius: 6, fontWeight: 700, fontSize: 14, letterSpacing: '0.005em', marginTop: 'auto', background: '#fff', textDecoration: 'none' }}>
+                    Book for this date
+                  </Link>
+                </article>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Units overview */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="text-xs tracking-widest text-muted uppercase mb-8">Three Apartments</div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {units.map((unit) => (
-            <UnitCard key={unit.slug} unit={unit} showCompareLink />
-          ))}
+      {/* ============ REVIEWS ============ */}
+      <section id="reviews" style={{ padding: '96px 0', background: '#fff' }}>
+        <div style={WRAP}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Testimonials</div>
+            <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Guest Reviews</h2>
+            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Real testimonials from booked guests.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+            {featuredReviews.map((review, i) => (
+              <div key={i} style={{ padding: '0 6px' }}>
+                <div style={{ fontSize: 22, lineHeight: 1, color: '#E85A2C', fontFamily: "'DM Serif Display', Georgia, serif", marginBottom: 8 }}>&ldquo;</div>
+                <p style={{ color: '#1c2433', fontSize: 15, lineHeight: 1.6, margin: '0 0 22px' }}>{review.text}</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ width: 42, height: 42, borderRadius: '50%', background: '#d7dbe2', flex: 'none', display: 'grid', placeItems: 'center', color: '#15375c', fontWeight: 800, fontSize: 14 }}>{review.initials}</div>
+                  <div style={{ fontSize: 14 }}>
+                    <div style={{ fontWeight: 700, color: '#15375c' }}>{review.name}</div>
+                    <div style={{ color: '#6b7585', fontSize: 12 }}>{review.unit}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Events strip */}
-      <section className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
-        <div className="flex items-center justify-between mb-8">
-          <div className="text-xs tracking-widest text-muted uppercase">Upcoming at Wrigley</div>
-          <Link href="/events" className="text-xs text-secondary hover:text-primary transition-colors">
-            Full schedule →
-          </Link>
-        </div>
-        <div>
-          {upcomingEvents.map((event, i) => (
-            <EventCard key={i} event={event} />
-          ))}
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
-        <div className="flex items-center justify-between mb-8">
-          <div className="text-xs tracking-widest text-muted uppercase">Guest Reviews</div>
-          <Link href="/reviews" className="text-xs text-secondary hover:text-primary transition-colors">
-            All reviews →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredReviews.map((review, i) => (
-            <ReviewCard key={i} review={review} />
-          ))}
-        </div>
-      </section>
-
-      {/* Neighborhood teaser */}
-      <section className="max-w-6xl mx-auto px-6 py-20 border-t border-border">
-        <div className="flex items-center justify-between mb-8">
-          <div className="text-xs tracking-widest text-muted uppercase">The Neighborhood</div>
-          <Link href="/neighborhood" className="text-xs text-secondary hover:text-primary transition-colors">
-            Full guide →
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {spots.slice(0, 4).map((spot, i) => (
-            <div key={i} className="bg-surface border border-border p-4">
-              <div className="text-xs text-muted uppercase tracking-widest mb-1">{spot.category}</div>
-              <div className="text-sm font-bold text-primary mb-1">{spot.name}</div>
-              <div className="text-xs text-muted">{spot.distance}</div>
-            </div>
-          ))}
+      {/* ============ NEIGHBORHOOD ============ */}
+      <section id="guide" style={{ padding: '96px 0', background: '#f5f6f8' }}>
+        <div style={WRAP}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Local Area</div>
+            <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Explore Wrigleyville</h2>
+            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Find out more about the full neighborhood guide.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+            {[
+              { label: 'Local Bars', ph: 'Local bars' },
+              { label: 'Local Restaurants', ph: 'Restaurants' },
+              { label: 'Coffee & Brunch', ph: 'Coffee & brunch' },
+            ].map(({ label, ph }) => (
+              <div key={label} style={{ borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, cursor: 'pointer' }}>
+                <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(135deg, #cfd5dd 0 14px, #c4cbd5 14px 28px)' }} />
+                <div style={{ position: 'absolute', left: 12, top: 12, background: 'rgba(255,255,255,0.94)', color: '#15375c', fontFamily: 'ui-monospace, monospace', fontSize: 10, letterSpacing: '0.08em', padding: '5px 8px', borderRadius: 4 }}>{ph}</div>
+                <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(11,31,54,0.85) 100%)', color: '#fff', padding: '24px 16px 14px', fontWeight: 700, fontSize: 15, lineHeight: 1.3 }}>{label}</div>
+              </div>
+            ))}
+            <Link href="/neighborhood" style={{ borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, cursor: 'pointer', textDecoration: 'none' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(135deg, #cfd5dd 0 14px, #c4cbd5 14px 28px)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,55,92,0.40) 0%, rgba(11,31,54,0.92) 100%)' }} />
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 16px 14px', fontWeight: 700, fontSize: 15, lineHeight: 1.3 }}>Explore More<br />Neighborhood Guide &#8594;</div>
+            </Link>
+          </div>
         </div>
       </section>
     </>
