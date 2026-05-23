@@ -1,20 +1,75 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function NavBar() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-bg/90 backdrop-blur-sm border-b border-border">
-      <Link href="/" className="text-sm font-black tracking-widest text-primary uppercase">
-        Double Play
-      </Link>
-      <div className="hidden md:flex items-center gap-8 text-xs tracking-widest text-secondary uppercase">
-        <Link href="/units/unit-1" className="hover:text-primary transition-colors">Units</Link>
-        <Link href="/compare" className="hover:text-primary transition-colors">Compare</Link>
-        <Link href="/events" className="hover:text-primary transition-colors">Events</Link>
-        <Link href="/neighborhood" className="hover:text-primary transition-colors">Neighborhood</Link>
-        <Link href="/#booking" className="bg-primary text-bg px-4 py-2 text-xs font-bold tracking-widest hover:bg-primary/90 transition-colors">
-          Book Direct
+    <header style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 30,
+      padding: '28px 0',
+    }}>
+      <div style={{
+        maxWidth: 1320,
+        margin: '0 auto',
+        padding: '0 32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 48,
+      }}>
+        <Link href="/" aria-label="Double Play at Wrigley" style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 14,
+          color: '#fff',
+          textDecoration: 'none',
+        }}>
+          <span style={{ width: 52, height: 58, flex: 'none', display: 'grid', placeItems: 'center' }}>
+            <Image src="/logo-mark.png" alt="" width={52} height={58} style={{ objectFit: 'contain', filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.35))' }} />
+          </span>
+          <span style={{
+            fontFamily: "'DM Serif Display', Georgia, serif",
+            fontSize: 30,
+            lineHeight: 1.02,
+            letterSpacing: '-0.01em',
+            color: '#fff',
+          }}>
+            Double Play
+            <span style={{ display: 'block', fontSize: 18, fontStyle: 'italic', fontWeight: 400, marginTop: 2 }}>at Wrigley</span>
+          </span>
         </Link>
+
+        <nav aria-label="Main" style={{ display: 'flex', alignItems: 'center', gap: 42 }}>
+          {[
+            { label: 'Home', href: '/', active: true },
+            { label: 'Apartments', href: '/#apartments' },
+            { label: 'Comparison', href: '/compare' },
+            { label: 'Calendar', href: '/events' },
+            { label: 'Guide', href: '/neighborhood' },
+            { label: 'Reviews', href: '/reviews' },
+            { label: 'FAQ', href: '/faq' },
+          ].map(({ label, href, active }) => (
+            <Link key={label} href={href} style={{
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              color: '#fff',
+              textTransform: 'uppercase',
+              position: 'relative',
+              padding: '6px 0',
+              textShadow: '0 1px 14px rgba(0,0,0,0.35)',
+              textDecoration: 'none',
+              borderBottom: active ? '3px solid #E85A2C' : 'none',
+              paddingBottom: active ? '3px' : '6px',
+            }}>
+              {label}
+            </Link>
+          ))}
+        </nav>
       </div>
-    </nav>
+    </header>
   )
 }
