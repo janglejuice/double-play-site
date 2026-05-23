@@ -1,43 +1,48 @@
 export type Review = {
   name: string
+  initials: string
   date: string
   rating: number
   text: string
-  unit?: string
+  unit: string
   source: 'Airbnb' | 'VRBO' | 'Direct'
 }
 
 export const reviews: Review[] = [
   {
-    name: 'Mike T.',
+    name: 'Jorn Corara',
+    initials: 'JC',
     date: 'October 2024',
     rating: 5,
-    text: 'Incredible location. Walked to every game, came back and could hear the crowd from the apartment. Exactly what we needed for the series.',
-    unit: 'Unit 2',
+    text: 'Location is unreal. We walked out the front door and were in our seats in four minutes flat. Skipping the platform fees made it cheaper than the hotel a block over.',
+    unit: "Slugger's Suite",
     source: 'Airbnb',
   },
   {
-    name: 'Sarah K.',
+    name: 'Jane Cenare',
+    initials: 'JC',
     date: 'August 2024',
     rating: 5,
-    text: 'Clean, well-equipped, and the location cannot be beaten. We were at Wrigley in under two minutes. Will absolutely be back.',
-    unit: 'Unit 1',
+    text: 'Booking direct was easy. Confirmation came through in seconds and there were no surprise fees at checkout. The balcony view during the seventh-inning stretch was unreal.',
+    unit: 'Bleacher Balcony Flat',
     source: 'Airbnb',
   },
   {
-    name: 'James R.',
+    name: 'Jonn Neviar',
+    initials: 'JN',
     date: 'July 2024',
     rating: 5,
-    text: 'Top floor unit was quiet and had the best views of the neighborhood. Host was responsive and check-in was seamless.',
-    unit: 'Unit 3',
+    text: 'Came in for a concert weekend. Spotless apartment, easy keypad entry, and great recommendations from the host for the best deep dish nearby. We will be back.',
+    unit: 'Field View Loft',
     source: 'VRBO',
   },
   {
-    name: 'Carla M.',
+    name: 'Fernanda Ruiz',
+    initials: 'FR',
     date: 'June 2024',
     rating: 5,
-    text: 'We went for a Cubs series and the apartment was perfect for our group of four. Full kitchen, great beds, and everything was spotless.',
-    unit: 'Unit 2',
+    text: 'Three couples, two bedrooms, one big living room. Perfect for a weekend in Wrigleyville. Comparing the direct rate to the listing apps literally saved us $214 over three nights.',
+    unit: "Slugger's Suite",
     source: 'Airbnb',
   },
 ]
