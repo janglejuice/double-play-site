@@ -20,7 +20,8 @@ function formatDate(iso: string) {
 }
 
 export default function HomePage() {
-  const upcomingEvents = events.slice(0, 4)
+  const now = new Date()
+  const upcomingEvents = events.filter(e => new Date(e.date) >= now).slice(0, 4)
   const featuredReviews = reviews.slice(0, 4)
 
   return (
@@ -72,7 +73,7 @@ export default function HomePage() {
                 maxWidth: 520,
                 textShadow: '0 1px 14px rgba(0,0,0,0.5)',
               }}>
-                Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago Book direct and skip the booking fees.
+                Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago. Book direct and skip the booking fees.
               </p>
             </div>
 
@@ -125,6 +126,26 @@ export default function HomePage() {
               </div>
             </aside>
 
+            {/* Save $200+ callout below booking panel */}
+            <div style={{
+              gridColumn: 2,
+              background: '#E85A2C',
+              color: '#fff',
+              padding: '18px 22px',
+              borderRadius: 14,
+              boxShadow: '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)',
+              marginTop: 14,
+              fontFamily: 'Manrope',
+              alignSelf: 'start',
+            }}>
+              <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.06em', marginBottom: 4 }}>
+                SAVE $200+ BOOKING DIRECT
+              </div>
+              <div style={{ fontSize: 13, lineHeight: 1.5, opacity: 0.95 }}>
+                Guests save an average of $200+ vs. Airbnb &amp; VRBO on a 3-night stay.
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -140,7 +161,11 @@ export default function HomePage() {
                 </div>
                 <div style={{ padding: '28px 28px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                   <h3 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 24, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 12px' }}>{unit.name}</h3>
-                  <p style={{ color: '#6b7585', fontSize: 15, lineHeight: 1.5, margin: '0 0 24px' }}>{unit.tagline}</p>
+                  <p style={{ color: '#6b7585', fontSize: 15, lineHeight: 1.5, margin: '0 0 14px' }}>{unit.tagline}</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#6b7585', fontSize: 13, marginBottom: 20 }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none' }}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+                    {unit.parking}
+                  </div>
                   <div style={{ fontSize: 15, color: '#1c2433', marginBottom: 28 }}>
                     <b style={{ fontSize: 24, fontWeight: 700, color: '#15375c', marginRight: 6, letterSpacing: '-0.015em' }}>${unit.pricePerNight}</b>
                     <span style={{ color: '#6b7585' }}>per night</span>
@@ -190,6 +215,21 @@ export default function HomePage() {
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Guest Reviews</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Real testimonials from booked guests.</p>
           </div>
+          {/* TRUST BADGES — owner: remove whichever badge does not apply to your hosting status */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginBottom: 48, marginTop: -24 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
+              <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
+              Airbnb Superhost
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
+              <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
+              VRBO Premier Host
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
+              <span style={{ color: '#23a06b', fontSize: 14 }}>●</span>
+              5.0 Average Rating
+            </div>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {featuredReviews.map((review, i) => (
               <div key={i} style={{ padding: '0 6px' }}>
@@ -199,7 +239,7 @@ export default function HomePage() {
                   <div style={{ width: 42, height: 42, borderRadius: '50%', background: '#d7dbe2', flex: 'none', display: 'grid', placeItems: 'center', color: '#15375c', fontWeight: 800, fontSize: 14 }}>{review.initials}</div>
                   <div style={{ fontSize: 14 }}>
                     <div style={{ fontWeight: 700, color: '#15375c' }}>{review.name}</div>
-                    <div style={{ color: '#6b7585', fontSize: 12 }}>{review.unit}</div>
+                    <div style={{ color: '#6b7585', fontSize: 12 }}>{review.unit} · {review.date}</div>
                   </div>
                 </div>
               </div>

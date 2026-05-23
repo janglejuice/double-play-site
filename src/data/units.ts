@@ -11,6 +11,7 @@ export type Unit = {
   baths: number
   sleeps: number
   pricePerNight: number
+  parking: string
   hospitable_widget_id: string
 }
 
@@ -28,6 +29,7 @@ export const units: Unit[] = [
     baths: 1,
     sleeps: 4,
     pricePerNight: 300,
+    parking: 'Street parking · Garage 2 min walk',
     hospitable_widget_id: 'FILL_IN',
   },
   {
@@ -43,6 +45,7 @@ export const units: Unit[] = [
     baths: 1,
     sleeps: 4,
     pricePerNight: 175,
+    parking: 'Street parking · Garage 2 min walk',
     hospitable_widget_id: 'FILL_IN',
   },
   {
@@ -58,6 +61,7 @@ export const units: Unit[] = [
     baths: 1,
     sleeps: 4,
     pricePerNight: 200,
+    parking: 'Street parking · Garage 2 min walk',
     hospitable_widget_id: 'FILL_IN',
   },
 ]
