@@ -72,8 +72,7 @@ export default function HomePage() {
                 maxWidth: 520,
                 textShadow: '0 1px 14px rgba(0,0,0,0.5)',
               }}>
-                Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago.<br />
-                Book direct and skip the booking fees.
+                Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago Book direct and skip the booking fees.
               </p>
             </div>
 
@@ -160,7 +159,6 @@ export default function HomePage() {
       <section id="calendar" style={{ padding: '96px 0', background: '#f5f6f8' }}>
         <div style={WRAP}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Schedule</div>
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Upcoming Events at Wrigley</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Direct Booking, No Service Fees.</p>
           </div>
@@ -189,7 +187,6 @@ export default function HomePage() {
       <section id="reviews" style={{ padding: '96px 0', background: '#fff' }}>
         <div style={WRAP}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Testimonials</div>
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Guest Reviews</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Real testimonials from booked guests.</p>
           </div>
@@ -215,7 +212,6 @@ export default function HomePage() {
       <section id="guide" style={{ padding: '96px 0', background: '#f5f6f8' }}>
         <div style={WRAP}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>Local Area</div>
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Explore Wrigleyville</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Find out more about the full neighborhood guide.</p>
           </div>
