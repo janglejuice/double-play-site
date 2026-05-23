@@ -176,26 +176,27 @@ export default function NeighborhoodPage() {
         </div>
       </section>
 
-      {/* ============ THEMED SPOT SECTIONS ============ */}
-      {categoryOrder.map(cat => {
-        const catSpots = spots.filter(s => s.category === cat.key)
-        if (catSpots.length === 0) return null
-        return (
-          <section key={cat.key} style={{ padding: '40px 32px', background: '#fff' }}>
-            <div style={{ maxWidth: 880, margin: '0 auto' }}>
-              <h2 style={{
-                fontFamily: 'Manrope',
-                fontWeight: 700,
-                fontSize: 28,
-                letterSpacing: '-0.015em',
-                color: '#15375c',
-                margin: '0 0 8px',
-              }}>
-                {cat.label}
-              </h2>
-              <p style={{ color: '#6b7585', fontSize: 16, margin: '0 0 20px' }}>{cat.intro}</p>
-              <div style={{ display: 'grid', gap: 16 }}>
-                {catSpots.map(spot => (
+      {/* ============ THEMED SPOT SECTIONS (consolidated into one container) ============ */}
+      <section style={{ padding: '24px 32px 64px', background: '#fff' }}>
+        <div style={{ maxWidth: 880, margin: '0 auto' }}>
+          {categoryOrder.map(cat => {
+            const catSpots = spots.filter(s => s.category === cat.key)
+            if (catSpots.length === 0) return null
+            return (
+              <div key={cat.key} style={{ marginTop: 48 }}>
+                <h2 style={{
+                  fontFamily: 'Manrope',
+                  fontWeight: 700,
+                  fontSize: 28,
+                  letterSpacing: '-0.015em',
+                  color: '#15375c',
+                  margin: '0 0 8px',
+                }}>
+                  {cat.label}
+                </h2>
+                <p style={{ color: '#6b7585', fontSize: 16, margin: '0 0 20px' }}>{cat.intro}</p>
+                <div style={{ display: 'grid', gap: 16 }}>
+                  {catSpots.map(spot => (
                   <article
                     key={spot.name}
                     style={{
@@ -265,13 +266,14 @@ export default function NeighborhoodPage() {
                         ))}
                       </div>
                     )}
-                  </article>
-                ))}
+                    </article>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-        )
-      })}
+            )
+          })}
+        </div>
+      </section>
 
       {/* ============ BEYOND WRIGLEYVILLE — BROADER CHICAGO ============ */}
       <section id="beyond-wrigleyville" style={{ padding: '72px 32px', background: '#f5f6f8' }}>
