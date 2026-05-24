@@ -1,8 +1,5 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import type { Unit } from '@/data/units'
 
 interface CompareContentProps {
@@ -77,24 +74,6 @@ const faqData = {
 }
 
 export default function CompareContent({ units }: CompareContentProps) {
-  useEffect(() => {
-    // Add structured data to head
-    const breadcrumbScript = document.createElement('script')
-    breadcrumbScript.type = 'application/ld+json'
-    breadcrumbScript.innerHTML = JSON.stringify(schemaData)
-    document.head.appendChild(breadcrumbScript)
-
-    const faqScript = document.createElement('script')
-    faqScript.type = 'application/ld+json'
-    faqScript.innerHTML = JSON.stringify(faqData)
-    document.head.appendChild(faqScript)
-
-    return () => {
-      if (breadcrumbScript.parentNode) document.head.removeChild(breadcrumbScript)
-      if (faqScript.parentNode) document.head.removeChild(faqScript)
-    }
-  }, [])
-
   const useCases = [
     {
       title: 'Best for groups of 4–8',
@@ -163,6 +142,8 @@ export default function CompareContent({ units }: CompareContentProps) {
 
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }} />
       {/* Hero Section */}
       <section className="bg-primary text-white pt-60 pb-24 px-6">
         <div className="max-w-5xl mx-auto text-center">
