@@ -10,7 +10,32 @@ export type Spot = {
   ourPick?: string // why we send guests here specifically
   goodFor?: string[] // tags
   hoursNote?: string
+  priceLevel?: 1 | 2 | 3 // $, $$, $$$
+  hostPick?: boolean // shown with HOST PICK badge
+  photoLabel?: string // monospace placeholder label until real photo
 }
+
+// ============ HERO STATS PANEL (top of /neighborhood) ============
+export type HeroStat = { label: string; value: string; highlight?: boolean }
+export const heroStats: HeroStat[] = [
+  { label: 'Wrigley Field', value: 'Across the street', highlight: true },
+  { label: 'Red Line · Addison', value: '3 min walk' },
+  { label: 'Lakefront Trail', value: '15 min walk east' },
+  { label: 'Downtown Chicago', value: '15 min by train' },
+  { label: 'Divvy Bikes', value: 'Station at our door' },
+  { label: "O'Hare Airport", value: '60 min · Blue Line' },
+]
+
+// ============ QUICK FACTS SIDEBAR (overview section) ============
+export type QuickFact = { label: string; value: string; sub: string }
+export const quickFacts: QuickFact[] = [
+  { label: 'Our address', value: '3601 N Sheffield Ave', sub: 'Directly across from Wrigley' },
+  { label: 'Train', value: 'Addison Red Line', sub: '3 min walk · 24/7 service' },
+  { label: 'Bike share', value: 'Divvy Station', sub: 'At our front door' },
+  { label: 'Parking', value: 'Skip it', sub: '$40–60/day on game days' },
+  { label: 'Nearest beach', value: 'Montrose Beach', sub: '15 min walk north' },
+  { label: 'Deep dish (best)', value: "Pequod's Pizza", sub: '15 min by rideshare' },
+]
 
 export const spots: Spot[] = [
   // ==================== PRE-GAME + GAME-DAY BARS ====================
@@ -22,6 +47,9 @@ export const spots: Spot[] = [
       "The Wrigleyville classic. Right at the corner of Sheffield and Waveland, directly across from the bleacher entrance. Cold beer, an enormous outdoor patio, and a crowd that swells two hours before first pitch.",
     ourPick: 'Get there 90 minutes before first pitch on weekends. After that the line wraps around the block.',
     goodFor: ['game day', 'big groups', 'outdoor seating'],
+    priceLevel: 2,
+    hostPick: true,
+    photoLabel: "photo · Murphy's patio",
   },
   {
     name: 'The Cubby Bear',
@@ -31,6 +59,8 @@ export const spots: Spot[] = [
       "A Wrigleyville institution since 1953, sitting right across from the marquee on Clark and Addison. Two floors, multiple bars, and live music on weekend nights. As iconic to the neighborhood as the ballpark itself.",
     ourPick: 'Best people-watching in Wrigleyville is from the upstairs windows looking down at the marquee.',
     goodFor: ['game day', 'live music', 'late night'],
+    priceLevel: 2,
+    photoLabel: 'photo · Cubby Bear marquee view',
   },
   {
     name: 'HVAC Pub',
@@ -49,6 +79,8 @@ export const spots: Spot[] = [
       "Two-story sports bar with batting cages upstairs (yes, really) and a famous dueling-piano bar called The Piano Lounge. A Wrigleyville rite of passage.",
     ourPick: 'After the game, head upstairs for batting cages before the piano lounge gets packed.',
     goodFor: ['game day', 'late night', 'unique'],
+    priceLevel: 2,
+    photoLabel: 'photo · Sluggers batting cages',
   },
 
   // ==================== SIT-DOWN RESTAURANTS ====================
@@ -60,6 +92,9 @@ export const spots: Spot[] = [
       "Wood-fired tacos al pastor, a serious tequila list, and a sunny outdoor patio. The Wrigleyville outpost of one of Chicago's most beloved taquerias.",
     ourPick: "The al pastor tacos and a margarita on the patio is our perfect pre-game order.",
     goodFor: ['date night', 'patio', 'pre-game'],
+    priceLevel: 2,
+    hostPick: true,
+    photoLabel: 'photo · Big Star tacos al pastor',
   },
   {
     name: 'Mordecai',
@@ -70,6 +105,8 @@ export const spots: Spot[] = [
     ourPick: "Reserve the chef's counter — they pour rare whiskeys you won't see on the menu.",
     goodFor: ['date night', 'cocktails', 'special occasion'],
     hoursNote: 'Dinner only, reservations strongly recommended',
+    priceLevel: 3,
+    photoLabel: 'photo · Mordecai whiskey bar',
   },
   {
     name: 'Mia Francesca',
@@ -129,6 +166,8 @@ export const spots: Spot[] = [
       "Brunch with a giant patio that fills up the second the weather turns. American comfort plates, strong bloody marys, and a vibe that says \"we have nowhere to be today.\"",
     ourPick: 'Get the chicken and waffles and ask for the bloody mary spicy.',
     goodFor: ['brunch', 'patio', 'groups'],
+    priceLevel: 2,
+    photoLabel: 'photo · Pony Inn brunch patio',
   },
   {
     name: 'Yolk',
@@ -149,6 +188,9 @@ export const spots: Spot[] = [
       "Chicago-born specialty coffee. Their Lakeview location on Broadway is a serious-coffee spot — perfect single-origin pour-overs, beautiful lattes, and laptop-friendly tables in the back.",
     ourPick: 'The Black Cat Espresso is their signature for a reason.',
     goodFor: ['serious coffee', 'work-friendly'],
+    priceLevel: 2,
+    hostPick: true,
+    photoLabel: 'photo · Intelligentsia café bar',
   },
   {
     name: 'Dollop Coffee',
