@@ -41,9 +41,10 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
   .place-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .transit-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .tips-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .why-direct-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 680px) {
-  .place-grid, .transit-grid, .tips-grid, .explore-grid {
+  .place-grid, .transit-grid, .tips-grid, .explore-grid, .why-direct-grid {
     grid-template-columns: 1fr !important;
   }
   .explore-feature { grid-column: span 1 !important; }

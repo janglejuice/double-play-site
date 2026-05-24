@@ -27,6 +27,12 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(getLodgingBusinessSchema()) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Double Play at Wrigley',
+        url: 'https://yourdomain.com',
+      }) }} />
 
       {/* ============ HERO ============ */}
       <section style={{ position: 'relative', minHeight: 880, overflow: 'hidden', background: '#0c1d33' }}>
@@ -153,7 +159,7 @@ export default function HomePage() {
       {/* ============ APARTMENTS — overlaps hero ============ */}
       <section id="apartments" style={{ position: 'relative', zIndex: 5, marginTop: -140, paddingBottom: 120 }}>
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, maxWidth: 1190, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, maxWidth: 1280, margin: '0 auto' }}>
             {units.map(unit => (
               <article key={unit.slug} style={{ background: '#fff', borderRadius: 8, boxShadow: SHADOW_CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '5px solid #fff', outline: '5px solid #fff' }}>
                 <div style={{ aspectRatio: '16/10', background: '#e8eaee', position: 'relative', overflow: 'hidden' }}>
@@ -244,6 +250,56 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ WHY BOOK DIRECT ============ */}
+      <section style={{ padding: '96px 0', background: '#fdf6f1' }}>
+        <div style={WRAP}>
+          <div style={{ textAlign: 'center', maxWidth: 720, margin: '0 auto 48px' }}>
+            <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>
+              Why Book Direct
+            </div>
+            <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: 40, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 16px', lineHeight: 1.15 }}>
+              Skip the middleman. Stay direct.
+            </h2>
+            <p style={{ color: '#1c2433', fontSize: 17, lineHeight: 1.7, margin: 0 }}>
+              Booking direct means lower prices, no platform service fees, and a real person on the other end of every message. Here&apos;s what changes when you skip Airbnb and VRBO.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, maxWidth: 1140, margin: '0 auto' }} className="why-direct-grid">
+            {[
+              {
+                title: 'No service fees.',
+                body: 'Airbnb charges guests up to 14% in service fees on top of your nightly rate. VRBO does the same. We don\'t. Same apartment, same dates — just direct. Most guests save $150–$250+ on a 3-night stay.',
+                icon: '$',
+              },
+              {
+                title: 'Local hosts who answer.',
+                body: 'We live in and around Wrigleyville. Message us anytime and we typically respond within the hour. Pre-booking questions, custom requests, last-minute changes — all handled by an actual human who knows the neighborhood inside out.',
+                icon: '✉',
+              },
+              {
+                title: 'Best rate, guaranteed.',
+                body: 'Our direct rate is always the same as or lower than what you\'d pay through Airbnb or VRBO for the same dates. If you find a lower rate on any major platform, message us and we\'ll match it.',
+                icon: '✓',
+              },
+            ].map(card => (
+              <div key={card.title} style={{ background: '#fff', borderRadius: 14, padding: 32, border: '1px solid #f0e8e2', boxShadow: '0 1px 2px rgba(15,42,72,.03), 0 6px 18px -10px rgba(15,42,72,.10)' }}>
+                <div style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(232,90,44,.12)', display: 'grid', placeItems: 'center', fontSize: 24, fontWeight: 800, color: '#E85A2C', marginBottom: 18 }}>
+                  {card.icon}
+                </div>
+                <h3 style={{ fontFamily: 'Manrope', fontSize: 20, fontWeight: 800, color: '#15375c', margin: '0 0 12px', letterSpacing: '-0.01em' }}>{card.title}</h3>
+                <p style={{ fontSize: 15, lineHeight: 1.7, color: '#1c2433', margin: 0 }}>{card.body}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 44 }}>
+            <p style={{ fontSize: 14, color: '#6b7585', margin: '0 0 18px' }}>Direct booking. No service fees. Same apartments.</p>
+            <a href="#booking" style={{ display: 'inline-block', background: '#E85A2C', color: '#fff', padding: '16px 32px', borderRadius: 8, fontSize: 13, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', textDecoration: 'none' }}>
+              Check Availability →
+            </a>
           </div>
         </div>
       </section>
