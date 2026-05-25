@@ -1,6 +1,13 @@
 // Hospitable booking widget — site ID is shared across all units in this account
 export const HOSPITABLE_SITE_ID = 'a1d82a3d-16d4-4e5e-9793-6fb5e07758dd'
 
+// Hospitable multi-property search widget identifier
+export const HOSPITABLE_SEARCH_IDENTIFIER = '082b3ef6-da76-4027-b7e9-a9c809c82f98'
+
+// Search widget script (loaded once globally)
+export const HOSPITABLE_SEARCH_SCRIPT =
+  'https://hospitable.b-cdn.net/direct-property-search-widget/hospitable-search-widget.prod.js'
+
 export type Unit = {
   slug: string
   name: string

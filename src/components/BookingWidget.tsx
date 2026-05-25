@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { HOSPITABLE_SITE_ID } from '@/data/units'
 
 interface BookingWidgetProps {
@@ -10,8 +13,46 @@ interface BookingWidgetProps {
   title?: string
 }
 
+/**
+ * Read search params from window.location.search and turn them into
+ * a query string Hospitable's booking widget accepts.
+ *
+ * Hospitable expects: start_date, end_date, adults
+ * Our search redirects use: checkin, checkout, guests
+ * — we map either input naming.
+ */
+function buildIframeSrc(propertyId: string): string {
+  const baseSrc = `https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${propertyId}`
+
+  if (typeof window === 'undefined') return baseSrc
+
+  const params = new URLSearchParams(window.location.search)
+  const out = new URLSearchParams()
+
+  const checkin = params.get('start_date') || params.get('checkin') || params.get('startDate')
+  const checkout = params.get('end_date') || params.get('checkout') || params.get('endDate')
+  const guests = params.get('adults') || params.get('guests')
+
+  if (checkin) out.set('start_date', checkin)
+  if (checkout) out.set('end_date', checkout)
+  if (guests) out.set('adults', guests)
+
+  const qs = out.toString()
+  return qs ? `${baseSrc}?${qs}` : baseSrc
+}
+
 export default function BookingWidget({ propertyId, compact = false, title = 'Book your stay' }: BookingWidgetProps) {
-  // If no property ID is set yet, render a graceful fallback
+  // Track iframe src on the client so we can include URL search params after hydration
+  const [src, setSrc] = useState<string>(() =>
+    propertyId ? `https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${propertyId}` : ''
+  )
+
+  useEffect(() => {
+    if (!propertyId) return
+    setSrc(buildIframeSrc(propertyId))
+  }, [propertyId])
+
+  // Fallback when no property is wired
   if (!propertyId) {
     return (
       <div style={{
@@ -55,7 +96,6 @@ export default function BookingWidget({ propertyId, compact = false, title = 'Bo
     )
   }
 
-  const src = `https://booking.hospitable.com/widget/${HOSPITABLE_SITE_ID}/${propertyId}`
   const height = compact ? 720 : 900
 
   return (
