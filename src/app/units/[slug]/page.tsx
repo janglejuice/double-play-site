@@ -86,7 +86,7 @@ export default async function UnitPage({ params }: { params: Promise<{ slug: str
       addressCountry: 'US',
     },
     telephone: '+1-xxx-xxx-xxxx',
-    priceRange: `$${unit.pricePerNight}`,
+    priceRange: unit.pricePerNight ? `$${unit.pricePerNight}` : '$$',
     amenityFeature: unit.amenities.map(a => ({
       '@type': 'Text',
       name: a,

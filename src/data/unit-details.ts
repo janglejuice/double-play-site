@@ -247,121 +247,155 @@ export const unitDetails: UnitDetail[] = [
     ],
   },
   {
-    slug: 'field-view-loft',
-    heroHeadline: 'Top-floor loft with panoramic views of Wrigley Field and the Chicago skyline',
-    heroSubhead: 'Two bedrooms, one bath, sleeps four. The best vantage point of all three units.',
+    slug: 'catbird-seat',
+    heroHeadline: '1-minute walk to Wrigley. Top floor. Corner-lot bay windows.',
+    heroSubhead:
+      'Our 2-bedroom top-floor apartment at 3601 N Sheffield — sleeps 5, 900 sqft, 10-foot ceilings, and a Walk Score of 98. The Red Line is literally next door.',
     whatYouLove: [
       {
-        title: 'Panoramic Field and Skyline Views',
-        body: 'From the third floor, you see the entire ballpark, the Chicago skyline, and the neighborhoods stretching north. It\'s not just a view—it\'s a vista. Every window opens onto the city.',
+        title: 'You can see the whole neighborhood from your living room',
+        body:
+          'The living room has huge bay-style windows, and the dining area wraps the corner with more big windows. Because we\'re on a corner lot, you get the full Wrigleyville scene from inside the apartment. On game days, you can watch the crowd stream toward the stadium without leaving the couch. Plenty of natural light all day.',
       },
       {
-        title: 'Top-Floor Quiet and Privacy',
-        body: 'Higher means quieter. You\'re above most of the street noise, above the ground-level hustle. Game days are festive, not overwhelming. A peaceful retreat after a long day downtown.',
+        title: 'Top-floor quiet — with bedrooms double-windowed for sleep',
+        body:
+          'You\'re on the top floor (2nd) with no neighbors above you. The bedrooms have double-pane windows we added specifically for soundproofing — Wrigleyville is a vibrant block and we want you to actually sleep. The living room keeps the energy. The bedrooms keep the peace.',
       },
       {
-        title: 'Natural Light and Air',
-        body: 'Top-floor apartments catch light and breeze that lower floors miss. The space feels bigger, brighter, more open. It\'s not just windows—it\'s atmosphere.',
+        title: 'Transit at your front door',
+        body:
+          'The Addison Red Line station and a CTA bus stop are literally next to the building. You can be in downtown Chicago in 15-20 minutes, at Lake Michigan in 15, or at O\'Hare in under an hour — all without a car. We hand every guest the same advice: skip the rental.',
       },
       {
-        title: 'Premium Experience, Fair Price',
-        body: 'You\'re paying a bit more than the Bleacher Flat but less than the average Chicago hotel. The panoramic view justifies it. This is where memories happen.',
+        title: 'A real apartment, not a hotel room',
+        body:
+          'Fully equipped kitchen with a dishwasher, 300 Mbps WiFi (fast enough to actually work from), 4K HD smart TV with live TV, multi-setting rainfall shower, washer/dryer in the building, and a dedicated workspace. We provide shampoo, conditioner, and body wash so you don\'t have to pack toiletries.',
       },
     ],
     idealFor: [
-      'Couples wanting premium experience',
-      'Skyline photography enthusiasts',
-      'Sunset and skyline lovers',
-      'Quiet game-day seekers',
-      'Instagram-worthy moments',
-      'Special occasions and romantic getaways',
+      'Cubs series weekends',
+      'Wrigley Field concert nights',
+      'Groups of 4-5',
+      'Couples + a +1',
+      'Game-day scene from your window',
+      'Anyone who wants to skip a rental car',
     ],
     amenityGroups: [
       {
         category: 'Kitchen',
         items: [
-          'Full kitchen with stove, oven, dishwasher',
-          'Coffee maker and tea service',
-          'Cookware and utensils',
-          'Dishes and glassware',
+          'Full kitchen with dishwasher',
+          'Microwave, stove, oven',
+          'Basic cookware (pots, pans, oil, salt, pepper)',
+          'Dishes, silverware, glassware',
+          'Coffee setup',
         ],
       },
       {
-        category: 'Bedrooms & Bath',
+        category: 'Sleeping (sleeps 5)',
         items: [
-          'Master bedroom: queen bed with skyline views',
-          'Guest bedroom: queen bed',
-          'Washer and dryer in unit',
-          'Fresh linens and premium towels',
-          'Hairdryer and bath essentials',
+          '2 queen beds (one per bedroom)',
+          'Roll-out twin bed',
+          'Folding floor mattress',
+          'Fresh bed linens (fitted + flat sheets)',
+          'Extra pillows and blankets',
+          'Hangers in both bedrooms',
         ],
       },
       {
-        category: 'Entertainment & Comfort',
+        category: 'Bath',
         items: [
-          'Smart TV with streaming apps',
-          'Fast WiFi (100+ Mbps)',
+          'Multi-setting shower with rainfall head',
+          'Shampoo + conditioner provided',
+          'Body wash + body soap provided',
+          'Hot water',
+          'Hair dryer',
+          'Bath towels + hand towels + face cloths',
+        ],
+      },
+      {
+        category: 'Comfort & Tech',
+        items: [
           'Central air conditioning',
-          'Heat (gas, included)',
-          'Sound system',
-          'Floor-to-ceiling windows',
+          'Central heating',
+          '300 Mbps WiFi',
+          '4K HD Smart TV with live TV',
+          'Soundproofed double-pane bedroom windows',
+          'Dedicated workspace',
+          'Iron',
         ],
       },
       {
         category: 'Building & Access',
         items: [
-          'Self check-in (keypad code)',
-          'Elevator access to third floor',
-          'Panoramic windows throughout',
-          'Premium finishes and aesthetic',
+          'Smart-lock keyless self check-in (your own personal code)',
+          'No physical key needed',
+          'Top floor (2nd) of a 3-unit building',
+          'Main building door → your apartment door',
+          'In-building washer/dryer (free)',
         ],
       },
     ],
     floorPlan:
-      'The third floor opens into an expansive living room with floor-to-ceiling windows framing the field and skyline. The kitchen flows seamlessly from the living space. Two bedrooms—the master with its own skyline view, the guest bedroom with equal comfort. Washer and dryer tucked near the kitchen, guest bath off the main space, ensuite in the master.',
+      "You enter into a generous open living/dining space along the corner of the building — bay-style windows on one side, wraparound windows in the dining area on the other. The kitchen is at the back with full appliances and counter space. Two bedrooms are on the quieter interior side, both with soundproofed double-pane windows. One full bathroom with a multi-setting rainfall shower. 10-foot ceilings throughout make the 900 sqft feel substantially larger than the number suggests.",
     versusOthers:
-      'The Field View Loft is the premium option. You get more space, more light, more view, and more quiet than either the Slugger\'s or the Bleacher Flat. It\'s the same two-bedroom layout, but the third-floor elevation and panoramic windows make it feel like a different class of experience.',
+      "The Catbird Seat is the top-floor apartment in our 3-unit building — the highest, brightest, and quietest of the three. If you want the corner-lot views and the elevated quiet, this is your unit. The other two apartments (Garden Level and First Floor) are equally close to Wrigley but sit lower in the building. All three are 2-bed, 1-bath.",
     unitFAQ: [
       {
-        question: 'What exactly can you see from the windows?',
+        question: 'How close exactly is the apartment to Wrigley Field?',
         answer:
-          'The entire Wrigley Field ballpark is visible. The field, scoreboard, bleachers. Beyond that, the Chicago skyline stretches north and west. On clear days, you can see the John Hancock Building and beyond. It\'s genuinely panoramic.',
+          "About a 1-minute walk. We're at 3601 N Sheffield Ave — one block from the bleacher entrance. You can see the crowd streaming toward the stadium from the living room and dining room windows.",
       },
       {
-        question: 'Is it quieter than the other units?',
+        question: 'What floor is it on, and is there an elevator?',
         answer:
-          'Yes, noticeably quieter. You\'re above street level and away from the ground-floor energy. Game days are festive, not chaotic. You catch the atmosphere without the constant foot traffic and noise.',
+          "Top floor (2nd) of a 3-unit building. There's no elevator — you'll take the stairs from the main entrance up to the apartment. The Garden Level apartment sits below, and there's a First Floor apartment in between (which is about 12 steps up from the sidewalk).",
       },
       {
-        question: 'Is the third floor accessible?',
+        question: 'How many people can sleep here?',
         answer:
-          'Yes, there\'s an elevator in the building. It\'s an easy ride up. Once you\'re in the loft, everything is one floor, no stairs to navigate within the unit.',
+          "Sleeps 5 comfortably with two queen beds (one in each bedroom), a roll-out twin, and a folding floor mattress. Max guest count is 5.",
       },
       {
-        question: 'How big is this unit compared to the others?',
+        question: 'How is the noise situation? Wrigleyville sounds loud.',
         answer:
-          'Same two-bedroom, one-bath layout as the Slugger\'s Suite and Bleacher Flat. What\'s different is the ceiling height, the number and size of windows, and the light. It feels bigger because of the vista.',
+          "Honest answer: the neighborhood is vibrant, especially around games and concerts. The living room will catch some of that energy — which most guests love. The bedrooms have double-pane windows we added specifically for soundproofing, so sleep is much quieter than you'd expect. That said, this apartment may not be ideal for the very lightest sleepers.",
       },
       {
-        question: 'Can we cook and do laundry?',
+        question: 'Is parking available?',
         answer:
-          'Full kitchen with everything you need to cook. Washer and dryer in unit. Same comfort level as the other apartments, just a better view and quieter experience.',
+          "We provide a residential street-parking pass (max 1 per night) that lets you park on resident-only streets. Spots are not 100% guaranteed since it's street parking. Honestly, we recommend skipping the car — the Red Line is right next to the building and a 3-day CTA pass is about $15.",
       },
       {
-        question: 'Is this good for game-day parties?',
+        question: 'How do we get in?',
         answer:
-          'It works for both: intimate gatherings with a skyline backdrop, or group celebrations with the best view in the building. The three-floor elevation means your party doesn\'t disturb neighbors below, and you\'re not overwhelmed by street-level chaos.',
+          "Keyless self check-in with a smart lock. You'll get your own personal code in your booking confirmation. Main building door first, then your apartment door (the second of three doors inside). No physical key, no key handoff required.",
+      },
+      {
+        question: 'Is there fast WiFi for working remotely?',
+        answer:
+          "Yes — 300 Mbps WiFi throughout the apartment. Plenty fast for video calls, streaming, and remote work. There's also a dedicated workspace if you need a real desk.",
+      },
+      {
+        question: 'What\'s the kitchen like — can we actually cook?',
+        answer:
+          "Fully equipped. Full stove, oven, microwave, dishwasher, pots and pans, dishes, silverware, oil, salt, and pepper. You can absolutely cook here. Mariano's grocery store is a 5-minute walk for everything else.",
       },
     ],
     localProximity: [
       { name: 'Wrigley Field', time: '1 min walk' },
-      { name: 'Murphy\'s Bleachers', time: '2 min walk' },
-      { name: 'Gallagher Way (food & drinks)', time: '1 min walk' },
-      { name: 'Cubby Bear (bar)', time: '2 min walk' },
-      { name: 'Addison Red Line station', time: '3 min walk' },
-      { name: 'Mariano\'s grocery store', time: '5 min walk' },
-      { name: 'Lake Michigan shoreline', time: '12 min walk' },
-      { name: 'Downtown Chicago', time: '15 min drive' },
+      { name: 'Addison Red Line', time: 'Right next door' },
+      { name: 'CTA bus stop', time: 'Right next door' },
+      { name: 'Gallagher Way', time: '1 min walk' },
+      { name: "Murphy's Bleachers", time: '2 min walk' },
+      { name: 'The Cubby Bear', time: '2 min walk' },
+      { name: "Mariano's grocery", time: '5 min walk' },
+      { name: 'CVS', time: '3 min walk' },
+      { name: 'Starbucks / Subway / Chipotle', time: 'Under 5 min walk' },
+      { name: 'Lake Michigan trail', time: '15 min walk' },
+      { name: 'Downtown Chicago (Loop)', time: '15-20 min on Red Line' },
+      { name: "O'Hare Airport", time: '~60 min via Blue Line transfer' },
     ],
   },
 ]

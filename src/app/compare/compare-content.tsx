@@ -40,10 +40,10 @@ const faqData = {
     },
     {
       '@type': 'Question',
-      'name': 'Which apartment has the best view of Wrigley Field?',
+      'name': 'Which apartment is closest to Wrigley Field?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Depends what you mean. Slugger\'s Suite has a direct field-view window — you can see into the ballpark from the living room. Field View Loft has the most panoramic view (Wrigley + skyline). Bleacher Balcony Flat has a partial view from the balcony.'
+        'text': 'All three are about a 1-minute walk from the bleacher entrance — we\'re at 3601 N Sheffield Ave, directly across the street. They\'re three units in the same building, so closeness is identical. What varies is the floor: Garden Level, First Floor (up about 12 steps), and Top Floor.'
       }
     },
     {
@@ -51,7 +51,7 @@ const faqData = {
       'name': 'Can I book 2 or 3 apartments together?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Yes. Block bookings work great for wedding parties, family reunions, fantasy baseball trips, corporate retreats. Sleeps up to 12 across all three. Message us to coordinate.'
+        'text': 'Yes. Block bookings work great for wedding parties, family reunions, fantasy baseball trips, and corporate retreats. With all three booked, you can sleep up to 13 across the building. Message us to coordinate dates and pricing.'
       }
     },
     {
@@ -59,7 +59,7 @@ const faqData = {
       'name': 'Are the apartments identical inside?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Same building, similar finishes, but each has a different layout based on its floor. Slugger\'s faces street directly. Bleacher has the balcony. Field View has the panoramic skyline view.'
+        'text': 'Same building, all 2-bedroom 1-bath, but each has its own layout based on the floor. The Catbird Seat (top floor) has 10-foot ceilings and corner-lot bay windows. The other two units have their own characters — full descriptions coming soon.'
       }
     },
     {
@@ -67,7 +67,7 @@ const faqData = {
       'name': 'Do all three include the same amenities?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'All three include full kitchens, fast WiFi, smart TVs, central AC, washer/dryer, self check-in. Bleacher Balcony Flat additionally has the private balcony. See each unit page for full lists.'
+        'text': 'All three include full kitchens, fast WiFi, smart TVs, central AC, and smart-lock self check-in. Each unit has its own washer/dryer or shared in-building laundry. See each unit page for full amenity lists.'
       }
     }
   ]
@@ -76,28 +76,28 @@ const faqData = {
 export default function CompareContent({ units }: CompareContentProps) {
   const useCases = [
     {
-      title: 'Best for groups of 4–8',
-      body: 'Book multiple units — we coordinate. Or start with the Bleacher Balcony Flat (largest layout feel and the balcony for outdoor hangs).'
+      title: 'Best for groups of 5+',
+      body: 'The Catbird Seat sleeps 5 in 900 sqft. For larger groups, book multiple units in the same building — we coordinate, and the building can sleep up to 13 across all three apartments.'
     },
     {
-      title: 'Best for the view',
-      body: 'Field View Loft for the panoramic Wrigley + skyline angle. Slugger\'s Suite for the direct field-view window in the living room.'
+      title: 'Best for the view from inside',
+      body: 'The Catbird Seat. Corner-lot location with huge bay-style windows in the living room and wraparound windows in the dining area. You watch the Wrigleyville scene from your couch.'
     },
     {
-      title: 'Best for couples',
-      body: 'Field View Loft. Quietest of the three (top floor), the best view, and a layout that just feels good for two.'
+      title: 'Best for couples (or a couple plus friends)',
+      body: 'The Catbird Seat. Top floor of the building (quieter, brighter), 10-foot ceilings, soundproofed bedrooms, and enough space for a third or fourth guest if you want company.'
     },
     {
       title: 'Best for Cubs playoffs',
-      body: 'All three book fast for postseason — but Slugger\'s Suite always goes first because of the direct field view.'
+      body: 'All three apartments book fast for postseason — same building, same 1-minute walk to the bleacher entrance. Book early.'
     },
     {
-      title: 'Best for outdoor space',
-      body: 'Bleacher Balcony Flat. The only unit with a private outdoor balcony — perfect for morning coffee with a partial view of the marquee.'
+      title: 'Best for remote work',
+      body: 'The Catbird Seat has 300 Mbps WiFi and a dedicated workspace. Fast enough for video calls and a real desk if you need one.'
     },
     {
-      title: 'Best for budget',
-      body: 'Bleacher Balcony Flat. $175/night is the lowest rate of the three — and you still get a private balcony and direct walk to the bleacher entrance.'
+      title: 'Best for skipping the rental car',
+      body: 'All three. The Addison Red Line is literally next door — Loop in 15-20 minutes, both airports reachable on CTA. We always recommend skipping the car.'
     }
   ]
 
@@ -107,36 +107,36 @@ export default function CompareContent({ units }: CompareContentProps) {
       a: 'Yes. All three units are in the same building at 3601 N Sheffield Ave, directly across from Wrigley Field. Different floors, same front door, same incredible location.'
     },
     {
-      q: 'Which apartment has the best view of Wrigley Field?',
-      a: 'Depends what you mean. Slugger\'s Suite has a direct field-view window — you can see into the ballpark from the living room. Field View Loft has the most panoramic view (Wrigley + skyline). Bleacher Balcony Flat has a partial view from the balcony.'
+      q: 'Which apartment is closest to Wrigley Field?',
+      a: 'All three are about a 1-minute walk from the bleacher entrance — we\'re at 3601 N Sheffield Ave, directly across the street. They\'re three units in the same building, so closeness is identical. What varies is the floor: Garden Level, First Floor (up about 12 steps), and Top Floor.'
     },
     {
       q: 'Can I book 2 or 3 apartments together?',
-      a: 'Yes. Block bookings work great for wedding parties, family reunions, fantasy baseball trips, corporate retreats. Sleeps up to 12 across all three. Message us to coordinate.'
+      a: 'Yes. Block bookings work great for wedding parties, family reunions, fantasy baseball trips, and corporate retreats. With all three booked, you can sleep up to 13 across the building. Message us to coordinate dates and pricing.'
     },
     {
       q: 'Are the apartments identical inside?',
-      a: 'Same building, similar finishes, but each has a different layout based on its floor. Slugger\'s faces street directly. Bleacher has the balcony. Field View has the panoramic skyline view.'
+      a: 'Same building, all 2-bedroom 1-bath, but each has its own layout based on the floor. The Catbird Seat (top floor) has 10-foot ceilings and corner-lot bay windows. The other two units have their own characters — full descriptions coming soon.'
     },
     {
       q: 'Do all three include the same amenities?',
-      a: 'All three include full kitchens, fast WiFi, smart TVs, central AC, washer/dryer, self check-in. Bleacher Balcony Flat additionally has the private balcony. See each unit page for full lists.'
+      a: 'All three include full kitchens, fast WiFi, smart TVs, central AC, and smart-lock self check-in. Each unit has its own washer/dryer or shared in-building laundry. See each unit page for full amenity lists.'
     }
   ]
 
   // Mapping for comparison table data
-  const comparisonData = {
+  const comparisonData: Record<string, { bestFor: string; keyFeature: string }> = {
     'sluggers-suite': {
-      bestFor: 'Game-day groups who want the view',
-      keyFeature: 'Direct field-view window'
+      bestFor: 'Groups who want the closest-to-street energy',
+      keyFeature: 'Garden-level entry'
     },
     'bleacher-balcony-flat': {
-      bestFor: 'Couples and groups who want outdoor space',
-      keyFeature: 'Private outdoor balcony'
+      bestFor: 'Groups who want the elevated first-floor feel',
+      keyFeature: 'First floor, up ~12 steps'
     },
-    'field-view-loft': {
-      bestFor: 'Couples and photographers who want the highest vantage',
-      keyFeature: 'Top-floor panoramic views'
+    'catbird-seat': {
+      bestFor: 'Groups of up to 5 who want the brightest, quietest unit',
+      keyFeature: 'Top floor · 10-ft ceilings · corner-lot bay windows'
     }
   }
 
@@ -226,9 +226,9 @@ export default function CompareContent({ units }: CompareContentProps) {
                     <td className="font-bold text-ink px-5 py-4 text-sm text-primary">{row.label}</td>
                     {units.map(unit => (
                       <td key={unit.slug} className="px-5 py-4 text-sm text-ink">
-                        {row.key === 'price' && `$${unit.pricePerNight}/night`}
-                        {row.key === 'bestFor' && comparisonData[unit.slug as keyof typeof comparisonData].bestFor}
-                        {row.key === 'keyFeature' && comparisonData[unit.slug as keyof typeof comparisonData].keyFeature}
+                        {row.key === 'price' && (unit.pricePerNight ? `$${unit.pricePerNight}/night` : 'Check availability')}
+                        {row.key === 'bestFor' && (comparisonData[unit.slug]?.bestFor || '—')}
+                        {row.key === 'keyFeature' && (comparisonData[unit.slug]?.keyFeature || '—')}
                         {row.key === 'floor' && unit.floor}
                         {row.key === 'highlight' && unit.highlight}
                         {row.key === 'sleeps' && unit.sleeps}

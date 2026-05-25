@@ -173,8 +173,14 @@ export default function HomePage() {
                     {unit.parking}
                   </div>
                   <div style={{ fontSize: 15, color: '#1c2433', marginBottom: 28 }}>
-                    <b style={{ fontSize: 24, fontWeight: 700, color: '#15375c', marginRight: 6, letterSpacing: '-0.015em' }}>${unit.pricePerNight}</b>
-                    <span style={{ color: '#6b7585' }}>per night</span>
+                    {unit.pricePerNight ? (
+                      <>
+                        <b style={{ fontSize: 24, fontWeight: 700, color: '#15375c', marginRight: 6, letterSpacing: '-0.015em' }}>${unit.pricePerNight}</b>
+                        <span style={{ color: '#6b7585' }}>per night</span>
+                      </>
+                    ) : (
+                      <span style={{ color: '#6b7585', fontStyle: 'italic' }}>Check availability for live pricing</span>
+                    )}
                   </div>
                   <Link href={`/units/${unit.slug}`} style={{ display: 'block', textAlign: 'center', background: '#15375c', color: '#fff', padding: '17px 16px', borderRadius: 8, fontWeight: 700, fontSize: 15, letterSpacing: '0.005em', marginTop: 'auto', textDecoration: 'none' }}>
                     View Apartment

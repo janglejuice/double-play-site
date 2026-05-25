@@ -33,7 +33,7 @@ export const reviews: Review[] = [
     date: 'July 2024',
     rating: 5,
     text: 'Came in for a concert weekend. Spotless apartment, easy keypad entry, and great recommendations from the host for the best deep dish nearby. We will be back.',
-    unit: 'Field View Loft',
+    unit: 'The Catbird Seat',
     source: 'VRBO',
   },
   {
