@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import HospitableSearch from '@/components/HospitableSearch'
+import SearchPrompt from '@/components/SearchPrompt'
 
 export const metadata = {
   title: 'Search Apartments — Double Play at Wrigley',
@@ -55,8 +56,9 @@ export default function SearchPage() {
       </section>
 
       {/* Search widget */}
-      <section style={{ padding: '48px 32px 96px', background: '#fff' }}>
+      <section style={{ padding: '32px 32px 96px', background: '#fff' }}>
         <div style={{ ...WRAP }}>
+          <SearchPrompt />
           <HospitableSearch />
         </div>
       </section>
