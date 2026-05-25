@@ -192,7 +192,7 @@ export default async function UnitPage({ params }: { params: Promise<{ slug: str
           >
             {unit.description}
           </p>
-          <BookingWidget unitId={unit.hospitable_widget_id} />
+          <BookingWidget propertyId={unit.hospitable_property_id} title={`Book ${unit.name}`} />
           <Link
             href="/compare"
             style={{

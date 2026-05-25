@@ -1,3 +1,6 @@
+// Hospitable booking widget — site ID is shared across all units in this account
+export const HOSPITABLE_SITE_ID = 'a1d82a3d-16d4-4e5e-9793-6fb5e07758dd'
+
 export type Unit = {
   slug: string
   name: string
@@ -14,7 +17,8 @@ export type Unit = {
   sqft?: number
   pricePerNight?: number  // optional — Hospitable widget will show real-time pricing
   parking: string
-  hospitable_widget_id: string
+  /** Per-property Hospitable widget ID. `null` until owner sets it up for that unit. */
+  hospitable_property_id: string | null
 }
 
 export const units: Unit[] = [
@@ -33,7 +37,7 @@ export const units: Unit[] = [
     sleeps: 4,
     maxGuests: 4,
     parking: 'Residential street-parking pass provided (max 1 per night)',
-    hospitable_widget_id: 'FILL_IN',
+    hospitable_property_id: null, // Owner to provide
   },
   {
     // Unit 2 — first floor (up ~12 steps from sidewalk since Unit 1 is half-basement). Copy to be provided.
@@ -50,7 +54,7 @@ export const units: Unit[] = [
     sleeps: 4,
     maxGuests: 4,
     parking: 'Residential street-parking pass provided (max 1 per night)',
-    hospitable_widget_id: 'FILL_IN',
+    hospitable_property_id: null, // Owner to provide
   },
   {
     // Unit 3 — top floor (2nd floor). Real listing copy from owner.
@@ -86,7 +90,7 @@ export const units: Unit[] = [
     sqft: 900,
     // pricePerNight intentionally omitted — pricing varies daily, Hospitable widget shows real-time rate
     parking: 'Residential street-parking pass provided (max 1 per night, not guaranteed)',
-    hospitable_widget_id: 'FILL_IN',
+    hospitable_property_id: '560744',
   },
 ]
 
