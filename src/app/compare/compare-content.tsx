@@ -272,7 +272,7 @@ export default function CompareContent({ units }: CompareContentProps) {
         overflow: 'hidden',
         background: NAVY_INK,
         color: '#fff',
-        padding: '140px 0 88px',
+        padding: '72px 0 88px',
       }}>
         {/* grid texture overlay */}
         <div aria-hidden style={{

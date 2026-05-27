@@ -87,9 +87,6 @@ export default function CatbirdSeatPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* Header band: dark navy backdrop for the absolute-positioned NavBar */}
-      <div style={{ height: 206, background: T.navyInk }} aria-hidden="true" />
-
       {/* ─────────────── Breadcrumb / Action bar ─────────────── */}
       <div
         style={{
@@ -1278,7 +1275,7 @@ export default function CatbirdSeatPage() {
                 name: "The Slugger's Suite",
                 meta: 'Garden Level, closest to street',
                 badge: 'Sister unit',
-                photo: '/sluggers-suite.jpg',
+                photo: '/field-view-loft.png',
               },
             ].map(u => (
               <Link

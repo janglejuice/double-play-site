@@ -251,7 +251,7 @@ export default function NeighborhoodPage() {
       {/* ====================== HERO ====================== */}
       <section style={{
         background: NAVY_INK,
-        padding: '240px 0 80px',
+        padding: '88px 0 80px',
         position: 'relative',
         overflow: 'hidden',
       }}>

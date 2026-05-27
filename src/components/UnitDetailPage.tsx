@@ -74,7 +74,7 @@ export default function UnitDetailPage({ slug }: UnitDetailPageProps) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(lodgingSchema) }} />
 
       {/* HERO */}
-      <section style={{ backgroundColor: '#15375c', color: '#fff', paddingTop: 240, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
+      <section style={{ backgroundColor: '#15375c', color: '#fff', paddingTop: 80, paddingBottom: 80, paddingLeft: 24, paddingRight: 24 }}>
         <div style={{ maxWidth: 880, margin: '0 auto' }}>
           <div style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 24, opacity: 0.7 }}>
             {unit.floor}

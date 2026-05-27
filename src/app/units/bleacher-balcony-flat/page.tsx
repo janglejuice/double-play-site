@@ -88,9 +88,6 @@ export default function BleacherBalconyFlatPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      {/* Header band: dark navy backdrop for the absolute-positioned NavBar */}
-      <div style={{ height: 206, background: T.navyInk }} aria-hidden="true" />
-
       {/* ─────────────── Breadcrumb / Action bar ─────────────── */}
       <div
         style={{
@@ -1297,14 +1294,14 @@ export default function BleacherBalconyFlatPage() {
                 name: 'The Catbird Seat',
                 meta: 'Top Floor (2nd), 900 sqft, bay windows',
                 badge: 'Top floor',
-                photo: '/field-view-loft.png',
+                photo: '/sluggers-suite.jpg',
               },
               {
                 slug: 'sluggers-suite',
                 name: "The Slugger's Suite",
                 meta: 'Garden Level, closest to street',
                 badge: 'Sister unit',
-                photo: '/sluggers-suite.jpg',
+                photo: '/field-view-loft.png',
               },
             ].map(u => (
               <Link

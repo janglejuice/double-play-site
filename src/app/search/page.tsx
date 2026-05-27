@@ -22,7 +22,7 @@ export default function SearchPage() {
       <section style={{
         background: NAVY_INK,
         color: '#fff',
-        padding: '220px 32px 60px',
+        padding: '80px 32px 60px',
       }}>
         <div style={{ ...WRAP }}>
           <div style={{
