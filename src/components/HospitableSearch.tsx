@@ -211,9 +211,37 @@ export default function HospitableSearch({ resultsUrl }: HospitableSearchProps) 
   }, [mounted, params, resultsUrl])
 
   if (!mounted) {
+    // Read URL params server-side (window not available) via a quick SSR-safe parse
+    let loadingText = 'Searching availability…'
+    if (typeof window !== 'undefined') {
+      const sp = new URLSearchParams(window.location.search)
+      const sd = sp.get('start_date') || sp.get('startDate') || sp.get('checkin')
+      const ed = sp.get('end_date') || sp.get('endDate') || sp.get('checkout')
+      const adults = sp.get('adults') || sp.get('guests')
+      if (sd) {
+        const fmt = (s: string) =>
+          new Date(s + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+        const dateRange = ed ? `${fmt(sd)}–${fmt(ed)}` : fmt(sd)
+        const guestPart = adults ? ` · ${adults} guest${parseInt(adults, 10) !== 1 ? 's' : ''}` : ''
+        loadingText = `Finding availability for ${dateRange}${guestPart}…`
+      }
+    }
     return (
-      <div style={{ minHeight: 120, display: 'grid', placeItems: 'center', color: '#6b7585', fontSize: 14 }}>
-        Loading search…
+      <div
+        className="search-loading-pulse"
+        style={{
+          minHeight: 120,
+          display: 'grid',
+          placeItems: 'center',
+          color: '#6b7585',
+          fontSize: 14,
+          fontFamily: 'Manrope, system-ui, sans-serif',
+          letterSpacing: '0.01em',
+          background: '#f5f6f8',
+          borderRadius: 8,
+        }}
+      >
+        {loadingText}
       </div>
     )
   }

@@ -34,7 +34,9 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
 
-/* Responsive grid collapses for neighborhood/homepage layouts */
+/* ─────────────────────────────────────────────
+   Responsive grid collapses — neighborhood pages
+   ───────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .hero-split-neighbor { grid-template-columns: 1fr !important; gap: 36px !important; }
   .overview-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
@@ -48,4 +50,140 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
     grid-template-columns: 1fr !important;
   }
   .explore-feature { grid-column: span 1 !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Homepage responsive — hero
+   ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .hero-section { min-height: auto !important; }
+  .hero-content-wrap {
+    padding-top: 110px !important;
+    padding-bottom: 60px !important;
+    min-height: auto !important;
+  }
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .hero-headline { align-self: auto !important; font-size: clamp(2rem, 8vw, 3.5rem) !important; }
+  .hero-booking-panel { width: 100% !important; max-width: 480px !important; align-self: auto !important; }
+}
+@media (max-width: 580px) {
+  .hero-content-wrap { padding-top: 90px !important; padding-bottom: 40px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Homepage responsive — unit cards
+   ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .units-section { margin-top: -80px !important; }
+  .units-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 28px !important; }
+}
+@media (max-width: 580px) {
+  .units-section { margin-top: -40px !important; }
+  .units-grid { grid-template-columns: 1fr !important; max-width: 440px !important; margin-left: auto !important; margin-right: auto !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Homepage responsive — events, reviews
+   ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .events-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .events-grid { grid-template-columns: 1fr !important; }
+  .reviews-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Homepage responsive — beyond the ballpark
+   ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .beyond-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .beyond-proximity-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 480px) {
+  .beyond-proximity-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Homepage responsive — neighborhood tiles
+   ───────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .neighborhood-tiles { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Footer responsive
+   ───────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 40px !important; }
+}
+@media (max-width: 580px) {
+  .footer-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+  .footer-logo-text { font-size: 32px !important; }
+  .footer-logo-sub { font-size: 20px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   NavBar responsive
+   ───────────────────────────────────────────── */
+.nav-desktop { display: flex; }
+.nav-hamburger { display: none; }
+.nav-mobile-drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #0b1f36;
+  padding: 8px 0 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 40;
+}
+.nav-mobile-drawer a {
+  display: block;
+  padding: 14px 32px;
+  font-size: 15px !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff !important;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  text-decoration: none;
+}
+.nav-mobile-drawer a:last-child { border-bottom: 0; }
+@media (max-width: 900px) {
+  .nav-desktop { display: none !important; }
+  .nav-hamburger { display: flex !important; }
+}
+@media (max-width: 680px) {
+  .nav-logo-mark { width: 100px !important; height: 88px !important; }
+  .nav-logo-text { font-size: 32px !important; margin-left: -20px !important; }
+  .nav-logo-sub { font-size: 19px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Global container padding — small screens
+   ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Reduce outer gutters on tiny screens */
+  .wrap-pad { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   Search loading state pulse animation
+   ───────────────────────────────────────────── */
+@keyframes search-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.45; }
+}
+.search-loading-pulse {
+  animation: search-pulse 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-loading-pulse {
+    animation: none;
+  }
 }
