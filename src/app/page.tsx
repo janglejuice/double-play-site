@@ -35,7 +35,7 @@ export default function HomePage() {
       }) }} />
 
       {/* ============ HERO ============ */}
-      <section style={{ position: 'relative', minHeight: 880, overflow: 'hidden', background: '#0c1d33' }}>
+      <section className="hero-section" style={{ position: 'relative', minHeight: 880, overflow: 'hidden', background: '#0c1d33' }}>
         {/* Background photo with blur */}
         <div style={{
           position: 'absolute', inset: 0,
@@ -55,11 +55,11 @@ export default function HomePage() {
         }} />
 
         {/* Content */}
-        <div style={{ ...WRAP, position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 220, minHeight: 880, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 48, alignItems: 'start', flex: 1 }}>
+        <div className="hero-content-wrap" style={{ ...WRAP, position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 220, minHeight: 880, display: 'flex', flexDirection: 'column' }}>
+          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 48, alignItems: 'start', flex: 1 }}>
 
             {/* Headline */}
-            <div style={{ alignSelf: 'end', color: '#fff', maxWidth: 720 }}>
+            <div className="hero-headline" style={{ alignSelf: 'end', color: '#fff', maxWidth: 720 }}>
               <h1 style={{
                 fontFamily: "'DM Serif Display', Georgia, serif",
                 fontWeight: 400,
@@ -104,7 +104,7 @@ export default function HomePage() {
             </div>
 
             {/* Booking Panel — custom form, submits to /search */}
-            <aside aria-label="Booking panel" style={{
+            <aside aria-label="Booking panel" className="hero-booking-panel" style={{
               width: 380,
               background: '#fff',
               borderRadius: 14,
@@ -155,9 +155,9 @@ export default function HomePage() {
       </section>
 
       {/* ============ APARTMENTS — overlaps hero ============ */}
-      <section id="apartments" style={{ position: 'relative', zIndex: 5, marginTop: -140, paddingBottom: 120 }}>
+      <section id="apartments" className="units-section" style={{ position: 'relative', zIndex: 5, marginTop: -140, paddingBottom: 120 }}>
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, maxWidth: 1280, margin: '0 auto' }}>
+          <div className="units-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, maxWidth: 1280, margin: '0 auto' }}>
             {units.map(unit => (
               <article key={unit.slug} style={{ background: '#fff', borderRadius: 8, boxShadow: SHADOW_CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '5px solid #fff', outline: '5px solid #fff' }}>
                 <div style={{ aspectRatio: '16/10', background: '#e8eaee', position: 'relative', overflow: 'hidden' }}>
@@ -191,32 +191,43 @@ export default function HomePage() {
       </section>
 
       {/* ============ EVENTS ============ */}
-      <section id="calendar" style={{ padding: '96px 0', background: '#f5f6f8' }}>
-        <div style={WRAP}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Upcoming Events at Wrigley</h2>
-            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Direct Booking, No Service Fees.</p>
+      {upcomingEvents.length === 0 ? (
+        <section id="calendar" style={{ padding: '96px 0', background: '#f5f6f8' }}>
+          <div style={WRAP}>
+            <div style={{ textAlign: 'center' }}>
+              <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Upcoming Events at Wrigley</h2>
+              <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Cubs season schedule coming soon, check back for upcoming dates.</p>
+            </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
-            {upcomingEvents.map((event, i) => {
-              const { dow, day, mon } = formatDate(event.date)
-              return (
-                <article key={i} style={{ background: '#fff', borderRadius: 14, boxShadow: SHADOW_CARD, padding: '26px 24px 24px', display: 'flex', flexDirection: 'column', border: '1px solid #eef0f3' }}>
-                  <div style={{ background: '#f1f4f9', borderRadius: 10, padding: '14px 10px', textAlign: 'center', marginBottom: 18, color: '#15375c' }}>
-                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#E85A2C' }}>{dow}</div>
-                    <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 46, lineHeight: 1, margin: '2px 0', letterSpacing: '-0.02em' }}>{day}</div>
-                    <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#15375c' }}>{mon}</div>
-                  </div>
-                  <h3 style={{ fontWeight: 700, color: '#15375c', fontSize: 18, lineHeight: 1.3, letterSpacing: '-0.01em', margin: '0 0 14px', minHeight: 48 }}>{event.title}</h3>
-                  <Link href={`/units/sluggers-suite?checkin=${event.date}`} style={{ display: 'block', textAlign: 'center', border: '1.5px solid #E85A2C', color: '#E85A2C', padding: '12px 14px', borderRadius: 6, fontWeight: 700, fontSize: 14, letterSpacing: '0.005em', marginTop: 'auto', background: '#fff', textDecoration: 'none' }}>
-                    Book for this date
-                  </Link>
-                </article>
-              )
-            })}
+        </section>
+      ) : (
+        <section id="calendar" style={{ padding: '96px 0', background: '#f5f6f8' }}>
+          <div style={WRAP}>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Upcoming Events at Wrigley</h2>
+              <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Book early, game-day weekends sell out fast.</p>
+            </div>
+            <div className="events-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+              {upcomingEvents.map((event, i) => {
+                const { dow, day, mon } = formatDate(event.date)
+                return (
+                  <article key={i} style={{ background: '#fff', borderRadius: 14, boxShadow: SHADOW_CARD, padding: '26px 24px 24px', display: 'flex', flexDirection: 'column', border: '1px solid #eef0f3' }}>
+                    <div style={{ background: '#f1f4f9', borderRadius: 10, padding: '14px 10px', textAlign: 'center', marginBottom: 18, color: '#15375c' }}>
+                      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#E85A2C' }}>{dow}</div>
+                      <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 46, lineHeight: 1, margin: '2px 0', letterSpacing: '-0.02em' }}>{day}</div>
+                      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#15375c' }}>{mon}</div>
+                    </div>
+                    <h3 style={{ fontWeight: 700, color: '#15375c', fontSize: 18, lineHeight: 1.3, letterSpacing: '-0.01em', margin: '0 0 14px', minHeight: 48 }}>{event.title}</h3>
+                    <Link href={`/units/sluggers-suite?checkin=${event.date}`} style={{ display: 'block', textAlign: 'center', border: '1.5px solid #E85A2C', color: '#E85A2C', padding: '12px 14px', borderRadius: 6, fontWeight: 700, fontSize: 14, letterSpacing: '0.005em', marginTop: 'auto', background: '#fff', textDecoration: 'none' }}>
+                      Book for this date
+                    </Link>
+                  </article>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============ REVIEWS ============ */}
       <section id="reviews" style={{ padding: '96px 0', background: '#fff' }}>
@@ -240,7 +251,7 @@ export default function HomePage() {
               5.0 Average Rating
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+          <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {featuredReviews.map((review, i) => (
               <div key={i} style={{ padding: '0 6px' }}>
                 <div style={{ fontSize: 22, lineHeight: 1, color: '#E85A2C', fontFamily: "'DM Serif Display', Georgia, serif", marginBottom: 8 }}>&ldquo;</div>
@@ -311,7 +322,7 @@ export default function HomePage() {
       {/* ============ BROADER CHICAGO APPEAL ============ */}
       <section id="chicago" style={{ padding: '96px 0', background: '#15375c', color: '#fff' }}>
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+          <div className="beyond-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
               <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.22em', color: '#E85A2C', textTransform: 'uppercase', marginBottom: 14 }}>
                 Beyond the Ballpark
@@ -353,7 +364,7 @@ export default function HomePage() {
                 Read the full guide →
               </Link>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="beyond-proximity-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
               {[
                 { label: 'The Loop & The Bean', time: '15 min' },
                 { label: 'Lake Michigan', time: '10 min walk' },
@@ -388,7 +399,7 @@ export default function HomePage() {
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Explore Wrigleyville</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>The pre-game bars, late-night slices, and weekend brunch spots we&apos;ve sent hundreds of guests to. Full guide inside.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
+          <div className="neighborhood-tiles" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
             {[
               { label: 'Local Bars', ph: 'Local bars' },
               { label: 'Local Restaurants', ph: 'Restaurants' },

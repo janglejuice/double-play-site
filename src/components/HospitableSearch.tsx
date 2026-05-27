@@ -228,7 +228,7 @@ export default function HospitableSearch({ resultsUrl }: HospitableSearchProps) 
       }
     }
     return (
-      {/* pulse animation lives in globals.css — cannot be expressed as an inline style */}
+      /* pulse animation lives in globals.css — cannot be expressed as an inline style */
       <div
         className="search-loading-pulse"
         style={{
