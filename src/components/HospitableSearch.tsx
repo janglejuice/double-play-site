@@ -211,7 +211,8 @@ export default function HospitableSearch({ resultsUrl }: HospitableSearchProps) 
   }, [mounted, params, resultsUrl])
 
   if (!mounted) {
-    // Read URL params server-side (window not available) via a quick SSR-safe parse
+    // Client-only: window.location is unavailable during SSR pre-render.
+    // The contextual text appears only after hydration, before the first useEffect fires.
     let loadingText = 'Searching availability…'
     if (typeof window !== 'undefined') {
       const sp = new URLSearchParams(window.location.search)
@@ -227,6 +228,7 @@ export default function HospitableSearch({ resultsUrl }: HospitableSearchProps) 
       }
     }
     return (
+      {/* pulse animation lives in globals.css — cannot be expressed as an inline style */}
       <div
         className="search-loading-pulse"
         style={{
