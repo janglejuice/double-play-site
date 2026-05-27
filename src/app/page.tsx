@@ -262,7 +262,7 @@ export default function HomePage() {
               {
                 num: '2',
                 title: 'Local hosts who answer.',
-                body: 'We live in and around Wrigleyville. Message us anytime and we typically respond within the hour. Pre-booking questions, custom requests, last-minute changes -- all handled by an actual human who knows the neighborhood inside out.',
+                body: 'We live in and around Wrigleyville. Message us anytime and we typically respond within the hour. Pre-booking questions, custom requests, last-minute changes: all handled by an actual human who knows the neighborhood inside out.',
               },
               {
                 num: '3',
