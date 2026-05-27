@@ -257,7 +257,7 @@ export default function HomePage() {
               {
                 num: '1',
                 title: 'No service fees.',
-                body: "Airbnb charges guests up to 14% in service fees on top of your nightly rate. VRBO does the same. We don't. Same apartment, same dates -- just direct. Most guests save $150-$250+ on a 3-night stay.",
+                body: "Airbnb charges guests up to 14% in service fees on top of your nightly rate. VRBO does the same. We don't. Same apartment, same dates, just direct. Most guests save $150-$250+ on a 3-night stay.",
               },
               {
                 num: '2',
