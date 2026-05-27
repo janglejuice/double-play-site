@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-25T00:00:00.000Z",
+  "title": "Design System: Double Play at Wrigley",
+  "extensions": {
+    "colorMeta": {
+      "navy":          { "role": "primary",   "displayName": "Wrigley Night Navy",  "canonical": "#15375c", "tonalRamp": ["#051320", "#0a2238", "#0f2a48", "#15375c", "#1d4b7a", "#336099", "#6690b8", "#a8c0d6"] },
+      "navy-deep":     { "role": "primary",   "displayName": "Ivy Wall Deep",       "canonical": "#0f2a48", "tonalRamp": ["#040f1c", "#081829", "#0f2a48", "#163861", "#1f4f84", "#3669a2", "#6090be", "#a2bfd8"] },
+      "navy-ink":      { "role": "primary",   "displayName": "Wrigleyville Ink",    "canonical": "#0b1f36", "tonalRamp": ["#030b14", "#060f1c", "#0b1f36", "#122b4a", "#1c3e68", "#305580", "#607ea0", "#a0b8cc"] },
+      "accent":        { "role": "secondary", "displayName": "Game Day Orange",     "canonical": "#E85A2C", "tonalRamp": ["#4a1500", "#7a2400", "#b03810", "#e85a2c", "#f07852", "#f59a7a", "#f8bba4", "#fcddd2"] },
+      "accent-dark":   { "role": "secondary", "displayName": "Dugout Orange",       "canonical": "#d04a1f", "tonalRamp": ["#401200", "#6e1f00", "#a03015", "#d04a1f", "#e06a44", "#ea8e72", "#f2b4a0", "#f8d5cb"] },
+      "ink":           { "role": "neutral",   "displayName": "Night Game Ink",      "canonical": "#1c2433", "tonalRamp": ["#06090d", "#0d1219", "#1c2433", "#2c3649", "#3e4d62", "#5a6880", "#8896a8", "#c0c8d4"] },
+      "muted":         { "role": "neutral",   "displayName": "Chalk Line Muted",    "canonical": "#6b7585", "tonalRamp": ["#1a1e23", "#2e333c", "#484f5c", "#6b7585", "#8a93a2", "#aab2be", "#c8cdd6", "#e5e8ed"] },
+      "line":          { "role": "neutral",   "displayName": "Foul Line",           "canonical": "#e6e8ec", "tonalRamp": ["#b4b8c0", "#c4c8d0", "#d5d8de", "#e6e8ec", "#eef0f3", "#f3f4f6", "#f8f9fa", "#ffffff"] },
+      "bg":            { "role": "neutral",   "displayName": "Stadium White",       "canonical": "#ffffff", "tonalRamp": ["#c8cdd6", "#d8dce4", "#e8eaee", "#f2f3f5", "#f8f9fa", "#fafbfc", "#fdfdfe", "#ffffff"] },
+      "bg-soft":       { "role": "neutral",   "displayName": "Bleacher Gray",       "canonical": "#f5f6f8", "tonalRamp": ["#c4c8d2", "#d2d5de", "#e2e4ea", "#f0f1f4", "#f5f6f8", "#f8f9fb", "#fafbfc", "#fdfdfe"] },
+      "bg-warm":       { "role": "neutral",   "displayName": "Postgame Cream",      "canonical": "#fdf6f1", "tonalRamp": ["#d4c0b0", "#e0d0c0", "#ecdfcf", "#f5ece4", "#fdf6f1", "#fef9f5", "#fefcfa", "#fefefe"] },
+      "confirm-green": { "role": "tertiary",  "displayName": "First-Base Green",    "canonical": "#23a06b", "tonalRamp": ["#073320", "#0e5535", "#186b46", "#23a06b", "#35c082", "#60d49e", "#98e5bf", "#cdf2e0"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero section headlines and large section callouts only. DM Serif Display — never at body or UI sizes." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings, unit names, page-level titles. Manrope 700 with tight letter-spacing." },
+      "title":    { "displayName": "Title",    "purpose": "Card titles, event headings, booking panel headers." },
+      "body":     { "displayName": "Body",     "purpose": "All running prose. 65-75ch max-width. Line-height 1.7 for long passages." },
+      "label":    { "displayName": "Label",    "purpose": "Eyebrow labels above section headings, form field labels, trust badges, meta info. Always uppercase." }
+    },
+    "shadows": [
+      {
+        "name": "shadow-card",
+        "value": "0 1px 2px rgba(15,42,72,0.04), 0 12px 28px -12px rgba(15,42,72,0.18)",
+        "purpose": "Unit cards, event cards, neighborhood tiles — the standard container lift."
+      },
+      {
+        "name": "shadow-panel",
+        "value": "0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)",
+        "purpose": "Hero booking panel and focal-point callouts. Heavier directional lift for primary conversion surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "State transitions: button hover, link color changes."
+      }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "680px",  "purpose": "Single-column grid collapses" },
+      { "name": "tablet", "value": "1100px", "purpose": "Two-column layout collapses for neighborhood/overview grids" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary CTA Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main booking and search action. Orange background, white text. Used for 'Search & Book', 'Check Availability', 'Read the full guide'.",
+      "html": "<button class=\"ds-btn-primary\">Search &amp; Book</button>",
+      "css": ".ds-btn-primary { display: inline-block; background: #E85A2C; color: #ffffff; padding: 16px 32px; border-radius: 8px; font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.005em; border: 0; cursor: pointer; transition: background 0.18s; text-decoration: none; } .ds-btn-primary:hover { background: #d04a1f; } .ds-btn-primary:focus-visible { outline: 2px solid #E85A2C; outline-offset: 3px; }"
+    },
+    {
+      "name": "Navy Secondary Button",
+      "kind": "button",
+      "refersTo": "button-navy",
+      "description": "Secondary action button used on unit cards ('View Apartment'). Navy background, white text.",
+      "html": "<a class=\"ds-btn-navy\" href=\"#\">View Apartment</a>",
+      "css": ".ds-btn-navy { display: block; text-align: center; background: #15375c; color: #ffffff; padding: 17px 16px; border-radius: 8px; font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.005em; text-decoration: none; transition: background 0.18s; } .ds-btn-navy:hover { background: #0f2a48; } .ds-btn-navy:focus-visible { outline: 2px solid #15375c; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Accent Button",
+      "kind": "button",
+      "refersTo": "button-outline-accent",
+      "description": "Secondary CTA that lives near orange primaries. White background, orange border and text. Used on event cards ('Book for this date').",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Book for this date</a>",
+      "css": ".ds-btn-outline { display: block; text-align: center; background: #ffffff; color: #E85A2C; border: 1.5px solid #E85A2C; padding: 12px 14px; border-radius: 6px; font-family: 'Manrope', system-ui, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 0.005em; text-decoration: none; transition: background 0.18s, color 0.18s; } .ds-btn-outline:hover { background: #E85A2C; color: #ffffff; } .ds-btn-outline:focus-visible { outline: 2px solid #E85A2C; outline-offset: 3px; }"
+    },
+    {
+      "name": "Unit Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The main apartment listing card. White background, 8px radius, shadow-card. Image at top (16/10 ratio), content below with heading, tagline, and bottom-pinned CTA.",
+      "html": "<article class=\"ds-unit-card\"><div class=\"ds-unit-card__image\"></div><div class=\"ds-unit-card__body\"><h3 class=\"ds-unit-card__title\">The Catbird Seat</h3><p class=\"ds-unit-card__tagline\">Top-floor views, two bedrooms, steps from the marquee.</p><a class=\"ds-btn-navy\" href=\"#\">View Apartment</a></div></article>",
+      "css": ".ds-unit-card { background: #ffffff; border-radius: 8px; box-shadow: 0 1px 2px rgba(15,42,72,0.04), 0 12px 28px -12px rgba(15,42,72,0.18); overflow: hidden; display: flex; flex-direction: column; } .ds-unit-card__image { aspect-ratio: 16/10; background: #e8eaee; } .ds-unit-card__body { padding: 28px; display: flex; flex-direction: column; flex: 1; } .ds-unit-card__title { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.015em; color: #15375c; margin: 0 0 12px; } .ds-unit-card__tagline { color: #6b7585; font-size: 15px; line-height: 1.5; margin: 0 0 auto; padding-bottom: 28px; }"
+    },
+    {
+      "name": "Event Card",
+      "kind": "card",
+      "refersTo": "card-lg",
+      "description": "Event listing card with a date-tile at top. White background, 14px radius. DM Serif Display for the day numeral — the one exception to the brand-only serif rule.",
+      "html": "<article class=\"ds-event-card\"><div class=\"ds-event-card__date\"><div class=\"ds-event-card__dow\">SAT</div><div class=\"ds-event-card__day\">14</div><div class=\"ds-event-card__mon\">JUN</div></div><h3 class=\"ds-event-card__title\">Cubs vs. Cardinals</h3><a class=\"ds-btn-outline\" href=\"#\">Book for this date</a></article>",
+      "css": ".ds-event-card { background: #ffffff; border-radius: 14px; box-shadow: 0 1px 2px rgba(15,42,72,0.04), 0 12px 28px -12px rgba(15,42,72,0.18); border: 1px solid #eef0f3; padding: 26px 24px 24px; display: flex; flex-direction: column; } .ds-event-card__date { background: #f1f4f9; border-radius: 10px; padding: 14px 10px; text-align: center; margin-bottom: 18px; color: #15375c; } .ds-event-card__dow { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; color: #E85A2C; text-transform: uppercase; } .ds-event-card__day { font-family: 'DM Serif Display', Georgia, serif; font-size: 46px; line-height: 1; margin: 2px 0; letter-spacing: -0.02em; } .ds-event-card__mon { font-size: 11px; font-weight: 800; letter-spacing: 0.2em; color: #15375c; text-transform: uppercase; } .ds-event-card__title { font-weight: 700; color: #15375c; font-size: 18px; line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 14px; flex: 1; }"
+    },
+    {
+      "name": "Trust Badge Pill",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Horizontal pill for trust signals (Superhost, Premier Host, 5.0 Rating). White background, line border, 999px radius.",
+      "html": "<div class=\"ds-trust-badge\"><span class=\"ds-trust-badge__dot ds-trust-badge__dot--orange\">★</span>Airbnb Superhost</div>",
+      "css": ".ds-trust-badge { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; background: #ffffff; border: 1.5px solid #e6e8ec; border-radius: 999px; font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700; color: #15375c; letter-spacing: 0.02em; } .ds-trust-badge__dot--orange { color: #E85A2C; font-size: 16px; } .ds-trust-badge__dot--green { color: #23a06b; font-size: 14px; }"
+    },
+    {
+      "name": "Form Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Booking form text/date/select input. White background, line border, 6px radius, 48px height.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field__label\" for=\"f1\">Check-in date</label><div class=\"ds-field__wrap\"><input class=\"ds-field__input\" id=\"f1\" type=\"date\" /></div></div>",
+      "css": ".ds-field { margin-bottom: 18px; } .ds-field__label { display: block; font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; color: #15375c; text-transform: uppercase; margin-bottom: 8px; } .ds-field__wrap { display: flex; align-items: center; border: 1.5px solid #e6e8ec; border-radius: 6px; padding: 0 14px; height: 48px; background: #ffffff; transition: border-color 0.15s; } .ds-field__wrap:focus-within { border-color: #15375c; } .ds-field__input { width: 100%; border: 0; outline: 0; background: transparent; font-family: 'Manrope', sans-serif; color: #1c2433; font-weight: 600; font-size: 15px; }"
+    },
+    {
+      "name": "Section Eyebrow Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Orange uppercase label that precedes a section headline. The system's most recognizable punctuation — always appears before h2 headings that open a new chapter.",
+      "html": "<div class=\"ds-eyebrow\">Why Book Direct</div><h2 class=\"ds-section-headline\">Skip the middleman. Stay direct.</h2>",
+      "css": ".ds-eyebrow { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.22em; color: #E85A2C; text-transform: uppercase; margin-bottom: 14px; } .ds-section-headline { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; font-size: 40px; letter-spacing: -0.015em; color: #15375c; margin: 0 0 16px; line-height: 1.15; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Local's Matchbook",
+    "overview": "Worn, specific, trustworthy. The design feels like something a neighborhood regular hands you with a recommendation scrawled on the back. Not polished to a corporation's shine. Not rustic for rustic's sake. Just confident, genuine, and earned.\n\nThe palette pairs deep Wrigley Night Navy against a live Game Day Orange. Two colors that carry the neighborhood. The serif display type (DM Serif Display) shows up at headline scale only. Manrope handles everything else. Same two typefaces, same shadow vocabulary, same orange-or-navy button decision, every time.\n\nThis system explicitly rejects: corporate hotel chain sterility, Airbnb/VRBO listing-card blankness, cheap vacation rental clutter, and the trendy startup aesthetic.",
+    "keyCharacteristics": [
+      "Two typefaces, no exceptions: DM Serif Display (display only) and Manrope (everything else)",
+      "Navy as the dominant brand color; orange reserved for action and emphasis",
+      "Ambient navy-tinted shadows — every surface lifts from the page the same way",
+      "Eyebrow labels in orange uppercase: the system's most recognizable punctuation",
+      "Background cycling: white, bg-soft, bg-warm, and full navy — each section signals a new chapter"
+    ],
+    "rules": [
+      { "name": "The One Action Rule", "body": "Orange is the site's action color. It appears on booking buttons, eyebrow labels, and call-to-action links. It does not appear on decorative elements.", "section": "colors" },
+      { "name": "The Navy Background Rule", "body": "When a section uses navy as its full-bleed background, body text becomes white and secondary text becomes rgba(255,255,255,0.9). Orange still means action.", "section": "colors" },
+      { "name": "The Navy-Tinted Shadow Rule", "body": "All box-shadows use rgba(15,42,72,...) as their color. rgba(0,0,0,...) shadows are forbidden.", "section": "elevation" },
+      { "name": "The Two-Shadow Rule", "body": "Every shadow consists of exactly two layers: a tight ambient layer and a larger directional layer. Never one, never three.", "section": "elevation" },
+      { "name": "The Serif Guest Rule", "body": "DM Serif Display appears at display scale and on isolated date numerals in the events component. Never at body or label sizes.", "section": "typography" },
+      { "name": "The Tight Heading Rule", "body": "All Manrope headings use negative letter-spacing (-0.01em to -0.015em). Headings that feel loose are placeholders.", "section": "typography" }
+    ],
+    "dos": [
+      "Use SHADOW_CARD on all card-level containers and SHADOW_PANEL on the booking panel — never swapped",
+      "Use Game Day Orange for all primary booking CTAs",
+      "Tint all box-shadows with rgba(15,42,72,...)",
+      "Use DM Serif Display only at display scale",
+      "Use orange eyebrow labels to open sections",
+      "Apply negative letter-spacing to all Manrope headings",
+      "Write in first-person plural throughout UI copy",
+      "Cap body text containers at 65-75ch",
+      "Respect prefers-reduced-motion"
+    ],
+    "donts": [
+      "Don't use gradient text (background-clip: text)",
+      "Don't use glassmorphism or backdrop-filter on UI elements",
+      "Don't use rgba(0,0,0,...) or #000 in any shadow",
+      "Don't make orange decorative — orange means action",
+      "Don't use DM Serif Display at body, label, or UI sizes",
+      "Don't build side-stripe borders (colored border-left wider than 1px)",
+      "Don't create identical card grids with the same internal structure",
+      "Don't design like a corporate hotel chain",
+      "Don't design like a cheap vacation rental site",
+      "Don't use trendy startup aesthetics (gradient blobs, neon accents, glassmorphism)",
+      "Don't use Airbnb/VRBO platform conventions",
+      "Don't add new typefaces"
+    ]
+  }
+}
