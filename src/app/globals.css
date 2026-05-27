@@ -187,3 +187,16 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
     animation: none;
   }
 }
+
+/* ─────────────────────────────────────────────
+   Compare page responsive
+   ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .compare-units-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+}
+@media (max-width: 580px) {
+  .compare-units-grid { grid-template-columns: 1fr !important; max-width: 480px !important; margin-left: auto !important; margin-right: auto !important; }
+}
+@media (max-width: 680px) {
+  .compare-cta-row { flex-direction: column !important; align-items: center !important; }
+}
