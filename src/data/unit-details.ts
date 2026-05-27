@@ -131,119 +131,173 @@ export const unitDetails: UnitDetail[] = [
   },
   {
     slug: 'bleacher-balcony-flat',
-    heroHeadline: 'First-floor apartment with a private balcony and partial Wrigley view',
-    heroSubhead: 'Two bedrooms, one bath, sleeps four. Your own outdoor space, steps from the ballpark.',
+    heroHeadline: 'First-floor classic. Bay windows. Pets welcome.',
+    heroSubhead:
+      'Our 2-bedroom first-floor apartment at 3601 N Sheffield. Sleeps 5, 780 sqft, 10-foot ceilings, Walk Score 98. New floors in 2022. Pet-friendly.',
     whatYouLove: [
       {
-        title: 'Private Balcony With Partial Field View',
-        body: 'Your own outdoor space overlooking Sheffield, with a sliver of the field visible. Sit outside with a drink before the game, feel the neighborhood energy, watch fans walk by on their way to the park.',
+        title: 'Game day energy from the dining room corner',
+        body:
+          "Tall 10-foot ceilings and huge bay-like windows in the living room, with big wraparound windows in the dining area. The corner lot puts you in the middle of the action: you watch Cubs fans stream toward the stadium on game day from inside the apartment, no need to leave the couch.",
       },
       {
-        title: 'Ground Floor, Walkability That Can\'t Be Beat',
-        body: 'Step out your door and be at the bleacher gates in under two minutes. No elevator wait, no stairs to climb when you\'re tired after a long day. Convenience is built in.',
+        title: 'Central AC and heat. New floors in 2022.',
+        body:
+          "Real central air and central heat, not window units. We refloored the living and dining rooms in 2022. The apartment looks and feels updated, but the building still has the classic Wrigleyville bones.",
       },
       {
-        title: 'Best Price, Same Comfort',
-        body: 'Two full bedrooms, full kitchen, washer and dryer. You\'re not giving up on amenities—you\'re just being smart about your dollar. Great for groups splitting costs.',
+        title: 'Pets welcome, including assistance animals',
+        body:
+          "This is the rare Wrigleyville apartment that says yes to dogs. Bring them along. Assistance animals are always welcome. (We do ask you to message us about your specific pet before booking so we can confirm fit.)",
       },
       {
-        title: 'Outdoor Living Space',
-        body: 'The balcony is a game-day tradition. Use it for morning coffee, evening drinks, or just stepping outside to feel the pulse of the neighborhood. It\'s extra square footage that matters.',
+        title: 'Sleeps 5 with real options',
+        body:
+          "Two queen beds (one per bedroom), a roll-out twin, and a convertible sleeper couch in the living room. Four sleeping surfaces for up to 5 guests, so nobody is stuck on a floor mattress. Plus a multi-setting rainfall shower for after the game.",
       },
     ],
     idealFor: [
-      'Budget-conscious groups',
-      'Game day parties',
-      'First-time visitors',
-      'Friends sharing costs',
-      'Outdoor-loving guests',
-      'Walking distance seekers',
+      'Cubs series weekends',
+      'Pet owners (dogs welcome)',
+      'Groups of 4 or 5',
+      'Anyone who hates window-unit AC',
+      'Concerts at Wrigley Field',
+      'Skipping the rental car',
     ],
     amenityGroups: [
       {
-        category: 'Kitchen',
+        category: 'Kitchen & dining',
         items: [
-          'Full kitchen with stove, oven, dishwasher',
-          'Coffee maker and tea service',
-          'Cookware and utensils',
-          'Dishes and glassware',
+          'Full kitchen with dishwasher',
+          'Stove, oven, microwave',
+          'Refrigerator and freezer',
+          'Coffee maker',
+          'Cooking basics (pots, pans, oil, salt, pepper)',
+          'Dishes, silverware, bowls, cups',
         ],
       },
       {
-        category: 'Bedrooms & Bath',
+        category: 'Sleeping (sleeps 5)',
         items: [
-          'Master bedroom: queen bed',
-          'Guest bedroom: queen bed',
-          'Washer and dryer in unit',
-          'Fresh linens and towels',
-          'Hairdryer and bath essentials',
+          '2 queen beds, one in each bedroom',
+          'Roll-out twin bed',
+          'Convertible sleeper couch in living room',
+          'Fresh bed linens and towels',
+          'Extra pillows and blankets',
+          'Hangers in both bedrooms',
         ],
       },
       {
-        category: 'Entertainment & Comfort',
+        category: 'Bath',
         items: [
-          'Smart TV with streaming apps',
-          'Fast WiFi (100+ Mbps)',
-          'Central air conditioning',
-          'Heat (gas, included)',
-          'Private balcony with seating',
+          'Multi-setting rainfall shower head',
+          'Shampoo and body soap provided',
+          'Hot water',
+          'Hair dryer',
+          'Bath towels, hand towels, face cloths',
         ],
       },
       {
-        category: 'Building & Access',
+        category: 'Comfort & tech',
         items: [
-          'Self check-in (keypad code)',
-          'Ground-floor location',
-          'No elevator needed',
-          'Direct building access from Sheffield',
+          'Central air conditioning (not a window unit)',
+          'Central heating',
+          'Portable fans on request',
+          '300 Mbps WiFi throughout',
+          '4K Smart TV with standard cable',
+          'Dedicated workspace',
+          'Iron',
+        ],
+      },
+      {
+        category: 'Building & access',
+        items: [
+          'Self check-in with smart lock (your own personal code)',
+          'No physical key handoff',
+          'Private entrance (separate apartment door inside the building)',
+          'First floor of a 3-unit building (middle apartment)',
+          'In-building washer and dryer',
+          'Free street parking, plus residential parking pass (1 per night)',
+          'Pets allowed (message us first)',
+        ],
+      },
+      {
+        category: 'Home safety',
+        items: [
+          'Exterior security cameras (front and back of building)',
+          'Outdoor doorbell cameras at both entrances',
+          'Noise decibel monitor on property',
+          'Carbon monoxide detector',
+          'Smoke detector',
+          'Fire extinguisher',
+          'First aid kit',
         ],
       },
     ],
     floorPlan:
-      'Enter from Sheffield directly into the living room. Kitchen sits to the right of the living space. Both bedrooms branch off the main area, each with its own vibe. The balcony opens from the living room, your outdoor extension. Guest bath serves the main space, ensuite in the master bedroom.',
+      "Enter from the main building door, then through your own apartment door (the middle of three apartment doors inside the building). You walk into an open living and dining space with the corner-lot bay windows opening onto Sheffield Avenue. The kitchen sits at the back. Both bedrooms are off the main space on the quieter side, each with a queen bed. One full bathroom with a multi-setting rainfall shower. 780 sqft total, with 10-foot ceilings that make the rooms feel taller than the footprint suggests.",
     versusOthers:
-      'The Bleacher Flat is the most accessible and affordable option. You trade the direct field view indoors for a private balcony and the best walkability to the ballpark. It\'s the same two-bedroom layout as the Slugger\'s Suite, but ground-floor convenience and outdoor space make it a different experience.',
+      "Bleacher Balcony Flat is the first-floor (middle) apartment in our 3-unit building. It is the only one of the three that welcomes pets. Slightly smaller than the Top Floor's 900 sqft, with the same bay windows but a different vantage. Quieter than the Garden Level below, brighter than you'd expect for a middle floor. If you have a dog or you want the classic raised first-floor feel with central AC and heat (no window units), this is your unit.",
     unitFAQ: [
       {
-        question: 'Can we see the field from the balcony?',
+        question: 'Are pets really allowed?',
         answer:
-          'You get a partial view—a sliver of the field from one corner of the balcony. It\'s enough to catch the crowd energy and know game time, but the main attraction is the street-level view of Sheffield and the neighborhood vibe.',
+          "Yes. We welcome dogs (and other household pets) at the First Floor unit, and assistance animals are always allowed. We do ask you to message us about your specific pet before booking so we can confirm fit and answer any building questions.",
       },
       {
-        question: 'How long is the walk to the ballpark?',
+        question: 'How close exactly is the apartment to Wrigley Field?',
         answer:
-          'Under two minutes to the bleacher gates. You\'re on the same side of the street, same block practically. Grab a coffee, leave the apartment, you\'re in the bleachers 90 seconds later.',
+          "About a 1-minute walk. We are at 3601 N Sheffield Ave, one block from the bleacher entrance. You see Cubs fans streaming toward the stadium from the dining room windows on game day.",
       },
       {
-        question: 'Is the balcony furnished?',
+        question: 'What floor is it on?',
         answer:
-          'Yes. Chairs and a small table. Perfect for morning coffee, game-day drinks, or just watching Sheffield wake up. We\'ll note any seasonal furniture updates when you book.',
+          "First floor of a 3-unit building, the middle apartment. There is a Garden Level apartment below and a Top Floor apartment above. You enter from the main building door, then through your own apartment door (the middle of three apartment doors inside).",
       },
       {
-        question: 'What about noise and street activity?',
+        question: 'How many people can sleep here?',
         answer:
-          'Ground floor means you hear neighborhood energy, especially on game days. It\'s part of the charm. If that doesn\'t appeal, the higher floors are quieter.',
+          "Sleeps 5 comfortably with two queen beds (one per bedroom), a roll-out twin, and a convertible sleeper couch in the living room. That is four real sleeping surfaces for up to 5 guests.",
       },
       {
-        question: 'Is there a washer and dryer?',
+        question: 'How is the noise situation? Wrigleyville sounds loud.',
         answer:
-          'Yes, full washer and dryer in unit. No laundromat trips. You can do laundry whenever you want.',
+          "Honest answer: the neighborhood is vibrant, especially around games and concerts. The living room catches some of that energy, which most guests love. The bedrooms have double-pane windows for soundproofing, so sleep is quieter than you would expect. That said, this apartment may not be ideal for the very lightest sleepers. We also have noise decibel monitors on property as a courtesy to neighbors.",
       },
       {
-        question: 'How many people can comfortably stay here?',
+        question: 'Is parking available?',
         answer:
-          'Four, maximum. Two queens, sleeping four. Sofa in the living room if someone needs a third bed, but tight. We recommend four as the sweet spot.',
+          "Yes. We provide a free residential street-parking pass (1 per night) for resident-only streets, plus free street parking around the building. Honestly, we recommend skipping the car. The Red Line is right next to the building and a 3-day CTA pass is about $15.",
+      },
+      {
+        question: 'How do we get in?',
+        answer:
+          "Keyless self check-in with a smart lock. You will get your own personal code in your booking confirmation. Main building door first, then your apartment door (the middle of three doors inside). No physical key, no key handoff required.",
+      },
+      {
+        question: 'Is there fast WiFi for working remotely?',
+        answer:
+          "Yes, 300 Mbps WiFi throughout the apartment. Plenty fast for video calls, streaming, and remote work. There is also a dedicated workspace if you need a real desk.",
+      },
+      {
+        question: 'How does this compare to the other two units?',
+        answer:
+          "Same building, same 1-minute walk to Wrigley. The Top Floor (Catbird Seat) is the highest and brightest at 900 sqft. The Garden Level (Slugger's Suite) is the closest to street level. This First Floor unit is the only one that allows pets, has the classic raised first-floor feel, and got new floors in 2022. 780 sqft.",
       },
     ],
     localProximity: [
-      { name: 'Wrigley Field bleacher entrance', time: '2 min walk' },
-      { name: 'Murphy\'s Bleachers', time: '1 min walk' },
-      { name: 'Gallagher Way (food & drinks)', time: '1 min walk' },
-      { name: 'Cubby Bear (bar)', time: '2 min walk' },
-      { name: 'Addison Red Line station', time: '3 min walk' },
-      { name: 'Mariano\'s grocery store', time: '5 min walk' },
-      { name: 'Small Corner Park', time: '2 min walk' },
-      { name: 'Lake Michigan shoreline', time: '12 min walk' },
+      { name: 'Wrigley Field', time: '1 min walk' },
+      { name: 'Addison Red Line', time: 'Right next door' },
+      { name: 'CTA bus stop', time: 'Right next door' },
+      { name: 'Gallagher Way', time: '1 min walk' },
+      { name: "Murphy's Bleachers", time: '2 min walk' },
+      { name: 'The Cubby Bear', time: '2 min walk' },
+      { name: 'CVS', time: '3 min walk' },
+      { name: "Mariano's grocery", time: '5 min walk' },
+      { name: 'Starbucks / Subway / Chipotle', time: 'Under 5 min walk' },
+      { name: 'Lake Michigan trail', time: '15 min walk' },
+      { name: 'Downtown Chicago (Loop)', time: '15 to 20 min on Red Line' },
+      { name: "O'Hare Airport", time: 'About 60 min via Blue Line transfer' },
     ],
   },
   {

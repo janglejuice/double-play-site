@@ -47,20 +47,31 @@ export const units: Unit[] = [
     hospitable_property_id: null, // Owner to provide
   },
   {
-    // Unit 2 — first floor (up ~12 steps from sidewalk since Unit 1 is half-basement). Copy to be provided.
+    // Unit 2 — first floor (middle apartment, up about 12 steps from sidewalk since Unit 1 is half-basement). Real listing copy from owner.
     slug: 'bleacher-balcony-flat',
     name: 'Bleacher Balcony Flat',
-    tagline: 'First Floor (up ~12 steps), 2 BR · Sleeps 4',
-    floor: 'First Floor (~12 steps up)',
-    highlight: 'Raised first-floor with street-level energy',
-    description: 'The Bleacher Balcony Flat is the first-floor unit — about 12 steps up from the sidewalk, since the garden-level apartment sits below. Two bedrooms, sleeps four. Walk out the front door and be at the bleacher entrance in about a minute. (Full listing copy coming soon — message us for questions.)',
-    amenities: ['Full kitchen', 'Fast WiFi', 'Smart TV', 'Central A/C', 'Self check-in'],
+    tagline: 'First Floor (middle) · 2 BR · Sleeps 5 · 780 sqft · Pet-friendly',
+    floor: 'First Floor (middle apartment)',
+    highlight: 'Bay windows, central AC, pet-friendly',
+    description:
+      "The First Floor unit (middle of our 3-unit building) at 3601 N Sheffield Ave, a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot ceilings and huge bay-like windows as the Top Floor, with large windows wrapping the dining area at the corner. New floors went in across the living and dining rooms in 2022. Central air and central heat (not window units). Sleeps 5 with two queen beds, a roll-out twin, and a convertible sleeper couch. 780 sqft. Smart-lock keyless entry, Walk Score 98, and yes, pets are welcome (assistance animals always).",
+    amenities: [
+      'Full kitchen with dishwasher',
+      '300 Mbps WiFi',
+      '4K Smart TV with cable',
+      'Central A/C and heat',
+      'In-building washer/dryer',
+      'Self check-in (smart lock)',
+      'Pets welcome',
+      'Free street parking pass',
+    ],
     photos: ['/bleacher-balcony-flat.png'],
     beds: 2,
     baths: 1,
-    sleeps: 4,
-    maxGuests: 4,
-    parking: 'Residential street-parking pass provided (max 1 per night)',
+    sleeps: 5,
+    maxGuests: 5,
+    sqft: 780,
+    parking: 'Free residential street-parking pass provided (1 per night, not guaranteed)',
     hospitable_property_id: null, // Owner to provide
   },
   {
