@@ -14,6 +14,7 @@ function addOneDay(dateStr: string): string {
 
 export default function BookingForm() {
   const [checkin, setCheckin] = useState('')
+  const [checkout, setCheckout] = useState('')
   const today = toLocalDateString(new Date())
   const checkoutMin = checkin ? addOneDay(checkin) : today
 
@@ -30,7 +31,10 @@ export default function BookingForm() {
             required
             min={today}
             value={checkin}
-            onChange={e => setCheckin(e.target.value)}
+            onChange={e => {
+              setCheckin(e.target.value)
+              if (checkout && checkout <= e.target.value) setCheckout('')
+            }}
             style={{ width: '100%', border: 0, outline: 0, background: 'transparent', fontFamily: 'inherit', color: '#1c2433', fontWeight: 600, fontSize: 15 }}
           />
         </div>
@@ -45,6 +49,8 @@ export default function BookingForm() {
             name="end_date"
             required
             min={checkoutMin}
+            value={checkout}
+            onChange={e => setCheckout(e.target.value)}
             style={{ width: '100%', border: 0, outline: 0, background: 'transparent', fontFamily: 'inherit', color: '#1c2433', fontWeight: 600, fontSize: 15 }}
           />
         </div>
