@@ -288,6 +288,55 @@ export default function CatbirdSeatPage() {
                 </div>
               ))}
             </div>
+
+            {/* Quick highlights chip strip — surfaces the listing's bullet value props */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 8,
+                marginTop: 22,
+              }}
+            >
+              {[
+                '1 block from Wrigley',
+                'Next to Red Line',
+                '300 Mbps WiFi',
+                'Walk Score 98',
+                'Free parking pass',
+                'Keyless check-in',
+                'Live TV',
+              ].map(h => (
+                <span
+                  key={h}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: T.navy,
+                    background: T.bgSoft,
+                    border: `1px solid ${T.line}`,
+                    padding: '7px 12px',
+                    borderRadius: 100,
+                    letterSpacing: '0.005em',
+                  }}
+                >
+                  <span
+                    aria-hidden
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: '50%',
+                      background: T.accent,
+                      flex: 'none',
+                    }}
+                  />
+                  {h}
+                </span>
+              ))}
+            </div>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
@@ -942,6 +991,71 @@ export default function CatbirdSeatPage() {
           </p>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
+
+          {/* Good to know — honest disclosure callout (warm bg, host voice) */}
+          <div
+            style={{
+              background: T.bgWarm,
+              border: '1px solid #f0e8e2',
+              borderRadius: 12,
+              padding: '22px 24px',
+              display: 'flex',
+              gap: 16,
+              alignItems: 'flex-start',
+              marginBottom: 32,
+            }}
+          >
+            <div
+              aria-hidden
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: T.accentBg,
+                color: T.accent,
+                display: 'grid',
+                placeItems: 'center',
+                flex: 'none',
+                fontFamily: T.display,
+                fontWeight: 400,
+                fontSize: 20,
+              }}
+            >
+              i
+            </div>
+            <div>
+              <div
+                style={{
+                  fontSize: 10,
+                  fontWeight: 800,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: T.accent,
+                  marginBottom: 6,
+                }}
+              >
+                Good to know
+              </div>
+              <h3
+                style={{
+                  fontSize: 15.5,
+                  fontWeight: 800,
+                  color: T.navy,
+                  margin: '0 0 8px',
+                  letterSpacing: '-0.005em',
+                }}
+              >
+                Wrigleyville is a vibrant block. Here is what to expect.
+              </h3>
+              <p style={{ fontSize: 14, color: T.ink, lineHeight: 1.7, margin: 0 }}>
+                The neighborhood is energetic, especially around games and concerts. The living
+                room catches some of that energy, which most guests love. The bedrooms have
+                double-pane windows we added specifically for soundproofing, so sleep is quieter
+                than you would expect. If you are a very light sleeper, this may not be the right
+                apartment for you.
+              </p>
+            </div>
+          </div>
 
           {/* FAQ accordion */}
           <h2

@@ -250,55 +250,56 @@ export const unitDetails: UnitDetail[] = [
     slug: 'catbird-seat',
     heroHeadline: '1-minute walk to Wrigley. Top floor. Corner-lot bay windows.',
     heroSubhead:
-      'Our 2-bedroom top-floor apartment at 3601 N Sheffield — sleeps 5, 900 sqft, 10-foot ceilings, and a Walk Score of 98. The Red Line is literally next door.',
+      'Our 2-bedroom top-floor apartment at 3601 N Sheffield. Sleeps 5, 900 sqft, 10-foot ceilings, Walk Score 98. The Red Line is literally next door.',
     whatYouLove: [
       {
         title: 'You can see the whole neighborhood from your living room',
         body:
-          'The living room has huge bay-style windows, and the dining area wraps the corner with more big windows. Because we\'re on a corner lot, you get the full Wrigleyville scene from inside the apartment. On game days, you can watch the crowd stream toward the stadium without leaving the couch. Plenty of natural light all day.',
+          "The living room has huge bay-like windows, and the dining area wraps the corner with more large windows. Because we're on a corner lot, you get the full Wrigleyville scene from inside the apartment. On game days, you watch the crowd stream toward the stadium without leaving the couch. Plenty of natural light all day.",
       },
       {
-        title: 'Top-floor quiet — with bedrooms double-windowed for sleep',
+        title: 'Top-floor quiet, with bedrooms double-windowed for sleep',
         body:
-          'You\'re on the top floor (2nd) with no neighbors above you. The bedrooms have double-pane windows we added specifically for soundproofing — Wrigleyville is a vibrant block and we want you to actually sleep. The living room keeps the energy. The bedrooms keep the peace.',
+          "You're on the top floor (2nd) with no neighbors above you. The bedrooms have double-pane windows we added specifically for soundproofing. Wrigleyville is a vibrant block, and we want you to actually sleep. The living room keeps the energy. The bedrooms keep the peace.",
       },
       {
         title: 'Transit at your front door',
         body:
-          'The Addison Red Line station and a CTA bus stop are literally next to the building. You can be in downtown Chicago in 15-20 minutes, at Lake Michigan in 15, or at O\'Hare in under an hour — all without a car. We hand every guest the same advice: skip the rental.',
+          "The Addison Red Line station and a CTA bus stop are literally next to the building. You can be in downtown Chicago in 15 to 20 minutes, at Lake Michigan in 15, or at O'Hare in under an hour, all without a car. We give every guest the same advice: skip the rental.",
       },
       {
         title: 'A real apartment, not a hotel room',
         body:
-          'Fully equipped kitchen with a dishwasher, 300 Mbps WiFi (fast enough to actually work from), 4K HD smart TV with live TV, multi-setting rainfall shower, washer/dryer in the building, and a dedicated workspace. We provide shampoo, conditioner, and body wash so you don\'t have to pack toiletries.',
+          "Fully equipped kitchen with a dishwasher, 300 Mbps WiFi (fast enough to actually work from), 4K HD smart TV with live TV, multi-setting rainfall shower, washer/dryer in the building, and a dedicated workspace. We provide shampoo, conditioner, and body wash so you don't have to pack toiletries.",
       },
     ],
     idealFor: [
       'Cubs series weekends',
       'Wrigley Field concert nights',
-      'Groups of 4-5',
-      'Couples + a +1',
+      'Groups of 4 or 5',
+      'Couples plus a guest',
       'Game-day scene from your window',
       'Anyone who wants to skip a rental car',
     ],
     amenityGroups: [
       {
-        category: 'Kitchen',
+        category: 'Kitchen & dining',
         items: [
           'Full kitchen with dishwasher',
-          'Microwave, stove, oven',
-          'Basic cookware (pots, pans, oil, salt, pepper)',
+          'Stove, oven, microwave',
+          'Refrigerator and freezer',
+          'Coffee maker',
+          'Cooking basics (pots, pans, oil, salt, pepper)',
           'Dishes, silverware, glassware',
-          'Coffee setup',
         ],
       },
       {
         category: 'Sleeping (sleeps 5)',
         items: [
-          '2 queen beds (one per bedroom)',
+          '2 queen beds, one in each bedroom',
           'Roll-out twin bed',
           'Folding floor mattress',
-          'Fresh bed linens (fitted + flat sheets)',
+          'Fresh bed linens (fitted plus flat sheets)',
           'Extra pillows and blankets',
           'Hangers in both bedrooms',
         ],
@@ -306,20 +307,21 @@ export const unitDetails: UnitDetail[] = [
       {
         category: 'Bath',
         items: [
-          'Multi-setting shower with rainfall head',
-          'Shampoo + conditioner provided',
-          'Body wash + body soap provided',
+          'Multi-setting rainfall shower head',
+          'Shampoo and conditioner provided',
+          'Body soap and shower gel provided',
           'Hot water',
           'Hair dryer',
-          'Bath towels + hand towels + face cloths',
+          'Bath towels, hand towels, face cloths',
         ],
       },
       {
-        category: 'Comfort & Tech',
+        category: 'Comfort & tech',
         items: [
           'Central air conditioning',
           'Central heating',
-          '300 Mbps WiFi',
+          'Ceiling fan and portable fans',
+          '300 Mbps WiFi throughout',
           '4K HD Smart TV with live TV',
           'Soundproofed double-pane bedroom windows',
           'Dedicated workspace',
@@ -327,60 +329,69 @@ export const unitDetails: UnitDetail[] = [
         ],
       },
       {
-        category: 'Building & Access',
+        category: 'Building & access',
         items: [
           'Smart-lock keyless self check-in (your own personal code)',
-          'No physical key needed',
+          'No physical key handoff required',
           'Top floor (2nd) of a 3-unit building',
-          'Main building door → your apartment door',
-          'In-building washer/dryer (free)',
+          'In-building washer and dryer',
+          'Free residential street-parking pass (1 per night)',
+        ],
+      },
+      {
+        category: 'Home safety',
+        items: [
+          'Carbon monoxide detector',
+          'Smoke detector',
+          'Fire extinguisher',
+          'First aid kit',
         ],
       },
     ],
     floorPlan:
-      "You enter into a generous open living/dining space along the corner of the building — bay-style windows on one side, wraparound windows in the dining area on the other. The kitchen is at the back with full appliances and counter space. Two bedrooms are on the quieter interior side, both with soundproofed double-pane windows. One full bathroom with a multi-setting rainfall shower. 10-foot ceilings throughout make the 900 sqft feel substantially larger than the number suggests.",
+      "You enter into a generous open living and dining space along the corner of the building. Bay-like windows on one side, wraparound windows in the dining area on the other. The kitchen is at the back with full appliances and counter space. Two bedrooms sit on the quieter interior side, both with soundproofed double-pane windows. One full bathroom with a multi-setting rainfall shower. 10-foot ceilings throughout make the 900 sqft feel substantially larger than the number suggests.",
     versusOthers:
-      "The Catbird Seat is the top-floor apartment in our 3-unit building — the highest, brightest, and quietest of the three. If you want the corner-lot views and the elevated quiet, this is your unit. The other two apartments (Garden Level and First Floor) are equally close to Wrigley but sit lower in the building. All three are 2-bed, 1-bath.",
+      "The Catbird Seat is the top-floor apartment in our 3-unit building. The highest, brightest, and quietest of the three. If you want the corner-lot views and the elevated quiet, this is your unit. The other two apartments (Garden Level and First Floor) are equally close to Wrigley but sit lower in the building. All three are 2-bed, 1-bath.",
     unitFAQ: [
       {
         question: 'How close exactly is the apartment to Wrigley Field?',
         answer:
-          "About a 1-minute walk. We're at 3601 N Sheffield Ave — one block from the bleacher entrance. You can see the crowd streaming toward the stadium from the living room and dining room windows.",
+          "About a 1-minute walk. We're at 3601 N Sheffield Ave, one block from the bleacher entrance. You can see the crowd streaming toward the stadium from the living room and dining room windows.",
       },
       {
         question: 'What floor is it on, and is there an elevator?',
         answer:
-          "Top floor (2nd) of a 3-unit building. There's no elevator — you'll take the stairs from the main entrance up to the apartment. The Garden Level apartment sits below, and there's a First Floor apartment in between (which is about 12 steps up from the sidewalk).",
+          "Top floor (2nd) of a 3-unit building. There is no elevator, you take the stairs from the main entrance up to the apartment. The Garden Level unit sits below, and there is a First Floor unit in between (which is about 12 steps up from the sidewalk).",
       },
       {
         question: 'How many people can sleep here?',
         answer:
-          "Sleeps 5 comfortably with two queen beds (one in each bedroom), a roll-out twin, and a folding floor mattress. Max guest count is 5.",
+          "Sleeps 5 comfortably with two queen beds (one in each bedroom), a roll-out twin, and a folding floor mattress. Maximum guest count is 5.",
       },
       {
         question: 'How is the noise situation? Wrigleyville sounds loud.',
         answer:
-          "Honest answer: the neighborhood is vibrant, especially around games and concerts. The living room will catch some of that energy — which most guests love. The bedrooms have double-pane windows we added specifically for soundproofing, so sleep is much quieter than you'd expect. That said, this apartment may not be ideal for the very lightest sleepers.",
+          "Honest answer: the neighborhood is vibrant, especially around games and concerts. The living room will catch some of that energy, which most guests love. The bedrooms have double-pane windows we added specifically for soundproofing, so sleep is much quieter than you would expect. That said, this apartment may not be ideal for the very lightest sleepers.",
       },
       {
         question: 'Is parking available?',
         answer:
-          "We provide a residential street-parking pass (max 1 per night) that lets you park on resident-only streets. Spots are not 100% guaranteed since it's street parking. Honestly, we recommend skipping the car — the Red Line is right next to the building and a 3-day CTA pass is about $15.",
+          "We provide a free residential street-parking pass (1 per night) that lets you park on resident-only streets. Spots are not 100% guaranteed since it is street parking. Honestly, we recommend skipping the car. The Red Line is right next to the building and a 3-day CTA pass is about $15.",
       },
       {
         question: 'How do we get in?',
         answer:
-          "Keyless self check-in with a smart lock. You'll get your own personal code in your booking confirmation. Main building door first, then your apartment door (the second of three doors inside). No physical key, no key handoff required.",
+          "Keyless self check-in with a smart lock. You will get your own personal code in your booking confirmation. Main building door first, then your apartment door (the second of three doors inside). No physical key, no key handoff required.",
       },
       {
         question: 'Is there fast WiFi for working remotely?',
         answer:
-          "Yes — 300 Mbps WiFi throughout the apartment. Plenty fast for video calls, streaming, and remote work. There's also a dedicated workspace if you need a real desk.",
+          "Yes, 300 Mbps WiFi throughout the apartment. Plenty fast for video calls, streaming, and remote work. There is also a dedicated workspace if you need a real desk.",
       },
       {
-        question: 'What\'s the kitchen like — can we actually cook?',
+        question: 'What is the kitchen like? Can we actually cook?',
         answer:
-          "Fully equipped. Full stove, oven, microwave, dishwasher, pots and pans, dishes, silverware, oil, salt, and pepper. You can absolutely cook here. Mariano's grocery store is a 5-minute walk for everything else.",
+          "Fully equipped. Full stove, oven, microwave, dishwasher, pots and pans, dishes, silverware, oil, salt, and pepper. You can absolutely cook here. Mariano's grocery is a 5-minute walk for everything else.",
       },
     ],
     localProximity: [
@@ -390,12 +401,12 @@ export const unitDetails: UnitDetail[] = [
       { name: 'Gallagher Way', time: '1 min walk' },
       { name: "Murphy's Bleachers", time: '2 min walk' },
       { name: 'The Cubby Bear', time: '2 min walk' },
-      { name: "Mariano's grocery", time: '5 min walk' },
       { name: 'CVS', time: '3 min walk' },
+      { name: "Mariano's grocery", time: '5 min walk' },
       { name: 'Starbucks / Subway / Chipotle', time: 'Under 5 min walk' },
       { name: 'Lake Michigan trail', time: '15 min walk' },
-      { name: 'Downtown Chicago (Loop)', time: '15-20 min on Red Line' },
-      { name: "O'Hare Airport", time: '~60 min via Blue Line transfer' },
+      { name: 'Downtown Chicago (Loop)', time: '15 to 20 min on Red Line' },
+      { name: "O'Hare Airport", time: 'About 60 min via Blue Line transfer' },
     ],
   },
 ]

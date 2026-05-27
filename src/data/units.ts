@@ -71,7 +71,7 @@ export const units: Unit[] = [
     floor: 'Top Floor (2nd)',
     highlight: 'Corner-lot bay windows · 10-ft ceilings · Walk Score 98',
     description:
-      "The Catbird Seat is the top-floor apartment in our 3-unit building — a 1-minute walk from Wrigley Field, on a corner lot at 3601 N Sheffield Ave. The living room has huge bay-style windows with the dining area windows wrapping the corner, so you get the full Wrigleyville game-day scene from inside the apartment. 10-foot ceilings, two bedrooms with soundproofed double-pane windows, sleeps five, ~900 sqft. Red Line and bus stop are literally next to the building. Smart-lock keyless entry with your own personal code.",
+      "The Catbird Seat is the top-floor apartment in our 3-unit building at 3601 N Sheffield Ave, a 1-minute walk from Wrigley Field. The living room has huge bay-like windows and the dining area wraps the corner with more large windows, so you get the full Wrigleyville scene from inside the apartment. 10-foot ceilings, two bedrooms with soundproofed double-pane windows for sleep, and roughly 900 sqft that sleeps 5 comfortably. The Addison Red Line and a bus stop are literally next to the building. Smart-lock keyless entry with your own personal code, Walk Score 98.",
     amenities: [
       'Full kitchen with dishwasher',
       '300 Mbps WiFi',
