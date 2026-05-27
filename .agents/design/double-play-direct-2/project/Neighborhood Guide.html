@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrigleyville Neighborhood Guide — Double Play at Wrigley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --navy:       #15375c;
+  --navy-deep:  #0f2a48;
+  --navy-ink:   #0b1f36;
+  --accent:     #E85A2C;
+  --accent-bg:  rgba(232,90,44,.09);
+  --ink:        #1c2433;
+  --muted:      #6b7585;
+  --line:       #e6e8ec;
+  --bg:         #ffffff;
+  --bg-soft:    #f5f6f8;
+  --bg-warm:    #fdf6f1;
+  --shadow-card: 0 1px 2px rgba(15,42,72,.04), 0 12px 28px -12px rgba(15,42,72,.18);
+  --r: 12px;
+}
+*,*::before,*::after { box-sizing: border-box; }
+html,body { margin: 0; padding: 0; }
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--ink); background: var(--bg);
+  font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a   { color: inherit; text-decoration: none; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy-ink);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; gap: 40px;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; }
+.brand-mark { width: 38px; height: 42px; flex: none; display: grid; place-items: center; }
+.brand-mark img { width: 100%; height: 100%; object-fit: contain; }
+.brand-text { font-family: 'DM Serif Display', Georgia, serif; font-size: 22px; line-height: 1.02; color: #fff; }
+.brand-text .small { display: block; font-size: 13px; font-style: italic; font-weight: 400; margin-top: 1px; }
+nav.primary { display: flex; align-items: center; gap: 32px; }
+nav.primary a {
+  font-size: 12px; font-weight: 700; letter-spacing: .13em;
+  color: rgba(255,255,255,.65); text-transform: uppercase;
+  position: relative; padding: 4px 0;
+  transition: color .15s;
+}
+nav.primary a:hover { color: #fff; }
+nav.primary a.active { color: #fff; }
+nav.primary a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px;
+  height: 2px; background: var(--accent); border-radius: 2px;
+}
+
+/* ─── GUIDE HERO ─────────────────────────────────────────────── */
+.guide-hero {
+  background: var(--navy-ink);
+  padding: 140px 0 72px;
+  position: relative; overflow: hidden;
+}
+.guide-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.hero-grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 360px; gap: 64px; align-items: end;
+}
+.hero-left {}
+.eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: .22em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 16px;
+}
+.guide-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 62px; line-height: 1.03; color: #fff;
+  margin: 0 0 22px; letter-spacing: -.02em;
+}
+.guide-hero h1 em { font-style: italic; }
+.guide-hero .intro {
+  font-size: 17px; line-height: 1.7;
+  color: rgba(255,255,255,.68); max-width: 540px; margin: 0;
+}
+.guide-hero .intro em { color: rgba(255,255,255,.88); font-style: italic; }
+
+/* Stats panel */
+.stats-panel {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px; overflow: hidden;
+}
+.stat-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-label { font-size: 12.5px; color: rgba(255,255,255,.50); font-weight: 500; }
+.stat-value { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -.01em; }
+.stat-value.hi { color: var(--accent); }
+
+/* ─── CATEGORY NAV ───────────────────────────────────────────── */
+.cat-nav {
+  position: sticky; top: 68px; z-index: 150;
+  background: #fff; border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 20px -8px rgba(15,42,72,.10);
+}
+.cat-nav-inner {
+  display: flex; align-items: center;
+  max-width: 1240px; margin: 0 auto; padding: 0 40px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.cat-nav-inner::-webkit-scrollbar { display: none; }
+.cat-nav a {
+  display: inline-block; padding: 15px 18px;
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted); white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+.cat-nav a:hover { color: var(--navy); }
+.cat-nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ─── HOST TIPS ──────────────────────────────────────────────── */
+.host-tips { background: var(--bg-warm); padding: 80px 0; }
+.tips-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.tips-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; font-weight: 400; color: var(--navy);
+  margin: 0; letter-spacing: -.01em;
+}
+.tips-head-right {
+  font-size: 13px; color: var(--muted); text-align: right; line-height: 1.5;
+}
+.tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.tip-card {
+  background: #fff; border-radius: var(--r); padding: 28px;
+  border: 1px solid #f0e8e2;
+  box-shadow: 0 1px 2px rgba(15,42,72,.03), 0 6px 18px -10px rgba(15,42,72,.10);
+}
+.tip-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 56px; line-height: 1; color: var(--accent);
+  opacity: .22; margin-bottom: 10px; display: block;
+}
+.tip-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin: 0 0 9px; }
+.tip-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+.tip-card p strong { color: var(--ink); }
+
+/* ─── OVERVIEW ───────────────────────────────────────────────── */
+.overview { padding: 88px 0; }
+.overview-grid {
+  display: grid; grid-template-columns: 1fr 300px; gap: 72px; align-items: start;
+}
+.overview-text h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 40px; font-weight: 400; color: var(--navy);
+  margin: 0 0 28px; letter-spacing: -.015em; line-height: 1.15;
+}
+.overview-text p {
+  font-size: 16px; line-height: 1.78; color: var(--ink); margin: 0 0 18px;
+}
+.overview-text p strong { color: var(--navy); }
+.pull-quote {
+  border-left: 3px solid var(--accent);
+  padding: 2px 0 2px 22px; margin: 28px 0;
+}
+.pull-quote p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 21px; line-height: 1.4;
+  color: var(--navy); margin: 0;
+}
+.facts-sidebar {
+  background: var(--navy); border-radius: 14px;
+  padding: 26px; color: #fff;
+  position: sticky; top: 120px;
+}
+.facts-sidebar h3 {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent); font-weight: 800; margin: 0 0 18px;
+}
+.fact-item {
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+.fact-lbl { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.40); }
+.fact-val { font-size: 14px; font-weight: 700; color: #fff; }
+.fact-sub { font-size: 11px; color: rgba(255,255,255,.45); }
+
+/* ─── GUIDE SECTIONS ─────────────────────────────────────────── */
+.guide-section       { padding: 80px 0; }
+.guide-section.alt   { background: var(--bg-soft); }
+
+.section-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding-bottom: 24px; margin-bottom: 36px;
+  border-bottom: 1px solid var(--line);
+}
+.section-kicker { font-size: 11px; font-weight: 800; letter-spacing: .22em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+.section-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px; font-weight: 400; color: var(--navy);
+  margin: 0; letter-spacing: -.01em;
+}
+.section-header p { font-size: 14px; color: var(--muted); max-width: 300px; text-align: right; line-height: 1.5; margin: 0; }
+
+/* ─── PLACE CARDS ────────────────────────────────────────────── */
+.place-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.place-card {
+  background: #fff; border-radius: var(--r); overflow: hidden;
+  box-shadow: var(--shadow-card); border: 1px solid #eef0f3;
+  display: flex; flex-direction: column;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.place-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgba(15,42,72,.06), 0 20px 40px -16px rgba(15,42,72,.22);
+}
+.place-photo {
+  aspect-ratio: 3/2; position: relative;
+  background: #d8dce4; overflow: hidden; flex: none;
+}
+.place-photo .stripes {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, #d4d9e2 0 14px, #c9cfd9 14px 28px);
+}
+.place-photo .ph-lbl {
+  position: absolute; left: 12px; bottom: 12px;
+  background: rgba(255,255,255,.92); color: var(--navy);
+  font-family: ui-monospace, monospace;
+  font-size: 9.5px; letter-spacing: .07em;
+  padding: 4px 8px; border-radius: 4px;
+}
+.host-pick-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--accent); color: #fff;
+  font-size: 9px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 100px;
+}
+.place-body { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.place-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
+.dist-pill {
+  font-size: 11px; font-weight: 700; letter-spacing: .05em;
+  background: #eef2f8; color: var(--navy);
+  padding: 3px 9px; border-radius: 100px;
+}
+.price {
+  font-size: 12px; font-weight: 700; color: #c8cdd6; letter-spacing: .04em;
+}
+.price .on { color: var(--navy); }
+.place-name { font-size: 17px; font-weight: 800; color: var(--navy); margin: 0 0 7px; letter-spacing: -.01em; line-height: 1.25; }
+.place-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; margin: 0 0 14px; flex: 1; }
+.place-tip { border-top: 1px solid var(--line); padding-top: 12px; margin-top: auto; }
+.place-tip-label {
+  font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 4px;
+}
+.place-tip-text { font-size: 13px; font-style: italic; color: var(--ink); line-height: 1.5; }
+
+/* ─── EXPLORE GRID ───────────────────────────────────────────── */
+.explore-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+}
+.explore-card {
+  background: #fff; border-radius: var(--r);
+  box-shadow: var(--shadow-card); border: 1px solid #eef0f3;
+  padding: 26px; display: flex; gap: 18px; align-items: flex-start;
+}
+.explore-card.feature {
+  grid-column: span 2;
+  background: var(--navy); border-color: transparent;
+}
+.explore-icon {
+  width: 46px; height: 46px; border-radius: 10px;
+  background: var(--accent-bg); flex: none;
+  display: grid; place-items: center;
+}
+.explore-card.feature .explore-icon { background: rgba(255,255,255,.10); }
+.explore-icon svg {
+  width: 21px; height: 21px; stroke: var(--accent);
+  fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.explore-card.feature .explore-icon svg { stroke: #fff; }
+.explore-card h3 { font-size: 16px; font-weight: 800; color: var(--navy); margin: 0 0 6px; }
+.explore-card.feature h3 { color: #fff; }
+.explore-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0; }
+.explore-card.feature p  { color: rgba(255,255,255,.62); }
+.explore-dist { margin-top: 10px; font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+/* ─── TRANSIT ────────────────────────────────────────────────── */
+.transit-section { background: var(--navy-ink); padding: 80px 0; }
+.transit-section .section-header  { border-bottom-color: rgba(255,255,255,.10); }
+.transit-section .section-header h2 { color: #fff; }
+.transit-section .section-header p  { color: rgba(255,255,255,.45); }
+.transit-section .section-kicker     { color: var(--accent); }
+
+.transit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+.transit-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--r); padding: 26px;
+}
+.t-icon {
+  width: 46px; height: 46px; border-radius: 10px;
+  background: var(--accent); display: grid; place-items: center; margin-bottom: 16px;
+}
+.t-icon svg { width: 21px; height: 21px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.transit-big {
+  font-family: 'DM Serif Display', serif;
+  font-size: 34px; color: #fff; display: block;
+  margin-bottom: 6px; letter-spacing: -.02em;
+}
+.transit-card h3 { font-size: 16px; font-weight: 800; color: #fff; margin: 0 0 8px; }
+.transit-card p  { font-size: 13.5px; color: rgba(255,255,255,.55); line-height: 1.65; margin: 0; }
+
+.parking-note {
+  background: rgba(232,90,44,.10); border: 1px solid rgba(232,90,44,.22);
+  border-radius: 10px; padding: 18px 22px;
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.p-note-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: rgba(232,90,44,.18); display: grid; place-items: center; flex: none;
+}
+.p-note-icon svg { width: 17px; height: 17px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+.parking-note p { font-size: 14px; color: rgba(255,255,255,.72); line-height: 1.65; margin: 0; }
+.parking-note strong { color: #fff; }
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer { background: var(--navy); color: #cbd6e3; padding: 64px 0 28px; }
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: 32px;
+  padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.foot-brand .brand-text { color: #fff; }
+.foot-brand p { color: #9fb0c5; font-size: 14px; margin-top: 18px; max-width: 280px; line-height: 1.6; }
+.foot-col h4 { color: #fff; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; margin: 0 0 16px; font-weight: 800; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.foot-col a  { color: #aabacb; font-size: 14px; transition: color .15s; }
+.foot-col a:hover { color: #fff; }
+.foot-contact .phone { color: #fff; font-weight: 700; font-size: 17px; margin-top: 12px; }
+.foot-contact .addr  { color: #aabacb; font-size: 13px; margin-top: 5px; }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 22px; font-size: 12px; color: #7e92aa;
+}
+.socials { display: flex; gap: 12px; }
+.socials a {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  display: grid; place-items: center; color: #cbd6e3;
+  transition: all .15s;
+}
+.socials a:hover { background: #fff; color: var(--navy); border-color: #fff; }
+.socials svg { width: 13px; height: 13px; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .hero-grid   { grid-template-columns: 1fr; gap: 36px; }
+  .stats-panel { max-width: 380px; }
+  .overview-grid { grid-template-columns: 1fr; gap: 36px; }
+  .facts-sidebar { position: static; }
+  .place-grid  { grid-template-columns: repeat(2, 1fr); }
+  .transit-grid{ grid-template-columns: repeat(2, 1fr); }
+  .tips-grid   { grid-template-columns: repeat(2, 1fr); }
+  .foot-grid   { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 680px) {
+  .wrap { padding: 0 20px; }
+  nav.primary { display: none; }
+  .guide-hero h1 { font-size: 40px; }
+  .place-grid, .transit-grid, .tips-grid, .explore-grid { grid-template-columns: 1fr; }
+  .explore-card.feature { grid-column: span 1; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .section-header p { text-align: left; }
+  .tips-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════ HEADER ══ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="Double Play at Wrigley.html" class="brand" aria-label="Double Play at Wrigley">
+      <span class="brand-mark" aria-hidden="true"><img src="assets/logo-mark.png" alt=""></span>
+      <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+    </a>
+    <nav class="primary" aria-label="Main">
+      <a href="Double Play at Wrigley.html">Home</a>
+      <a href="Double Play at Wrigley.html#apartments">Apartments</a>
+      <a href="Double Play at Wrigley.html#compare">Comparison</a>
+      <a href="Double Play at Wrigley.html#calendar">Calendar</a>
+      <a href="#" class="active">Guide</a>
+      <a href="Double Play at Wrigley.html#reviews">Reviews</a>
+      <a href="Double Play at Wrigley.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════ HERO ══ -->
+<section class="guide-hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="eyebrow">Wrigleyville · Chicago</div>
+        <h1>A real, lived-in guide<br>to our <em>neighborhood.</em></h1>
+        <p class="intro">We're your hosts at Double Play at Wrigley — three apartments directly across from Wrigley Field. We've lived here for years. This is the same guide we hand every guest who asks <em>"okay, what should we actually do?"</em></p>
+      </div>
+      <div class="stats-panel" aria-label="Neighborhood quick facts">
+        <div class="stat-row">
+          <span class="stat-label">Wrigley Field</span>
+          <span class="stat-value hi">Across the street</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Red Line · Addison</span>
+          <span class="stat-value">3 min walk</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Lakefront Trail</span>
+          <span class="stat-value">15 min walk east</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Downtown Chicago</span>
+          <span class="stat-value">15 min by train</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Divvy Bikes</span>
+          <span class="stat-value">Station at our door</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">O'Hare Airport</span>
+          <span class="stat-value">35 min · Blue Line</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ CAT NAV ══ -->
+<nav class="cat-nav" aria-label="Guide categories">
+  <div class="cat-nav-inner">
+    <a href="#tips">Host Tips</a>
+    <a href="#overview">The Neighborhood</a>
+    <a href="#bars">Bars &amp; Pregame</a>
+    <a href="#restaurants">Restaurants</a>
+    <a href="#coffee">Coffee &amp; Brunch</a>
+    <a href="#explore">Things To Do</a>
+    <a href="#transit">Getting Around</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════ HOST TIPS ══ -->
+<section id="tips" class="host-tips">
+  <div class="wrap">
+    <div class="tips-head">
+      <div>
+        <div class="eyebrow" style="margin-bottom:8px">From Your Hosts</div>
+        <h2>Our top three pieces of advice</h2>
+      </div>
+      <div class="tips-head-right">
+        Your hosts, Double Play at Wrigley<br>
+        <span style="opacity:.6">3601 N Sheffield Ave · Chicago, IL</span>
+      </div>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-num">01</span>
+        <h3>Skip the rental car.</h3>
+        <p>The Addison Red Line is a 3-minute walk and runs 24/7. <strong>A CTA Ventra pass for 3 days is about $15.</strong> A single day of parking in Wrigleyville on a game day can run $60. You will spend more time parking than we spend walking to the park.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">02</span>
+        <h3>Check Gallagher Way before you arrive.</h3>
+        <p>The plaza next to Wrigley hosts free concerts, yoga classes, outdoor movies, and a German Christmas market in winter. <strong>Half our guests discover there's a free show the night they arrive.</strong> Plan around it at gallagherway.com.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-num">03</span>
+        <h3>Non-game days are often better.</h3>
+        <p>The restaurants on Clark Street are packed with locals year-round. <strong>Come on a Tuesday and you'll have Murphy's Bleachers mostly to yourself.</strong> Everything is easier, cheaper, and more genuinely Wrigleyville.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ OVERVIEW ══ -->
+<section id="overview" class="overview">
+  <div class="wrap">
+    <div class="overview-grid">
+      <div class="overview-text">
+        <div class="eyebrow" style="margin-bottom:14px">What It's Actually Like</div>
+        <h2>The neighborhood that grew up <em>around a ballpark.</em></h2>
+        <p>Wrigleyville is the Chicago neighborhood that grew up around <strong>Wrigley Field</strong>, the second-oldest ballpark in America. On a game day, the streets fill with red and blue jerseys two hours before first pitch and stay loud until last call. Murphy's Bleachers spills onto Sheffield, the marquee at Clark and Addison glows, and the "Go Cubs Go" chant rolls out of every bar.</p>
+        <div class="pull-quote">
+          <p>"But what surprises most of our guests is how great it is on non-game days."</p>
+        </div>
+        <p>The restaurants on Clark Street are packed with locals year-round. <strong>Gallagher Way</strong>, the plaza next to the ballpark, hosts free concerts, yoga classes, outdoor movies, and a German Christmas market in winter. The Lakefront Trail is a 15-minute walk east.</p>
+        <p>And we're a 15-minute train ride from downtown Chicago, the Art Institute, Lake Michigan's beaches, and the Magnificent Mile. You don't need a rental car. You don't need to plan. You just need to walk out the front door.</p>
+      </div>
+      <div>
+        <div class="facts-sidebar">
+          <h3>Quick Facts</h3>
+          <div class="fact-item">
+            <span class="fact-lbl">Our address</span>
+            <span class="fact-val">3601 N Sheffield Ave</span>
+            <span class="fact-sub">Directly across from Wrigley</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-lbl">Train</span>
+            <span class="fact-val">Addison Red Line</span>
+            <span class="fact-sub">3 min walk · 24/7 service</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-lbl">Bike share</span>
+            <span class="fact-val">Divvy Station</span>
+            <span class="fact-sub">At our front door</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-lbl">Parking</span>
+            <span class="fact-val">Skip it</span>
+            <span class="fact-sub">$40–60/day on game days</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-lbl">Nearest beach</span>
+            <span class="fact-val">Montrose Beach</span>
+            <span class="fact-sub">15 min walk north</span>
+          </div>
+          <div class="fact-item">
+            <span class="fact-lbl">Deep dish (best)</span>
+            <span class="fact-val">Pequod's Pizza</span>
+            <span class="fact-sub">15 min by rideshare</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ BARS ══ -->
+<section id="bars" class="guide-section alt">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">01 — Bars &amp; Pregame</div>
+        <h2>Drink like a local.</h2>
+      </div>
+      <p>These are the bars we actually go to — not just the ones tourists find on their own.</p>
+    </div>
+    <div class="place-grid">
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Murphy's Bleachers patio</div>
+          <div class="host-pick-badge">Host Pick</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">2 min walk</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Murphy's Bleachers</h3>
+          <p class="place-desc">The legendary outdoor bar right across from the bleacher entrance. On game days it's the only place to be — order a beer before you even think about going inside.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Get there 90 minutes early on game days. The patio fills up fast and the vibe before first pitch is completely unmatched.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Sluggers batting cages</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">4 min walk</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Sluggers World Class Sports Bar</h3>
+          <p class="place-desc">Two floors, batting cages upstairs, 20+ TVs everywhere. Exactly what it sounds like — and better than you'd expect. Great for large groups.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">The batting cages on the upper level are genuinely fun and never as crowded as the main bar — even during games.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Gman Tavern interior</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">8 min walk</span>
+            <span class="price"><span class="on">$</span>$$</span>
+          </div>
+          <h3 class="place-name">Gman Tavern</h3>
+          <p class="place-desc">A real neighborhood dive with live music most nights. Dark, loud, genuinely local. This is where Wrigleyville residents go when they don't want game-day crowds.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Check the show schedule ahead. Live music is always free and the room has energy you won't find on Clark Street.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ RESTAURANTS ══ -->
+<section id="restaurants" class="guide-section">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">02 — Restaurants</div>
+        <h2>Where we actually eat.</h2>
+      </div>
+      <p>From pre-game bites to the deep dish you've been thinking about since you booked.</p>
+    </div>
+    <div class="place-grid">
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Smoke Daddy BBQ / ribs</div>
+          <div class="host-pick-badge">Host Pick</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">6 min walk</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Smoke Daddy BBQ</h3>
+          <p class="place-desc">The best late-night spot on Clark Street. Smoked ribs, live blues, and a long bar. One of the few places that gets better at midnight than at dinner.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">The pulled pork sandwich is the move. If there's live music when you walk in, stay — you won't regret it.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Ann Sather cinnamon rolls</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">7 min walk</span>
+            <span class="price"><span class="on">$</span>$$</span>
+          </div>
+          <h3 class="place-name">Ann Sather</h3>
+          <p class="place-desc">A Wrigleyville institution since 1945. Swedish-American comfort food, legendary cinnamon rolls, and weekend brunch lines that are always worth the wait.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Order the cinnamon rolls the moment you sit down. They come with every meal and they are what this place is famous for.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Pequod's deep dish pizza</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">15 min rideshare</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Pequod's Pizza</h3>
+          <p class="place-desc">Our pick for deep dish. The caramelized cheese crust makes it completely different from every other deep dish in the city — better, in our opinion. Worth the trip.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Call 30 minutes before you leave — the pizza takes 45 min to bake. Pickup is faster than delivery. Worth every minute of the wait.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ COFFEE ══ -->
+<section id="coffee" class="guide-section alt">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">03 — Coffee &amp; Brunch</div>
+        <h2>Morning done right.</h2>
+      </div>
+      <p>Pre-game prep and slow Sunday mornings, both covered.</p>
+    </div>
+    <div class="place-grid">
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Wrigley Coffee interior</div>
+          <div class="host-pick-badge">Host Pick</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">3 min walk</span>
+            <span class="price"><span class="on">$</span>$$</span>
+          </div>
+          <h3 class="place-name">Wrigley Coffee</h3>
+          <p class="place-desc">Our go-to morning spot. Opens at 6am on game days (they know their audience). Good espresso, unhurried vibe, never too crowded before 10am.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">If you're heading to a day game, grab your coffee here first. It's directly on the way and a fraction of the price inside the park.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · Intelligentsia café bar</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">Red Line · 10 min</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Intelligentsia Coffee</h3>
+          <p class="place-desc">The Chicago coffee institution, a short Red Line ride south in Lincoln Park. Worth the trip if you care about coffee. One of the best pour-overs in the city.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Pair it with a walk through Lincoln Park to the free zoo. Beautiful on any morning that isn't genuinely freezing.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="place-card">
+        <div class="place-photo">
+          <div class="stripes"></div>
+          <div class="ph-lbl">photo · brunch patio / mimosas</div>
+        </div>
+        <div class="place-body">
+          <div class="place-meta">
+            <span class="dist-pill">5 min walk</span>
+            <span class="price"><span class="on">$</span><span class="on">$</span>$</span>
+          </div>
+          <h3 class="place-name">Yak-Zies on Clark</h3>
+          <p class="place-desc">A Wrigleyville sports bar that does brunch better than it has any right to. Big summer patio, easy mimosas, and always a game on. Bring a group.</p>
+          <div class="place-tip">
+            <div class="place-tip-label">Host Tip</div>
+            <div class="place-tip-text">Weekend brunch starts at 10am. Ask for the patio table in back — best spot in the house and usually available before noon.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ EXPLORE ══ -->
+<section id="explore" class="guide-section">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">04 — Things To Do</div>
+        <h2>Beyond the game.</h2>
+      </div>
+      <p>Wrigleyville is a neighborhood, not just a destination. Here's what's around you.</p>
+    </div>
+    <div class="explore-grid">
+
+      <div class="explore-card feature">
+        <div class="explore-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        </div>
+        <div>
+          <h3>Gallagher Way</h3>
+          <p>The plaza right next to Wrigley Field hosts free concerts, outdoor yoga, outdoor movies, winter markets, and pop-up events year-round. Check gallagherway.com before you arrive — half our guests end up at a free event the first night.</p>
+          <div class="explore-dist">Steps from your door</div>
+        </div>
+      </div>
+
+      <div class="explore-card">
+        <div class="explore-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+        </div>
+        <div>
+          <h3>Lakefront Trail</h3>
+          <p>18 miles of uninterrupted path along Lake Michigan, 15 minutes east on foot. Grab a Divvy bike and ride north to Montrose Beach or south toward downtown.</p>
+          <div class="explore-dist">15 min walk east</div>
+        </div>
+      </div>
+
+      <div class="explore-card">
+        <div class="explore-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <h3>Wrigley Field Tour</h3>
+          <p>The behind-the-scenes tour covers the Cubs dugout, press box, broadcast booths, and the ivy-covered outfield wall. A must even if you're not a baseball fan.</p>
+          <div class="explore-dist">Across the street</div>
+        </div>
+      </div>
+
+      <div class="explore-card">
+        <div class="explore-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div>
+          <h3>Millennium Park</h3>
+          <p>Cloud Gate (the Bean), Crown Fountain, the Pritzker Pavilion, and free summer concerts. Take the Red Line south — it's 15 minutes and worth the ride every time.</p>
+          <div class="explore-dist">Red Line · 15 min south</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ TRANSIT ══ -->
+<section id="transit" class="transit-section">
+  <div class="wrap">
+    <div class="section-header">
+      <div>
+        <div class="section-kicker">05 — Getting Around</div>
+        <h2>You don't need a car.</h2>
+      </div>
+      <p>Seriously. The Red Line gets you everywhere and Divvy bikes cover the rest.</p>
+    </div>
+    <div class="transit-grid">
+
+      <div class="transit-card">
+        <div class="t-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M5 12h14M9 2v4M15 2v4"/></svg>
+        </div>
+        <span class="transit-big">3 min walk</span>
+        <h3>Addison Red Line</h3>
+        <p>The CTA Red Line stops at Addison, three minutes from our front door. It runs 24/7 and connects directly to the Loop, Magnificent Mile, and both O'Hare and Midway airports. A 3-day Ventra pass costs $15 and covers everything.</p>
+      </div>
+
+      <div class="transit-card">
+        <div class="t-icon">
+          <svg viewBox="0 0 24 24"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><path d="M15 17.5H9M5.5 14V5a1 1 0 0 1 1-1h6.5l4 5v5.5"/></svg>
+        </div>
+        <span class="transit-big">At your door</span>
+        <h3>Divvy Bikes</h3>
+        <p>There's a Divvy bike-share station directly outside our building. Rent a regular or e-bike by the ride or get a day pass. The Lakefront Trail runs 18 flat miles — this is the best way to see Chicago's shoreline.</p>
+      </div>
+
+      <div class="transit-card">
+        <div class="t-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span class="transit-big">On demand</span>
+        <h3>Rideshare &amp; Taxi</h3>
+        <p>Uber and Lyft work well in Wrigleyville. On game days, schedule your pickup on Roscoe Street — one block north — to skip the postgame chaos on Clark and Sheffield entirely.</p>
+      </div>
+
+    </div>
+    <div class="parking-note">
+      <div class="p-note-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p><strong>A note on parking:</strong> Wrigleyville has almost no free parking, and game-day garages run $40–$60. A 3-day CTA Ventra pass costs $15 and gets you everywhere in the city. We have never once wished we'd driven here. Leave the car at home.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════ FOOTER ══ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="Double Play at Wrigley.html" class="brand" aria-label="Double Play at Wrigley">
+          <span class="brand-mark" aria-hidden="true"><img src="assets/logo-mark.png" alt=""></span>
+          <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+        </a>
+        <p>Three 2-bedroom apartments directly across from Wrigley Field. Book direct, save the fees, walk to the game.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Guide</h4>
+        <ul>
+          <li><a href="#bars">Bars &amp; Pregame</a></li>
+          <li><a href="#restaurants">Restaurants</a></li>
+          <li><a href="#coffee">Coffee &amp; Brunch</a></li>
+          <li><a href="#explore">Things To Do</a></li>
+          <li><a href="#transit">Getting Around</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Apartments</h4>
+        <ul>
+          <li><a href="Double Play at Wrigley.html#apartments">Slugger's Suite</a></li>
+          <li><a href="Double Play at Wrigley.html#apartments">Bleacher Balcony Flat</a></li>
+          <li><a href="Double Play at Wrigley.html#apartments">Field View Loft</a></li>
+          <li><a href="Double Play at Wrigley.html#calendar">Events Calendar</a></li>
+        </ul>
+      </div>
+      <div class="foot-contact foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:stay@doubleplaywrigley.com">stay@doubleplaywrigley.com</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Contact Form</a></li>
+        </ul>
+        <div class="phone">(853) 436-2139</div>
+        <div class="addr">3601 N Sheffield Ave · Chicago, IL</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>Powered by Hospitable and PriceLabs · © 2026 Double Play at Wrigley</div>
+      <div class="socials" aria-label="Social links">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2.2C16.5 2.1 15.4 2 14.2 2 11.6 2 10 3.6 10 6.7V10H7v4h3v8h3z"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.7-1.7C18.2 5 12 5 12 5s-6.2 0-7.9.5A2.5 2.5 0 0 0 2.4 7.2C2 8.9 2 12 2 12s0 3.1.4 4.8a2.5 2.5 0 0 0 1.7 1.7C5.8 19 12 19 12 19s6.2 0 7.9-.5a2.5 2.5 0 0 0 1.7-1.7C22 15.1 22 12 22 12s0-3.1-.4-4.8zM10 15V9l5 3-5 3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Sticky nav: highlight active section on scroll */
+(function () {
+  var sections = ['tips','overview','bars','restaurants','coffee','explore','transit'];
+  var links    = document.querySelectorAll('.cat-nav a');
+  var offset   = 130;
+
+  function update() {
+    var active = '';
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= offset) active = id;
+    });
+    links.forEach(function (a) {
+      var match = a.getAttribute('href') === '#' + active;
+      a.classList.toggle('active', match);
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  /* Smooth-scroll cat-nav links */
+  links.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      var top = el.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  /* Tweaks protocol (no panel for this page — just announce availability) */
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== '__activate_edit_mode') return;
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

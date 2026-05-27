@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slugger's Suite — Double Play at Wrigley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ────────────────────────────────────────────────── */
+:root {
+  --navy:      #15375c;
+  --navy-deep: #0f2a48;
+  --navy-ink:  #0b1f36;
+  --accent:    #E85A2C;
+  --accent-dk: #d04a1f;
+  --accent-bg: rgba(232,90,44,.08);
+  --ink:       #1c2433;
+  --muted:     #6b7585;
+  --line:      #e6e8ec;
+  --bg:        #ffffff;
+  --bg-soft:   #f5f6f8;
+  --bg-warm:   #fdf6f1;
+  --shadow:    0 1px 3px rgba(15,42,72,.05), 0 10px 30px -10px rgba(15,42,72,.16);
+  --shadow-lg: 0 2px 6px rgba(15,42,72,.07), 0 24px 48px -16px rgba(15,42,72,.22);
+  --r:         12px;
+  --hh:        68px;
+}
+*,*::before,*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--ink); background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img  { display: block; max-width: 100%; }
+a    { color: inherit; text-decoration: none; }
+p    { margin: 0 0 16px; }
+p:last-child { margin-bottom: 0; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* ── SITE HEADER ──────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: var(--hh); background: var(--navy-ink);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 100%; gap: 32px;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; }
+.brand-mark { width: 34px; height: 38px; flex: none; }
+.brand-mark img { width: 100%; height: 100%; object-fit: contain; }
+.brand-text { font-family: 'DM Serif Display', serif; font-size: 20px; line-height: 1.02; color: #fff; }
+.brand-text .small { display: block; font-size: 11.5px; font-style: italic; font-weight: 400; margin-top: 1px; }
+nav.primary { display: flex; align-items: center; gap: 24px; }
+nav.primary a {
+  font-size: 11px; font-weight: 700; letter-spacing: .13em;
+  color: rgba(255,255,255,.60); text-transform: uppercase;
+  transition: color .14s; padding: 4px 0; position: relative;
+}
+nav.primary a:hover { color: #fff; }
+nav.primary a.active { color: #fff; }
+nav.primary a.active::after {
+  content:""; position:absolute; left:0; right:0; bottom:-4px;
+  height:2px; background:var(--accent); border-radius:2px;
+}
+
+/* ── BREADCRUMB ──────────────────────────────────────────── */
+.breadcrumb-bar {
+  position: sticky; top: var(--hh); z-index: 200;
+  background: #fff; border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 12px -6px rgba(15,42,72,.08);
+}
+.bc-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1240px; margin: 0 auto; padding: 0 32px;
+  height: 48px;
+}
+.bc-left { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.bc-left a:hover { color: var(--navy); }
+.bc-sep { color: var(--line); }
+.bc-current { color: var(--navy); font-weight: 700; }
+.bc-actions { display: flex; align-items: center; gap: 16px; }
+.bc-action-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 700; color: var(--muted);
+  cursor: pointer; background: none; border: none; font-family: inherit;
+  transition: color .14s; padding: 0;
+}
+.bc-action-btn:hover { color: var(--navy); }
+.bc-action-btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+/* ── GALLERY ─────────────────────────────────────────────── */
+.gallery-shell {
+  margin-top: var(--hh);
+  padding: 20px 32px 0;
+  max-width: 1240px; margin-left: auto; margin-right: auto;
+  margin-top: calc(var(--hh) + 48px); /* below sticky breadcrumb */
+  position: relative;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 0.82fr;
+  grid-template-rows: 280px 280px;
+  gap: 6px;
+  border-radius: 16px; overflow: hidden;
+}
+.g-hero {
+  grid-row: 1 / 3;
+  position: relative; overflow: hidden;
+}
+.g-hero img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.gallery-grid:hover .g-hero img { transform: scale(1.02); }
+.g-side { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; }
+.g-ph {
+  position: relative; overflow: hidden;
+  background: #d4d8e0;
+}
+.g-ph .stripes {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, #cdd2db 0 14px, #c0c6d0 14px 28px);
+}
+.g-ph .ph-lbl {
+  position: absolute; left: 10px; bottom: 10px;
+  background: rgba(255,255,255,.90); color: var(--navy);
+  font-size: 9.5px; font-weight: 700; letter-spacing: .06em;
+  padding: 4px 9px; border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+.show-all-btn {
+  position: absolute; bottom: 16px; right: 48px;
+  background: #fff; color: var(--navy);
+  border: 1.5px solid rgba(255,255,255,.9);
+  padding: 9px 16px; border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12.5px; font-weight: 800; cursor: pointer;
+  display: flex; align-items: center; gap: 7px;
+  box-shadow: var(--shadow); transition: box-shadow .14s, transform .14s;
+}
+.show-all-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.show-all-btn svg { width: 14px; height: 14px; stroke: var(--navy); fill: none; stroke-width: 2; }
+
+/* ── MAIN LAYOUT ─────────────────────────────────────────── */
+.page-body {
+  display: grid;
+  grid-template-columns: 1fr 356px;
+  gap: 64px;
+  max-width: 1240px; margin: 0 auto;
+  padding: 40px 32px 88px;
+  align-items: start;
+}
+.content-col { min-width: 0; }
+.booking-col { position: sticky; top: calc(var(--hh) + 48px + 20px); }
+
+/* ── UNIT TITLE AREA ─────────────────────────────────────── */
+.unit-header {}
+.unit-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 10px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+}
+.unit-badge::before {
+  content: ""; width: 22px; height: 2px;
+  background: var(--accent); border-radius: 1px;
+}
+.unit-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px; color: var(--navy);
+  margin: 0 0 14px; line-height: 1.08; letter-spacing: -.02em;
+}
+.unit-meta-row {
+  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+}
+.meta-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 13.5px; color: var(--ink); font-weight: 600;
+  padding: 0 16px; border-right: 1px solid var(--line);
+}
+.meta-item:first-child { padding-left: 0; }
+.meta-item:last-child  { border-right: none; }
+.meta-item svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; }
+.stars { display: flex; gap: 2px; }
+.stars svg { width: 13px; height: 13px; fill: var(--accent); stroke: none; }
+.review-count { font-size: 13px; color: var(--muted); margin-left: 4px; }
+
+/* ── DIVIDER ─────────────────────────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+
+/* ── HOST INTRO ──────────────────────────────────────────── */
+.host-intro-row {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 22px;
+}
+.host-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--navy); display: grid; place-items: center; flex: none;
+  font-family: 'DM Serif Display', serif; font-size: 20px; color: #fff;
+}
+.host-meta { flex: 1; }
+.host-name { font-size: 15px; font-weight: 800; color: var(--navy); }
+.host-since { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.host-badge {
+  font-size: 10px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--accent-bg); padding: 4px 10px; border-radius: 100px;
+}
+
+.about-text { font-size: 15.5px; line-height: 1.78; color: var(--ink); }
+.about-text strong { color: var(--navy); }
+.about-text em { font-style: italic; }
+.read-more-btn {
+  background: none; border: none; font-family: inherit;
+  font-size: 14px; font-weight: 800; color: var(--navy);
+  cursor: pointer; padding: 0; margin-top: 12px; display: inline-flex;
+  align-items: center; gap: 5px; transition: color .14s;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.read-more-btn:hover { color: var(--accent); }
+
+/* ── THE VIEW FEATURE ────────────────────────────────────── */
+.view-feature {
+  background: var(--navy-ink);
+  border-radius: 14px; padding: 30px 30px 30px;
+  margin: 32px 0; position: relative; overflow: hidden;
+}
+.view-feature::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.vf-inner { position: relative; z-index: 2; }
+.vf-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+}
+.vf-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: #fff; margin: 0 0 12px; letter-spacing: -.01em;
+  font-style: italic;
+}
+.vf-body { font-size: 14.5px; color: rgba(255,255,255,.65); line-height: 1.72; }
+.vf-body strong { color: #fff; }
+.vf-stats {
+  display: flex; gap: 24px; margin-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.10); padding-top: 18px;
+}
+.vf-stat { display: flex; flex-direction: column; gap: 2px; }
+.vf-stat-val { font-size: 18px; font-weight: 800; color: #fff; }
+.vf-stat-lbl { font-size: 10.5px; color: rgba(255,255,255,.42); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── AMENITIES ───────────────────────────────────────────── */
+.amenities-section {}
+.amenities-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: var(--navy); margin: 0 0 22px; font-weight: 400;
+}
+.amenity-groups { display: flex; flex-direction: column; gap: 22px; }
+.amenity-group-title {
+  font-size: 10px; font-weight: 800; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+}
+.amenity-list {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.amenity-row {
+  display: flex; align-items: center; gap: 11px;
+  font-size: 13.5px; color: var(--ink); font-weight: 600;
+}
+.amenity-row svg {
+  width: 16px; height: 16px; stroke: var(--accent);
+  fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  flex: none;
+}
+.amenity-row.dim { color: var(--muted); }
+.amenity-row.dim svg { stroke: var(--line); }
+.show-amenities-btn {
+  display: inline-flex; align-items: center; gap: 7px; margin-top: 18px;
+  padding: 11px 20px; border-radius: 8px;
+  border: 1.5px solid var(--line); background: none;
+  font-family: inherit; font-size: 13px; font-weight: 800; color: var(--navy);
+  cursor: pointer; transition: all .14s;
+}
+.show-amenities-btn:hover { border-color: var(--navy); }
+
+/* ── HOUSE RULES / POLICIES ──────────────────────────────── */
+.policies-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.policy-card {
+  background: var(--bg-soft); border-radius: 10px;
+  padding: 20px 22px; border: 1px solid var(--line);
+}
+.policy-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--accent-bg); display: grid; place-items: center; margin-bottom: 12px;
+}
+.policy-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+.policy-card h3 { font-size: 13px; font-weight: 800; color: var(--navy); margin: 0 0 10px; }
+.policy-card ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.policy-card li {
+  font-size: 13px; color: var(--muted); line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 7px;
+}
+.policy-card li::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); flex: none; margin-top: 6px;
+}
+
+/* Check-in/out strip */
+.checkin-strip {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px; background: var(--line);
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--line);
+}
+.ci-cell {
+  background: #fff; padding: 18px 20px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.ci-label { font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.ci-value { font-size: 18px; font-weight: 800; color: var(--navy); }
+.ci-sub   { font-size: 12px; color: var(--muted); }
+
+/* Cancellation */
+.cancel-card {
+  border-radius: 10px; border: 1.5px solid var(--line);
+  padding: 22px; display: flex; gap: 16px; align-items: flex-start;
+}
+.cancel-icon {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: #ecf5ec; display: grid; place-items: center; flex: none;
+}
+.cancel-icon svg { width: 18px; height: 18px; stroke: #1db76b; fill: none; stroke-width: 2; stroke-linecap: round; }
+.cancel-title { font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.cancel-body  { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+.cancel-body strong { color: var(--ink); }
+
+/* ── FAQ ─────────────────────────────────────────────────── */
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+details.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+details.faq-item:first-child { border-top: 1px solid var(--line); }
+summary.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0; cursor: pointer; list-style: none;
+  font-size: 14.5px; font-weight: 700; color: var(--navy);
+  transition: color .14s;
+}
+summary.faq-q:hover { color: var(--accent); }
+summary.faq-q::after {
+  content: "+"; font-size: 20px; font-weight: 400;
+  color: var(--muted); flex: none; margin-left: 12px;
+  transition: transform .2s;
+}
+details[open] summary.faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  font-size: 14px; color: var(--muted); line-height: 1.7;
+  padding: 0 0 16px; max-width: 92%;
+}
+.faq-a strong { color: var(--ink); }
+
+/* ── SECTION TITLE ───────────────────────────────────────── */
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 26px; color: var(--navy); margin: 0 0 20px; font-weight: 400;
+}
+
+/* ── REVIEWS ─────────────────────────────────────────────── */
+.reviews-header {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 22px;
+}
+.reviews-header .score {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px; color: var(--navy); line-height: 1; letter-spacing: -.03em;
+}
+.reviews-header .score-sub { display: flex; flex-direction: column; gap: 4px; }
+.reviews-header .score-sub .stars-row { display: flex; gap: 3px; }
+.reviews-header .score-sub .stars-row svg { width: 16px; height: 16px; fill: var(--accent); }
+.reviews-header .count { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+.review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.review-card {
+  background: var(--bg-soft); border-radius: 10px;
+  border: 1px solid var(--line); padding: 20px 22px;
+}
+.reviewer-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.reviewer-av {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--navy); display: grid; place-items: center; flex: none;
+  font-size: 14px; font-weight: 800; color: #fff;
+}
+.reviewer-name { font-size: 14px; font-weight: 800; color: var(--navy); }
+.reviewer-date { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+.review-stars { display: flex; gap: 2px; margin-bottom: 8px; }
+.review-stars svg { width: 12px; height: 12px; fill: var(--accent); }
+.review-text { font-size: 13.5px; color: var(--ink); line-height: 1.65; font-style: italic; }
+
+.review-grid-3 { grid-column: span 2; }
+
+/* ── CROSS SELL ──────────────────────────────────────────── */
+.cross-sell { background: var(--bg-soft); padding: 64px 0; }
+.cs-head { margin-bottom: 28px; }
+.cs-head h2 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); margin: 0 0 6px; font-weight: 400; }
+.cs-head p  { font-size: 14px; color: var(--muted); margin: 0; }
+.cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.cs-card {
+  background: #fff; border-radius: var(--r);
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+  overflow: hidden; display: flex; gap: 0;
+  transition: box-shadow .18s, transform .18s;
+}
+.cs-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.cs-photo {
+  width: 140px; flex: none;
+  background: #d4d8e0; position: relative; overflow: hidden;
+}
+.cs-photo .stripes {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, #cdd2db 0 14px, #c0c6d0 14px 28px);
+}
+.cs-photo img { width: 100%; height: 100%; object-fit: cover; }
+.cs-body { padding: 18px 20px; display: flex; flex-direction: column; flex: 1; }
+.cs-badge {
+  font-size: 9px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; background: var(--bg-soft);
+  color: var(--navy); padding: 3px 9px; border-radius: 100px;
+  border: 1px solid var(--line); display: inline-block; margin-bottom: 8px; align-self: flex-start;
+}
+.cs-name { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+.cs-floor { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 10px; }
+.cs-price { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); margin-bottom: 12px; }
+.cs-price span { font-size: 12px; color: var(--muted); font-family: 'Manrope', sans-serif; font-weight: 600; }
+.cs-btn {
+  display: block; text-align: center; padding: 10px 14px;
+  border: 1.5px solid var(--line); border-radius: 7px;
+  font-size: 12.5px; font-weight: 800; color: var(--navy);
+  transition: all .14s; margin-top: auto;
+}
+.cs-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── BOOKING CARD ────────────────────────────────────────── */
+.booking-card {
+  background: #fff; border-radius: 16px;
+  border: 1px solid var(--line); box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.bc-top { padding: 24px 24px 0; }
+.bc-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px; }
+.bc-price {
+  font-family: 'DM Serif Display', serif;
+  font-size: 34px; color: var(--navy); letter-spacing: -.02em;
+}
+.bc-per { font-size: 14px; color: var(--muted); font-weight: 600; }
+.bc-rating { display: flex; align-items: center; gap: 5px; margin-bottom: 18px; }
+.bc-rating svg { width: 13px; height: 13px; fill: var(--accent); }
+.bc-rating span { font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.bc-rating .rc  { color: var(--muted); font-weight: 500; }
+
+/* Date/guest inputs */
+.bc-inputs { border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+.bc-input-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.bc-input-cell {
+  padding: 12px 14px; border-right: 1px solid var(--line);
+  cursor: pointer; transition: background .12s;
+}
+.bc-input-cell:last-child { border-right: none; }
+.bc-input-cell:hover { background: var(--bg-soft); }
+.bc-input-cell.full { grid-column: span 2; border-top: 1px solid var(--line); }
+.bc-input-label { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.bc-input-val { font-size: 14px; font-weight: 700; color: var(--navy); }
+.bc-input-val.placeholder { color: var(--muted); font-weight: 500; }
+
+.btn-book-primary {
+  display: block; text-align: center;
+  background: var(--accent); color: #fff;
+  padding: 15px 20px; border-radius: 10px;
+  font-weight: 800; font-size: 15px; letter-spacing: .02em;
+  transition: background .14s; margin-bottom: 10px;
+}
+.btn-book-primary:hover { background: var(--accent-dk); }
+.btn-inquire {
+  display: block; text-align: center;
+  border: 1.5px solid var(--line); color: var(--navy);
+  padding: 13px 20px; border-radius: 10px;
+  font-weight: 700; font-size: 13.5px; transition: border-color .14s;
+}
+.btn-inquire:hover { border-color: var(--navy); }
+
+.bc-no-charge {
+  text-align: center; font-size: 12px; color: var(--muted);
+  margin-top: 10px; margin-bottom: 18px;
+}
+.bc-no-charge strong { color: var(--ink); }
+
+/* Breakdown */
+.bc-breakdown {
+  border-top: 1px solid var(--line); padding: 18px 24px;
+}
+.bc-breakdown-row {
+  display: flex; justify-content: space-between;
+  font-size: 13.5px; color: var(--muted); margin-bottom: 10px;
+}
+.bc-breakdown-row span:last-child { color: var(--ink); font-weight: 600; }
+.bc-breakdown-row.total {
+  border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px;
+  font-weight: 800; color: var(--navy); font-size: 14.5px;
+}
+.bc-breakdown-row.total span:last-child { color: var(--navy); }
+.bc-fee-note {
+  font-size: 11px; color: #1db76b; font-weight: 700;
+  background: #ecf5ec; padding: 8px 12px; border-radius: 6px; margin-top: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.bc-fee-note svg { width: 13px; height: 13px; stroke: #1db76b; fill: none; stroke-width: 2.2; stroke-linecap: round; }
+
+/* Hospitable trust badges */
+.bc-trust {
+  border-top: 1px solid var(--line); padding: 16px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.trust-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--muted);
+}
+.trust-row svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; flex: none; }
+
+/* ── MOBILE BOTTOM BAR ───────────────────────────────────── */
+.mobile-book-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 250;
+  background: #fff; border-top: 1px solid var(--line);
+  padding: 12px 20px 20px;
+  align-items: center; justify-content: space-between; gap: 16px;
+  box-shadow: 0 -4px 20px -8px rgba(15,42,72,.18);
+}
+.mbb-price { display: flex; flex-direction: column; }
+.mbb-price .num { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--navy); }
+.mbb-price .per { font-size: 12px; color: var(--muted); }
+.mbb-btn {
+  background: var(--accent); color: #fff; padding: 13px 28px;
+  border-radius: 10px; font-weight: 800; font-size: 14px; white-space: nowrap;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer { background: var(--navy); color: #cbd6e3; padding: 56px 0 24px; }
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px;
+  padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.foot-brand .brand-text { color: #fff; }
+.foot-brand p { color: #9fb0c5; font-size: 13.5px; margin-top: 16px; max-width: 260px; line-height: 1.6; }
+.foot-col h4 { color: #fff; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; margin: 0 0 14px; font-weight: 800; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.foot-col a  { color: #aabacb; font-size: 13.5px; transition: color .13s; }
+.foot-col a:hover { color: #fff; }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 20px; font-size: 11.5px; color: #7e92aa;
+}
+.socials { display: flex; gap: 10px; }
+.socials a {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.16);
+  display: grid; place-items: center; color: #cbd6e3; transition: all .13s;
+}
+.socials a:hover { background: #fff; color: var(--navy); border-color: #fff; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width:1000px) {
+  .page-body { grid-template-columns: 1fr; gap: 0; }
+  .booking-col { position: static; order: -1; margin-bottom: 32px; }
+  .mobile-book-bar { display: flex; }
+  body { padding-bottom: 80px; }
+  .amenity-list { grid-template-columns: 1fr; }
+  .policies-grid { grid-template-columns: 1fr; }
+  .checkin-strip { grid-template-columns: 1fr; }
+  .ci-cell { border-bottom: 1px solid var(--line); }
+  .ci-cell:last-child { border-bottom: none; }
+  .review-grid { grid-template-columns: 1fr; }
+  .review-grid-3 { grid-column: span 1; }
+  .cs-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width:680px) {
+  .wrap { padding: 0 16px; }
+  nav.primary { display: none; }
+  .gallery-shell { padding: 12px 16px 0; }
+  .gallery-grid { grid-template-rows: 200px 200px; }
+  .g-side { grid-template-columns: 1fr 1fr; }
+  .page-body { padding: 24px 16px 80px; }
+  .unit-name { font-size: 30px; }
+  .meta-item { font-size: 12px; padding: 0 10px; }
+  .show-all-btn { right: 28px; }
+  .foot-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ HEADER ══════ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="Double Play at Wrigley.html" class="brand">
+      <span class="brand-mark"><img src="assets/logo-mark.png" alt=""></span>
+      <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+    </a>
+    <nav class="primary" aria-label="Main">
+      <a href="Double Play at Wrigley.html">Home</a>
+      <a href="Double Play at Wrigley.html#apartments" class="active">Apartments</a>
+      <a href="Compare Apartments.html">Compare</a>
+      <a href="Double Play at Wrigley.html#calendar">Calendar</a>
+      <a href="Neighborhood Guide.html">Guide</a>
+      <a href="Double Play at Wrigley.html#reviews">Reviews</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════ BREADCRUMB ══ -->
+<div class="breadcrumb-bar">
+  <div class="bc-inner">
+    <div class="bc-left">
+      <a href="Double Play at Wrigley.html#apartments">All Apartments</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-current">Slugger's Suite</span>
+    </div>
+    <div class="bc-actions">
+      <button class="bc-action-btn" aria-label="Share">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share
+      </button>
+      <button class="bc-action-btn" aria-label="Save">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Save
+      </button>
+      <a href="Compare Apartments.html" class="bc-action-btn">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Compare all three
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ GALLERY ══════ -->
+<div class="gallery-shell">
+  <div class="gallery-grid">
+    <div class="g-hero">
+      <img src="assets/sluggers-suite.jpg" alt="Slugger's Suite living room with direct Wrigley Field view">
+    </div>
+    <div class="g-side">
+      <div class="g-ph"><div class="stripes"></div><span class="ph-lbl">Bedroom 1 · queen bed</span></div>
+      <div class="g-ph"><div class="stripes"></div><span class="ph-lbl">Bedroom 2 · queen bed</span></div>
+      <div class="g-ph"><div class="stripes"></div><span class="ph-lbl">Kitchen &amp; dining</span></div>
+      <div class="g-ph"><div class="stripes"></div><span class="ph-lbl">View from windows</span></div>
+    </div>
+  </div>
+  <button class="show-all-btn" onclick="alert('Gallery lightbox — connect to your photo library')">
+    <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Show all 14 photos
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════ MAIN BODY ════ -->
+<div class="page-body">
+
+  <!-- ══════════════════════ CONTENT COLUMN ══════ -->
+  <main class="content-col">
+
+    <!-- TITLE -->
+    <div class="unit-header">
+      <div class="unit-badge">2nd Floor · Sheffield Avenue</div>
+      <h1 class="unit-name">Slugger's Suite</h1>
+      <div class="unit-meta-row">
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          2 Bedrooms
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Sleeps 4
+        </div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          1 Bath
+        </div>
+        <div class="meta-item">
+          <div class="stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <strong>5.0</strong><span class="review-count">(47 reviews)</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- HOST INTRO -->
+    <div class="host-intro-row">
+      <div class="host-avatar">D</div>
+      <div class="host-meta">
+        <div class="host-name">Hosted by Double Play</div>
+        <div class="host-since">Superhost · Hosting since 2019</div>
+      </div>
+      <span class="host-badge">Superhost</span>
+    </div>
+
+    <div class="about-text">
+      <p>You're on the second floor of our building on Sheffield Avenue, looking <strong>directly at the Wrigley Field marquee.</strong> We've hosted guests here for years, and Slugger's Suite is where we put people who refuse to miss a thing — the ones who want to watch the scoreboard from the couch, hear the crowd from the bedroom window, and be first through the gates.</p>
+      <p>The apartment has <strong>two queen bedrooms, a full kitchen, and a living room</strong> that does double-duty as the best seat in the house. We've done our best to make it feel like a real home — there's a Nespresso machine, proper kitchen knives, high-speed WiFi, and a TV loaded with every streaming service. Nothing was an afterthought.</p>
+      <p>Check-in is <em>keypad-only — no lockbox, no waiting around.</em> We'll send your personal code the morning of arrival. We're available by text the whole time you're here and we're usually two minutes away.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- THE VIEW FEATURE -->
+    <div class="view-feature">
+      <div class="vf-inner">
+        <div class="vf-eyebrow">Why people book this unit</div>
+        <div class="vf-title">"The marquee glows all night."</div>
+        <p class="vf-body">What you're looking at from your living room: <strong>the Wrigley Field marquee at Clark and Addison,</strong> one of the most photographed signs in baseball. On game days, you watch the flags go up from your window. On quiet nights, the scoreboard lights drift through your curtains. On a sellout night, you can hear the crowd from bed. It is the reason this unit books first — and it's the reason guests come back.</p>
+        <div class="vf-stats">
+          <div class="vf-stat">
+            <span class="vf-stat-val">Across the street</span>
+            <span class="vf-stat-lbl">Distance to field</span>
+          </div>
+          <div class="vf-stat">
+            <span class="vf-stat-val">3 min</span>
+            <span class="vf-stat-lbl">Walk to Red Line</span>
+          </div>
+          <div class="vf-stat">
+            <span class="vf-stat-val">2 min</span>
+            <span class="vf-stat-lbl">Walk to Murphy's</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- AMENITIES -->
+    <div class="amenities-section">
+      <h2 class="amenities-title">What this place offers</h2>
+      <div class="amenity-groups">
+
+        <div>
+          <div class="amenity-group-title">Bedroom &amp; Bath</div>
+          <div class="amenity-list">
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M2 20v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/><path d="M2 15V7a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v3"/></svg>2 queen beds</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M4 22V12h16v10"/><path d="M2 12h20V7a5 5 0 0 0-5-5H7a5 5 0 0 0-5 5v5z"/></svg>Hotel-quality linens</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>Blackout curtains</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M12 22V12m0 0c0-3.31-2.69-6-6-6H4v2c0 3.31 2.69 6 6 6h2zm0 0c0-3.31 2.69-6 6-6h2v2c0 3.31-2.69 6-6 6h-2z"/></svg>Towels &amp; toiletries provided</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="amenity-group-title">Kitchen</div>
+          <div class="amenity-list">
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>Full kitchen</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>Nespresso machine</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>Dishwasher</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>Microwave &amp; stove</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="amenity-group-title">Entertainment &amp; Comfort</div>
+          <div class="amenity-list">
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Smart TV (55")</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>High-speed WiFi</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M12 2v5M12 17v5M4.22 4.22l3.54 3.54M16.24 16.24l3.54 3.54M2 12h5M17 12h5"/></svg>Central A/C &amp; heat</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M6 2v6a6 6 0 0 0 12 0V2"/><line x1="2" y1="22" x2="22" y2="22"/></svg>Washer &amp; dryer</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="amenity-group-title">Building &amp; Access</div>
+          <div class="amenity-list">
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Keypad entry (no lockbox)</div>
+            <div class="amenity-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M1 1l22 22"/></svg>24/7 host support by text</div>
+            <div class="amenity-row dim"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>No parking (not needed)</div>
+            <div class="amenity-row dim"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>No balcony (see Bleacher Flat)</div>
+          </div>
+        </div>
+
+      </div>
+      <button class="show-amenities-btn">
+        Show all 28 amenities
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--navy);fill:none;stroke-width:2;stroke-linecap:round;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+
+    <hr class="divider">
+
+    <!-- HOUSE RULES -->
+    <h2 class="section-title">House rules</h2>
+    <div class="policies-grid">
+      <div class="policy-card">
+        <div class="policy-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <h3>Ground rules</h3>
+        <ul>
+          <li>No smoking anywhere on the property</li>
+          <li>No pets (allergies in building)</li>
+          <li>No parties or events — building has other residents</li>
+          <li>Respect quiet hours after 10pm</li>
+          <li>Max 4 guests at any time</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <div class="policy-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Security &amp; access</h3>
+        <ul>
+          <li>Personal keypad code sent morning of arrival</li>
+          <li>Code expires automatically at checkout</li>
+          <li>Do not share your code with non-guests</li>
+          <li>Lock the door when leaving the unit</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- CHECK-IN / CHECK-OUT -->
+    <h2 class="section-title">Check-in &amp; check-out</h2>
+    <div class="checkin-strip" style="margin-bottom:16px;">
+      <div class="ci-cell">
+        <div class="ci-label">Check-in</div>
+        <div class="ci-value">3:00 PM</div>
+        <div class="ci-sub">Keypad code sent by 10am</div>
+      </div>
+      <div class="ci-cell">
+        <div class="ci-label">Check-out</div>
+        <div class="ci-value">11:00 AM</div>
+        <div class="ci-sub">Late checkout: ask us</div>
+      </div>
+      <div class="ci-cell">
+        <div class="ci-label">Minimum stay</div>
+        <div class="ci-value">2 nights</div>
+        <div class="ci-sub">Game weekends fill fast</div>
+      </div>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);line-height:1.65;">Early check-in and late check-out are often available on request — just text us a day before. On game days, we ask everyone to be out by 11am sharp so we can turn the unit around in time.</p>
+
+    <hr class="divider">
+
+    <!-- CANCELLATION -->
+    <h2 class="section-title">Cancellation policy</h2>
+    <div class="cancel-card">
+      <div class="cancel-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.96 0 3.78.62 5.25 1.68"/></svg>
+      </div>
+      <div>
+        <div class="cancel-title">Moderate — free cancellation up to 5 days before check-in</div>
+        <p class="cancel-body">Cancel up to <strong>5 days before check-in</strong> for a full refund. Cancel within 5 days and the first night is non-refundable. Cancel after check-in and the remaining nights are non-refundable. We never charge a cancellation fee on top of that.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- FAQ -->
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q">Can we actually see the game from inside the apartment?</summary>
+        <p class="faq-a">You can see the <strong>Wrigley Field marquee and the scoreboard</strong> from the living room windows — and on a quiet night you can hear the crowd clearly. You can't see the playing field directly (the ballpark walls block that), but you know exactly when something happens. A lot of guests watch the first few innings from the couch before heading over.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Is parking available?</summary>
+        <p class="faq-a">There is no dedicated parking with the unit, and we genuinely recommend not driving. <strong>Wrigleyville parking on game days runs $40–60.</strong> The Addison Red Line is a 3-minute walk and runs 24/7. A 3-day CTA Ventra pass is $15 and gets you everywhere in Chicago. We also have a Divvy bike share station directly outside the building.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Do we need Cubs tickets to stay here?</summary>
+        <p class="faq-a">Absolutely not. Many of our guests come for the neighborhood, not a specific game. The unit is great any time of year — Gallagher Way hosts free events year-round, the Lakefront Trail is 15 minutes east, and the Red Line puts you downtown in 15 minutes. That said, if you want tickets, <strong>text us before you book</strong> — we sometimes have leads on good seats.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What's the noise level like on game days?</summary>
+        <p class="faq-a">Sheffield Avenue gets lively on game days — that's part of the experience. The apartment has double-pane windows which help significantly. <strong>If noise is a concern</strong>, our Field View Loft on the 3rd floor is the quietest unit in the building. Slugger's Suite is for guests who want to be in the middle of it, not away from it.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Can we host a group larger than 4 people?</summary>
+        <p class="faq-a">The unit comfortably sleeps 4 (two queens) and we max out at 4 guests. If you're a larger group, <strong>we have two other units in the same building</strong> — the Bleacher Balcony Flat and the Field View Loft. Groups of 8–12 often book all three. Text us and we'll work something out.</p>
+      </details>
+    </div>
+
+    <hr class="divider">
+
+    <!-- REVIEWS -->
+    <div class="reviews-header">
+      <span class="score">5.0</span>
+      <div class="score-sub">
+        <div class="stars-row">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="count">47 reviews</span>
+      </div>
+    </div>
+
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="reviewer-row">
+          <div class="reviewer-av">M</div>
+          <div>
+            <div class="reviewer-name">Marcus T.</div>
+            <div class="reviewer-date">April 2026</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">"We stayed for the home opener and it was everything. Watching the marquee light up from our couch, walking to the game in two minutes — this is the only way to do Wrigley. Already rebooked for July."</p>
+      </div>
+      <div class="review-card">
+        <div class="reviewer-row">
+          <div class="reviewer-av" style="background:#23a06b;">J</div>
+          <div>
+            <div class="reviewer-name">Jennifer &amp; Rob K.</div>
+            <div class="reviewer-date">September 2025</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">"Our anniversary trip. The apartment was spotless, hosts responded instantly, the neighborhood guide they sent us was genuinely the best we've ever gotten from an Airbnb host. Will be back."</p>
+      </div>
+      <div class="review-card review-grid-3">
+        <div class="reviewer-row">
+          <div class="reviewer-av" style="background:#7c5cbf;">D</div>
+          <div>
+            <div class="reviewer-name">Dave S.</div>
+            <div class="reviewer-date">July 2025 · Stayed 4 nights</div>
+          </div>
+        </div>
+        <div class="review-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-text">"Four nights for a Cubs series. Three grown men, zero complaints — beds were comfortable, kitchen had everything we needed, and we could hear the seventh-inning stretch from the window every game. The location is just impossible to beat. I've stayed at nicer apartments and I've stayed closer to ballparks, but never both at once."</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════════ BOOKING SIDEBAR ══════ -->
+  <aside class="booking-col">
+    <div class="booking-card">
+      <div class="bc-top">
+        <div class="bc-price-row">
+          <span class="bc-price">$300</span>
+          <span class="bc-per">/ night</span>
+        </div>
+        <div class="bc-rating">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>5.0</span>
+          <span class="rc">· 47 reviews</span>
+        </div>
+
+        <!-- Date + Guest inputs -->
+        <div class="bc-inputs">
+          <div class="bc-input-row">
+            <div class="bc-input-cell">
+              <div class="bc-input-label">Check-in</div>
+              <div class="bc-input-val placeholder">Add date</div>
+            </div>
+            <div class="bc-input-cell">
+              <div class="bc-input-label">Check-out</div>
+              <div class="bc-input-val placeholder">Add date</div>
+            </div>
+          </div>
+          <div class="bc-input-row">
+            <div class="bc-input-cell full">
+              <div class="bc-input-label">Guests</div>
+              <div class="bc-input-val">2 guests</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="btn-book-primary">Check Availability</a>
+        <a href="mailto:stay@doubleplaywrigley.com" class="btn-inquire">Contact the hosts</a>
+        <div class="bc-no-charge">You won't be charged yet · <strong>No service fees</strong></div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="bc-breakdown">
+        <div class="bc-breakdown-row">
+          <span>$300 × 3 nights</span>
+          <span>$900</span>
+        </div>
+        <div class="bc-breakdown-row">
+          <span>Cleaning fee</span>
+          <span>$85</span>
+        </div>
+        <div class="bc-breakdown-row">
+          <span>Service fee</span>
+          <span>$0</span>
+        </div>
+        <div class="bc-breakdown-row total">
+          <span>Total</span>
+          <span>$985</span>
+        </div>
+        <div class="bc-fee-note">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          Save ~$180 by booking direct (no platform fee)
+        </div>
+      </div>
+
+      <!-- Trust signals -->
+      <div class="bc-trust">
+        <div class="trust-row">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Powered by Hospitable · instant confirmation
+        </div>
+        <div class="trust-row">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M1 1l22 22"/></svg>
+          Text (853) 436-2139 with questions
+        </div>
+        <div class="trust-row">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Usually responds within an hour
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /page-body -->
+
+<!-- ══════════════════════════════════════════ CROSS-SELL ════ -->
+<section class="cross-sell">
+  <div class="wrap">
+    <div class="cs-head">
+      <h2>The other two units</h2>
+      <p>Same building, same location, very different experiences. Book multiple units for larger groups.</p>
+    </div>
+    <div class="cs-grid">
+
+      <a href="#" class="cs-card">
+        <div class="cs-photo">
+          <img src="assets/bleacher-balcony-flat.png" alt="Bleacher Balcony Flat">
+        </div>
+        <div class="cs-body">
+          <span class="cs-badge">Best Price</span>
+          <div class="cs-name">Bleacher Balcony Flat</div>
+          <div class="cs-floor">1st Floor · Private balcony · No stairs</div>
+          <div class="cs-price">$175<span> / night</span></div>
+          <div class="cs-btn">View &amp; Book</div>
+        </div>
+      </a>
+
+      <a href="#" class="cs-card">
+        <div class="cs-photo">
+          <img src="assets/field-view-loft.png" alt="Field View Loft">
+        </div>
+        <div class="cs-body">
+          <span class="cs-badge">Best Value</span>
+          <div class="cs-name">Field View Loft</div>
+          <div class="cs-floor">3rd Floor · Panoramic view · Quietest unit</div>
+          <div class="cs-price">$200<span> / night</span></div>
+          <div class="cs-btn">View &amp; Book</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ FOOTER ════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="Double Play at Wrigley.html" class="brand">
+          <span class="brand-mark"><img src="assets/logo-mark.png" alt=""></span>
+          <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+        </a>
+        <p>Three 2-bedroom apartments directly across from Wrigley Field. Book direct, save the fees, walk to the game.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Apartments</h4>
+        <ul>
+          <li><a href="#">Slugger's Suite — $300</a></li>
+          <li><a href="#">Bleacher Balcony — $175</a></li>
+          <li><a href="#">Field View Loft — $200</a></li>
+          <li><a href="Compare Apartments.html">Compare All Three</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="Neighborhood Guide.html">Neighborhood Guide</a></li>
+          <li><a href="Double Play at Wrigley.html#calendar">Events Calendar</a></li>
+          <li><a href="Double Play at Wrigley.html#reviews">Guest Reviews</a></li>
+          <li><a href="Double Play at Wrigley.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:8534362139">(853) 436-2139</a></li>
+          <li><a href="mailto:stay@doubleplaywrigley.com">stay@doubleplaywrigley.com</a></li>
+        </ul>
+        <div style="color:#9fb0c5;font-size:13px;margin-top:14px;line-height:1.5;">3601 N Sheffield Ave<br>Chicago, IL 60613</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>Powered by Hospitable and PriceLabs · © 2026 Double Play at Wrigley</div>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2.2C16.5 2.1 15.4 2 14.2 2 11.6 2 10 3.6 10 6.7V10H7v4h3v8h3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile bottom book bar -->
+<div class="mobile-book-bar">
+  <div class="mbb-price">
+    <span class="num">$300</span>
+    <span class="per">/ night · no fees</span>
+  </div>
+  <a href="#" class="mbb-btn">Check Availability</a>
+</div>
+
+<script>
+(function () {
+  /* Tweaks protocol */
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== '__activate_edit_mode') return;
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e) {}
+})();
+</script>
+</body>
+</html>

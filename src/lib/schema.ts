@@ -11,10 +11,8 @@ export function getLodgingBusinessSchema() {
     url: SITE_URL,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '3601 N Sheffield Ave',
       addressLocality: 'Chicago',
       addressRegion: 'IL',
-      postalCode: '60613',
       addressCountry: 'US',
     },
     geo: {
@@ -40,10 +38,8 @@ export function getVacationRentalSchema(unit: Unit) {
     url: `${SITE_URL}/units/${unit.slug}`,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '3601 N Sheffield Ave',
       addressLocality: 'Chicago',
       addressRegion: 'IL',
-      postalCode: '60613',
       addressCountry: 'US',
     },
     numberOfRooms: unit.beds,

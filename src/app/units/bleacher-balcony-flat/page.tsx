@@ -60,11 +60,12 @@ export default function BleacherBalconyFlatPage() {
   }
 
   // Stat tiles for the dark feature panel.
-  // Bleacher's signature: pet-friendly + central air (not window units) + new floors 2022
+  // Bleacher's signature (vs the other two units that share the building): the 4.68 star rating
+  // across 117 guest reviews, new floors put in 2022, and central air (not window units).
   const featureStats = [
-    { val: 'Pets OK', lbl: 'Including assistance animals' },
-    { val: '780 sqft', lbl: 'Living area' },
+    { val: '4.68 ★', lbl: 'Across 117 reviews' },
     { val: '2022', lbl: 'New floors' },
+    { val: '780 sqft', lbl: 'Living area' },
   ]
 
   // Group proximity into two semantic tiers
@@ -326,45 +327,42 @@ export default function BleacherBalconyFlatPage() {
             >
               {[
                 '1 block from Wrigley',
-                'Pets welcome',
+                '4.68★ across 117 reviews',
+                'New floors 2022',
                 'Central A/C and heat',
                 'Walk Score 98',
-                '300 Mbps WiFi',
-                'Free parking pass',
+                'Pets welcome',
                 'Self check-in',
-              ].map((h, i) => {
-                const isPets = i === 1
-                return (
+              ].map(h => (
+                <span
+                  key={h}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: T.navy,
+                    background: T.bgSoft,
+                    border: `1px solid ${T.line}`,
+                    padding: '7px 12px',
+                    borderRadius: 100,
+                    letterSpacing: '0.005em',
+                  }}
+                >
                   <span
-                    key={h}
+                    aria-hidden
                     style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 7,
-                      fontSize: 12,
-                      fontWeight: 700,
-                      color: isPets ? '#fff' : T.navy,
-                      background: isPets ? T.accent : T.bgSoft,
-                      border: isPets ? `1px solid ${T.accent}` : `1px solid ${T.line}`,
-                      padding: '7px 12px',
-                      borderRadius: 100,
-                      letterSpacing: '0.005em',
+                      width: 5,
+                      height: 5,
+                      borderRadius: '50%',
+                      background: T.accent,
+                      flex: 'none',
                     }}
-                  >
-                    <span
-                      aria-hidden
-                      style={{
-                        width: 5,
-                        height: 5,
-                        borderRadius: '50%',
-                        background: isPets ? '#fff' : T.accent,
-                        flex: 'none',
-                      }}
-                    />
-                    {h}
-                  </span>
-                )
-              })}
+                  />
+                  {h}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -393,7 +391,7 @@ export default function BleacherBalconyFlatPage() {
                 Hosted by Double Play
               </div>
               <div style={{ fontSize: 12, color: T.muted, marginTop: 1 }}>
-                Local hosts, two minutes away
+                Local Wrigleyville hosts
               </div>
             </div>
             <span
@@ -414,10 +412,10 @@ export default function BleacherBalconyFlatPage() {
 
           <div style={{ fontSize: 15.5, lineHeight: 1.78, color: T.ink }}>
             <p style={{ margin: '0 0 16px' }}>
-              The First Floor unit is the middle apartment in our 3-unit building at 3601 N
-              Sheffield, a 1-minute walk from Wrigley Field. The living room has the same tall
-              10-foot ceilings and huge bay-like windows as the Top Floor, with the dining area
-              wrapping the corner.
+              The First Floor unit is the middle apartment in our 3-unit Wrigleyville building,
+              a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot
+              ceilings and huge bay-like windows as the Top Floor, with the dining area wrapping
+              the corner.
             </p>
             <p style={{ margin: '0 0 16px' }}>
               We refloored the living and dining rooms in 2022 and the apartment has{' '}
@@ -487,7 +485,7 @@ export default function BleacherBalconyFlatPage() {
                   fontWeight: 400,
                 }}
               >
-                {'“'}Bay windows, central air, and yes, we take dogs.{'”'}
+                {'“'}New floors. Bay windows. The first-floor classic.{'”'}
               </div>
               <p
                 style={{
@@ -497,11 +495,11 @@ export default function BleacherBalconyFlatPage() {
                   margin: 0,
                 }}
               >
-                The First Floor is the only one of our three apartments that{' '}
-                <strong style={{ color: '#fff' }}>welcomes pets</strong>. Same bay-window views
-                onto Sheffield as the Top Floor, with central AC and heat we put in (not window
-                units). New floors in 2022. The middle of the building, in the middle of the
-                neighborhood.
+                We refloored the living and dining rooms in 2022. Real central air and central
+                heat, not window units like a lot of Wrigleyville apartments. Same bay-window
+                views as the Top Floor.{' '}
+                <strong style={{ color: '#fff' }}>4.68 stars across 117 guest reviews</strong>:
+                the unit guests come back for.
               </p>
               <div
                 style={{

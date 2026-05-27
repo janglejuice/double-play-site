@@ -300,7 +300,7 @@ export default function SluggersSuitePage() {
                 Hosted by Double Play
               </div>
               <div style={{ fontSize: 12, color: T.muted, marginTop: 1 }}>
-                Local hosts, two minutes away
+                Local Wrigleyville hosts
               </div>
             </div>
             <span
@@ -574,19 +574,19 @@ export default function SluggersSuitePage() {
                 title: 'Ground rules',
                 items: [
                   'No smoking anywhere on the property',
-                  'No pets (allergies in building)',
                   'No parties or events, building has other residents',
                   'Respect quiet hours after 10pm',
                   `Max ${unit.maxGuests} guests at any time`,
                 ],
               },
               {
-                title: 'Security & access',
+                title: 'Pets and access',
                 items: [
-                  'Personal keypad code sent morning of arrival',
+                  'Pets welcome (message us first to confirm fit)',
+                  'Assistance animals always allowed',
+                  'Personal smart-lock code sent in your booking confirmation',
                   'Code expires automatically at checkout',
                   'Do not share your code with non-guests',
-                  'Lock the door when leaving the unit',
                 ],
               },
             ].map((pol, pi) => (

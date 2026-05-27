@@ -10,7 +10,7 @@ export const neighborhoodFAQs: NeighborhoodFAQ[] = [
   {
     question: 'How close is Double Play at Wrigley to Wrigley Field?',
     answer:
-      "We are directly across the street from Wrigley Field at 3601 N Sheffield Ave. From our front door to the bleacher entrance is roughly 30 seconds of walking. It is, with no exaggeration, the closest you can stay without sleeping inside the ballpark.",
+      "We are directly across the street from Wrigley Field in Wrigleyville. From our front door to the bleacher entrance is roughly 30 seconds of walking. It is, with no exaggeration, the closest you can stay without sleeping inside the ballpark.",
   },
   {
     question: 'How do I get from Wrigleyville to downtown Chicago?',

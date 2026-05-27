@@ -1,6 +1,6 @@
 // Wrigleyville + Lakeview neighborhood guide
 // Hand-curated by us, your hosts. Updated regularly.
-// All distances measured from 3601 N Sheffield Ave.
+// All distances measured from our building in Wrigleyville.
 
 export type Spot = {
   name: string
@@ -29,7 +29,7 @@ export const heroStats: HeroStat[] = [
 // ============ QUICK FACTS SIDEBAR (overview section) ============
 export type QuickFact = { label: string; value: string; sub: string }
 export const quickFacts: QuickFact[] = [
-  { label: 'Our address', value: '3601 N Sheffield Ave', sub: 'Directly across from Wrigley' },
+  { label: 'Our building', value: 'Sheffield Avenue', sub: 'Directly across from Wrigley' },
   { label: 'Train', value: 'Addison Red Line', sub: '3 min walk · 24/7 service' },
   { label: 'Bike share', value: 'Divvy Station', sub: 'At our front door' },
   { label: 'Parking', value: 'Skip it', sub: '$40–60/day on game days' },

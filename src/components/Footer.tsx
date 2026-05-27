@@ -57,7 +57,7 @@ export default function Footer() {
               <li><a href="#" style={{ color: '#aabacb', fontSize: 14 }}>Contact form</a></li>
             </ul>
             <div style={{ color: '#fff', fontWeight: 700, fontSize: 18, marginTop: 14 }}>(853) 436-2139</div>
-            <div style={{ color: '#aabacb', fontSize: 14, marginTop: 6 }}>3601 N Sheffield Ave · Chicago, IL</div>
+            <div style={{ color: '#aabacb', fontSize: 14, marginTop: 6 }}>Wrigleyville, Chicago, IL</div>
           </div>
         </div>
 

@@ -55,10 +55,8 @@ export default function UnitDetailPage({ slug }: UnitDetailPageProps) {
     image: unit.photos.map(p => `https://yourdomain.com${p}`),
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '3601 N Sheffield Ave',
       addressLocality: 'Chicago',
       addressRegion: 'IL',
-      postalCode: '60613',
       addressCountry: 'US',
     },
     priceRange: unit.pricePerNight ? `$${unit.pricePerNight}` : '$$',

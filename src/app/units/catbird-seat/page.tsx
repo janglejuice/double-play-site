@@ -303,9 +303,9 @@ export default function CatbirdSeatPage() {
                 'Next to Red Line',
                 '300 Mbps WiFi',
                 'Walk Score 98',
+                'Pets welcome',
                 'Free parking pass',
                 'Keyless check-in',
-                'Live TV',
               ].map(h => (
                 <span
                   key={h}
@@ -364,7 +364,7 @@ export default function CatbirdSeatPage() {
                 Hosted by Double Play
               </div>
               <div style={{ fontSize: 12, color: T.muted, marginTop: 1 }}>
-                Local hosts, two minutes away
+                Local Wrigleyville hosts
               </div>
             </div>
             <span
@@ -385,10 +385,10 @@ export default function CatbirdSeatPage() {
 
           <div style={{ fontSize: 15.5, lineHeight: 1.78, color: T.ink }}>
             <p style={{ margin: '0 0 16px' }}>
-              The Catbird Seat is the top-floor apartment in our 3-unit building, a 1-minute walk
-              from Wrigley Field at 3601 N Sheffield Ave. The living room has huge bay-style
-              windows with the dining area wrapping the corner, so you get the full Wrigleyville
-              game-day scene from inside the apartment.
+              The Catbird Seat is the top-floor apartment in our 3-unit building in Wrigleyville,
+              a 1-minute walk from Wrigley Field. The living room has huge bay-style windows with
+              the dining area wrapping the corner, so you get the full Wrigleyville game-day scene
+              from inside the apartment.
             </p>
             <p style={{ margin: '0 0 16px' }}>
               The apartment has{' '}
@@ -664,20 +664,20 @@ export default function CatbirdSeatPage() {
                 kind: 'rules' as const,
                 items: [
                   'No smoking anywhere on the property',
-                  'No pets (allergies in building)',
                   'No parties or events, building has other residents',
                   'Respect quiet hours after 10pm',
                   `Max ${unit.maxGuests} guests at any time`,
                 ],
               },
               {
-                title: 'Security and access',
-                kind: 'security' as const,
+                title: 'Pets and access',
+                kind: 'pet' as const,
                 items: [
+                  'Pets welcome (message us first to confirm fit)',
+                  'Assistance animals always allowed',
                   'Personal smart-lock code sent in your booking confirmation',
                   'Code expires automatically at checkout',
                   'Do not share your code with non-guests',
-                  'Lock the door when leaving the unit',
                 ],
               },
             ].map((pol, pi) => (

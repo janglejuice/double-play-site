@@ -122,7 +122,7 @@ const USE_CASES = [
 const FAQS = [
   {
     q: 'Are all three apartments in the same building?',
-    a: 'Yes. All three units are at 3601 N Sheffield Ave, directly across from Wrigley Field. Different floors, same front door, same location.',
+    a: 'Yes. All three units are in the same Wrigleyville building, directly across from Wrigley Field. Different floors, same front door, same location.',
   },
   {
     q: 'Which apartment is closest to Wrigley Field?',

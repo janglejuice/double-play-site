@@ -404,7 +404,7 @@ export default function NeighborhoodPage() {
             </div>
             <div style={{ fontSize: 13, color: MUTED, textAlign: 'right', lineHeight: 1.5 }}>
               Your hosts, Double Play at Wrigley<br />
-              <span style={{ opacity: 0.6 }}>3601 N Sheffield Ave · Chicago, IL</span>
+              <span style={{ opacity: 0.6 }}>Wrigleyville, Chicago, IL</span>
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="tips-grid">

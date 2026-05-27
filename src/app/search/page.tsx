@@ -49,7 +49,7 @@ export default function SearchPage() {
             maxWidth: 640,
             margin: 0,
           }}>
-            All three of our apartments at 3601 N Sheffield Ave. Real-time pricing, instant
+            All three of our apartments in Wrigleyville. Real-time pricing, instant
             confirmation, and zero service fees when you book direct.
           </p>
         </div>

@@ -30,20 +30,20 @@ export type Unit = {
 
 export const units: Unit[] = [
   {
-    // Unit 1 — half-basement (garden level). Copy to be provided by owner — current values are placeholders.
+    // Unit 1 — half-basement (garden level). Copy is placeholder pending owner update.
     slug: 'sluggers-suite',
     name: "The Slugger's Suite",
-    tagline: 'Garden Level, 2 Bedrooms, 2 BR · Sleeps 4',
+    tagline: 'Garden Level · 2 BR · Sleeps 4 · Pet-friendly',
     floor: 'Garden Level (half-basement)',
     highlight: 'Closest to the bleacher entrance',
-    description: "The Slugger's Suite is the garden-level apartment in our 3-unit building directly across from Wrigley Field. Two bedrooms, sleeps four. Fully equipped kitchen, fast WiFi, and self check-in. (Full listing copy coming soon — message us for questions.)",
-    amenities: ['Full kitchen', 'Fast WiFi', 'Smart TV', 'Central A/C', 'Washer/Dryer', 'Self check-in'],
+    description: "The Slugger's Suite is the garden-level apartment in our 3-unit building, directly across from Wrigley Field in Wrigleyville. Two bedrooms, sleeps four. Fully equipped kitchen, fast WiFi, self check-in, and pets are welcome. (Full listing copy coming soon, message us for questions.)",
+    amenities: ['Full kitchen', 'Fast WiFi', 'Smart TV', 'Central A/C', 'Washer/Dryer', 'Self check-in', 'Pets welcome'],
     photos: ['/sluggers-suite.jpg'],
     beds: 2,
     baths: 1,
     sleeps: 4,
     maxGuests: 4,
-    parking: 'Residential street-parking pass provided (max 1 per night)',
+    parking: 'Free residential street-parking pass provided (1 per night, not guaranteed)',
     hospitable_property_id: null, // Owner to provide
   },
   {
@@ -54,7 +54,7 @@ export const units: Unit[] = [
     floor: 'First Floor (middle apartment)',
     highlight: 'Bay windows, central AC, pet-friendly',
     description:
-      "The First Floor unit (middle of our 3-unit building) at 3601 N Sheffield Ave, a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot ceilings and huge bay-like windows as the Top Floor, with large windows wrapping the dining area at the corner. New floors went in across the living and dining rooms in 2022. Central air and central heat (not window units). Sleeps 5 with two queen beds, a roll-out twin, and a convertible sleeper couch. 780 sqft. Smart-lock keyless entry, Walk Score 98, and yes, pets are welcome (assistance animals always).",
+      "The First Floor unit, the middle apartment in our 3-unit building in Wrigleyville, a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot ceilings and huge bay-like windows as the Top Floor, with large windows wrapping the dining area at the corner. New floors went in across the living and dining rooms in 2022. Central air and central heat (not window units). Sleeps 5 with two queen beds, a roll-out twin, and a convertible sleeper couch. 780 sqft. Smart-lock keyless entry, Walk Score 98, and pets are welcome (assistance animals always).",
     amenities: [
       'Full kitchen with dishwasher',
       '300 Mbps WiFi',
@@ -72,7 +72,7 @@ export const units: Unit[] = [
     maxGuests: 5,
     sqft: 780,
     parking: 'Free residential street-parking pass provided (1 per night, not guaranteed)',
-    hospitable_property_id: null, // Owner to provide
+    hospitable_property_id: '560742', // Bleacher (First Floor / middle unit) Hospitable widget
   },
   {
     // Unit 3 — top floor (2nd floor). Real listing copy from owner.
@@ -82,7 +82,7 @@ export const units: Unit[] = [
     floor: 'Top Floor (2nd)',
     highlight: 'Corner-lot bay windows · 10-ft ceilings · Walk Score 98',
     description:
-      "The Catbird Seat is the top-floor apartment in our 3-unit building at 3601 N Sheffield Ave, a 1-minute walk from Wrigley Field. The living room has huge bay-like windows and the dining area wraps the corner with more large windows, so you get the full Wrigleyville scene from inside the apartment. 10-foot ceilings, two bedrooms with soundproofed double-pane windows for sleep, and roughly 900 sqft that sleeps 5 comfortably. The Addison Red Line and a bus stop are literally next to the building. Smart-lock keyless entry with your own personal code, Walk Score 98.",
+      "The Catbird Seat is the top-floor apartment in our 3-unit building in Wrigleyville, a 1-minute walk from Wrigley Field. The living room has huge bay-like windows and the dining area wraps the corner with more large windows, so you get the full Wrigleyville scene from inside the apartment. 10-foot ceilings, two bedrooms with soundproofed double-pane windows for sleep, and roughly 900 sqft that sleeps 5 comfortably. The Addison Red Line and a bus stop are literally next to the building. Smart-lock keyless entry with your own personal code, Walk Score 98. Pets welcome.",
     amenities: [
       'Full kitchen with dishwasher',
       '300 Mbps WiFi',
@@ -99,6 +99,7 @@ export const units: Unit[] = [
       'Bed linens, extra pillows & blankets, hangers',
       'Cooking basics (pots, pans, oil, salt, pepper)',
       'Dishes, silverware, cookware',
+      'Pets welcome',
     ],
     photos: ['/field-view-loft.png'],
     beds: 2,

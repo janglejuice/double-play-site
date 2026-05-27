@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compare Apartments — Double Play at Wrigley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ──────────────────────────────────────────────────── */
+:root {
+  --navy:      #15375c;
+  --navy-deep: #0f2a48;
+  --navy-ink:  #0b1f36;
+  --accent:    #E85A2C;
+  --accent-dk: #d04a1f;
+  --accent-bg: rgba(232,90,44,.07);
+  --ink:       #1c2433;
+  --muted:     #6b7585;
+  --line:      #e6e8ec;
+  --bg:        #ffffff;
+  --bg-soft:   #f5f6f8;
+  --shadow:    0 1px 2px rgba(15,42,72,.04), 0 12px 28px -12px rgba(15,42,72,.18);
+  --shadow-lg: 0 2px 4px rgba(15,42,72,.06), 0 24px 48px -18px rgba(15,42,72,.26);
+  --r:         12px;
+  --hh:        68px; /* site header height */
+}
+*,*::before,*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--ink); background: var(--bg);
+  font-size: 16px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a   { color: inherit; text-decoration: none; }
+
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+/* ── SITE HEADER ─────────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: var(--hh); background: var(--navy-ink);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 100%; gap: 40px;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; }
+.brand-mark { width: 36px; height: 40px; flex: none; }
+.brand-mark img { width: 100%; height: 100%; object-fit: contain; }
+.brand-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: 21px; line-height: 1.02; color: #fff;
+}
+.brand-text .small {
+  display: block; font-size: 12px; font-style: italic;
+  font-weight: 400; margin-top: 1px;
+}
+nav.primary { display: flex; align-items: center; gap: 28px; }
+nav.primary a {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .13em;
+  color: rgba(255,255,255,.60); text-transform: uppercase;
+  transition: color .15s; padding: 4px 0; position: relative;
+}
+nav.primary a:hover { color: #fff; }
+nav.primary a.active { color: #fff; }
+nav.primary a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -4px;
+  height: 2px; background: var(--accent); border-radius: 2px;
+}
+
+/* ── PAGE HERO ───────────────────────────────────────────────── */
+.page-hero {
+  background: var(--navy-ink);
+  padding: 130px 0 64px;
+  position: relative; overflow: hidden;
+}
+.page-hero::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.hero-inner { position: relative; z-index: 2; }
+.eyebrow {
+  font-size: 10.5px; font-weight: 800; letter-spacing: .22em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+}
+.page-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 58px; line-height: 1.04; color: #fff;
+  margin: 0 0 18px; letter-spacing: -.02em;
+}
+.page-hero h1 em { font-style: italic; }
+.page-hero .sub {
+  font-size: 16.5px; color: rgba(255,255,255,.62);
+  max-width: 500px; margin: 0; line-height: 1.65;
+}
+.hero-jumps {
+  display: flex; align-items: center; gap: 12px; margin-top: 32px;
+}
+.jump-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 100px;
+  font-size: 12.5px; font-weight: 700; letter-spacing: .03em;
+  border: 1.5px solid rgba(255,255,255,.2); color: rgba(255,255,255,.75);
+  cursor: pointer; transition: all .15s; background: rgba(255,255,255,.04);
+}
+.jump-btn:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+.jump-btn .dot {
+  width: 8px; height: 8px; border-radius: 50%; flex: none;
+}
+
+/* ── DECISION HELPER ─────────────────────────────────────────── */
+.decision-bar {
+  background: #fff; border-bottom: 1px solid var(--line);
+  position: sticky; top: var(--hh); z-index: 200;
+  box-shadow: 0 4px 18px -8px rgba(15,42,72,.10);
+}
+.decision-inner {
+  display: flex; align-items: center; gap: 0;
+  padding: 0 32px; max-width: 1240px; margin: 0 auto;
+  overflow-x: auto; scrollbar-width: none;
+}
+.decision-inner::-webkit-scrollbar { display: none; }
+.decision-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; margin-right: 18px; flex: none;
+}
+.dh-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 14px 16px; cursor: pointer; background: none; border: none;
+  font-family: inherit; font-size: 13px; font-weight: 700;
+  color: var(--muted); white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: color .14s, border-color .14s;
+}
+.dh-btn:hover { color: var(--navy); }
+.dh-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.dh-btn .swatch {
+  width: 9px; height: 9px; border-radius: 50%; flex: none;
+}
+
+/* ── UNIT CARDS ──────────────────────────────────────────────── */
+.unit-cards { padding: 64px 0; }
+.cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+
+/* Column highlight state */
+.cards-grid[data-highlight="sluggers"]   .unit-card:nth-child(1) { box-shadow: 0 0 0 2.5px var(--accent), var(--shadow-lg); }
+.cards-grid[data-highlight="balcony"]    .unit-card:nth-child(2) { box-shadow: 0 0 0 2.5px var(--accent), var(--shadow-lg); }
+.cards-grid[data-highlight="loft"]       .unit-card:nth-child(3) { box-shadow: 0 0 0 2.5px var(--accent), var(--shadow-lg); }
+.cards-grid[data-highlight="outdoor"]    .unit-card:nth-child(2) { box-shadow: 0 0 0 2.5px var(--accent), var(--shadow-lg); }
+
+.unit-card {
+  background: #fff; border-radius: var(--r);
+  box-shadow: var(--shadow); border: 1px solid #eef0f3;
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow .22s ease, transform .18s ease;
+  position: relative;
+}
+.unit-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.unit-card.recommended {
+  border-color: rgba(232,90,44,.3);
+}
+
+.card-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 5;
+  font-size: 9.5px; font-weight: 800; letter-spacing: .16em;
+  text-transform: uppercase; padding: 5px 11px; border-radius: 100px;
+}
+.badge-view  { background: var(--navy-ink); color: #fff; }
+.badge-price { background: #fff; color: var(--navy); border: 1.5px solid var(--line); }
+.badge-value { background: var(--accent); color: #fff; }
+
+.card-photo {
+  aspect-ratio: 4/3; position: relative; overflow: hidden;
+  background: #d8dce4; flex: none;
+}
+.card-photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .4s ease;
+}
+.unit-card:hover .card-photo img { transform: scale(1.03); }
+
+.card-body { padding: 24px 24px 28px; display: flex; flex-direction: column; flex: 1; }
+.card-floor {
+  font-size: 10px; font-weight: 800; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+}
+.card-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 24px; color: var(--navy);
+  margin: 0 0 10px; letter-spacing: -.01em; line-height: 1.2;
+}
+.card-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0 0 18px; }
+
+/* View dots */
+.view-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.view-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.dots { display: flex; gap: 5px; }
+.dot-circle {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #dde2e9;
+}
+.dot-circle.on { background: var(--accent); }
+
+/* Stat pills */
+.stat-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 100px;
+  background: var(--bg-soft); border: 1px solid var(--line);
+  font-size: 12px; font-weight: 700; color: var(--navy);
+}
+.pill svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; }
+.pill.accent-pill { background: var(--accent-bg); border-color: rgba(232,90,44,.2); color: var(--accent); }
+
+.card-price {
+  display: flex; align-items: baseline; gap: 6px;
+  margin-bottom: 18px;
+}
+.price-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: var(--navy); letter-spacing: -.02em;
+}
+.price-unit { font-size: 13px; color: var(--muted); font-weight: 600; }
+.per-guest { font-size: 11.5px; color: var(--muted); margin-left: auto; align-self: flex-end; }
+
+.btn-book-card {
+  display: block; text-align: center;
+  background: var(--accent); color: #fff;
+  padding: 14px 18px; border-radius: 8px;
+  font-weight: 800; font-size: 14px; letter-spacing: .02em;
+  transition: background .14s ease; margin-bottom: 10px;
+}
+.btn-book-card:hover { background: var(--accent-dk); }
+.btn-view-card {
+  display: block; text-align: center;
+  border: 1.5px solid var(--line); color: var(--navy);
+  padding: 12px 18px; border-radius: 8px;
+  font-weight: 700; font-size: 13.5px;
+  transition: all .14s ease;
+}
+.btn-view-card:hover { border-color: var(--navy); }
+
+/* "Best for" chip */
+.best-for {
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
+}
+.best-for-label {
+  font-size: 9px; font-weight: 800; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+}
+.best-for-text { font-size: 13.5px; font-style: italic; color: var(--navy); line-height: 1.4; }
+
+/* ── COMPARISON TABLE ────────────────────────────────────────── */
+.compare-section { padding: 0 0 80px; }
+.section-head {
+  text-align: center; padding: 64px 0 40px;
+}
+.section-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 38px; font-weight: 400; color: var(--navy);
+  margin: 0 0 10px; letter-spacing: -.015em;
+}
+.section-head p { font-size: 15px; color: var(--muted); margin: 0; }
+
+.table-wrap {
+  border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+}
+.compare-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  font-size: 14px;
+  table-layout: fixed;
+}
+
+/* Sticky table header */
+.compare-table thead th {
+  position: sticky;
+  top: calc(var(--hh) + 48px); /* header + decision bar */
+  z-index: 10;
+  vertical-align: bottom;
+  padding: 0; background: #fff;
+}
+.compare-table thead th.label-col { background: var(--bg-soft); border-right: 1px solid var(--line); }
+.compare-table thead th.unit-col { border-right: 1px solid var(--line); }
+.compare-table thead th.unit-col:last-child { border-right: 0; }
+
+/* Recommended column header */
+.compare-table thead th.rec-col { background: #fffaf8; }
+
+.th-photo-wrap {
+  height: 80px; overflow: hidden; position: relative;
+}
+.th-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center 25%;
+}
+.th-body {
+  padding: 14px 18px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.rec-col .th-body { background: #fffaf8; }
+.th-badge {
+  font-size: 9px; font-weight: 800; letter-spacing: .18em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
+  display: inline-block; margin-bottom: 6px;
+}
+.th-badge.b-view  { background: var(--navy-ink); color: #fff; }
+.th-badge.b-price { background: var(--bg-soft); color: var(--navy); border: 1px solid var(--line); }
+.th-badge.b-value { background: var(--accent); color: #fff; }
+.th-unit-name {
+  font-weight: 800; font-size: 14px; color: var(--navy);
+  line-height: 1.25; margin-bottom: 2px;
+}
+.th-price { font-size: 18px; font-weight: 800; color: var(--navy); }
+.th-price span { font-size: 12px; font-weight: 600; color: var(--muted); }
+.th-cta {
+  display: block; text-align: center;
+  background: var(--accent); color: #fff;
+  padding: 9px 14px; border-radius: 6px;
+  font-weight: 800; font-size: 12px; letter-spacing: .03em;
+  margin-top: 10px; transition: background .14s;
+}
+.th-cta:hover { background: var(--accent-dk); }
+
+/* Table body rows */
+.compare-table tbody tr td {
+  padding: 14px 18px; border-bottom: 1px solid var(--line);
+  vertical-align: middle; line-height: 1.45;
+}
+.compare-table tbody tr:last-child td { border-bottom: 0; }
+.compare-table tbody td.label-col {
+  background: var(--bg-soft); border-right: 1px solid var(--line);
+  font-size: 13px; font-weight: 600; color: var(--muted);
+}
+.compare-table tbody td.unit-col { border-right: 1px solid var(--line); text-align: center; }
+.compare-table tbody td.unit-col:last-child { border-right: 0; }
+.compare-table tbody td.rec-col { background: #fffaf8; }
+
+/* Group header rows */
+.group-row td {
+  background: var(--navy) !important;
+  color: #fff; font-size: 10px !important; font-weight: 800 !important;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: 9px 18px !important; border-bottom: 0 !important;
+  border-right: 0 !important;
+}
+
+/* Check / X / dash symbols */
+.chk { display: inline-flex; align-items: center; justify-content: center; }
+.chk.yes svg { stroke: #1db76b; }
+.chk.no  svg { stroke: #c8cdd6; }
+.chk svg { width: 18px; height: 18px; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Dots (view quality) */
+.tdots { display: inline-flex; gap: 5px; align-items: center; }
+.tdot { width: 11px; height: 11px; border-radius: 50%; background: #dde2e9; }
+.tdot.on { background: var(--accent); }
+
+/* Noise bar */
+.noise-bar { display: inline-flex; gap: 3px; align-items: center; }
+.nbar { width: 26px; height: 6px; border-radius: 3px; background: #dde2e9; }
+.nbar.on { background: var(--navy); }
+.nbar.on.hi { background: var(--accent); }
+
+/* Value highlight */
+.val-best { font-weight: 800; color: var(--accent); }
+.val-note  { font-size: 11px; color: var(--muted); display: block; margin-top: 2px; }
+
+/* Price row */
+.price-big { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--navy); letter-spacing: -.02em; }
+
+/* ── SHARED AMENITIES ────────────────────────────────────────── */
+.amenities-section { background: var(--bg-soft); padding: 64px 0; }
+.amenities-head { text-align: center; margin-bottom: 36px; }
+.amenities-head h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 32px; color: var(--navy); margin: 0 0 8px; font-weight: 400;
+}
+.amenities-head p { font-size: 14px; color: var(--muted); margin: 0; }
+.amenity-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+}
+.amenity-item {
+  background: #fff; border-radius: 10px;
+  border: 1px solid var(--line); padding: 18px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.amenity-icon {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: var(--accent-bg); display: grid; place-items: center; flex: none;
+}
+.amenity-icon svg { width: 17px; height: 17px; stroke: var(--accent); fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.amenity-name { font-size: 13.5px; font-weight: 700; color: var(--navy); }
+
+/* ── FINAL CTA ───────────────────────────────────────────────── */
+.final-cta {
+  background: var(--navy-ink); padding: 80px 0;
+  position: relative; overflow: hidden;
+}
+.final-cta::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.final-inner { position: relative; z-index: 2; text-align: center; }
+.final-inner .eyebrow { margin-bottom: 12px; }
+.final-inner h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px; color: #fff; margin: 0 0 14px; letter-spacing: -.02em;
+}
+.final-inner p { font-size: 15px; color: rgba(255,255,255,.55); margin: 0 0 40px; }
+.final-cta-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  max-width: 900px; margin: 0 auto;
+}
+.final-unit-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r); padding: 26px; text-align: left;
+}
+.final-unit-card.rec-card {
+  background: rgba(232,90,44,.10);
+  border-color: rgba(232,90,44,.30);
+}
+.fuc-name { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.fuc-floor { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.40); margin-bottom: 14px; }
+.fuc-price { font-family: 'DM Serif Display', serif; font-size: 32px; color: #fff; letter-spacing: -.02em; margin-bottom: 18px; }
+.fuc-price span { font-size: 13px; color: rgba(255,255,255,.45); font-family: 'Manrope', sans-serif; font-weight: 600; }
+.btn-final {
+  display: block; text-align: center;
+  background: #fff; color: var(--navy);
+  padding: 13px 18px; border-radius: 8px;
+  font-weight: 800; font-size: 13.5px;
+  transition: all .14s;
+}
+.btn-final:hover { background: var(--accent); color: #fff; }
+.btn-final-accent {
+  display: block; text-align: center;
+  background: var(--accent); color: #fff;
+  padding: 13px 18px; border-radius: 8px;
+  font-weight: 800; font-size: 13.5px;
+  transition: background .14s;
+}
+.btn-final-accent:hover { background: var(--accent-dk); }
+.direct-note {
+  margin-top: 28px; font-size: 12px; color: rgba(255,255,255,.35);
+}
+.direct-note strong { color: rgba(255,255,255,.65); }
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+footer { background: var(--navy); color: #cbd6e3; padding: 64px 0 28px; }
+.foot-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.1fr; gap: 32px;
+  padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.foot-brand .brand-text { color: #fff; }
+.foot-brand p { color: #9fb0c5; font-size: 14px; margin-top: 18px; max-width: 280px; line-height: 1.6; }
+.foot-col h4 { color: #fff; font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; margin: 0 0 16px; font-weight: 800; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.foot-col a { color: #aabacb; font-size: 14px; transition: color .14s; }
+.foot-col a:hover { color: #fff; }
+.foot-contact .phone { color: #fff; font-weight: 700; font-size: 17px; margin-top: 12px; }
+.foot-contact .addr  { color: #aabacb; font-size: 13px; margin-top: 5px; }
+.foot-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 22px; font-size: 12px; color: #7e92aa;
+}
+.socials { display: flex; gap: 12px; }
+.socials a {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  display: grid; place-items: center; color: #cbd6e3; transition: all .14s;
+}
+.socials a:hover { background: #fff; color: var(--navy); border-color: #fff; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width:1100px) {
+  .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+  .unit-card { flex-direction: row; }
+  .card-photo { width: 280px; flex: none; aspect-ratio: auto; min-height: 220px; }
+  .amenity-grid { grid-template-columns: repeat(2,1fr); }
+  .final-cta-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  /* Table scrolls horizontally */
+  .table-wrap { overflow-x: auto; }
+  .compare-table { min-width: 720px; }
+}
+@media (max-width:680px) {
+  .wrap { padding: 0 20px; }
+  nav.primary { display: none; }
+  .page-hero h1 { font-size: 38px; }
+  .unit-card { flex-direction: column; }
+  .card-photo { width: 100%; min-height: unset; aspect-ratio: 16/9; }
+  .amenity-grid { grid-template-columns: 1fr 1fr; }
+  .final-cta-grid { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; }
+  .hero-jumps { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ HEADER ══════ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="Double Play at Wrigley.html" class="brand" aria-label="Double Play at Wrigley">
+      <span class="brand-mark"><img src="assets/logo-mark.png" alt=""></span>
+      <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+    </a>
+    <nav class="primary" aria-label="Main">
+      <a href="Double Play at Wrigley.html">Home</a>
+      <a href="Double Play at Wrigley.html#apartments">Apartments</a>
+      <a href="#" class="active">Compare</a>
+      <a href="Double Play at Wrigley.html#calendar">Calendar</a>
+      <a href="Neighborhood Guide.html">Guide</a>
+      <a href="Double Play at Wrigley.html#reviews">Reviews</a>
+      <a href="Double Play at Wrigley.html#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ HERO ══════════ -->
+<section class="page-hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Three Apartments · One Building · Zero Booking Fees</div>
+    <h1>Find your <em>perfect unit.</em></h1>
+    <p class="sub">Same great location — directly across from Wrigley Field. Very different experiences. Here's how to pick.</p>
+    <div class="hero-jumps">
+      <a href="#cards" class="jump-btn">
+        <span class="dot" style="background:#fff;"></span>
+        See all three
+      </a>
+      <a href="#table" class="jump-btn">Side-by-side table</a>
+      <a href="#book" class="jump-btn">Book direct</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DECISION BAR ══ -->
+<div class="decision-bar" role="navigation" aria-label="Filter units">
+  <div class="decision-inner">
+    <span class="decision-label">I want the</span>
+    <button class="dh-btn active" data-filter="all">Show All</button>
+    <button class="dh-btn" data-filter="sluggers">
+      <span class="swatch" style="background:var(--navy-ink);"></span>
+      Best View
+    </button>
+    <button class="dh-btn" data-filter="balcony">
+      <span class="swatch" style="background:#23a06b;"></span>
+      Outdoor Space
+    </button>
+    <button class="dh-btn" data-filter="loft">
+      <span class="swatch" style="background:var(--accent);"></span>
+      Best Value
+    </button>
+    <button class="dh-btn" data-filter="price">
+      <span class="swatch" style="background:#6b7585;"></span>
+      Lowest Price
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ UNIT CARDS ═════ -->
+<section id="cards" class="unit-cards">
+  <div class="wrap">
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- SLUGGER'S SUITE -->
+      <article class="unit-card" data-unit="sluggers">
+        <div class="card-badge badge-view">Best View</div>
+        <div class="card-photo">
+          <img src="assets/sluggers-suite.jpg" alt="Slugger's Suite living room with Wrigley Field view">
+        </div>
+        <div class="card-body">
+          <div class="card-floor">2nd Floor · Sheffield Ave</div>
+          <h2 class="card-name">Slugger's Suite</h2>
+          <p class="card-desc">Direct field-view windows facing Wrigley. The premium unit — you can see the marquee from the living room. The choice for serious Cubs fans and special occasions.</p>
+          <div class="view-row">
+            <span class="view-label">View</span>
+            <span class="dots" aria-label="3 out of 3">
+              <span class="dot-circle on"></span>
+              <span class="dot-circle on"></span>
+              <span class="dot-circle on"></span>
+            </span>
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Direct field view</span>
+          </div>
+          <div class="stat-pills">
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              2 Bedrooms
+            </span>
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Sleeps 4
+            </span>
+            <span class="pill">2nd Floor</span>
+          </div>
+          <div class="card-price">
+            <span class="price-num">$300</span>
+            <span class="price-unit">/ night</span>
+            <span class="per-guest">$75 per guest</span>
+          </div>
+          <a href="#" class="btn-book-card">Book Slugger's Suite</a>
+          <a href="#" class="btn-view-card">View Details</a>
+          <div class="best-for">
+            <div class="best-for-label">Best For</div>
+            <div class="best-for-text">The devoted Cubs fan, anniversary trips, and anyone who refuses to compromise on the view.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- BLEACHER BALCONY FLAT -->
+      <article class="unit-card" data-unit="balcony">
+        <div class="card-badge badge-price">Best Price</div>
+        <div class="card-photo">
+          <img src="assets/bleacher-balcony-flat.png" alt="Bleacher Balcony Flat living room">
+        </div>
+        <div class="card-body">
+          <div class="card-floor">1st Floor · Sheffield Ave</div>
+          <h2 class="card-name">Bleacher Balcony Flat</h2>
+          <p class="card-desc">Ground floor with a private balcony — the only unit with outdoor living space. Partial field view. Easiest access (no stairs) and the lowest nightly rate of the three.</p>
+          <div class="view-row">
+            <span class="view-label">View</span>
+            <span class="dots" aria-label="2 out of 3">
+              <span class="dot-circle on"></span>
+              <span class="dot-circle on"></span>
+              <span class="dot-circle"></span>
+            </span>
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Partial + balcony</span>
+          </div>
+          <div class="stat-pills">
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              2 Bedrooms
+            </span>
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Sleeps 4
+            </span>
+            <span class="pill accent-pill">Private Balcony</span>
+          </div>
+          <div class="card-price">
+            <span class="price-num">$175</span>
+            <span class="price-unit">/ night</span>
+            <span class="per-guest">$44 per guest</span>
+          </div>
+          <a href="#" class="btn-book-card">Book Bleacher Balcony</a>
+          <a href="#" class="btn-view-card">View Details</a>
+          <div class="best-for">
+            <div class="best-for-label">Best For</div>
+            <div class="best-for-text">Budget-conscious groups, guests who love outdoor space, and anyone who wants zero stairs.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- FIELD VIEW LOFT -->
+      <article class="unit-card recommended" data-unit="loft">
+        <div class="card-badge badge-value">Best Value</div>
+        <div class="card-photo">
+          <img src="assets/field-view-loft.png" alt="Field View Loft kitchen and living area">
+        </div>
+        <div class="card-body">
+          <div class="card-floor">3rd Floor · Sheffield Ave</div>
+          <h2 class="card-name">Field View Loft</h2>
+          <p class="card-desc">Top floor, panoramic views of Wrigley Field and the Chicago skyline. The quietest unit in the building, most natural light, and $100 less per night than Slugger's. Our most popular unit.</p>
+          <div class="view-row">
+            <span class="view-label">View</span>
+            <span class="dots" aria-label="3 out of 3">
+              <span class="dot-circle on"></span>
+              <span class="dot-circle on"></span>
+              <span class="dot-circle on"></span>
+            </span>
+            <span style="font-size:12px;color:var(--muted);font-weight:600;">Panoramic field + city</span>
+          </div>
+          <div class="stat-pills">
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              2 Bedrooms
+            </span>
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Sleeps 4
+            </span>
+            <span class="pill">Top Floor</span>
+          </div>
+          <div class="card-price">
+            <span class="price-num">$200</span>
+            <span class="price-unit">/ night</span>
+            <span class="per-guest">$50 per guest</span>
+          </div>
+          <a href="#" class="btn-book-card">Book Field View Loft</a>
+          <a href="#" class="btn-view-card">View Details</a>
+          <div class="best-for">
+            <div class="best-for-label">Best For</div>
+            <div class="best-for-text">Guests who want the best overall experience — panoramic views, quiet evenings, and the best price per view quality.</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ TABLE ══════════ -->
+<section id="table" class="compare-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Every detail, side by side</div>
+      <h2>Full Comparison</h2>
+      <p>Scroll through every difference. Same building, three distinct experiences.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="compare-table" aria-label="Unit comparison">
+        <thead>
+          <tr>
+            <th class="label-col" style="width:22%"></th>
+            <!-- Slugger's Suite -->
+            <th class="unit-col" style="width:26%">
+              <div class="th-photo-wrap">
+                <img src="assets/sluggers-suite.jpg" alt="Slugger's Suite">
+              </div>
+              <div class="th-body">
+                <span class="th-badge b-view">Best View</span>
+                <div class="th-unit-name">Slugger's Suite</div>
+                <div class="th-price">$300 <span>/ night</span></div>
+                <a href="#" class="th-cta">Book Now</a>
+              </div>
+            </th>
+            <!-- Bleacher Balcony Flat -->
+            <th class="unit-col" style="width:26%">
+              <div class="th-photo-wrap">
+                <img src="assets/bleacher-balcony-flat.png" alt="Bleacher Balcony Flat">
+              </div>
+              <div class="th-body">
+                <span class="th-badge b-price">Best Price</span>
+                <div class="th-unit-name">Bleacher Balcony Flat</div>
+                <div class="th-price">$175 <span>/ night</span></div>
+                <a href="#" class="th-cta">Book Now</a>
+              </div>
+            </th>
+            <!-- Field View Loft — RECOMMENDED -->
+            <th class="unit-col rec-col" style="width:26%">
+              <div class="th-photo-wrap">
+                <img src="assets/field-view-loft.png" alt="Field View Loft" style="object-position:center 60%">
+              </div>
+              <div class="th-body">
+                <span class="th-badge b-value">Best Value</span>
+                <div class="th-unit-name">Field View Loft</div>
+                <div class="th-price">$200 <span>/ night</span></div>
+                <a href="#" class="th-cta">Book Now</a>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ── PRICING ── -->
+          <tr class="group-row">
+            <td colspan="4">Pricing</td>
+          </tr>
+          <tr>
+            <td class="label-col">Nightly rate</td>
+            <td class="unit-col">$300</td>
+            <td class="unit-col"><span class="val-best">$175</span></td>
+            <td class="unit-col rec-col">$200</td>
+          </tr>
+          <tr>
+            <td class="label-col">Per guest / night</td>
+            <td class="unit-col">$75</td>
+            <td class="unit-col"><span class="val-best">$44</span></td>
+            <td class="unit-col rec-col">$50</td>
+          </tr>
+          <tr>
+            <td class="label-col">3-night stay</td>
+            <td class="unit-col">$900</td>
+            <td class="unit-col"><span class="val-best">$525</span></td>
+            <td class="unit-col rec-col">$600</td>
+          </tr>
+
+          <!-- ── THE VIEW ── -->
+          <tr class="group-row">
+            <td colspan="4">The View</td>
+          </tr>
+          <tr>
+            <td class="label-col">View quality</td>
+            <td class="unit-col">
+              <span class="tdots" aria-label="3 out of 3">
+                <span class="tdot on"></span><span class="tdot on"></span><span class="tdot on"></span>
+              </span>
+            </td>
+            <td class="unit-col">
+              <span class="tdots" aria-label="2 out of 3">
+                <span class="tdot on"></span><span class="tdot on"></span><span class="tdot"></span>
+              </span>
+            </td>
+            <td class="unit-col rec-col">
+              <span class="tdots" aria-label="3 out of 3">
+                <span class="tdot on"></span><span class="tdot on"></span><span class="tdot on"></span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label-col">View description</td>
+            <td class="unit-col" style="font-weight:700;color:var(--navy);">Direct field view<span class="val-note">from living room windows</span></td>
+            <td class="unit-col">Partial field view<span class="val-note">facing Sheffield Ave</span></td>
+            <td class="unit-col rec-col" style="font-weight:700;color:var(--navy);">Panoramic field + city<span class="val-note">highest vantage point</span></td>
+          </tr>
+          <tr>
+            <td class="label-col">Private balcony</td>
+            <td class="unit-col">
+              <span class="chk no" aria-label="No"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+            </td>
+            <td class="unit-col">
+              <span class="chk yes" aria-label="Yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span class="val-note">outdoor living space</span>
+            </td>
+            <td class="unit-col rec-col">
+              <span class="chk no" aria-label="No"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label-col">Outdoor space</td>
+            <td class="unit-col">
+              <span class="chk no" aria-label="No"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+            </td>
+            <td class="unit-col">
+              <span class="chk yes" aria-label="Yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </td>
+            <td class="unit-col rec-col">
+              <span class="chk no" aria-label="No"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+            </td>
+          </tr>
+
+          <!-- ── THE SPACE ── -->
+          <tr class="group-row">
+            <td colspan="4">The Space</td>
+          </tr>
+          <tr>
+            <td class="label-col">Floor</td>
+            <td class="unit-col">2nd Floor</td>
+            <td class="unit-col"><span class="val-best">1st Floor</span><span class="val-note">street level — no stairs</span></td>
+            <td class="unit-col rec-col"><span style="font-weight:700;color:var(--navy);">3rd Floor</span><span class="val-note">top floor, most private</span></td>
+          </tr>
+          <tr>
+            <td class="label-col">Bedrooms</td>
+            <td class="unit-col">2</td>
+            <td class="unit-col">2</td>
+            <td class="unit-col rec-col">2</td>
+          </tr>
+          <tr>
+            <td class="label-col">Max guests</td>
+            <td class="unit-col">4</td>
+            <td class="unit-col">4</td>
+            <td class="unit-col rec-col">4</td>
+          </tr>
+          <tr>
+            <td class="label-col">Full kitchen</td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col rec-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+
+          <!-- ── BUILDING & ACCESS ── -->
+          <tr class="group-row">
+            <td colspan="4">Building &amp; Access</td>
+          </tr>
+          <tr>
+            <td class="label-col">Stairs to unit</td>
+            <td class="unit-col">1 flight</td>
+            <td class="unit-col"><span class="val-best">None</span><span class="val-note">ground floor, street level</span></td>
+            <td class="unit-col rec-col">2 flights</td>
+          </tr>
+          <tr>
+            <td class="label-col">Noise at night</td>
+            <td class="unit-col">
+              <span class="noise-bar" aria-label="Moderate noise">
+                <span class="nbar on hi"></span><span class="nbar on hi"></span><span class="nbar"></span>
+              </span>
+              <span class="val-note">Moderate</span>
+            </td>
+            <td class="unit-col">
+              <span class="noise-bar" aria-label="Street level noise">
+                <span class="nbar on hi"></span><span class="nbar on hi"></span><span class="nbar on hi"></span>
+              </span>
+              <span class="val-note">Street level</span>
+            </td>
+            <td class="unit-col rec-col">
+              <span class="noise-bar" aria-label="Quiet">
+                <span class="nbar on"></span><span class="nbar"></span><span class="nbar"></span>
+              </span>
+              <span class="val-note">Quietest</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="label-col">Keypad entry</td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col rec-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+
+          <!-- ── BOOKING ── -->
+          <tr class="group-row">
+            <td colspan="4">Booking</td>
+          </tr>
+          <tr>
+            <td class="label-col">Instant confirmation</td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col rec-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="label-col">No service fees</td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+            <td class="unit-col rec-col"><span class="chk yes"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span></td>
+          </tr>
+          <tr>
+            <td class="label-col">Min. stay</td>
+            <td class="unit-col">2 nights</td>
+            <td class="unit-col">2 nights</td>
+            <td class="unit-col rec-col">2 nights</td>
+          </tr>
+
+          <!-- ── CTA ROW ── -->
+          <tr>
+            <td class="label-col" style="background:#fff;"></td>
+            <td class="unit-col" style="padding:20px 18px;">
+              <a href="#" class="btn-book-card" style="font-size:13px;padding:12px 14px;">Book Slugger's Suite</a>
+            </td>
+            <td class="unit-col" style="padding:20px 18px;">
+              <a href="#" class="btn-book-card" style="font-size:13px;padding:12px 14px;">Book Bleacher Balcony</a>
+            </td>
+            <td class="unit-col rec-col" style="padding:20px 18px;">
+              <a href="#" class="btn-book-card" style="font-size:13px;padding:12px 14px;">Book Field View Loft</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ AMENITIES ══════ -->
+<section class="amenities-section">
+  <div class="wrap">
+    <div class="amenities-head">
+      <div class="eyebrow" style="margin-bottom:10px;">Included in every unit</div>
+      <h2>All apartments include</h2>
+      <p>These are the same across all three — you won't need to trade off on any of them.</p>
+    </div>
+    <div class="amenity-grid">
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <span class="amenity-name">Smart TV</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg></div>
+        <span class="amenity-name">High-Speed WiFi</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <span class="amenity-name">Full Kitchen</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span class="amenity-name">Keypad Entry</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M8 7V5a2 2 0 0 1 4 0v2"/></svg></div>
+        <span class="amenity-name">Washer &amp; Dryer</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M12 2v5M12 17v5M4.22 4.22l3.54 3.54M16.24 16.24l3.54 3.54M2 12h5M17 12h5M4.22 19.78l3.54-3.54M16.24 7.76l3.54-3.54"/></svg></div>
+        <span class="amenity-name">A/C &amp; Heating</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.42 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72 13 13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 5.37 5.37l.87-.87a2 2 0 0 1 2.11-.45 13 13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <span class="amenity-name">Host Support 24/7</span>
+      </div>
+      <div class="amenity-item">
+        <div class="amenity-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <span class="amenity-name">No Booking Fees</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FINAL CTA ══════ -->
+<section id="book" class="final-cta">
+  <div class="wrap final-inner">
+    <div class="eyebrow">Book Direct &amp; Save</div>
+    <h2>Ready to book?</h2>
+    <p>Skip the platform fees. Confirm instantly. Walk to the game.</p>
+    <div class="final-cta-grid">
+
+      <div class="final-unit-card">
+        <div class="fuc-name">Slugger's Suite</div>
+        <div class="fuc-floor">2nd Floor · Direct field view</div>
+        <div class="fuc-price">$300<span> / night</span></div>
+        <a href="#" class="btn-final">Book Now</a>
+      </div>
+
+      <div class="final-unit-card">
+        <div class="fuc-name">Bleacher Balcony Flat</div>
+        <div class="fuc-floor">1st Floor · Private balcony</div>
+        <div class="fuc-price">$175<span> / night</span></div>
+        <a href="#" class="btn-final">Book Now</a>
+      </div>
+
+      <div class="final-unit-card rec-card">
+        <div class="fuc-name">Field View Loft</div>
+        <div class="fuc-floor">3rd Floor · Panoramic view</div>
+        <div class="fuc-price">$200<span> / night</span></div>
+        <a href="#" class="btn-final-accent">Book Now — Best Value</a>
+      </div>
+
+    </div>
+    <div class="direct-note">All three available at <strong>doubleplaywrigley.com</strong> · Instant confirmation · No service fees · (853) 436-2139</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER ══════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="Double Play at Wrigley.html" class="brand">
+          <span class="brand-mark"><img src="assets/logo-mark.png" alt=""></span>
+          <span class="brand-text">Double Play<span class="small">at Wrigley</span></span>
+        </a>
+        <p>Three 2-bedroom apartments directly across from Wrigley Field. Book direct, save the fees, walk to the game.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Apartments</h4>
+        <ul>
+          <li><a href="#">Slugger's Suite — $300</a></li>
+          <li><a href="#">Bleacher Balcony — $175</a></li>
+          <li><a href="#">Field View Loft — $200</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Site</h4>
+        <ul>
+          <li><a href="Double Play at Wrigley.html">Home</a></li>
+          <li><a href="Double Play at Wrigley.html#calendar">Events Calendar</a></li>
+          <li><a href="Neighborhood Guide.html">Neighborhood Guide</a></li>
+          <li><a href="Double Play at Wrigley.html#reviews">Guest Reviews</a></li>
+        </ul>
+      </div>
+      <div class="foot-contact foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:stay@doubleplaywrigley.com">stay@doubleplaywrigley.com</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+        <div class="phone">(853) 436-2139</div>
+        <div class="addr">3601 N Sheffield Ave · Chicago, IL</div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>Powered by Hospitable and PriceLabs · © 2026 Double Play at Wrigley</div>
+      <div class="socials">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.1.4-2 2-2h2V2.2C16.5 2.1 15.4 2 14.2 2 11.6 2 10 3.6 10 6.7V10H7v4h3v8h3z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.7-1.7C18.2 5 12 5 12 5s-6.2 0-7.9.5A2.5 2.5 0 0 0 2.4 7.2C2 8.9 2 12 2 12s0 3.1.4 4.8a2.5 2.5 0 0 0 1.7 1.7C5.8 19 12 19 12 19s6.2 0 7.9-.5a2.5 2.5 0 0 0 1.7-1.7C22 15.1 22 12 22 12s0-3.1-.4-4.8zM10 15V9l5 3-5 3z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+
+  /* ── DECISION HELPER ──────────────────────────────────── */
+  var grid    = document.getElementById('cardsGrid');
+  var dhBtns  = document.querySelectorAll('.dh-btn');
+
+  var filterMap = {
+    all:      null,
+    sluggers: 'sluggers',
+    balcony:  'balcony',
+    loft:     'loft',
+    price:    'balcony',   /* lowest price = balcony flat */
+    outdoor:  'balcony'
+  };
+
+  dhBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      dhBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var f = btn.getAttribute('data-filter');
+      var target = filterMap[f] || null;
+      grid.setAttribute('data-highlight', target || '');
+
+      /* Also smooth-scroll down to cards on first interaction */
+      if (window.scrollY < 200) {
+        var el = document.getElementById('cards');
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 130, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── HERO JUMP BUTTONS ─────────────────────────────────── */
+  document.querySelectorAll('.jump-btn[href]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      var id = href.slice(1);
+      var el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 130, behavior: 'smooth' });
+    });
+  });
+
+  /* ── TWEAKS PROTOCOL ──────────────────────────────────── */
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== '__activate_edit_mode') return;
+  });
+  try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+
+})();
+</script>
+
+</body>
+</html>
