@@ -252,30 +252,66 @@ export default function HomePage() {
               Booking direct means lower prices, no platform service fees, and a real person on the other end of every message. Here&apos;s what changes when you skip Airbnb and VRBO.
             </p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, maxWidth: 1140, margin: '0 auto' }} className="why-direct-grid">
+          <div style={{ maxWidth: 720, margin: '0 auto' }}>
             {[
               {
+                num: '1',
                 title: 'No service fees.',
-                body: 'Airbnb charges guests up to 14% in service fees on top of your nightly rate. VRBO does the same. We don\'t. Same apartment, same dates — just direct. Most guests save $150–$250+ on a 3-night stay.',
-                icon: '$',
+                body: "Airbnb charges guests up to 14% in service fees on top of your nightly rate. VRBO does the same. We don't. Same apartment, same dates -- just direct. Most guests save $150-$250+ on a 3-night stay.",
               },
               {
+                num: '2',
                 title: 'Local hosts who answer.',
-                body: 'We live in and around Wrigleyville. Message us anytime and we typically respond within the hour. Pre-booking questions, custom requests, last-minute changes — all handled by an actual human who knows the neighborhood inside out.',
-                icon: '✉',
+                body: 'We live in and around Wrigleyville. Message us anytime and we typically respond within the hour. Pre-booking questions, custom requests, last-minute changes -- all handled by an actual human who knows the neighborhood inside out.',
               },
               {
+                num: '3',
                 title: 'Best rate, guaranteed.',
-                body: 'Our direct rate is always the same as or lower than what you\'d pay through Airbnb or VRBO for the same dates. If you find a lower rate on any major platform, message us and we\'ll match it.',
-                icon: '✓',
+                body: "Our direct rate is always the same as or lower than what you'd pay through Airbnb or VRBO for the same dates. If you find a lower rate on any major platform, message us and we'll match it.",
               },
-            ].map(card => (
-              <div key={card.title} style={{ background: '#fff', borderRadius: 14, padding: 32, border: '1px solid #f0e8e2', boxShadow: '0 1px 2px rgba(15,42,72,.03), 0 6px 18px -10px rgba(15,42,72,.10)' }}>
-                <div style={{ width: 48, height: 48, borderRadius: 24, background: 'rgba(232,90,44,.12)', display: 'grid', placeItems: 'center', fontSize: 24, fontWeight: 800, color: '#E85A2C', marginBottom: 18 }}>
-                  {card.icon}
+            ].map((item, i) => (
+              <div
+                key={item.num}
+                style={{
+                  borderTop: '1px solid #f0e8e2',
+                  padding: '40px 0',
+                  position: 'relative',
+                  ...(i === 0 ? { borderTop: 'none', paddingTop: 0 } : {}),
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 32 }}>
+                  <div
+                    style={{
+                      fontFamily: "'DM Serif Display', serif",
+                      fontSize: 88,
+                      fontWeight: 400,
+                      lineHeight: 1,
+                      color: 'rgba(21,55,92,0.13)',
+                      minWidth: 56,
+                      userSelect: 'none',
+                      marginTop: -8,
+                    }}
+                  >
+                    {item.num}
+                  </div>
+                  <div>
+                    <h3
+                      style={{
+                        fontFamily: 'Manrope, sans-serif',
+                        fontSize: 22,
+                        fontWeight: 700,
+                        color: '#15375c',
+                        margin: '0 0 10px',
+                        letterSpacing: '-0.01em',
+                      }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p style={{ fontFamily: 'Manrope, sans-serif', fontSize: 16, lineHeight: 1.7, color: '#1c2433', margin: 0 }}>
+                      {item.body}
+                    </p>
+                  </div>
                 </div>
-                <h3 style={{ fontFamily: 'Manrope', fontSize: 20, fontWeight: 800, color: '#15375c', margin: '0 0 12px', letterSpacing: '-0.01em' }}>{card.title}</h3>
-                <p style={{ fontSize: 15, lineHeight: 1.7, color: '#1c2433', margin: 0 }}>{card.body}</p>
               </div>
             ))}
           </div>
