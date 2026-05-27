@@ -72,6 +72,9 @@ export default function SluggersSuitePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
+      {/* Header band: dark navy backdrop for the absolute-positioned NavBar (which sits on top of this) */}
+      <div style={{ height: 206, background: T.navyInk }} aria-hidden="true" />
+
       {/* ─────────────── Breadcrumb / Action bar ─────────────── */}
       <div
         style={{
