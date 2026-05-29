@@ -13,6 +13,11 @@ export const faqItems: FAQItem[] = [
     category: 'Booking',
   },
   {
+    question: 'Is there a minimum age to book?',
+    answer: 'Yes. The guest who books and checks in must be at least 20 years old, and the booking guest needs to be staying in the apartment for the duration of the reservation. This helps us keep the building calm for our permanent neighbors.',
+    category: 'Booking',
+  },
+  {
     question: 'Can I book all three apartments for a large group?',
     answer: 'Yes. With all three units booked together, the building sleeps up to 13 across three private apartments on three separate floors. Message us directly to coordinate pricing, staggered check-in times, and to make sure the full group has a seamless experience.',
     category: 'Booking',
@@ -229,7 +234,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     question: 'Which unit is best for a Cubs game weekend?',
-    answer: 'All three are equally close to the stadium — about 30 seconds from any unit to the bleacher entrance. For neighborhood views and the most light, The Marquee is the flagship choice. For great value and the quietest bedrooms, The Ivy is the pick. For the classic first-floor feel and the most-reviewed unit (4.68 stars across 117 stays), The Addison.',
+    answer: 'All three are equally close to the stadium — about 30 seconds from any unit to the bleacher entrance. For neighborhood views and the most light, The Marquee is the flagship choice. For great value and the quietest bedrooms, The Ivy is the pick. For the classic first-floor feel and our most-reviewed, most-booked unit, The Addison.',
     category: 'Game Day',
   },
   {

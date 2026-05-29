@@ -60,10 +60,10 @@ export default function BleacherBalconyFlatPage() {
   }
 
   // Stat tiles for the dark feature panel.
-  // Bleacher's signature (vs the other two units that share the building): the 4.68 star rating
-  // across 117 guest reviews, new floors put in 2022, and central air (not window units).
+  // The Addison's signature (vs the other two units that share the building): it is our
+  // most-booked, most-reviewed apartment, new floors put in 2022, and central air (not window units).
   const featureStats = [
-    { val: '4.68 ★', lbl: 'Across 117 reviews' },
+    { val: 'Most-booked', lbl: 'Of our 3 apartments' },
     { val: '2022', lbl: 'New floors' },
     { val: '850 sqft', lbl: 'Living area' },
   ]
@@ -305,13 +305,14 @@ export default function BleacherBalconyFlatPage() {
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span aria-hidden style={{ color: T.accent, fontSize: 16 }}>{'★'}</span>
-                <span style={{ fontSize: 14, fontWeight: 800, color: T.navy }}>4.68</span>
-                <span style={{ fontSize: 13, color: T.muted }}>across 117 guest reviews</span>
+                <span style={{ fontSize: 13, color: T.muted }}>
+                  <span style={{ color: T.navy, fontWeight: 800 }}>Most-booked</span> of our three apartments
+                </span>
               </div>
               <span style={{ color: T.line }}>{'·'}</span>
               <div style={{ fontSize: 13, color: T.muted }}>
-                <span style={{ color: T.navy, fontWeight: 700 }}>6 years</span> hosting in this
-                building
+                <span style={{ color: T.navy, fontWeight: 700 }}>6 years</span> hosting, replies within
+                the hour
               </div>
             </div>
 
@@ -326,7 +327,7 @@ export default function BleacherBalconyFlatPage() {
             >
               {[
                 '1 block from Wrigley',
-                '4.68★ across 117 reviews',
+                'Most-booked of our 3 units',
                 'New floors 2022',
                 'Central A/C and heat',
                 'Walk Score 98',
@@ -497,7 +498,7 @@ export default function BleacherBalconyFlatPage() {
                 We refloored the living and dining rooms in 2022. Real central air and central
                 heat, not window units like a lot of Wrigleyville apartments. Same bay-window
                 views as the Top Floor.{' '}
-                <strong style={{ color: '#fff' }}>4.68 stars across 117 guest reviews</strong>:
+                <strong style={{ color: '#fff' }}>Our most-booked, most-reviewed apartment</strong>:
                 the unit guests come back for.
               </p>
               <div
@@ -691,14 +692,14 @@ export default function BleacherBalconyFlatPage() {
                   'Respect quiet hours after 10pm',
                   'Noise decibel monitor on property',
                   `Max ${unit.maxGuests} guests at any time`,
+                  'Booking guest must be 20 or older and stay in the unit',
                 ],
               },
               {
                 title: 'Pets and access',
                 kind: 'pet' as const,
                 items: [
-                  'Pets welcome (message us first to confirm fit)',
-                  'Pets welcome (pet fee applies)',
+                  'Pets welcome (message us first to confirm fit, pet fee applies)',
                   'Personal smart-lock code sent 2-3 days before arrival',
                   'Code expires automatically at checkout',
                   'Building has exterior security and doorbell cameras',
@@ -1214,7 +1215,7 @@ export default function BleacherBalconyFlatPage() {
               {[
                 'Pets welcome (message us first)',
                 'Text the hosts anytime, usually reply within the hour',
-                '4.68 stars across 117 guest reviews',
+                'Our most-booked, most-reviewed apartment',
               ].map((t, i) => (
                 <div
                   key={i}

@@ -666,14 +666,14 @@ export default function CatbirdSeatPage() {
                   'No parties or events, building has other residents',
                   'Respect quiet hours after 10pm',
                   `Max ${unit.maxGuests} guests at any time`,
+                  'Booking guest must be 20 or older and stay in the unit',
                 ],
               },
               {
                 title: 'Pets and access',
                 kind: 'pet' as const,
                 items: [
-                  'Pets welcome (message us first to confirm fit)',
-                  'Pets welcome (pet fee applies)',
+                  'Pets welcome (message us first to confirm fit, pet fee applies)',
                   'Personal smart-lock code sent 2-3 days before arrival',
                   'Code expires automatically at checkout',
                   'Do not share your code with non-guests',

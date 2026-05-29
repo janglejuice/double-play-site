@@ -114,6 +114,16 @@ export default function ReviewsPage() {
             hundreds of stays at Double Play — Cubs fans, concert weekenders, families, and everyone in
             between. Here's what they tell us.
           </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18, marginTop: 30, alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+              <span style={{ fontSize: 34, fontWeight: 800, fontFamily: 'var(--font-serif)' }}>4.71★</span>
+              <span style={{ opacity: 0.85 }}>across 236 guest reviews</span>
+            </div>
+            <span style={{ opacity: 0.4 }}>·</span>
+            <div style={{ opacity: 0.9 }}><strong>6 years</strong> hosting</div>
+            <span style={{ opacity: 0.4 }}>·</span>
+            <div style={{ opacity: 0.9 }}><strong>100%</strong> response rate, replies within the hour</div>
+          </div>
         </div>
       </section>
 

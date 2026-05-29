@@ -68,7 +68,7 @@ export const unitDetails: UnitDetail[] = [
         items: [
           'Smart TV with Live TV',
           '300 Mbps WiFi throughout',
-          'Air conditioning',
+          'Central air conditioning and heat',
         ],
       },
       {
@@ -132,8 +132,10 @@ export const unitDetails: UnitDetail[] = [
       { name: 'Murphy\'s Bleachers', time: '1 min walk' },
       { name: 'Gallagher Way (food & drinks)', time: '1 min walk' },
       { name: 'Cubby Bear (bar)', time: '2 min walk' },
+      { name: 'Do-Rite Donuts & Chicken', time: '1 min walk' },
       { name: 'Addison Red Line station', time: 'Across the street' },
-      { name: 'Mariano\'s grocery store', time: '5 min walk' },
+      { name: 'Whole Foods Market', time: '8 min walk' },
+      { name: 'Jewel-Osco grocery', time: '7 min walk' },
       { name: 'Lake Michigan shoreline', time: '12 min walk' },
       { name: 'Lincoln Park neighborhood', time: '15 min walk' },
     ],
@@ -142,7 +144,7 @@ export const unitDetails: UnitDetail[] = [
     slug: 'the-addison',
     heroHeadline: 'First-floor classic. New floors. Bay windows.',
     heroSubhead:
-      'Our 2-bedroom first-floor apartment in Wrigleyville. Sleeps 5 in 850 sqft, 10-foot ceilings, Walk Score 98. Refloored in 2022. 4.68 stars across 117 guest reviews.',
+      'Our 2-bedroom first-floor apartment in Wrigleyville. Sleeps 5 in 850 sqft, 10-foot ceilings, Walk Score 98. Refloored in 2022. Our most-reviewed, most-booked apartment.',
     whatYouLove: [
       {
         title: 'Game day energy from the dining room corner',
@@ -162,7 +164,7 @@ export const unitDetails: UnitDetail[] = [
       {
         title: 'Where guests come back, and bring the dog',
         body:
-          "4.68 stars across 117 guest reviews. Pets are welcome (a pet fee applies, varies by stay). Message us about your specific pet before booking so we can confirm fit and share the fee.",
+          "This is our most-booked, most-reviewed apartment, and guests keep coming back season after season. Pets are welcome (a pet fee applies, varies by stay). Message us about your specific pet before booking so we can confirm fit and share the fee.",
       },
     ],
     idealFor: [
@@ -245,7 +247,7 @@ export const unitDetails: UnitDetail[] = [
     floorPlan:
       "Enter from the main building door, then through your own apartment door (the middle of three apartment doors inside the building). You walk into an open living and dining space with the corner-lot bay windows opening onto Wilton Avenue. The kitchen sits at the back. Both bedrooms are off the main space on the quieter side, each with a queen bed. One full bathroom with a multi-setting rainfall shower. 850 sqft total, with 10-foot ceilings that make the rooms feel taller than the footprint suggests.",
     versusOthers:
-      "The Addison is the first-floor (middle) apartment in our 3-unit building. Slightly smaller than the Top Floor's 900 sqft, with the same bay-window views but a different vantage. The classic raised first-floor feel, with new floors in 2022 and real central AC and heat (not window units). It is the most-reviewed unit of the three: 117 stays at 4.68 stars. All three apartments welcome pets.",
+      "The Addison is the first-floor (middle) apartment in our 3-unit building. Slightly smaller than the Top Floor's 900 sqft, with the same bay-window views but a different vantage. The classic raised first-floor feel, with new floors in 2022 and real central AC and heat (not window units). It is the most-reviewed and most-booked unit of the three. All three apartments welcome pets.",
     unitFAQ: [
       {
         question: 'Are pets really allowed?',
@@ -290,19 +292,24 @@ export const unitDetails: UnitDetail[] = [
       {
         question: 'How does this compare to the other two units?',
         answer:
-          "Same building, same 1-minute walk to Wrigley. The Marquee (Top Floor) is the highest and brightest at 900 sqft. The Ivy (Garden Level) is the closest to street level. The Addison is the most-reviewed of the three (4.68 stars across 117 stays), has the classic raised first-floor feel, and got new floors in 2022. 850 sqft. All three units allow pets.",
+          "Same building, same 1-minute walk to Wrigley. The Marquee (Top Floor) is the highest and brightest at 900 sqft. The Ivy (Garden Level) is the closest to street level. The Addison is the most-reviewed of the three, has the classic raised first-floor feel, and got new floors in 2022. 850 sqft. All three units allow pets.",
       },
     ],
     localProximity: [
-      { name: 'Wrigley Field', time: '1 min walk' },
-      { name: 'Addison Red Line', time: 'Right next door' },
+      { name: 'Wrigley Field bleacher entrance', time: '1 min walk' },
+      { name: 'Addison Red Line station', time: 'Right next door' },
       { name: 'CTA bus stop', time: 'Right next door' },
-      { name: 'Gallagher Way', time: '1 min walk' },
+      { name: 'Gallagher Way (food, drinks, events)', time: '1 min walk' },
       { name: "Murphy's Bleachers", time: '2 min walk' },
       { name: 'The Cubby Bear', time: '2 min walk' },
-      { name: 'CVS', time: '3 min walk' },
-      { name: "Mariano's grocery", time: '5 min walk' },
+      { name: 'Wrigley View Rooftop', time: '6 min walk' },
+      { name: 'Do-Rite Donuts & Chicken', time: '1 min walk' },
       { name: 'Starbucks / Subway / Chipotle', time: 'Under 5 min walk' },
+      { name: 'CVS pharmacy', time: '3 min walk' },
+      { name: 'Whole Foods Market', time: '8 min walk' },
+      { name: 'Jewel-Osco grocery', time: '7 min walk' },
+      { name: 'Music Box Theatre', time: '10 min walk' },
+      { name: 'Vic Theatre', time: '13 min walk' },
       { name: 'Lake Michigan trail', time: '15 min walk' },
       { name: 'Downtown Chicago (Loop)', time: '15 to 20 min on Red Line' },
       { name: "O'Hare Airport", time: 'About 60 min via Blue Line transfer' },
@@ -463,15 +470,20 @@ export const unitDetails: UnitDetail[] = [
       },
     ],
     localProximity: [
-      { name: 'Wrigley Field', time: '1 min walk' },
-      { name: 'Addison Red Line', time: 'Right next door' },
+      { name: 'Wrigley Field bleacher entrance', time: '1 min walk' },
+      { name: 'Addison Red Line station', time: 'Right next door' },
       { name: 'CTA bus stop', time: 'Right next door' },
-      { name: 'Gallagher Way', time: '1 min walk' },
+      { name: 'Gallagher Way (food, drinks, events)', time: '1 min walk' },
       { name: "Murphy's Bleachers", time: '2 min walk' },
       { name: 'The Cubby Bear', time: '2 min walk' },
-      { name: 'CVS', time: '3 min walk' },
-      { name: "Mariano's grocery", time: '5 min walk' },
+      { name: 'Wrigley View Rooftop', time: '6 min walk' },
+      { name: 'Do-Rite Donuts & Chicken', time: '1 min walk' },
       { name: 'Starbucks / Subway / Chipotle', time: 'Under 5 min walk' },
+      { name: 'CVS pharmacy', time: '3 min walk' },
+      { name: 'Whole Foods Market', time: '8 min walk' },
+      { name: 'Jewel-Osco grocery', time: '7 min walk' },
+      { name: 'Music Box Theatre', time: '10 min walk' },
+      { name: 'Vic Theatre', time: '13 min walk' },
       { name: 'Lake Michigan trail', time: '15 min walk' },
       { name: 'Downtown Chicago (Loop)', time: '15 to 20 min on Red Line' },
       { name: "O'Hare Airport", time: 'About 60 min via Blue Line transfer' },
