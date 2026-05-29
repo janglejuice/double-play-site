@@ -84,8 +84,8 @@ function NavBarHomepage({
           <span
             className="nav-logo-mark"
             style={{
-              width: 170,
-              height: 150,
+              width: 110,
+              height: 96,
               flex: 'none',
               display: 'grid',
               placeItems: 'center',
@@ -94,8 +94,8 @@ function NavBarHomepage({
             <Image
               src="/logo-mark.png"
               alt=""
-              width={170}
-              height={150}
+              width={110}
+              height={96}
               style={{
                 objectFit: 'contain',
                 filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.35))',
@@ -106,11 +106,11 @@ function NavBarHomepage({
             className="nav-logo-text"
             style={{
               fontFamily: "'DM Serif Display', Georgia, serif",
-              fontSize: 48,
+              fontSize: 32,
               lineHeight: 1,
               letterSpacing: '-0.01em',
               color: '#fff',
-              marginLeft: -32,
+              marginLeft: -10,
             }}
           >
             Double Play
@@ -118,7 +118,7 @@ function NavBarHomepage({
               className="nav-logo-sub"
               style={{
                 display: 'block',
-                fontSize: 28,
+                fontSize: 18,
                 fontStyle: 'italic',
                 fontWeight: 400,
                 marginTop: 4,

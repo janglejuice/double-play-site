@@ -55,7 +55,8 @@ button { font-family: inherit; cursor: pointer; border: 0; background: none; col
     min-height: auto !important;
   }
   .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .hero-headline { align-self: auto !important; font-size: clamp(2rem, 8vw, 3.5rem) !important; }
+  .hero-headline { align-self: auto !important; }
+  .hero-headline h1 { font-size: clamp(1.9rem, 7vw, 2.9rem) !important; }
   .hero-booking-panel { width: 100% !important; max-width: 480px !important; align-self: auto !important; }
 }
 @media (max-width: 580px) {

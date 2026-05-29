@@ -44,7 +44,7 @@ export default async function HomePage() {
       }) }} />
 
       {/* ============ HERO ============ */}
-      <section className="hero-section" style={{ position: 'relative', minHeight: 880, overflow: 'hidden', background: '#0c1d33' }}>
+      <section className="hero-section" style={{ position: 'relative', minHeight: 750, overflow: 'hidden', background: '#0c1d33' }}>
         {/* Background photo with blur */}
         <div style={{
           position: 'absolute', inset: 0,
@@ -64,16 +64,16 @@ export default async function HomePage() {
         }} />
 
         {/* Content */}
-        <div className="hero-content-wrap" style={{ ...WRAP, position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 220, minHeight: 880, display: 'flex', flexDirection: 'column' }}>
-          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 48, alignItems: 'start', flex: 1 }}>
+        <div className="hero-content-wrap" style={{ ...WRAP, position: 'relative', zIndex: 2, paddingTop: 120, paddingBottom: 170, minHeight: 750, display: 'flex', flexDirection: 'column' }}>
+          <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 48, alignItems: 'start', flex: 1 }}>
 
             {/* Headline */}
             <div className="hero-headline" style={{ alignSelf: 'end', color: '#fff', maxWidth: 720 }}>
               <h1 style={{
                 fontFamily: "'DM Serif Display', Georgia, serif",
                 fontWeight: 400,
-                fontSize: 64,
-                lineHeight: 1.05,
+                fontSize: 50,
+                lineHeight: 1.06,
                 margin: '0 0 8px',
                 letterSpacing: '-0.01em',
                 textShadow: '0 2px 30px rgba(0,0,0,0.35)',
@@ -81,11 +81,11 @@ export default async function HomePage() {
                 Across the street<br />from Wrigley Field
               </h1>
               <p style={{
-                fontSize: 17,
+                fontSize: 16,
                 lineHeight: 1.5,
                 color: 'rgba(255,255,255,0.92)',
-                margin: '18px 0 0',
-                maxWidth: 520,
+                margin: '14px 0 0',
+                maxWidth: 500,
                 textShadow: '0 1px 14px rgba(0,0,0,0.5)',
               }}>
                 Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago. Book direct and skip the booking fees.
@@ -95,14 +95,15 @@ export default async function HomePage() {
 
             {/* Booking Panel — custom form, submits to /search */}
             <aside aria-label="Booking panel" className="hero-booking-panel" style={{
-              width: 380,
+              width: 320,
               background: '#fff',
               borderRadius: 14,
               boxShadow: SHADOW_PANEL,
               overflow: 'hidden',
               alignSelf: 'start',
+              marginTop: 56,
             }}>
-              <div style={{ background: '#15375c', color: '#fff', textAlign: 'left', padding: '20px 24px', fontFamily: 'Manrope', fontWeight: 700, fontSize: 18, letterSpacing: '-0.005em' }}>
+              <div style={{ background: '#15375c', color: '#fff', textAlign: 'left', padding: '14px 20px', fontFamily: 'Manrope', fontWeight: 700, fontSize: 15, letterSpacing: '-0.005em' }}>
                 Check Dates and Book
               </div>
               <BookingForm />
@@ -141,15 +142,19 @@ export default async function HomePage() {
                   <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(11,31,54,0.5) 0%, rgba(11,31,54,0) 40%)' }} />
                   <span style={{
                     position: 'absolute', left: 14, bottom: 14,
-                    background: 'rgba(255,255,255,0.94)', color: '#15375c',
+                    display: 'inline-flex', alignItems: 'center', gap: 7,
+                    background: 'rgba(255,255,255,0.94)', color: '#E85A2C',
                     fontFamily: 'Manrope', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
                     textTransform: 'uppercase', padding: '6px 12px', borderRadius: 100,
                     backdropFilter: 'blur(6px)',
                   }}>
+                    <span aria-hidden style={{ width: 6, height: 6, borderRadius: '50%', background: '#E85A2C', flex: 'none' }} />
                     {meta?.floorShort ?? unit.floor}
                   </span>
                 </div>
                 <div style={{ padding: '22px 26px 26px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  {/* Orange dash kicker */}
+                  <span aria-hidden style={{ display: 'block', width: 32, height: 3, borderRadius: 2, background: '#E85A2C', margin: '0 0 14px' }} />
                   {/* Unit name — DM Serif Display */}
                   <h3 style={{ fontFamily: '"DM Serif Display", serif', fontWeight: 400, fontSize: 27, lineHeight: 1.08, color: '#15375c', margin: '0 0 8px' }}>{unit.name}</h3>
                   {/* Tagline */}
@@ -175,8 +180,9 @@ export default async function HomePage() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
                       {meta.chips.map(c => (
                         <span key={c} style={{
-                          fontFamily: 'Manrope', fontSize: 11.5, fontWeight: 600, color: '#15375c',
-                          background: 'rgba(21,55,92,0.06)', padding: '5px 11px', borderRadius: 100,
+                          fontFamily: 'Manrope', fontSize: 11.5, fontWeight: 700, color: '#E85A2C',
+                          background: 'rgba(232,90,44,0.09)', border: '1px solid rgba(232,90,44,0.20)',
+                          padding: '5px 11px', borderRadius: 100,
                         }}>{c}</span>
                       ))}
                     </div>
@@ -257,19 +263,19 @@ export default async function HomePage() {
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Guest Reviews</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Real testimonials from booked guests.</p>
           </div>
-          {/* TRUST BADGES — owner: remove whichever badge does not apply to your hosting status */}
+          {/* TRUST BADGES — verified host stats (Airbnb host profile: 236 reviews, 4.71 avg, 6 yrs, 100% response) */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginBottom: 48, marginTop: -24 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
               <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
-              Airbnb Superhost
+              4.71 across 236 reviews
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
               <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
-              VRBO Premier Host
+              6 years hosting
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
               <span style={{ color: '#23a06b', fontSize: 14 }}>●</span>
-              5.0 Average Rating
+              100% response, replies within the hour
             </div>
           </div>
           <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
