@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Double Play at Wrigley — Chicago Apartments Near Wrigley Field',
     description: 'Three private 2-bedroom Chicago vacation rentals steps from Wrigley Field. Book direct, no service fees.',
-    url: 'https://yourdomain.com',
+    url: 'https://doubleplaywrigley.com',
     siteName: 'Double Play at Wrigley',
     type: 'website',
   },

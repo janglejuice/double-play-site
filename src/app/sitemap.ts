@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { units } from '@/data/units'
 
-const SITE_URL = 'https://yourdomain.com'
+const SITE_URL = 'https://doubleplaywrigley.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const unitPages = units.map(u => ({

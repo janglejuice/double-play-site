@@ -1,6 +1,6 @@
 import { Unit } from '@/data/units'
 
-const SITE_URL = 'https://yourdomain.com'
+const SITE_URL = 'https://doubleplaywrigley.com'
 
 export function getLodgingBusinessSchema() {
   return {

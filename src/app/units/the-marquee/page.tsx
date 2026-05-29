@@ -44,9 +44,9 @@ export default function CatbirdSeatPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://yourdomain.com' },
-      { '@type': 'ListItem', position: 2, name: 'Apartments', item: 'https://yourdomain.com/units' },
-      { '@type': 'ListItem', position: 3, name: unit.name, item: `https://yourdomain.com/units/${unit.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://doubleplaywrigley.com' },
+      { '@type': 'ListItem', position: 2, name: 'Apartments', item: 'https://doubleplaywrigley.com/units' },
+      { '@type': 'ListItem', position: 3, name: unit.name, item: `https://doubleplaywrigley.com/units/${unit.slug}` },
     ],
   }
   const faqSchema = {

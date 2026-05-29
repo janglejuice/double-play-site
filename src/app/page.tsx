@@ -40,7 +40,7 @@ export default async function HomePage() {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Double Play at Wrigley',
-        url: 'https://yourdomain.com',
+        url: 'https://doubleplaywrigley.com',
       }) }} />
 
       {/* ============ HERO ============ */}

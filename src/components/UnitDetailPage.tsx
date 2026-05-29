@@ -30,9 +30,9 @@ export default function UnitDetailPage({ slug }: UnitDetailPageProps) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home',       item: 'https://yourdomain.com' },
-      { '@type': 'ListItem', position: 2, name: 'Apartments', item: 'https://yourdomain.com/units' },
-      { '@type': 'ListItem', position: 3, name: unit.name,    item: `https://yourdomain.com/units/${slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home',       item: 'https://doubleplaywrigley.com' },
+      { '@type': 'ListItem', position: 2, name: 'Apartments', item: 'https://doubleplaywrigley.com/units' },
+      { '@type': 'ListItem', position: 3, name: unit.name,    item: `https://doubleplaywrigley.com/units/${slug}` },
     ],
   }
 
@@ -51,8 +51,8 @@ export default function UnitDetailPage({ slug }: UnitDetailPageProps) {
     '@type': 'LodgingBusiness',
     name: unit.name,
     description: unit.description,
-    url: `https://yourdomain.com/units/${slug}`,
-    image: unit.photos.map(p => `https://yourdomain.com${p}`),
+    url: `https://doubleplaywrigley.com/units/${slug}`,
+    image: unit.photos.map(p => `https://doubleplaywrigley.com${p}`),
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Chicago',
