@@ -1,5 +1,8 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import type { Unit } from '@/data/units'
 
 interface CompareContentProps {
@@ -26,68 +29,68 @@ const FONT_DISPLAY = "'DM Serif Display', Georgia, serif"
 const FONT_BODY    = "'Manrope', system-ui, sans-serif"
 
 // ── Per-unit meta ──────────────────────────────────────────────────────────
-type Slug = 'sluggers-suite' | 'bleacher-balcony-flat' | 'catbird-seat'
+type Slug = 'the-ivy' | 'the-addison' | 'the-marquee'
 
 const FLOOR_LABEL: Record<string, string> = {
-  'sluggers-suite':        'Garden Level',
-  'bleacher-balcony-flat': 'First Floor',
-  'catbird-seat':          'Top Floor',
+  'the-ivy':        'Garden Level',
+  'the-addison': 'First Floor',
+  'the-marquee':          'Top Floor',
 }
 
 const FLOOR_SUB: Record<string, string> = {
-  'sluggers-suite':        'Half-basement, no stairs from sidewalk',
-  'bleacher-balcony-flat': 'About 12 steps up from sidewalk',
-  'catbird-seat':          'Corner-lot bay windows, most light',
+  'the-ivy':        'Half-basement, 12 steps up to porch, 15 steps down',
+  'the-addison': 'About 12 steps up from sidewalk',
+  'the-marquee':          'Corner-lot bay windows, most light',
 }
 
 type BadgeKind = 'closest' | 'classic' | 'flagship'
 const BADGE: Record<string, { label: string; kind: BadgeKind }> = {
-  'sluggers-suite':        { label: 'Closest to street', kind: 'closest'  },
-  'bleacher-balcony-flat': { label: 'Classic floor',     kind: 'classic'  },
-  'catbird-seat':          { label: 'Flagship',          kind: 'flagship' },
+  'the-ivy':        { label: 'Closest to street', kind: 'closest'  },
+  'the-addison': { label: 'Classic floor',     kind: 'classic'  },
+  'the-marquee':          { label: 'Flagship',          kind: 'flagship' },
 }
 
 const SHORT_DESC: Record<string, string> = {
-  'sluggers-suite':        "Garden-level apartment with the most direct access to the front door. Steps from the sidewalk, you are inside. Fastest in, fastest out on game day.",
-  'bleacher-balcony-flat': "First-floor unit, raised a flight off the street. Two bedrooms, classic Wrigleyville feel, and the lowest-traffic floor of the three for sleeping in.",
-  'catbird-seat':          "Top-floor flagship with 10-ft ceilings, corner-lot bay windows wrapping the dining room, and the brightest light in the building. Sleeps 5 in roughly 900 sqft.",
+  'the-ivy':        "Half-basement apartment — below street, private, and cozy. Soundproofed bedrooms handle Wrigleyville noise well. 850 sqft, same size as the first floor.",
+  'the-addison': "First-floor unit, raised a flight off the street. Two bedrooms, classic Wrigleyville feel, and the lowest-traffic floor of the three for sleeping in.",
+  'the-marquee':          "Top-floor flagship with 10-ft ceilings, corner-lot bay windows wrapping the dining room, and the brightest light in the building. Sleeps 5 in roughly 900 sqft.",
 }
 
 const BEST_FOR_LABEL: Record<string, string> = {
-  'sluggers-suite':        'Best For',
-  'bleacher-balcony-flat': 'Best For',
-  'catbird-seat':          'Best For',
+  'the-ivy':        'Best For',
+  'the-addison': 'Best For',
+  'the-marquee':          'Best For',
 }
 
 const BEST_FOR_TEXT: Record<string, string> = {
-  'sluggers-suite':        'Quick in-and-out trips, anyone who hates stairs, and pre-game tailgates that spill onto the sidewalk.',
-  'bleacher-balcony-flat': 'Guests who want the classic first-floor feel and the quietest sleep on the building.',
-  'catbird-seat':          'Couples plus a friend, parties up to 5, and anyone who wants the room with the view and the light.',
+  'the-ivy':        'Guests who want a cozy, below-street feel and soundproofed bedrooms. Same 850 sqft as the first floor, lower price point.',
+  'the-addison': 'Guests who want the classic first-floor feel and the quietest sleep on the building.',
+  'the-marquee':          'Couples plus a friend, parties up to 5, and anyone who wants the room with the view and the light.',
 }
 
 // view dots (visual scale, not literal claims about Wrigley views)
 const VIEW_DOTS: Record<string, number> = {
-  'sluggers-suite':        1,
-  'bleacher-balcony-flat': 2,
-  'catbird-seat':          3,
+  'the-ivy':        1,
+  'the-addison': 2,
+  'the-marquee':          3,
 }
 const VIEW_NOTE: Record<string, string> = {
-  'sluggers-suite':        'Sidewalk-level vantage',
-  'bleacher-balcony-flat': 'Raised street outlook',
-  'catbird-seat':          'Wraparound bay windows',
+  'the-ivy':        'Sidewalk-level vantage',
+  'the-addison': 'Raised street outlook',
+  'the-marquee':          'Wraparound bay windows',
 }
 
 // noise (visual indicator only; 3 bars = loud, 1 bar = quietest)
 const NOISE_BARS: Record<string, { bars: number; label: string }> = {
-  'sluggers-suite':        { bars: 3, label: 'Street level'      },
-  'bleacher-balcony-flat': { bars: 1, label: 'Quietest floor'    },
-  'catbird-seat':          { bars: 2, label: 'Moderate, soundproofed bedrooms' },
+  'the-ivy':        { bars: 3, label: 'Street level'      },
+  'the-addison': { bars: 1, label: 'Quietest floor'    },
+  'the-marquee':          { bars: 2, label: 'Moderate, soundproofed bedrooms' },
 }
 
 const STAIRS: Record<string, string> = {
-  'sluggers-suite':        'None to door',
-  'bleacher-balcony-flat': 'About 12 steps',
-  'catbird-seat':          'Two flights',
+  'the-ivy':        '12 up to porch, 15 down to unit',
+  'the-addison': 'About 12 steps',
+  'the-marquee':          'Two flights',
 }
 
 // Use-case Q&A
@@ -249,17 +252,27 @@ const SHARED_AMENITIES: { name: string; svg: React.ReactNode }[] = [
   { name: 'High-Speed WiFi',    svg: (<><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill={ACCENT} stroke="none"/></>) },
   { name: 'Full Kitchen',       svg: (<><path d="M4 3h16v6H4z"/><path d="M4 9v12h16V9"/><path d="M9 14h6"/></>) },
   { name: 'Keypad Entry',       svg: (<><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></>) },
-  { name: 'Washer & Dryer',     svg: (<><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="13" r="5"/><circle cx="7" cy="6.5" r="0.6" fill={ACCENT} stroke="none"/></>) },
+  { name: 'Pets Welcome',       svg: (<><path d="M10 5.172C10 3.782 8.423 2.679 6.5 3c-2.823.47-4.113 6.006-4 7 .08.703 1.725 1.11 3.822.994C6.986 11.62 7 11.328 7 11c0-1.701 1.678-3.166 3-3zm4 0C14 3.782 15.577 2.679 17.5 3c2.823.47 4.113 6.006 4 7-.08.703-1.725 1.11-3.822.994C17.014 11.62 17 11.328 17 11c0-1.701-1.678-3.166-3-3zM5 15.5C5 13.567 8.134 12 12 12s7 1.567 7 3.5c0 1.933-3.134 3.5-7 3.5S5 17.433 5 15.5z"/></>) },
   { name: 'A/C and Heating',    svg: (<><path d="M12 2v5M12 17v5M4.22 4.22l3.54 3.54M16.24 16.24l3.54 3.54M2 12h5M17 12h5M4.22 19.78l3.54-3.54M16.24 7.76l3.54-3.54"/></>) },
   { name: 'Host Support 24/7',  svg: (<><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.42 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72 13 13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 5.37 5.37l.87-.87a2 2 0 0 1 2.11-.45 13 13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></>) },
   { name: 'No Booking Fees',    svg: (<><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></>) },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────
+const FILTERS: { id: string; label: string; dot: string }[] = [
+  { id: 'all',          label: 'Show All',     dot: '#fff'    },
+  { id: 'the-marquee',  label: 'Most Light',   dot: ACCENT    },
+  { id: 'the-addison',  label: 'Best Value',   dot: CONFIRM   },
+  { id: 'the-ivy',      label: 'Lowest Price', dot: MUTED     },
+]
+
 export default function CompareContent({ units }: CompareContentProps) {
+  const [activeFilter, setActiveFilter] = useState<string>('all')
+
   // Map units by slug for the table; preserve input order for cards
-  const orderedSlugs: Slug[] = ['sluggers-suite', 'bleacher-balcony-flat', 'catbird-seat']
+  const orderedSlugs: Slug[] = ['the-ivy', 'the-addison', 'the-marquee']
   const bySlug = Object.fromEntries(units.map(u => [u.slug, u])) as Record<string, Unit>
+  const visibleSlugs = activeFilter === 'all' ? orderedSlugs : [activeFilter as Slug]
 
   return (
     <div style={{ fontFamily: FONT_BODY, color: INK, background: '#fff' }}>
@@ -272,62 +285,172 @@ export default function CompareContent({ units }: CompareContentProps) {
         overflow: 'hidden',
         background: NAVY_INK,
         color: '#fff',
-        padding: '72px 0 88px',
+        minHeight: 440,
       }}>
-        {/* grid texture overlay */}
+        {/* Wrigley background photo */}
+        <Image
+          src="/wrigley-hero.png"
+          alt="Wrigley Field"
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center 70%', opacity: 0.82 }}
+        />
+        {/* Deep navy left (94%) where text lives, bleeds to near-transparent right so stadium breathes */}
         <div aria-hidden style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px)',
-          backgroundSize: '52px 52px',
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to right, rgba(11,31,54,0.94) 0%, rgba(11,31,54,0.92) 32%, rgba(11,31,54,0.40) 58%, rgba(11,31,54,0.08) 100%)',
         }} />
-        <div style={{ ...WRAP, position: 'relative', zIndex: 2 }}>
-          <Eyebrow>Three Apartments · One Building · Zero Booking Fees</Eyebrow>
-          <h1 style={{
-            fontFamily: FONT_DISPLAY,
-            fontWeight: 400,
-            fontSize: 'clamp(38px, 5.4vw, 60px)',
-            lineHeight: 1.04,
-            letterSpacing: '-0.02em',
-            margin: '0 0 18px',
-            color: '#fff',
-            maxWidth: 760,
-          }}>
-            Find your <em style={{ fontStyle: 'italic' }}>perfect unit.</em>
-          </h1>
-          <p style={{
-            fontSize: 17,
-            lineHeight: 1.65,
-            color: 'rgba(255,255,255,0.62)',
-            maxWidth: 540,
-            margin: 0,
-          }}>
-            Same great location, directly across from Wrigley Field. Very different floors. Here is how to pick.
-          </p>
 
-          {/* Jump pills */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 32, flexWrap: 'wrap' }}>
-            {[
-              { href: '#cards',     label: 'See all three',     dot: '#fff' },
-              { href: '#table',     label: 'Side by side table', dot: ACCENT },
-              { href: '#book',      label: 'Book direct',        dot: CONFIRM },
-            ].map(j => (
-              <a key={j.href} href={j.href} style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '10px 18px', borderRadius: 100,
-                fontSize: 12.5, fontWeight: 700, letterSpacing: '0.03em',
-                border: '1.5px solid rgba(255,255,255,0.2)',
-                color: 'rgba(255,255,255,0.78)',
-                background: 'rgba(255,255,255,0.04)',
-                textDecoration: 'none',
-              }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: j.dot }} />
-                {j.label}
-              </a>
-            ))}
+        <div style={{ ...WRAP, position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 48, padding: '72px 32px 88px' }}>
+
+          {/* ── Left: copy ── */}
+          <div style={{ flex: '1 1 0', minWidth: 0 }}>
+            <Eyebrow>Three Apartments · One Building · Zero Booking Fees</Eyebrow>
+            <h1 style={{
+              fontFamily: FONT_DISPLAY,
+              fontWeight: 400,
+              fontSize: 'clamp(36px, 5vw, 58px)',
+              lineHeight: 1.04,
+              letterSpacing: '-0.02em',
+              margin: '0 0 18px',
+              color: '#fff',
+            }}>
+              Find your <em style={{ fontStyle: 'italic' }}>perfect unit.</em>
+            </h1>
+            <p style={{
+              fontSize: 17,
+              lineHeight: 1.65,
+              color: 'rgba(255,255,255,0.62)',
+              maxWidth: 480,
+              margin: 0,
+            }}>
+              Same address, directly across from Wrigley Field. Three very different experiences. Here is how to pick the right one.
+            </p>
+
+            {/* Jump pills */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 32, flexWrap: 'wrap' }}>
+              {[
+                { href: '#cards',  label: 'See all three',      dot: '#fff'   },
+                { href: '#table',  label: 'Side-by-side table',  dot: ACCENT   },
+                { href: '#book',   label: 'Book direct',         dot: CONFIRM  },
+              ].map(j => (
+                <a key={j.href} href={j.href} style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '10px 18px', borderRadius: 100,
+                  fontSize: 12.5, fontWeight: 700, letterSpacing: '0.03em',
+                  border: '1.5px solid rgba(255,255,255,0.2)',
+                  color: 'rgba(255,255,255,0.78)',
+                  background: 'rgba(255,255,255,0.05)',
+                  textDecoration: 'none',
+                }}>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: j.dot, flex: 'none' }} />
+                  {j.label}
+                </a>
+              ))}
+            </div>
           </div>
+
+          {/* ── Right: floating unit mini-cards ── */}
+          <div style={{ flex: '0 0 330px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {orderedSlugs.map(slug => {
+              const u = bySlug[slug]
+              if (!u) return null
+              const badge = BADGE[slug]
+              const isFlagship = slug === 'the-marquee'
+              return (
+                <Link
+                  key={slug}
+                  href={`/units/${slug}`}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 14,
+                    padding: '12px 16px 12px 12px',
+                    borderRadius: 12,
+                    background: isFlagship ? 'rgba(232,90,44,0.14)' : 'rgba(255,255,255,0.07)',
+                    border: isFlagship ? '1px solid rgba(232,90,44,0.4)' : '1px solid rgba(255,255,255,0.1)',
+                    textDecoration: 'none',
+                    backdropFilter: 'blur(6px)',
+                  }}
+                >
+                  {/* Thumbnail */}
+                  <div style={{ position: 'relative', width: 68, height: 68, flex: 'none', borderRadius: 8, overflow: 'hidden', background: '#2a3a4e' }}>
+                    <Image src={u.photos[0]} alt={u.name} fill sizes="68px" style={{ objectFit: 'cover' }} />
+                  </div>
+                  {/* Info */}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{
+                      fontSize: 9, fontWeight: 800, letterSpacing: '0.14em',
+                      textTransform: 'uppercase' as const,
+                      color: isFlagship ? ACCENT : 'rgba(255,255,255,0.45)',
+                      marginBottom: 5,
+                    }}>
+                      {badge.label}
+                    </div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: '#fff', lineHeight: 1.2, marginBottom: 3 }}>
+                      {u.name}
+                    </div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.3 }}>
+                      {FLOOR_LABEL[slug]} · {FLOOR_SUB[slug].split(',')[0]}
+                    </div>
+                  </div>
+                  {/* Arrow */}
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none' }}>
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </Link>
+              )
+            })}
+          </div>
+
         </div>
       </section>
+
+      {/* ════════════════════════════════ FILTER BAR ════════════════════════════════ */}
+      <div style={{
+        position: 'sticky',
+        top: 68,
+        zIndex: 40,
+        background: '#fff',
+        borderBottom: `1px solid ${LINE}`,
+        boxShadow: '0 1px 0 rgba(15,42,72,0.04)',
+      }}>
+        <div style={{ ...WRAP, display: 'flex', alignItems: 'center', gap: 0 }}>
+          <span style={{
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.1em',
+            textTransform: 'uppercase' as const, color: MUTED,
+            paddingRight: 24, whiteSpace: 'nowrap' as const,
+          }}>
+            I want the
+          </span>
+          {FILTERS.map(f => {
+            const isActive = activeFilter === f.id
+            return (
+              <button
+                key={f.id}
+                onClick={() => setActiveFilter(f.id)}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '18px 20px',
+                  fontSize: 13, fontWeight: isActive ? 700 : 500,
+                  color: isActive ? NAVY : MUTED,
+                  background: 'none', border: 'none', cursor: 'pointer',
+                  borderBottom: isActive ? `2.5px solid ${ACCENT}` : '2.5px solid transparent',
+                  marginBottom: -1,
+                  whiteSpace: 'nowrap' as const,
+                  transition: 'color 0.15s',
+                }}
+              >
+                <span style={{
+                  width: 8, height: 8, borderRadius: '50%',
+                  background: isActive ? ACCENT : f.dot,
+                  flex: 'none',
+                  transition: 'background 0.15s',
+                }} />
+                {f.label}
+              </button>
+            )
+          })}
+        </div>
+      </div>
 
       {/* ════════════════════════════════ UNIT CARDS ════════════════════════════════ */}
       <section id="cards" style={{ padding: '72px 0 88px', background: '#fff' }}>
@@ -336,15 +459,17 @@ export default function CompareContent({ units }: CompareContentProps) {
             className="dp-compare-cards"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
+              gridTemplateColumns: visibleSlugs.length === 1 ? '1fr' : 'repeat(3, 1fr)',
               gap: 24,
+              maxWidth: visibleSlugs.length === 1 ? 520 : undefined,
+              margin: visibleSlugs.length === 1 ? '0 auto' : undefined,
             }}
           >
-            {orderedSlugs.map(slug => {
+            {visibleSlugs.map(slug => {
               const u = bySlug[slug]
               if (!u) return null
               const badge = BADGE[slug]
-              const isFlagship = slug === 'catbird-seat'
+              const isFlagship = slug === 'the-marquee' || (activeFilter !== 'all' && activeFilter === slug)
               return (
                 <article
                   key={slug}
@@ -558,7 +683,7 @@ export default function CompareContent({ units }: CompareContentProps) {
                     {orderedSlugs.map((slug, i) => {
                       const u = bySlug[slug]
                       if (!u) return null
-                      const isRec = slug === 'catbird-seat'
+                      const isRec = slug === 'the-marquee'
                       const badge = BADGE[slug]
                       const isLast = i === orderedSlugs.length - 1
                       return (
@@ -623,11 +748,11 @@ export default function CompareContent({ units }: CompareContentProps) {
                   {/* ── THE FLOOR ── */}
                   <GroupRow>The Floor</GroupRow>
                   <BodyRow label="Floor" cells={orderedSlugs.map(s => (
-                    s === 'catbird-seat'
+                    s === 'the-marquee'
                       ? { node: <span style={{ fontWeight: 700, color: NAVY }}>Top Floor</span>, note: 'most light' }
-                      : s === 'bleacher-balcony-flat'
+                      : s === 'the-addison'
                         ? { node: <span>First Floor</span>, note: 'classic raised entry' }
-                        : { node: <span style={{ fontWeight: 700, color: ACCENT }}>Garden Level</span>, note: 'no stairs from sidewalk' }
+                        : { node: <span style={{ fontWeight: 700, color: ACCENT }}>Garden Level</span>, note: '12 up to porch, 15 down' }
                   ))} />
                   <BodyRow label="Stairs to unit" cells={orderedSlugs.map(s => ({ node: STAIRS[s] }))} />
                   <BodyRow label="Approx. size" cells={orderedSlugs.map(s => {
@@ -642,7 +767,7 @@ export default function CompareContent({ units }: CompareContentProps) {
                   <BodyRow label="Natural light" cells={orderedSlugs.map(s => ({ node: <ViewDots on={VIEW_DOTS[s]} /> }))} />
                   <BodyRow label="Vantage" cells={orderedSlugs.map(s => ({
                     node: (
-                      <span style={{ fontWeight: s === 'catbird-seat' ? 700 : 400, color: s === 'catbird-seat' ? NAVY : INK }}>
+                      <span style={{ fontWeight: s === 'the-marquee' ? 700 : 400, color: s === 'the-marquee' ? NAVY : INK }}>
                         {VIEW_NOTE[s]}
                       </span>
                     ),
@@ -656,7 +781,7 @@ export default function CompareContent({ units }: CompareContentProps) {
                   <BodyRow label="Bedrooms"   cells={orderedSlugs.map(s => ({ node: String(bySlug[s].beds) }))} />
                   <BodyRow label="Bathrooms"  cells={orderedSlugs.map(s => ({ node: String(bySlug[s].baths) }))} />
                   <BodyRow label="Max guests" cells={orderedSlugs.map(s => ({
-                    node: s === 'catbird-seat'
+                    node: s === 'the-marquee'
                       ? <span style={{ fontWeight: 700, color: ACCENT }}>{bySlug[s].sleeps}</span>
                       : String(bySlug[s].sleeps),
                   }))} />
@@ -680,7 +805,7 @@ export default function CompareContent({ units }: CompareContentProps) {
                     }} />
                     {orderedSlugs.map((s, i) => {
                       const u = bySlug[s]
-                      const isRec = s === 'catbird-seat'
+                      const isRec = s === 'the-marquee'
                       const isLast = i === orderedSlugs.length - 1
                       return (
                         <td key={s} style={{
@@ -922,7 +1047,7 @@ export default function CompareContent({ units }: CompareContentProps) {
             {orderedSlugs.map(slug => {
               const u = bySlug[slug]
               if (!u) return null
-              const isRec = slug === 'catbird-seat'
+              const isRec = slug === 'the-marquee'
               return (
                 <div key={slug} style={{
                   background: isRec ? 'rgba(232,90,44,0.10)' : 'rgba(255,255,255,0.05)',

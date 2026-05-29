@@ -255,13 +255,6 @@ export default function NeighborhoodPage() {
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Subtle grid backdrop */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: 'linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)',
-          backgroundSize: '56px 56px',
-        }} />
         <div style={{ ...WRAP, position: 'relative', zIndex: 2 }}>
           <div style={{
             display: 'grid',
@@ -414,7 +407,7 @@ export default function NeighborhoodPage() {
                 title: 'Skip the rental car.',
                 body: (
                   <>
-                    The Addison Red Line is a 3-minute walk and runs 24/7. <strong style={{ color: INK }}>A CTA Ventra pass for 3 days is about $15.</strong> A single day of parking in Wrigleyville on a game day can run $60. You will spend more time parking than we spend walking to the park.
+                    The Addison Red Line is directly across the street and runs 24/7. <strong style={{ color: INK }}>A CTA Ventra pass for 3 days is about $15.</strong> A single day of parking in Wrigleyville on a game day can run $60. You will spend more time parking than we spend walking to the park.
                   </>
                 ),
               },
@@ -704,9 +697,9 @@ export default function NeighborhoodPage() {
           }} className="transit-grid">
             {[
               {
-                big: '3 min walk',
+                big: 'Across the street',
                 title: 'Addison Red Line',
-                body: 'The CTA Red Line stops at Addison, three minutes from our front door. It runs 24/7 and connects directly to the Loop, Magnificent Mile, and both O\'Hare and Midway airports. A 3-day Ventra pass costs $15 and covers everything.',
+                body: 'The CTA Red Line stops at Addison, directly across the street from our front door. It runs 24/7 and connects directly to the Loop, Magnificent Mile, and both O\'Hare and Midway airports. A 3-day Ventra pass costs $15 and covers everything.',
                 icon: (<><rect x={5} y={2} width={14} height={20} rx={2} /><line x1={12} y1={18} x2={12.01} y2={18} /><path d="M5 12h14M9 2v4M15 2v4" /></>),
               },
               {

@@ -5,7 +5,7 @@ import { getUnit } from '@/data/units'
 import { getUnitDetail } from '@/data/unit-details'
 import { getVacationRentalSchema } from '@/lib/schema'
 
-// ── Design tokens ──────────────────────────────────────────────
+// ── Design tokens (Sluggers Suite) ─────────────────────────────
 const T = {
   navy: '#15375c',
   navyDeep: '#0f2a48',
@@ -27,7 +27,7 @@ const T = {
 }
 
 export async function generateMetadata() {
-  const unit = getUnit('catbird-seat')
+  const unit = getUnit('the-ivy')
   if (!unit) return {}
   return {
     title: `${unit.name}, Double Play Wrigleyville`,
@@ -35,9 +35,9 @@ export async function generateMetadata() {
   }
 }
 
-export default function CatbirdSeatPage() {
-  const unit = getUnit('catbird-seat')!
-  const detail = getUnitDetail('catbird-seat')!
+export default function SluggersSuitePage() {
+  const unit = getUnit('the-ivy')!
+  const detail = getUnitDetail('the-ivy')!
 
   // ── SEO Schemas ──
   const breadcrumbSchema = {
@@ -59,26 +59,11 @@ export default function CatbirdSeatPage() {
     })),
   }
 
-  // Stat tiles for the dark "Why people book this" feature panel.
-  // Catbird's appeal is the SPACE + LIGHT, so highlight ceiling/sqft/Walk Score.
-  const featureStats = [
-    { val: '10 ft', lbl: 'Ceiling height' },
-    { val: '900 sqft', lbl: 'Living area' },
-    { val: '98', lbl: 'Walk Score' },
-  ]
-
-  // Group proximity into two semantic tiers per critique P2 fix.
-  const proximityGroups = [
-    {
-      title: 'At your doorstep',
-      meta: 'Under 5 min walk',
-      items: detail.localProximity.filter((_, i) => i < 9),
-    },
-    {
-      title: 'Beyond the block',
-      meta: 'Transit-scaled',
-      items: detail.localProximity.filter((_, i) => i >= 9),
-    },
+  // Stat tiles for the dark "Why people book this" feature
+  const viewStats = [
+    { val: 'Across the street', lbl: 'Distance to field' },
+    { val: 'Across the street', lbl: 'Addison Red Line' },
+    { val: '2 min', lbl: "Walk to Murphy's" },
   ]
 
   return (
@@ -112,7 +97,7 @@ export default function CatbirdSeatPage() {
               All Apartments
             </Link>
             <span style={{ color: T.line }}>{'›'}</span>
-            <span style={{ color: T.navy, fontWeight: 700 }}>{'The Catbird Seat'}</span>
+            <span style={{ color: T.navy, fontWeight: 700 }}>{'The Ivy'}</span>
           </div>
           <Link
             href="/compare"
@@ -129,7 +114,7 @@ export default function CatbirdSeatPage() {
         </div>
       </div>
 
-      {/* ─────────────── Gallery ─────────────── */}
+      {/* ─────────────── Gallery (image + photo placeholders) ─────────────── */}
       <section
         style={{
           maxWidth: 1240,
@@ -158,7 +143,7 @@ export default function CatbirdSeatPage() {
           >
             <Image
               src={unit.photos[0]}
-              alt={`${unit.name} corner-lot living room with bay windows facing Wrigleyville`}
+              alt={`${unit.name} living room with direct Wrigley Field view`}
               fill
               priority
               sizes="(max-width: 1000px) 100vw, 60vw"
@@ -174,20 +159,22 @@ export default function CatbirdSeatPage() {
             }}
           >
             {[
-              'Corner bay windows',
-              'Bedroom 1, queen bed',
-              'Kitchen with dishwasher',
-              'Dining at the corner',
-            ].map((label, i) => (
+              { src: '/The%20Ivy/download.png',        label: 'Bedroom 1, queen bed'  },
+              { src: '/The%20Ivy/download%20(6).png',  label: 'Kitchen & dining'      },
+              { src: '/The%20Ivy/download%20(1).png',  label: 'Bedroom 2, queen bed'  },
+              { src: '/The%20Ivy/download%20(7).png',  label: 'Bathroom'              },
+            ].map((tile, i) => (
               <div
                 key={i}
-                style={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  background:
-                    'repeating-linear-gradient(135deg, #cdd2db 0 14px, #c0c6d0 14px 28px)',
-                }}
+                style={{ position: 'relative', overflow: 'hidden', background: '#d4d8e0' }}
               >
+                <Image
+                  src={tile.src}
+                  alt={`The Ivy ${tile.label}`}
+                  fill
+                  sizes="(max-width: 1000px) 50vw, 25vw"
+                  style={{ objectFit: 'cover' }}
+                />
                 <span
                   style={{
                     position: 'absolute',
@@ -203,7 +190,7 @@ export default function CatbirdSeatPage() {
                     fontFamily: 'ui-monospace, monospace',
                   }}
                 >
-                  {label}
+                  {tile.label}
                 </span>
               </div>
             ))}
@@ -245,31 +232,31 @@ export default function CatbirdSeatPage() {
                   width: 22,
                   height: 2,
                   background: T.accent,
+                  borderRadius: 1,
                   display: 'inline-block',
-                  flex: 'none',
                 }}
               />
-              <span>Top Floor, Sheffield Avenue</span>
+              Garden Level, Wilton Avenue
             </div>
             <h1
               style={{
                 fontFamily: T.display,
-                fontSize: 44,
-                lineHeight: 1.05,
+                fontSize: 42,
                 color: T.navy,
-                margin: '0 0 18px',
-                letterSpacing: '-0.015em',
+                margin: '0 0 14px',
+                lineHeight: 1.08,
+                letterSpacing: '-0.02em',
                 fontWeight: 400,
               }}
             >
-              The Catbird Seat
+              {'The Ivy'}
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               {[
                 `${unit.beds} Bedrooms`,
-                `${unit.baths} Bath`,
                 `Sleeps ${unit.sleeps}`,
-                `${unit.sqft} sqft`,
+                `${unit.baths} Bath`,
+                unit.floor,
               ].map((m, i, arr) => (
                 <div
                   key={i}
@@ -283,55 +270,6 @@ export default function CatbirdSeatPage() {
                 >
                   {m}
                 </div>
-              ))}
-            </div>
-
-            {/* Quick highlights chip strip — surfaces the listing's bullet value props */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 8,
-                marginTop: 22,
-              }}
-            >
-              {[
-                '1 block from Wrigley',
-                'Next to Red Line',
-                '300 Mbps WiFi',
-                'Walk Score 98',
-                'Pets welcome',
-                'Free parking pass',
-                'Keyless check-in',
-              ].map(h => (
-                <span
-                  key={h}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 7,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: T.navy,
-                    background: T.bgSoft,
-                    border: `1px solid ${T.line}`,
-                    padding: '7px 12px',
-                    borderRadius: 100,
-                    letterSpacing: '0.005em',
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      width: 5,
-                      height: 5,
-                      borderRadius: '50%',
-                      background: T.accent,
-                      flex: 'none',
-                    }}
-                  />
-                  {h}
-                </span>
               ))}
             </div>
           </div>
@@ -382,34 +320,28 @@ export default function CatbirdSeatPage() {
 
           <div style={{ fontSize: 15.5, lineHeight: 1.78, color: T.ink }}>
             <p style={{ margin: '0 0 16px' }}>
-              The Catbird Seat is the top-floor apartment in our 3-unit building in Wrigleyville,
-              a 1-minute walk from Wrigley Field. The living room has huge bay-style windows with
-              the dining area wrapping the corner, so you get the full Wrigleyville game-day scene
-              from inside the apartment.
+              {unit.description}
             </p>
             <p style={{ margin: '0 0 16px' }}>
               The apartment has{' '}
               <strong style={{ color: T.navy }}>
-                10-foot ceilings, two bedrooms with soundproofed double-pane windows, and roughly
-                900 square feet
+                two bedrooms, a full kitchen, and a living room
               </strong>{' '}
-              that sleeps five comfortably. The bedrooms keep the peace; the living room keeps the
-              energy. The Addison Red Line station and a CTA bus stop are right next to the
-              building.
+              that doubles as the best seat on the block. We have done our best to make it feel
+              like a real home: proper kitchen knives, fast WiFi, and a smart TV loaded with
+              streaming apps. Nothing was an afterthought.
             </p>
             <p style={{ margin: 0 }}>
               Check-in is{' '}
-              <em style={{ fontStyle: 'italic' }}>
-                smart-lock, keyless, no key handoff required.
-              </em>{' '}
-              You get your own personal code in the booking confirmation. We are local and answer
-              messages within the hour, every day.
+              <em style={{ fontStyle: 'italic' }}>keypad only, no lockbox, no waiting around.</em>{' '}
+              We send your personal code 2-3 days before arrival, and we are available by text the
+              whole time you are here.
             </p>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* The feature panel: dark navy, grid texture, italic quote, stats */}
+          {/* The "view" feature panel */}
           <div
             style={{
               background: T.navyInk,
@@ -456,7 +388,7 @@ export default function CatbirdSeatPage() {
                   fontWeight: 400,
                 }}
               >
-                {'“'}The whole neighborhood, from your living room.{'”'}
+                {'“'}Closest to the bleacher entrance.{'”'}
               </div>
               <p
                 style={{
@@ -466,13 +398,13 @@ export default function CatbirdSeatPage() {
                   margin: 0,
                 }}
               >
-                Corner-lot location with{' '}
+                Step out the door and you are at{' '}
                 <strong style={{ color: '#fff' }}>
-                  bay windows wrapping the dining area
-                </strong>
-                . On game days you watch the crowd stream toward the stadium from the couch. On
-                quiet nights the light is the thing. Top floor, no neighbors above. Brightest unit
-                in the building.
+                  the bleacher entrance in under a minute.
+                </strong>{' '}
+                On game days you hear the marquee come alive from the living room. On quiet nights
+                the neighborhood hum drifts in just enough to remind you where you are. This is the
+                ground-floor energy of Wrigleyville without the climb.
               </p>
               <div
                 style={{
@@ -484,7 +416,7 @@ export default function CatbirdSeatPage() {
                   paddingTop: 18,
                 }}
               >
-                {featureStats.map((s, i) => (
+                {viewStats.map((s, i) => (
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <span style={{ fontSize: 18, fontWeight: 800, color: '#fff' }}>{s.val}</span>
                     <span
@@ -504,70 +436,51 @@ export default function CatbirdSeatPage() {
             </div>
           </div>
 
-          {/* What you'll love — NUMBERED editorial column (NOT a card grid) */}
+          {/* What you will love */}
           <h2
             style={{
               fontFamily: T.display,
               fontSize: 26,
               color: T.navy,
-              margin: '0 0 12px',
+              margin: '0 0 22px',
               fontWeight: 400,
             }}
           >
             What you will love
           </h2>
-          <div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             {detail.whatYouLove.map((item, idx) => (
               <div
                 key={idx}
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '64px 1fr',
-                  gap: 20,
-                  paddingTop: idx === 0 ? 18 : 24,
-                  paddingBottom: 24,
-                  borderTop: idx === 0 ? 'none' : `1px solid ${T.line}`,
-                  alignItems: 'start',
+                  background: '#fff',
+                  border: `1px solid ${T.line}`,
+                  borderRadius: 10,
+                  padding: '20px 22px',
+                  boxShadow: T.cardShadow,
                 }}
               >
-                <div
-                  aria-hidden
+                <h3
                   style={{
-                    fontFamily: T.display,
-                    fontSize: 56,
-                    fontWeight: 400,
-                    lineHeight: 1,
-                    color: 'rgba(21,55,92,0.18)',
-                    letterSpacing: '-0.04em',
-                    marginTop: -6,
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: T.navy,
+                    margin: '0 0 8px',
+                    letterSpacing: '-0.005em',
                   }}
                 >
-                  {String(idx + 1).padStart(2, '0')}
-                </div>
-                <div>
-                  <h3
-                    style={{
-                      fontSize: 17,
-                      fontWeight: 800,
-                      color: T.navy,
-                      margin: '0 0 8px',
-                      letterSpacing: '-0.01em',
-                      lineHeight: 1.25,
-                    }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: 14.5, color: T.ink, lineHeight: 1.7, margin: 0 }}>
-                    {item.body}
-                  </p>
-                </div>
+                  {item.title}
+                </h3>
+                <p style={{ fontSize: 13.5, color: T.ink, lineHeight: 1.65, margin: 0 }}>
+                  {item.body}
+                </p>
               </div>
             ))}
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Amenities — 5 groups, 2-col rows */}
+          {/* Amenities */}
           <h2
             style={{
               fontFamily: T.display,
@@ -658,7 +571,6 @@ export default function CatbirdSeatPage() {
             {[
               {
                 title: 'Ground rules',
-                kind: 'rules' as const,
                 items: [
                   'No smoking anywhere on the property',
                   'No parties or events, building has other residents',
@@ -668,11 +580,10 @@ export default function CatbirdSeatPage() {
               },
               {
                 title: 'Pets and access',
-                kind: 'pet' as const,
                 items: [
                   'Pets welcome (message us first to confirm fit)',
-                  'Assistance animals always allowed',
-                  'Personal smart-lock code sent in your booking confirmation',
+                  'Pets welcome (pet fee applies)',
+                  'Personal smart-lock code sent 2-3 days before arrival',
                   'Code expires automatically at checkout',
                   'Do not share your code with non-guests',
                 ],
@@ -701,7 +612,7 @@ export default function CatbirdSeatPage() {
                     fontSize: 16,
                   }}
                 >
-                  {pol.kind === 'rules' ? '!' : '✓'}
+                  {pi === 0 ? '!' : '✓'}
                 </div>
                 <h3
                   style={{
@@ -747,7 +658,7 @@ export default function CatbirdSeatPage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Check-in and check-out */}
+          {/* Check in / out */}
           <h2
             style={{
               fontFamily: T.display,
@@ -771,29 +682,12 @@ export default function CatbirdSeatPage() {
             }}
           >
             {[
-              { lbl: 'Check-in', val: '3:00 PM', sub: 'Smart-lock code in confirmation' },
+              { lbl: 'Check-in', val: '3:00 PM', sub: 'Keypad code sent by 10am' },
               { lbl: 'Check-out', val: '11:00 AM', sub: 'Late checkout: ask us' },
               { lbl: 'Minimum stay', val: '2 nights', sub: 'Game weekends fill fast' },
             ].map((c, ci) => (
-              <div
-                key={ci}
-                style={{
-                  background: '#fff',
-                  padding: '18px 20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 4,
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 800,
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    color: T.muted,
-                  }}
-                >
+              <div key={ci} style={{ background: '#fff', padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.muted }}>
                   {c.lbl}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 800, color: T.navy }}>{c.val}</div>
@@ -863,7 +757,7 @@ export default function CatbirdSeatPage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* From your front door — TWO TIERS (per critique P2 fix) */}
+          {/* From your front door */}
           <h2
             style={{
               fontFamily: T.display,
@@ -875,75 +769,37 @@ export default function CatbirdSeatPage() {
           >
             From your front door
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-            {proximityGroups.map((group, gi) => (
-              <div key={gi}>
-                <div
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '10px 24px',
+            }}
+          >
+            {detail.localProximity.map((loc, i) => (
+              <div
+                key={i}
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
+                  borderBottom: `1px solid ${T.line}`,
+                  paddingBottom: 8,
+                  gap: 12,
+                }}
+              >
+                <span style={{ fontSize: 13.5, color: T.ink, fontWeight: 600 }}>{loc.name}</span>
+                <span
                   style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: 12,
-                    marginBottom: 14,
+                    fontSize: 12,
+                    color: T.accent,
+                    fontWeight: 800,
+                    letterSpacing: '0.04em',
+                    whiteSpace: 'nowrap',
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize: 13,
-                      fontWeight: 800,
-                      color: T.navy,
-                      letterSpacing: '-0.005em',
-                    }}
-                  >
-                    {group.title}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 800,
-                      letterSpacing: '0.18em',
-                      textTransform: 'uppercase',
-                      color: T.muted,
-                    }}
-                  >
-                    {group.meta}
-                  </span>
-                </div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: '10px 24px',
-                  }}
-                >
-                  {group.items.map((loc, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'baseline',
-                        justifyContent: 'space-between',
-                        borderBottom: `1px solid ${T.line}`,
-                        paddingBottom: 8,
-                        gap: 12,
-                      }}
-                    >
-                      <span style={{ fontSize: 13.5, color: T.ink, fontWeight: 600 }}>
-                        {loc.name}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: 12,
-                          color: T.accent,
-                          fontWeight: 800,
-                          letterSpacing: '0.04em',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {loc.time}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                  {loc.time}
+                </span>
               </div>
             ))}
           </div>
@@ -989,72 +845,7 @@ export default function CatbirdSeatPage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Good to know — honest disclosure callout (warm bg, host voice) */}
-          <div
-            style={{
-              background: T.bgWarm,
-              border: '1px solid #f0e8e2',
-              borderRadius: 12,
-              padding: '22px 24px',
-              display: 'flex',
-              gap: 16,
-              alignItems: 'flex-start',
-              marginBottom: 32,
-            }}
-          >
-            <div
-              aria-hidden
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 8,
-                background: T.accentBg,
-                color: T.accent,
-                display: 'grid',
-                placeItems: 'center',
-                flex: 'none',
-                fontFamily: T.display,
-                fontWeight: 400,
-                fontSize: 20,
-              }}
-            >
-              i
-            </div>
-            <div>
-              <div
-                style={{
-                  fontSize: 10,
-                  fontWeight: 800,
-                  letterSpacing: '0.18em',
-                  textTransform: 'uppercase',
-                  color: T.accent,
-                  marginBottom: 6,
-                }}
-              >
-                Good to know
-              </div>
-              <h3
-                style={{
-                  fontSize: 15.5,
-                  fontWeight: 800,
-                  color: T.navy,
-                  margin: '0 0 8px',
-                  letterSpacing: '-0.005em',
-                }}
-              >
-                Wrigleyville is a vibrant block. Here is what to expect.
-              </h3>
-              <p style={{ fontSize: 14, color: T.ink, lineHeight: 1.7, margin: 0 }}>
-                The neighborhood is energetic, especially around games and concerts. The living
-                room catches some of that energy, which most guests love. The bedrooms have
-                double-pane windows we added specifically for soundproofing, so sleep is quieter
-                than you would expect. If you are a very light sleeper, this may not be the right
-                apartment for you.
-              </p>
-            </div>
-          </div>
-
-          {/* FAQ accordion */}
+          {/* FAQ */}
           <h2
             style={{
               fontFamily: T.display,
@@ -1118,7 +909,7 @@ export default function CatbirdSeatPage() {
           </div>
         </div>
 
-        {/* ════════════ BOOKING SIDEBAR (sticky) ════════════ */}
+        {/* ════════════ BOOKING SIDEBAR ════════════ */}
         <aside
           style={{
             position: 'sticky',
@@ -1159,7 +950,7 @@ export default function CatbirdSeatPage() {
                   fontWeight: 400,
                 }}
               >
-                Reserve The Catbird Seat
+                Reserve {'The Ivy'}
               </div>
               <div style={{ fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
                 Instant confirmation via Hospitable
@@ -1186,7 +977,7 @@ export default function CatbirdSeatPage() {
               {[
                 'Instant confirmation, no service fees',
                 'Text the hosts anytime, usually reply within the hour',
-                'Top-floor unit in our 3-unit Wrigleyville building',
+                'Same building as the other two Double Play units',
               ].map((t, i) => (
                 <div
                   key={i}
@@ -1264,18 +1055,18 @@ export default function CatbirdSeatPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {[
               {
-                slug: 'bleacher-balcony-flat',
-                name: 'Bleacher Balcony Flat',
-                meta: 'First Floor, up about 12 steps',
+                slug: 'the-addison',
+                name: 'The Addison',
+                meta: 'First Floor, up ~12 steps',
                 badge: 'Sister unit',
                 photo: '/bleacher-balcony-flat.png',
               },
               {
-                slug: 'sluggers-suite',
-                name: "The Slugger's Suite",
-                meta: 'Garden Level, closest to street',
-                badge: 'Sister unit',
-                photo: '/field-view-loft.png',
+                slug: 'the-marquee',
+                name: 'The Marquee',
+                meta: 'Top Floor (2nd), corner-lot bay windows',
+                badge: 'Top floor',
+                photo: '/sluggers-suite.jpg',
               },
             ].map(u => (
               <Link

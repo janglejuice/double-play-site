@@ -27,7 +27,7 @@ const T = {
 }
 
 export async function generateMetadata() {
-  const unit = getUnit('bleacher-balcony-flat')
+  const unit = getUnit('the-marquee')
   if (!unit) return {}
   return {
     title: `${unit.name}, Double Play Wrigleyville`,
@@ -35,9 +35,9 @@ export async function generateMetadata() {
   }
 }
 
-export default function BleacherBalconyFlatPage() {
-  const unit = getUnit('bleacher-balcony-flat')!
-  const detail = getUnitDetail('bleacher-balcony-flat')!
+export default function CatbirdSeatPage() {
+  const unit = getUnit('the-marquee')!
+  const detail = getUnitDetail('the-marquee')!
 
   // ── SEO Schemas ──
   const breadcrumbSchema = {
@@ -59,16 +59,15 @@ export default function BleacherBalconyFlatPage() {
     })),
   }
 
-  // Stat tiles for the dark feature panel.
-  // Bleacher's signature (vs the other two units that share the building): the 4.68 star rating
-  // across 117 guest reviews, new floors put in 2022, and central air (not window units).
+  // Stat tiles for the dark "Why people book this" feature panel.
+  // Catbird's appeal is the SPACE + LIGHT, so highlight ceiling/sqft/Walk Score.
   const featureStats = [
-    { val: '4.68 ★', lbl: 'Across 117 reviews' },
-    { val: '2022', lbl: 'New floors' },
-    { val: '780 sqft', lbl: 'Living area' },
+    { val: '10 ft', lbl: 'Ceiling height' },
+    { val: '900 sqft', lbl: 'Living area' },
+    { val: '98', lbl: 'Walk Score' },
   ]
 
-  // Group proximity into two semantic tiers
+  // Group proximity into two semantic tiers per critique P2 fix.
   const proximityGroups = [
     {
       title: 'At your doorstep',
@@ -113,7 +112,7 @@ export default function BleacherBalconyFlatPage() {
               All Apartments
             </Link>
             <span style={{ color: T.line }}>{'›'}</span>
-            <span style={{ color: T.navy, fontWeight: 700 }}>{unit.name}</span>
+            <span style={{ color: T.navy, fontWeight: 700 }}>{'The Marquee'}</span>
           </div>
           <Link
             href="/compare"
@@ -159,7 +158,7 @@ export default function BleacherBalconyFlatPage() {
           >
             <Image
               src={unit.photos[0]}
-              alt={`${unit.name} living room with bay windows facing Sheffield Avenue`}
+              alt={`${unit.name} corner-lot living room with bay windows facing Wrigleyville`}
               fill
               priority
               sizes="(max-width: 1000px) 100vw, 60vw"
@@ -175,20 +174,22 @@ export default function BleacherBalconyFlatPage() {
             }}
           >
             {[
-              'Corner bay windows',
-              'Bedroom 1, queen bed',
-              'Sleeper couch in living',
-              'Bedroom 2, queen bed',
-            ].map((label, i) => (
+              { src: '/The%20Marquee/3558%20N%20Wilton%202_004.jpg', label: 'Living room'           },
+              { src: '/The%20Marquee/3558%20N%20Wilton%202_009.jpg', label: 'Dining at the corner'  },
+              { src: '/The%20Marquee/3558%20N%20Wilton%202_015.jpg', label: 'Bedroom 1, queen bed'  },
+              { src: '/The%20Marquee/3558%20N%20Wilton%202_003.jpg', label: 'Corner bay windows'    },
+            ].map((tile, i) => (
               <div
                 key={i}
-                style={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  background:
-                    'repeating-linear-gradient(135deg, #cdd2db 0 14px, #c0c6d0 14px 28px)',
-                }}
+                style={{ position: 'relative', overflow: 'hidden', background: '#d4d8e0' }}
               >
+                <Image
+                  src={tile.src}
+                  alt={`The Marquee ${tile.label}`}
+                  fill
+                  sizes="(max-width: 1000px) 50vw, 25vw"
+                  style={{ objectFit: 'cover' }}
+                />
                 <span
                   style={{
                     position: 'absolute',
@@ -204,7 +205,7 @@ export default function BleacherBalconyFlatPage() {
                     fontFamily: 'ui-monospace, monospace',
                   }}
                 >
-                  {label}
+                  {tile.label}
                 </span>
               </div>
             ))}
@@ -250,7 +251,7 @@ export default function BleacherBalconyFlatPage() {
                   flex: 'none',
                 }}
               />
-              <span>First Floor, Sheffield Avenue</span>
+              <span>Top Floor, Wilton Avenue</span>
             </div>
             <h1
               style={{
@@ -263,7 +264,7 @@ export default function BleacherBalconyFlatPage() {
                 fontWeight: 400,
               }}
             >
-              {unit.name}
+              The Marquee
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               {[
@@ -287,49 +288,23 @@ export default function BleacherBalconyFlatPage() {
               ))}
             </div>
 
-            {/* Trust strip: rating + reviews + years hosting */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                flexWrap: 'wrap',
-                gap: 16,
-                marginTop: 18,
-                padding: '12px 16px',
-                background: T.bgSoft,
-                border: `1px solid ${T.line}`,
-                borderRadius: 10,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span aria-hidden style={{ color: T.accent, fontSize: 16 }}>{'★'}</span>
-                <span style={{ fontSize: 14, fontWeight: 800, color: T.navy }}>4.68</span>
-                <span style={{ fontSize: 13, color: T.muted }}>across 117 guest reviews</span>
-              </div>
-              <span style={{ color: T.line }}>{'·'}</span>
-              <div style={{ fontSize: 13, color: T.muted }}>
-                <span style={{ color: T.navy, fontWeight: 700 }}>6 years</span> hosting in this
-                building
-              </div>
-            </div>
-
-            {/* Quick highlights chip strip */}
+            {/* Quick highlights chip strip — surfaces the listing's bullet value props */}
             <div
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 gap: 8,
-                marginTop: 18,
+                marginTop: 22,
               }}
             >
               {[
                 '1 block from Wrigley',
-                '4.68★ across 117 reviews',
-                'New floors 2022',
-                'Central A/C and heat',
+                'Next to Red Line',
+                '300 Mbps WiFi',
                 'Walk Score 98',
                 'Pets welcome',
-                'Self check-in',
+                'Free parking pass',
+                'Keyless check-in',
               ].map(h => (
                 <span
                   key={h}
@@ -409,33 +384,34 @@ export default function BleacherBalconyFlatPage() {
 
           <div style={{ fontSize: 15.5, lineHeight: 1.78, color: T.ink }}>
             <p style={{ margin: '0 0 16px' }}>
-              The First Floor unit is the middle apartment in our 3-unit Wrigleyville building,
-              a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot
-              ceilings and huge bay-like windows as the Top Floor, with the dining area wrapping
-              the corner.
+              The Marquee is the top-floor apartment in our 3-unit building in Wrigleyville,
+              a 1-minute walk from Wrigley Field. The living room has huge bay-style windows with
+              the dining area wrapping the corner, so you get the full Wrigleyville game-day scene
+              from inside the apartment.
             </p>
             <p style={{ margin: '0 0 16px' }}>
-              We refloored the living and dining rooms in 2022 and the apartment has{' '}
+              The apartment has{' '}
               <strong style={{ color: T.navy }}>
-                real central air and central heat, not window units
-              </strong>
-              . The Addison Red Line and a CTA bus stop are right next to the building. Sleeps 5
-              with two queen beds, a roll-out twin, and a convertible sleeper couch in the
-              living room.
+                10-foot ceilings, two bedrooms with soundproofed double-pane windows, and roughly
+                900 square feet
+              </strong>{' '}
+              that sleeps five comfortably. The bedrooms keep the peace; the living room keeps the
+              energy. The Addison Red Line station and a CTA bus stop are right next to the
+              building.
             </p>
             <p style={{ margin: 0 }}>
               Check-in is{' '}
               <em style={{ fontStyle: 'italic' }}>
-                smart-lock, keyless, no key handoff required
-              </em>
-              . Your personal code arrives in the booking confirmation. And yes, this is the unit
-              that welcomes pets. We just ask you to message us about your pet before booking.
+                smart-lock, keyless, no key handoff required.
+              </em>{' '}
+              We send your personal code 2-3 days before arrival. We are local and answer
+              messages within the hour, every day.
             </p>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Feature panel: dark navy, grid texture, italic quote, stats */}
+          {/* The feature panel: dark navy, grid texture, italic quote, stats */}
           <div
             style={{
               background: T.navyInk,
@@ -482,7 +458,7 @@ export default function BleacherBalconyFlatPage() {
                   fontWeight: 400,
                 }}
               >
-                {'“'}New floors. Bay windows. The first-floor classic.{'”'}
+                {'“'}The whole neighborhood, from your living room.{'”'}
               </div>
               <p
                 style={{
@@ -492,11 +468,13 @@ export default function BleacherBalconyFlatPage() {
                   margin: 0,
                 }}
               >
-                We refloored the living and dining rooms in 2022. Real central air and central
-                heat, not window units like a lot of Wrigleyville apartments. Same bay-window
-                views as the Top Floor.{' '}
-                <strong style={{ color: '#fff' }}>4.68 stars across 117 guest reviews</strong>:
-                the unit guests come back for.
+                Corner-lot location with{' '}
+                <strong style={{ color: '#fff' }}>
+                  bay windows wrapping the dining area
+                </strong>
+                . On game days you watch the crowd stream toward the stadium from the couch. On
+                quiet nights the light is the thing. Top floor, no neighbors above. Brightest unit
+                in the building.
               </p>
               <div
                 style={{
@@ -528,7 +506,7 @@ export default function BleacherBalconyFlatPage() {
             </div>
           </div>
 
-          {/* What you'll love — numbered editorial column */}
+          {/* What you'll love — NUMBERED editorial column (NOT a card grid) */}
           <h2
             style={{
               fontFamily: T.display,
@@ -591,7 +569,7 @@ export default function BleacherBalconyFlatPage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Amenities — 6 groups, 2-col rows */}
+          {/* Amenities — 5 groups, 2-col rows */}
           <h2
             style={{
               fontFamily: T.display,
@@ -685,9 +663,8 @@ export default function BleacherBalconyFlatPage() {
                 kind: 'rules' as const,
                 items: [
                   'No smoking anywhere on the property',
-                  'No parties or events (building has other residents)',
+                  'No parties or events, building has other residents',
                   'Respect quiet hours after 10pm',
-                  'Noise decibel monitor on property',
                   `Max ${unit.maxGuests} guests at any time`,
                 ],
               },
@@ -696,10 +673,10 @@ export default function BleacherBalconyFlatPage() {
                 kind: 'pet' as const,
                 items: [
                   'Pets welcome (message us first to confirm fit)',
-                  'Assistance animals always allowed',
-                  'Personal smart-lock code sent in booking confirmation',
+                  'Pets welcome (pet fee applies)',
+                  'Personal smart-lock code sent 2-3 days before arrival',
                   'Code expires automatically at checkout',
-                  'Building has exterior security and doorbell cameras',
+                  'Do not share your code with non-guests',
                 ],
               },
             ].map((pol, pi) => (
@@ -796,7 +773,7 @@ export default function BleacherBalconyFlatPage() {
             }}
           >
             {[
-              { lbl: 'Check-in', val: '3:00 PM', sub: 'Smart-lock code in confirmation' },
+              { lbl: 'Check-in', val: '3:00 PM', sub: 'Code sent 2-3 days before arrival' },
               { lbl: 'Check-out', val: '11:00 AM', sub: 'Late checkout: ask us' },
               { lbl: 'Minimum stay', val: '2 nights', sub: 'Game weekends fill fast' },
             ].map((c, ci) => (
@@ -878,17 +855,17 @@ export default function BleacherBalconyFlatPage() {
               </div>
               <p style={{ fontSize: 13.5, color: T.muted, lineHeight: 1.6, margin: 0 }}>
                 Cancel up to{' '}
-                <strong style={{ color: T.ink }}>5 days before check-in</strong> for a full
-                refund. Cancel within 5 days and the first night is non-refundable. Cancel after
-                check-in and the remaining nights are non-refundable. We never charge a
-                cancellation fee on top of that.
+                <strong style={{ color: T.ink }}>5 days before check-in</strong> for a full refund.
+                Cancel within 5 days and the first night is non-refundable. Cancel after check-in
+                and the remaining nights are non-refundable. We never charge a cancellation fee on
+                top of that.
               </p>
             </div>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* From your front door — two tiers */}
+          {/* From your front door — TWO TIERS (per critique P2 fix) */}
           <h2
             style={{
               fontFamily: T.display,
@@ -1014,7 +991,7 @@ export default function BleacherBalconyFlatPage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Good to know — honest disclosure callout */}
+          {/* Good to know — honest disclosure callout (warm bg, host voice) */}
           <div
             style={{
               background: T.bgWarm,
@@ -1072,10 +1049,9 @@ export default function BleacherBalconyFlatPage() {
               <p style={{ fontSize: 14, color: T.ink, lineHeight: 1.7, margin: 0 }}>
                 The neighborhood is energetic, especially around games and concerts. The living
                 room catches some of that energy, which most guests love. The bedrooms have
-                double-pane windows for soundproofing, so sleep is quieter than you would
-                expect. As a courtesy to neighbors we keep a noise decibel monitor on property,
-                and the building has exterior security cameras at both entrances. If you are a
-                very light sleeper, this may not be the right apartment for you.
+                double-pane windows we added specifically for soundproofing, so sleep is quieter
+                than you would expect. If you are a very light sleeper, this may not be the right
+                apartment for you.
               </p>
             </div>
           </div>
@@ -1185,7 +1161,7 @@ export default function BleacherBalconyFlatPage() {
                   fontWeight: 400,
                 }}
               >
-                Reserve the First Floor
+                Reserve The Marquee
               </div>
               <div style={{ fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
                 Instant confirmation via Hospitable
@@ -1210,9 +1186,9 @@ export default function BleacherBalconyFlatPage() {
               }}
             >
               {[
-                'Pets welcome (message us first)',
+                'Instant confirmation, no service fees',
                 'Text the hosts anytime, usually reply within the hour',
-                '4.68 stars across 117 guest reviews',
+                'Top-floor unit in our 3-unit Wrigleyville building',
               ].map((t, i) => (
                 <div
                   key={i}
@@ -1290,15 +1266,15 @@ export default function BleacherBalconyFlatPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {[
               {
-                slug: 'catbird-seat',
-                name: 'The Catbird Seat',
-                meta: 'Top Floor (2nd), 900 sqft, bay windows',
-                badge: 'Top floor',
-                photo: '/sluggers-suite.jpg',
+                slug: 'the-addison',
+                name: 'The Addison',
+                meta: 'First Floor, up about 12 steps',
+                badge: 'Sister unit',
+                photo: '/bleacher-balcony-flat.png',
               },
               {
-                slug: 'sluggers-suite',
-                name: "The Slugger's Suite",
+                slug: 'the-ivy',
+                name: 'The Ivy',
                 meta: 'Garden Level, closest to street',
                 badge: 'Sister unit',
                 photo: '/field-view-loft.png',

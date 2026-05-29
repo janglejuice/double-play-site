@@ -24,7 +24,7 @@ export function getLodgingBusinessSchema() {
     amenityFeature: [
       { '@type': 'LocationFeatureSpecification', name: 'Full kitchen', value: true },
       { '@type': 'LocationFeatureSpecification', name: 'WiFi', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Washer/Dryer', value: true },
+      { '@type': 'LocationFeatureSpecification', name: 'Pets allowed', value: true },
     ],
   }
 }

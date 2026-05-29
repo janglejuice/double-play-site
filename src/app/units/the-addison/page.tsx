@@ -5,7 +5,7 @@ import { getUnit } from '@/data/units'
 import { getUnitDetail } from '@/data/unit-details'
 import { getVacationRentalSchema } from '@/lib/schema'
 
-// ── Design tokens (Sluggers Suite) ─────────────────────────────
+// ── Design tokens ──────────────────────────────────────────────
 const T = {
   navy: '#15375c',
   navyDeep: '#0f2a48',
@@ -27,7 +27,7 @@ const T = {
 }
 
 export async function generateMetadata() {
-  const unit = getUnit('sluggers-suite')
+  const unit = getUnit('the-addison')
   if (!unit) return {}
   return {
     title: `${unit.name}, Double Play Wrigleyville`,
@@ -35,9 +35,9 @@ export async function generateMetadata() {
   }
 }
 
-export default function SluggersSuitePage() {
-  const unit = getUnit('sluggers-suite')!
-  const detail = getUnitDetail('sluggers-suite')!
+export default function BleacherBalconyFlatPage() {
+  const unit = getUnit('the-addison')!
+  const detail = getUnitDetail('the-addison')!
 
   // ── SEO Schemas ──
   const breadcrumbSchema = {
@@ -59,11 +59,27 @@ export default function SluggersSuitePage() {
     })),
   }
 
-  // Stat tiles for the dark "Why people book this" feature
-  const viewStats = [
-    { val: 'Across the street', lbl: 'Distance to field' },
-    { val: '3 min', lbl: 'Walk to Red Line' },
-    { val: '2 min', lbl: "Walk to Murphy's" },
+  // Stat tiles for the dark feature panel.
+  // Bleacher's signature (vs the other two units that share the building): the 4.68 star rating
+  // across 117 guest reviews, new floors put in 2022, and central air (not window units).
+  const featureStats = [
+    { val: '4.68 ★', lbl: 'Across 117 reviews' },
+    { val: '2022', lbl: 'New floors' },
+    { val: '850 sqft', lbl: 'Living area' },
+  ]
+
+  // Group proximity into two semantic tiers
+  const proximityGroups = [
+    {
+      title: 'At your doorstep',
+      meta: 'Under 5 min walk',
+      items: detail.localProximity.filter((_, i) => i < 9),
+    },
+    {
+      title: 'Beyond the block',
+      meta: 'Transit-scaled',
+      items: detail.localProximity.filter((_, i) => i >= 9),
+    },
   ]
 
   return (
@@ -97,7 +113,7 @@ export default function SluggersSuitePage() {
               All Apartments
             </Link>
             <span style={{ color: T.line }}>{'›'}</span>
-            <span style={{ color: T.navy, fontWeight: 700 }}>{"Slugger's Suite"}</span>
+            <span style={{ color: T.navy, fontWeight: 700 }}>{unit.name}</span>
           </div>
           <Link
             href="/compare"
@@ -114,7 +130,7 @@ export default function SluggersSuitePage() {
         </div>
       </div>
 
-      {/* ─────────────── Gallery (image + photo placeholders) ─────────────── */}
+      {/* ─────────────── Gallery ─────────────── */}
       <section
         style={{
           maxWidth: 1240,
@@ -143,7 +159,7 @@ export default function SluggersSuitePage() {
           >
             <Image
               src={unit.photos[0]}
-              alt={`${unit.name} living room with direct Wrigley Field view`}
+              alt={`${unit.name} living room with bay windows facing Wilton Avenue`}
               fill
               priority
               sizes="(max-width: 1000px) 100vw, 60vw"
@@ -159,20 +175,22 @@ export default function SluggersSuitePage() {
             }}
           >
             {[
-              'Bedroom 1, queen bed',
-              'Bedroom 2, queen bed',
-              'Kitchen & dining',
-              'View from windows',
-            ].map((label, i) => (
+              { src: '/The%20Addison/download%20(4).png', label: 'Bedroom 1, queen bed'     },
+              { src: '/The%20Addison/download%20(5).png', label: 'Dining area'              },
+              { src: '/The%20Addison/download%20(2).png', label: 'Bedroom 2, queen bed'     },
+              { src: '/The%20Addison/download%20(8).png', label: 'Sleeper couch in living'  },
+            ].map((tile, i) => (
               <div
                 key={i}
-                style={{
-                  position: 'relative',
-                  overflow: 'hidden',
-                  background:
-                    'repeating-linear-gradient(135deg, #cdd2db 0 14px, #c0c6d0 14px 28px)',
-                }}
+                style={{ position: 'relative', overflow: 'hidden', background: '#d4d8e0' }}
               >
+                <Image
+                  src={tile.src}
+                  alt={`The Addison ${tile.label}`}
+                  fill
+                  sizes="(max-width: 1000px) 50vw, 25vw"
+                  style={{ objectFit: 'cover' }}
+                />
                 <span
                   style={{
                     position: 'absolute',
@@ -188,7 +206,7 @@ export default function SluggersSuitePage() {
                     fontFamily: 'ui-monospace, monospace',
                   }}
                 >
-                  {label}
+                  {tile.label}
                 </span>
               </div>
             ))}
@@ -230,31 +248,31 @@ export default function SluggersSuitePage() {
                   width: 22,
                   height: 2,
                   background: T.accent,
-                  borderRadius: 1,
                   display: 'inline-block',
+                  flex: 'none',
                 }}
               />
-              Garden Level, Sheffield Avenue
+              <span>First Floor, Wilton Avenue</span>
             </div>
             <h1
               style={{
                 fontFamily: T.display,
-                fontSize: 42,
+                fontSize: 44,
+                lineHeight: 1.05,
                 color: T.navy,
-                margin: '0 0 14px',
-                lineHeight: 1.08,
-                letterSpacing: '-0.02em',
+                margin: '0 0 18px',
+                letterSpacing: '-0.015em',
                 fontWeight: 400,
               }}
             >
-              {"Slugger's Suite"}
+              {unit.name}
             </h1>
             <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               {[
                 `${unit.beds} Bedrooms`,
-                `Sleeps ${unit.sleeps}`,
                 `${unit.baths} Bath`,
-                unit.floor,
+                `Sleeps ${unit.sleeps}`,
+                `${unit.sqft} sqft`,
               ].map((m, i, arr) => (
                 <div
                   key={i}
@@ -268,6 +286,81 @@ export default function SluggersSuitePage() {
                 >
                   {m}
                 </div>
+              ))}
+            </div>
+
+            {/* Trust strip: rating + reviews + years hosting */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: 16,
+                marginTop: 18,
+                padding: '12px 16px',
+                background: T.bgSoft,
+                border: `1px solid ${T.line}`,
+                borderRadius: 10,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span aria-hidden style={{ color: T.accent, fontSize: 16 }}>{'★'}</span>
+                <span style={{ fontSize: 14, fontWeight: 800, color: T.navy }}>4.68</span>
+                <span style={{ fontSize: 13, color: T.muted }}>across 117 guest reviews</span>
+              </div>
+              <span style={{ color: T.line }}>{'·'}</span>
+              <div style={{ fontSize: 13, color: T.muted }}>
+                <span style={{ color: T.navy, fontWeight: 700 }}>6 years</span> hosting in this
+                building
+              </div>
+            </div>
+
+            {/* Quick highlights chip strip */}
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 8,
+                marginTop: 18,
+              }}
+            >
+              {[
+                '1 block from Wrigley',
+                '4.68★ across 117 reviews',
+                'New floors 2022',
+                'Central A/C and heat',
+                'Walk Score 98',
+                'Pets welcome',
+                'Self check-in',
+              ].map(h => (
+                <span
+                  key={h}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 7,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: T.navy,
+                    background: T.bgSoft,
+                    border: `1px solid ${T.line}`,
+                    padding: '7px 12px',
+                    borderRadius: 100,
+                    letterSpacing: '0.005em',
+                  }}
+                >
+                  <span
+                    aria-hidden
+                    style={{
+                      width: 5,
+                      height: 5,
+                      borderRadius: '50%',
+                      background: T.accent,
+                      flex: 'none',
+                    }}
+                  />
+                  {h}
+                </span>
               ))}
             </div>
           </div>
@@ -318,28 +411,33 @@ export default function SluggersSuitePage() {
 
           <div style={{ fontSize: 15.5, lineHeight: 1.78, color: T.ink }}>
             <p style={{ margin: '0 0 16px' }}>
-              {unit.description}
+              The First Floor unit is the middle apartment in our 3-unit Wrigleyville building,
+              a 1-minute walk from Wrigley Field. The living room has the same tall 10-foot
+              ceilings and huge bay-like windows as the Top Floor, with the dining area wrapping
+              the corner.
             </p>
             <p style={{ margin: '0 0 16px' }}>
-              The apartment has{' '}
+              We refloored the living and dining rooms in 2022 and the apartment has{' '}
               <strong style={{ color: T.navy }}>
-                two bedrooms, a full kitchen, and a living room
-              </strong>{' '}
-              that doubles as the best seat on the block. We have done our best to make it feel
-              like a real home: proper kitchen knives, fast WiFi, and a smart TV loaded with
-              streaming apps. Nothing was an afterthought.
+                real central air and central heat, not window units
+              </strong>
+              . The Addison Red Line and a CTA bus stop are right next to the building. Sleeps 5
+              with two queen beds, a roll-out twin, and a convertible sleeper couch in the
+              living room.
             </p>
             <p style={{ margin: 0 }}>
               Check-in is{' '}
-              <em style={{ fontStyle: 'italic' }}>keypad only, no lockbox, no waiting around.</em>{' '}
-              We send your personal code the morning of arrival, and we are available by text the
-              whole time you are here.
+              <em style={{ fontStyle: 'italic' }}>
+                smart-lock, keyless, no key handoff required
+              </em>
+              . We send your personal code 2-3 days before arrival. And yes, this is the unit
+              that welcomes pets. We just ask you to message us about your pet before booking.
             </p>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* The "view" feature panel */}
+          {/* Feature panel: dark navy, grid texture, italic quote, stats */}
           <div
             style={{
               background: T.navyInk,
@@ -386,7 +484,7 @@ export default function SluggersSuitePage() {
                   fontWeight: 400,
                 }}
               >
-                {'“'}Closest to the bleacher entrance.{'”'}
+                {'“'}New floors. Bay windows. The first-floor classic.{'”'}
               </div>
               <p
                 style={{
@@ -396,13 +494,11 @@ export default function SluggersSuitePage() {
                   margin: 0,
                 }}
               >
-                Step out the door and you are at{' '}
-                <strong style={{ color: '#fff' }}>
-                  the bleacher entrance in under a minute.
-                </strong>{' '}
-                On game days you hear the marquee come alive from the living room. On quiet nights
-                the neighborhood hum drifts in just enough to remind you where you are. This is the
-                ground-floor energy of Wrigleyville without the climb.
+                We refloored the living and dining rooms in 2022. Real central air and central
+                heat, not window units like a lot of Wrigleyville apartments. Same bay-window
+                views as the Top Floor.{' '}
+                <strong style={{ color: '#fff' }}>4.68 stars across 117 guest reviews</strong>:
+                the unit guests come back for.
               </p>
               <div
                 style={{
@@ -414,7 +510,7 @@ export default function SluggersSuitePage() {
                   paddingTop: 18,
                 }}
               >
-                {viewStats.map((s, i) => (
+                {featureStats.map((s, i) => (
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <span style={{ fontSize: 18, fontWeight: 800, color: '#fff' }}>{s.val}</span>
                     <span
@@ -434,51 +530,70 @@ export default function SluggersSuitePage() {
             </div>
           </div>
 
-          {/* What you will love */}
+          {/* What you'll love — numbered editorial column */}
           <h2
             style={{
               fontFamily: T.display,
               fontSize: 26,
               color: T.navy,
-              margin: '0 0 22px',
+              margin: '0 0 12px',
               fontWeight: 400,
             }}
           >
             What you will love
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div>
             {detail.whatYouLove.map((item, idx) => (
               <div
                 key={idx}
                 style={{
-                  background: '#fff',
-                  border: `1px solid ${T.line}`,
-                  borderRadius: 10,
-                  padding: '20px 22px',
-                  boxShadow: T.cardShadow,
+                  display: 'grid',
+                  gridTemplateColumns: '64px 1fr',
+                  gap: 20,
+                  paddingTop: idx === 0 ? 18 : 24,
+                  paddingBottom: 24,
+                  borderTop: idx === 0 ? 'none' : `1px solid ${T.line}`,
+                  alignItems: 'start',
                 }}
               >
-                <h3
+                <div
+                  aria-hidden
                   style={{
-                    fontSize: 14,
-                    fontWeight: 800,
-                    color: T.navy,
-                    margin: '0 0 8px',
-                    letterSpacing: '-0.005em',
+                    fontFamily: T.display,
+                    fontSize: 56,
+                    fontWeight: 400,
+                    lineHeight: 1,
+                    color: 'rgba(21,55,92,0.18)',
+                    letterSpacing: '-0.04em',
+                    marginTop: -6,
                   }}
                 >
-                  {item.title}
-                </h3>
-                <p style={{ fontSize: 13.5, color: T.ink, lineHeight: 1.65, margin: 0 }}>
-                  {item.body}
-                </p>
+                  {String(idx + 1).padStart(2, '0')}
+                </div>
+                <div>
+                  <h3
+                    style={{
+                      fontSize: 17,
+                      fontWeight: 800,
+                      color: T.navy,
+                      margin: '0 0 8px',
+                      letterSpacing: '-0.01em',
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p style={{ fontSize: 14.5, color: T.ink, lineHeight: 1.7, margin: 0 }}>
+                    {item.body}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Amenities */}
+          {/* Amenities — 6 groups, 2-col rows */}
           <h2
             style={{
               fontFamily: T.display,
@@ -569,21 +684,24 @@ export default function SluggersSuitePage() {
             {[
               {
                 title: 'Ground rules',
+                kind: 'rules' as const,
                 items: [
                   'No smoking anywhere on the property',
-                  'No parties or events, building has other residents',
+                  'No parties or events (building has other residents)',
                   'Respect quiet hours after 10pm',
+                  'Noise decibel monitor on property',
                   `Max ${unit.maxGuests} guests at any time`,
                 ],
               },
               {
                 title: 'Pets and access',
+                kind: 'pet' as const,
                 items: [
                   'Pets welcome (message us first to confirm fit)',
-                  'Assistance animals always allowed',
-                  'Personal smart-lock code sent in your booking confirmation',
+                  'Pets welcome (pet fee applies)',
+                  'Personal smart-lock code sent 2-3 days before arrival',
                   'Code expires automatically at checkout',
-                  'Do not share your code with non-guests',
+                  'Building has exterior security and doorbell cameras',
                 ],
               },
             ].map((pol, pi) => (
@@ -610,7 +728,7 @@ export default function SluggersSuitePage() {
                     fontSize: 16,
                   }}
                 >
-                  {pi === 0 ? '!' : '✓'}
+                  {pol.kind === 'rules' ? '!' : '✓'}
                 </div>
                 <h3
                   style={{
@@ -656,7 +774,7 @@ export default function SluggersSuitePage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* Check in / out */}
+          {/* Check-in and check-out */}
           <h2
             style={{
               fontFamily: T.display,
@@ -680,12 +798,29 @@ export default function SluggersSuitePage() {
             }}
           >
             {[
-              { lbl: 'Check-in', val: '3:00 PM', sub: 'Keypad code sent by 10am' },
+              { lbl: 'Check-in', val: '3:00 PM', sub: 'Code sent 2-3 days before arrival' },
               { lbl: 'Check-out', val: '11:00 AM', sub: 'Late checkout: ask us' },
               { lbl: 'Minimum stay', val: '2 nights', sub: 'Game weekends fill fast' },
             ].map((c, ci) => (
-              <div key={ci} style={{ background: '#fff', padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.muted }}>
+              <div
+                key={ci}
+                style={{
+                  background: '#fff',
+                  padding: '18px 20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 4,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 800,
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: T.muted,
+                  }}
+                >
                   {c.lbl}
                 </div>
                 <div style={{ fontSize: 18, fontWeight: 800, color: T.navy }}>{c.val}</div>
@@ -745,17 +880,17 @@ export default function SluggersSuitePage() {
               </div>
               <p style={{ fontSize: 13.5, color: T.muted, lineHeight: 1.6, margin: 0 }}>
                 Cancel up to{' '}
-                <strong style={{ color: T.ink }}>5 days before check-in</strong> for a full refund.
-                Cancel within 5 days and the first night is non-refundable. Cancel after check-in
-                and the remaining nights are non-refundable. We never charge a cancellation fee on
-                top of that.
+                <strong style={{ color: T.ink }}>5 days before check-in</strong> for a full
+                refund. Cancel within 5 days and the first night is non-refundable. Cancel after
+                check-in and the remaining nights are non-refundable. We never charge a
+                cancellation fee on top of that.
               </p>
             </div>
           </div>
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* From your front door */}
+          {/* From your front door — two tiers */}
           <h2
             style={{
               fontFamily: T.display,
@@ -767,37 +902,75 @@ export default function SluggersSuitePage() {
           >
             From your front door
           </h2>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '10px 24px',
-            }}
-          >
-            {detail.localProximity.map((loc, i) => (
-              <div
-                key={i}
-                style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  justifyContent: 'space-between',
-                  borderBottom: `1px solid ${T.line}`,
-                  paddingBottom: 8,
-                  gap: 12,
-                }}
-              >
-                <span style={{ fontSize: 13.5, color: T.ink, fontWeight: 600 }}>{loc.name}</span>
-                <span
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+            {proximityGroups.map((group, gi) => (
+              <div key={gi}>
+                <div
                   style={{
-                    fontSize: 12,
-                    color: T.accent,
-                    fontWeight: 800,
-                    letterSpacing: '0.04em',
-                    whiteSpace: 'nowrap',
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    gap: 12,
+                    marginBottom: 14,
                   }}
                 >
-                  {loc.time}
-                </span>
+                  <span
+                    style={{
+                      fontSize: 13,
+                      fontWeight: 800,
+                      color: T.navy,
+                      letterSpacing: '-0.005em',
+                    }}
+                  >
+                    {group.title}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 800,
+                      letterSpacing: '0.18em',
+                      textTransform: 'uppercase',
+                      color: T.muted,
+                    }}
+                  >
+                    {group.meta}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(2, 1fr)',
+                    gap: '10px 24px',
+                  }}
+                >
+                  {group.items.map((loc, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        justifyContent: 'space-between',
+                        borderBottom: `1px solid ${T.line}`,
+                        paddingBottom: 8,
+                        gap: 12,
+                      }}
+                    >
+                      <span style={{ fontSize: 13.5, color: T.ink, fontWeight: 600 }}>
+                        {loc.name}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 12,
+                          color: T.accent,
+                          fontWeight: 800,
+                          letterSpacing: '0.04em',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {loc.time}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -843,7 +1016,73 @@ export default function SluggersSuitePage() {
 
           <hr style={{ border: 'none', borderTop: `1px solid ${T.line}`, margin: '32px 0' }} />
 
-          {/* FAQ */}
+          {/* Good to know — honest disclosure callout */}
+          <div
+            style={{
+              background: T.bgWarm,
+              border: '1px solid #f0e8e2',
+              borderRadius: 12,
+              padding: '22px 24px',
+              display: 'flex',
+              gap: 16,
+              alignItems: 'flex-start',
+              marginBottom: 32,
+            }}
+          >
+            <div
+              aria-hidden
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: T.accentBg,
+                color: T.accent,
+                display: 'grid',
+                placeItems: 'center',
+                flex: 'none',
+                fontFamily: T.display,
+                fontWeight: 400,
+                fontSize: 20,
+              }}
+            >
+              i
+            </div>
+            <div>
+              <div
+                style={{
+                  fontSize: 10,
+                  fontWeight: 800,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: T.accent,
+                  marginBottom: 6,
+                }}
+              >
+                Good to know
+              </div>
+              <h3
+                style={{
+                  fontSize: 15.5,
+                  fontWeight: 800,
+                  color: T.navy,
+                  margin: '0 0 8px',
+                  letterSpacing: '-0.005em',
+                }}
+              >
+                Wrigleyville is a vibrant block. Here is what to expect.
+              </h3>
+              <p style={{ fontSize: 14, color: T.ink, lineHeight: 1.7, margin: 0 }}>
+                The neighborhood is energetic, especially around games and concerts. The living
+                room catches some of that energy, which most guests love. The bedrooms have
+                double-pane windows for soundproofing, so sleep is quieter than you would
+                expect. As a courtesy to neighbors we keep a noise decibel monitor on property,
+                and the building has exterior security cameras at both entrances. If you are a
+                very light sleeper, this may not be the right apartment for you.
+              </p>
+            </div>
+          </div>
+
+          {/* FAQ accordion */}
           <h2
             style={{
               fontFamily: T.display,
@@ -907,7 +1146,7 @@ export default function SluggersSuitePage() {
           </div>
         </div>
 
-        {/* ════════════ BOOKING SIDEBAR ════════════ */}
+        {/* ════════════ BOOKING SIDEBAR (sticky) ════════════ */}
         <aside
           style={{
             position: 'sticky',
@@ -948,7 +1187,7 @@ export default function SluggersSuitePage() {
                   fontWeight: 400,
                 }}
               >
-                Reserve {"Slugger's Suite"}
+                Reserve the First Floor
               </div>
               <div style={{ fontSize: 12.5, color: T.muted, marginBottom: 14 }}>
                 Instant confirmation via Hospitable
@@ -973,9 +1212,9 @@ export default function SluggersSuitePage() {
               }}
             >
               {[
-                'Instant confirmation, no service fees',
+                'Pets welcome (message us first)',
                 'Text the hosts anytime, usually reply within the hour',
-                'Same building as the other two Double Play units',
+                '4.68 stars across 117 guest reviews',
               ].map((t, i) => (
                 <div
                   key={i}
@@ -1053,18 +1292,18 @@ export default function SluggersSuitePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
             {[
               {
-                slug: 'bleacher-balcony-flat',
-                name: 'Bleacher Balcony Flat',
-                meta: 'First Floor, up ~12 steps',
-                badge: 'Sister unit',
-                photo: '/bleacher-balcony-flat.png',
-              },
-              {
-                slug: 'catbird-seat',
-                name: 'The Catbird Seat',
-                meta: 'Top Floor (2nd), corner-lot bay windows',
+                slug: 'the-marquee',
+                name: 'The Marquee',
+                meta: 'Top Floor (2nd), 900 sqft, bay windows',
                 badge: 'Top floor',
                 photo: '/sluggers-suite.jpg',
+              },
+              {
+                slug: 'the-ivy',
+                name: 'The Ivy',
+                meta: 'Garden Level, closest to street',
+                badge: 'Sister unit',
+                photo: '/field-view-loft.png',
               },
             ].map(u => (
               <Link

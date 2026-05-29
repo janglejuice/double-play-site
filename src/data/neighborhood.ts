@@ -19,7 +19,7 @@ export type Spot = {
 export type HeroStat = { label: string; value: string; highlight?: boolean }
 export const heroStats: HeroStat[] = [
   { label: 'Wrigley Field', value: 'Across the street', highlight: true },
-  { label: 'Red Line · Addison', value: '3 min walk' },
+  { label: 'Red Line · Addison', value: 'Across the street' },
   { label: 'Lakefront Trail', value: '15 min walk east' },
   { label: 'Downtown Chicago', value: '15 min by train' },
   { label: 'Divvy Bikes', value: 'Station at our door' },
@@ -29,8 +29,8 @@ export const heroStats: HeroStat[] = [
 // ============ QUICK FACTS SIDEBAR (overview section) ============
 export type QuickFact = { label: string; value: string; sub: string }
 export const quickFacts: QuickFact[] = [
-  { label: 'Our building', value: 'Sheffield Avenue', sub: 'Directly across from Wrigley' },
-  { label: 'Train', value: 'Addison Red Line', sub: '3 min walk · 24/7 service' },
+  { label: 'Our building', value: 'Wilton Avenue', sub: 'Directly across from Wrigley' },
+  { label: 'Train', value: 'Addison Red Line', sub: 'Across the street · 24/7 service' },
   { label: 'Bike share', value: 'Divvy Station', sub: 'At our front door' },
   { label: 'Parking', value: 'Skip it', sub: '$40–60/day on game days' },
   { label: 'Nearest beach', value: 'Montrose Beach', sub: '15 min walk north' },

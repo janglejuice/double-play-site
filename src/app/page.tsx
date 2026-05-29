@@ -1,15 +1,24 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { units } from '@/data/units'
-import { events } from '@/data/events'
 import { reviews } from '@/data/reviews'
 import { getLodgingBusinessSchema } from '@/lib/schema'
+import { getUpcomingEvents } from '@/lib/schedule'
 import BookingForm from '@/components/BookingForm'
 
 const WRAP = { maxWidth: 1320, margin: '0 auto', padding: '0 32px' }
 
 const SHADOW_CARD = '0 1px 2px rgba(15,42,72,0.04), 0 12px 28px -12px rgba(15,42,72,0.18)'
 const SHADOW_PANEL = '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)'
+const CUBS_LOGO = 'https://www.mlbstatic.com/team-logos/112.svg'
+
+// Per-unit homepage card presentation: short floor label, a personality tagline,
+// and two highlight chips. Keeps the cards distinct instead of three clones.
+const CARD_META: Record<string, { floorShort: string; tagline: string; chips: string[] }> = {
+  'the-ivy':     { floorShort: 'Garden Level', tagline: 'Below-street and cozy, with soundproofed bedrooms for game-night sleep.',  chips: ['Soundproofed bedrooms'] },
+  'the-addison': { floorShort: 'First Floor',  tagline: 'Our most-reviewed apartment, with the classic raised first-floor feel.', chips: ['Corner bay windows'] },
+  'the-marquee': { floorShort: 'Top Floor',    tagline: 'Top-floor flagship: corner bay windows, 10-ft ceilings, the most light.', chips: ['Corner bay windows'] },
+}
 
 function formatDate(iso: string) {
   const d = new Date(iso)
@@ -20,9 +29,8 @@ function formatDate(iso: string) {
   }
 }
 
-export default function HomePage() {
-  const now = new Date()
-  const upcomingEvents = events.filter(e => new Date(e.date) >= now).slice(0, 4)
+export default async function HomePage() {
+  const upcomingEvents = (await getUpcomingEvents()).slice(0, 4)
   const featuredReviews = reviews.slice(0, 4)
 
   return (
@@ -83,25 +91,6 @@ export default function HomePage() {
                 Three private 2-bedroom apartments in the heart of Wrigleyville, Chicago. Book direct and skip the booking fees.
               </p>
 
-              {/* Save $200+ callout — under hero subtitle */}
-              <div style={{
-                display: 'inline-block',
-                background: '#E85A2C',
-                color: '#fff',
-                padding: '16px 22px',
-                borderRadius: 14,
-                boxShadow: '0 1px 2px rgba(15,42,72,0.06), 0 24px 48px -20px rgba(15,42,72,0.35)',
-                marginTop: 24,
-                fontFamily: 'Manrope',
-                maxWidth: 520,
-              }}>
-                <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.06em', marginBottom: 4 }}>
-                  SAVE $200+ BOOKING DIRECT
-                </div>
-                <div style={{ fontSize: 13, lineHeight: 1.5, opacity: 0.95 }}>
-                  Guests save an average of $200+ vs. Airbnb &amp; VRBO on a 3-night stay.
-                </div>
-              </div>
             </div>
 
             {/* Booking Panel — custom form, submits to /search */}
@@ -125,36 +114,89 @@ export default function HomePage() {
 
       {/* ============ APARTMENTS — overlaps hero ============ */}
       <section id="apartments" className="units-section" style={{ position: 'relative', zIndex: 5, marginTop: -140, paddingBottom: 120 }}>
+        <style>{`
+          .dp-unit-card { transition: transform 0.34s cubic-bezier(0.22,1,0.36,1), box-shadow 0.34s cubic-bezier(0.22,1,0.36,1); }
+          .dp-unit-card:hover { transform: translateY(-5px); box-shadow: 0 2px 6px rgba(15,42,72,0.08), 0 30px 60px -22px rgba(15,42,72,0.40); }
+          .dp-unit-photo > img { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+          .dp-unit-card:hover .dp-unit-photo > img { transform: scale(1.05); }
+          .dp-unit-cta { transition: background 0.2s ease, gap 0.2s ease; }
+          .dp-unit-card:hover .dp-unit-cta { background: #0f2a48; }
+          .dp-unit-card:hover .dp-unit-arrow { transform: translateX(3px); }
+          .dp-unit-arrow { transition: transform 0.2s ease; }
+          @media (prefers-reduced-motion: reduce) {
+            .dp-unit-card, .dp-unit-photo > img, .dp-unit-arrow { transition: none !important; }
+            .dp-unit-card:hover { transform: none; }
+            .dp-unit-card:hover .dp-unit-photo > img { transform: none; }
+          }
+        `}</style>
         <div style={WRAP}>
-          <div className="units-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 56, maxWidth: 1280, margin: '0 auto' }}>
-            {units.map(unit => (
-              <article key={unit.slug} style={{ background: '#fff', borderRadius: 8, boxShadow: SHADOW_CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column', border: '5px solid #fff', outline: '5px solid #fff' }}>
-                <div style={{ aspectRatio: '16/10', background: '#e8eaee', position: 'relative', overflow: 'hidden' }}>
+          <div className="units-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, maxWidth: 1280, margin: '0 auto' }}>
+            {units.map(unit => {
+              const meta = CARD_META[unit.slug]
+              return (
+              <article key={unit.slug} className="dp-unit-card" style={{ background: '#fff', borderRadius: 14, boxShadow: SHADOW_CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                {/* Photo with gradient + floor badge */}
+                <div className="dp-unit-photo" style={{ aspectRatio: '4/3', background: '#e8eaee', position: 'relative', overflow: 'hidden' }}>
                   <Image src={unit.photos[0]} alt={unit.name} fill style={{ objectFit: 'cover' }} />
+                  <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(11,31,54,0.5) 0%, rgba(11,31,54,0) 40%)' }} />
+                  <span style={{
+                    position: 'absolute', left: 14, bottom: 14,
+                    background: 'rgba(255,255,255,0.94)', color: '#15375c',
+                    fontFamily: 'Manrope', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
+                    textTransform: 'uppercase', padding: '6px 12px', borderRadius: 100,
+                    backdropFilter: 'blur(6px)',
+                  }}>
+                    {meta?.floorShort ?? unit.floor}
+                  </span>
                 </div>
-                <div style={{ padding: '28px 28px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                  <h3 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 24, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 12px' }}>{unit.name}</h3>
-                  <p style={{ color: '#6b7585', fontSize: 15, lineHeight: 1.5, margin: '0 0 14px' }}>{unit.tagline}</p>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#6b7585', fontSize: 13, marginBottom: 20 }}>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flex: 'none' }}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
-                    {unit.parking}
-                  </div>
-                  <div style={{ fontSize: 15, color: '#1c2433', marginBottom: 28 }}>
-                    {unit.pricePerNight ? (
+                <div style={{ padding: '22px 26px 26px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  {/* Unit name — DM Serif Display */}
+                  <h3 style={{ fontFamily: '"DM Serif Display", serif', fontWeight: 400, fontSize: 27, lineHeight: 1.08, color: '#15375c', margin: '0 0 8px' }}>{unit.name}</h3>
+                  {/* Tagline */}
+                  {meta && (
+                    <p style={{ fontFamily: 'Manrope', fontSize: 14, lineHeight: 1.5, color: '#6b7585', margin: '0 0 16px' }}>{meta.tagline}</p>
+                  )}
+                  {/* Stats row */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', fontSize: 13.5, fontWeight: 600, color: '#1c2433', marginBottom: 14, gap: '4px 0' }}>
+                    <span>{unit.beds} Bed</span>
+                    <span style={{ color: '#c8cdd6', margin: '0 8px' }}>·</span>
+                    <span>Sleeps {unit.sleeps}</span>
+                    <span style={{ color: '#c8cdd6', margin: '0 8px' }}>·</span>
+                    <span>{unit.baths} Bath</span>
+                    {unit.sqft && (
                       <>
-                        <b style={{ fontSize: 24, fontWeight: 700, color: '#15375c', marginRight: 6, letterSpacing: '-0.015em' }}>${unit.pricePerNight}</b>
-                        <span style={{ color: '#6b7585' }}>per night</span>
+                        <span style={{ color: '#c8cdd6', margin: '0 8px' }}>·</span>
+                        <span>{unit.sqft.toLocaleString()} sqft</span>
                       </>
-                    ) : (
-                      <span style={{ color: '#6b7585', fontStyle: 'italic' }}>Check availability for live pricing</span>
                     )}
                   </div>
-                  <Link href={`/units/${unit.slug}`} style={{ display: 'block', textAlign: 'center', background: '#15375c', color: '#fff', padding: '17px 16px', borderRadius: 8, fontWeight: 700, fontSize: 15, letterSpacing: '0.005em', marginTop: 'auto', textDecoration: 'none' }}>
+                  {/* Highlight chips */}
+                  {meta && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
+                      {meta.chips.map(c => (
+                        <span key={c} style={{
+                          fontFamily: 'Manrope', fontSize: 11.5, fontWeight: 600, color: '#15375c',
+                          background: 'rgba(21,55,92,0.06)', padding: '5px 11px', borderRadius: 100,
+                        }}>{c}</span>
+                      ))}
+                    </div>
+                  )}
+                  {/* Pricing */}
+                  <div style={{ fontSize: 13.5, color: '#6b7585', fontStyle: 'italic', marginBottom: 18, flex: 1 }}>
+                    {unit.pricePerNight ? (
+                      <><b style={{ fontStyle: 'normal', fontWeight: 700, color: '#15375c', fontSize: 22, marginRight: 4 }}>${unit.pricePerNight}</b><span>/ night</span></>
+                    ) : (
+                      'Check availability for live pricing'
+                    )}
+                  </div>
+                  <Link href={`/units/${unit.slug}`} className="dp-unit-cta" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#15375c', color: '#fff', padding: '15px', borderRadius: 8, fontWeight: 700, fontSize: 15, letterSpacing: '0.01em', textDecoration: 'none' }}>
                     View Apartment
+                    <svg className="dp-unit-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                   </Link>
                 </div>
               </article>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -182,12 +224,22 @@ export default function HomePage() {
                 return (
                   <article key={i} style={{ background: '#fff', borderRadius: 14, boxShadow: SHADOW_CARD, padding: '26px 24px 24px', display: 'flex', flexDirection: 'column', border: '1px solid #eef0f3' }}>
                     <div style={{ background: '#f1f4f9', borderRadius: 10, padding: '14px 10px', textAlign: 'center', marginBottom: 18, color: '#15375c' }}>
-                      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#E85A2C' }}>{dow}</div>
+                      <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.18em', color: '#E85A2C' }}>{dow}</div>
                       <div style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontSize: 46, lineHeight: 1, margin: '2px 0', letterSpacing: '-0.02em' }}>{day}</div>
-                      <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '0.2em', color: '#15375c' }}>{mon}</div>
+                      <div style={{ fontSize: 13, fontWeight: 800, letterSpacing: '0.18em', color: '#15375c' }}>{mon}</div>
                     </div>
-                    <h3 style={{ fontWeight: 700, color: '#15375c', fontSize: 18, lineHeight: 1.3, letterSpacing: '-0.01em', margin: '0 0 14px', minHeight: 48 }}>{event.title}</h3>
-                    <Link href={`/units/sluggers-suite?checkin=${event.date}`} style={{ display: 'block', textAlign: 'center', border: '1.5px solid #E85A2C', color: '#E85A2C', padding: '12px 14px', borderRadius: 6, fontWeight: 700, fontSize: 14, letterSpacing: '0.005em', marginTop: 'auto', background: '#fff', textDecoration: 'none' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 14px', minHeight: 48 }}>
+                      {event.logo && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={CUBS_LOGO} alt="Chicago Cubs" width={28} height={28} loading="lazy" style={{ width: 28, height: 28, objectFit: 'contain', flex: 'none' }} />
+                      )}
+                      <h3 style={{ flex: 1, fontWeight: 700, color: '#15375c', fontSize: 17, lineHeight: 1.25, letterSpacing: '-0.01em', margin: 0 }}>{event.title}</h3>
+                      {event.logo && (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img src={event.logo} alt="" width={28} height={28} loading="lazy" style={{ width: 28, height: 28, objectFit: 'contain', flex: 'none' }} />
+                      )}
+                    </div>
+                    <Link href={`/search?start_date=${event.date}`} style={{ display: 'block', textAlign: 'center', border: '1.5px solid #E85A2C', color: '#E85A2C', padding: '12px 14px', borderRadius: 6, fontWeight: 700, fontSize: 14, letterSpacing: '0.005em', marginTop: 'auto', background: '#fff', textDecoration: 'none' }}>
                       Book for this date
                     </Link>
                   </article>
@@ -343,7 +395,7 @@ export default function HomePage() {
                 You came for the game. Stay for the city.
               </h2>
               <p style={{ fontSize: 17, lineHeight: 1.7, color: 'rgba(255,255,255,0.9)', margin: '0 0 20px' }}>
-                Our apartments aren&apos;t just steps from Wrigley Field — they&apos;re a 3-minute walk from the Addison Red
+                Our apartments aren&apos;t just steps from Wrigley Field — they&apos;re across the street from the Addison Red
                 Line, which puts you in <strong>downtown Chicago in 15 minutes</strong>. The Bean. The Art Institute.
                 The Riverwalk. Magnificent Mile. Lake Michigan&apos;s beaches. All without renting a car.
               </p>
@@ -404,22 +456,27 @@ export default function HomePage() {
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Explore Wrigleyville</h2>
             <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>The pre-game bars, late-night slices, and weekend brunch spots we&apos;ve sent hundreds of guests to. Full guide inside.</p>
           </div>
+          <style>{`
+            .dp-explore-tile img { transition: transform 0.55s cubic-bezier(0.22,1,0.36,1); }
+            .dp-explore-tile:hover img { transform: scale(1.06); }
+            @media (prefers-reduced-motion: reduce) { .dp-explore-tile img { transition: none !important; } .dp-explore-tile:hover img { transform: none; } }
+          `}</style>
           <div className="neighborhood-tiles" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 20 }}>
             {[
-              { label: 'Local Bars', ph: 'Local bars' },
-              { label: 'Local Restaurants', ph: 'Restaurants' },
-              { label: 'Coffee & Brunch', ph: 'Coffee & brunch' },
-            ].map(({ label, ph }) => (
-              <div key={label} style={{ borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, cursor: 'pointer' }}>
-                <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(135deg, #cfd5dd 0 14px, #c4cbd5 14px 28px)' }} />
-                <div style={{ position: 'absolute', left: 12, top: 12, background: 'rgba(255,255,255,0.94)', color: '#15375c', fontFamily: 'ui-monospace, monospace', fontSize: 10, letterSpacing: '0.08em', padding: '5px 8px', borderRadius: 4 }}>{ph}</div>
-                <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(11,31,54,0.85) 100%)', color: '#fff', padding: '24px 16px 14px', fontWeight: 700, fontSize: 15, lineHeight: 1.3 }}>{label}</div>
-              </div>
+              { label: 'Local Bars',        img: '/image-1779917788821.webp', alt: 'Classic Wrigleyville sports bar interior' },
+              { label: 'Local Restaurants', img: '/Murphys.jpg',               alt: "Murphy's Bleachers, a Wrigleyville staple across from the ballpark" },
+              { label: 'Coffee & Brunch',   img: '/dorite.jpg',                alt: 'Do-Rite Donuts near Wrigley Field' },
+            ].map(({ label, img, alt }) => (
+              <Link key={label} href="/neighborhood" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
+                <Image src={img} alt={alt} fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(11,31,54,0) 38%, rgba(11,31,54,0.85) 100%)' }} />
+                <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 18px 16px', fontWeight: 700, fontSize: 16, lineHeight: 1.3 }}>{label}</div>
+              </Link>
             ))}
-            <Link href="/neighborhood" style={{ borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, cursor: 'pointer', textDecoration: 'none' }}>
-              <div style={{ position: 'absolute', inset: 0, background: 'repeating-linear-gradient(135deg, #cfd5dd 0 14px, #c4cbd5 14px 28px)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,55,92,0.40) 0%, rgba(11,31,54,0.92) 100%)' }} />
-              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 16px 14px', fontWeight: 700, fontSize: 15, lineHeight: 1.3 }}>Explore More<br />Neighborhood Guide &#8594;</div>
+            <Link href="/neighborhood" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
+              <Image src="/image-1779917796814.webp" alt="Gallagher Way plaza at Wrigley Field lit up at night" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,55,92,0.45) 0%, rgba(11,31,54,0.92) 100%)' }} />
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 18px 16px', fontWeight: 700, fontSize: 16, lineHeight: 1.3 }}>Explore More<br />Neighborhood Guide &#8594;</div>
             </Link>
           </div>
         </div>

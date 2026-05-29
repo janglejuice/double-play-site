@@ -13,41 +13,41 @@ export type UnitDetail = {
 
 export const unitDetails: UnitDetail[] = [
   {
-    slug: 'sluggers-suite',
-    heroHeadline: 'Second-floor apartment with a direct window view of Wrigley Field',
-    heroSubhead: 'Two bedrooms, one bath, sleeps four. Ground-level game day energy, perfect for Cubs series weekends.',
+    slug: 'the-ivy',
+    heroHeadline: 'Half-basement apartment, one minute from Wrigley Field',
+    heroSubhead: 'Two bedrooms, one bath, sleeps four. 850 sqft, soundproofed bedrooms, Walk Score 98. Pets welcome.',
     whatYouLove: [
       {
-        title: 'Direct Field View from Your Living Room',
-        body: 'Watch the action without leaving the apartment. Whether it\'s a day game or night game, you\'ve got a front-row seat from the living room window. See the field, hear the crowd, feel the energy.',
+        title: 'One Minute from Wrigley\'s Front Gate',
+        body: 'The building is directly across from Wrigley Field. Walk out the front door and you are at the bleacher entrance in under a minute. No transit, no rideshare, no parking hunt.',
       },
       {
-        title: 'Second Floor Convenience',
-        body: 'High enough to catch the view and avoid street noise, low enough to be at the ballpark gates in 30 seconds. This floor hits the sweet spot for both atmosphere and walkability to everything on Sheffield.',
+        title: 'Soundproofed Bedrooms',
+        body: 'The bedrooms have double-pane windows specifically for the noise that comes with being next to Wrigley and transit. Game night, concert night — the bedrooms stay quiet.',
       },
       {
         title: 'Two Separate Bedrooms',
-        body: 'Sleep four comfortably with separate spaces. The master has a queen, the guest room has a queen. Everyone gets their own bed, their own space, their own morning routine.',
+        body: 'Sleep four comfortably. Each bedroom has a queen bed. Everyone gets their own space, their own morning routine, their own bed.',
       },
       {
-        title: 'Full Kitchen, Full Freedom',
-        body: 'Cook breakfast before the game, prep dinner after. Washer and dryer in unit. You\'re not staying in a hotel—you\'re living in our neighborhood for a few days.',
+        title: 'Full Kitchen, Cook at Home',
+        body: 'Full stove, oven, dishwasher, cookware, and all the basics. Cook breakfast before the game or make dinner after. You are in a real apartment, not a hotel room.',
       },
     ],
     idealFor: [
       'Cubs game weekends',
       'Groups of 4',
       'Pet owners',
-      'First-time Chicago visitors',
+      'Budget-conscious travelers',
       'Multi-day series trips',
-      'Friends splitting a place',
+      'Guests who prefer a cozy, below-street feel',
     ],
     amenityGroups: [
       {
         category: 'Kitchen',
         items: [
           'Full kitchen with stove, oven, dishwasher',
-          'Coffee maker and tea service',
+          'Coffee maker',
           'Cookware and utensils',
           'Dishes and glassware',
         ],
@@ -55,42 +55,51 @@ export const unitDetails: UnitDetail[] = [
       {
         category: 'Bedrooms & Bath',
         items: [
-          'Master bedroom: queen bed, ensuite bathroom',
-          'Guest bedroom: queen bed',
-          'Washer and dryer in unit',
-          'Fresh linens and towels',
-          'Hairdryer and bath essentials',
+          '2 bedrooms, each with a queen bed',
+          'Double-pane soundproofed bedroom windows',
+          'Fresh linens, towels, and pillows',
+          'Hair dryer',
+          'Shampoo, conditioner, shower gel provided',
+          'Iron',
         ],
       },
       {
-        category: 'Entertainment & Comfort',
+        category: 'Entertainment & Tech',
         items: [
-          'Smart TV with streaming apps',
-          'Fast WiFi (100+ Mbps)',
-          'Central air conditioning',
-          'Heat (gas, included)',
-          'Sound system',
+          'Smart TV with Live TV',
+          '300 Mbps WiFi throughout',
+          'Air conditioning',
         ],
       },
       {
         category: 'Building & Access',
         items: [
-          'Self check-in (keypad code)',
-          'No front desk, no keys to carry',
-          'Direct entry on the Sheffield Avenue side',
+          'Keypad self check-in (your own personal code)',
+          'No physical key',
+          'Half-basement unit in a 3-unit building',
+          '12 steps up to front porch, 15 steps down to unit',
           'Pets welcome (message us first)',
+        ],
+      },
+      {
+        category: 'Home Safety',
+        items: [
+          'Carbon monoxide detector',
+          'Smoke detector',
+          'Fire extinguisher',
+          'First aid kit',
         ],
       },
     ],
     floorPlan:
-      'Enter from the building into the garden-level apartment, the closest unit to street level. Open-concept living flows into the kitchen on the right. Both bedrooms branch off the main living space. One full bathroom serves the unit. The washer and dryer are in-building.',
+      'Enter the building from the main door on Wilton Avenue, then take 15 steps down to the half-basement unit (the lowest of the three apartment doors). You walk into an open living and dining space with the kitchen at the back. Both bedrooms are off the main living area, each with a queen bed and double-pane windows. One full bathroom. 850 sqft.',
     versusOthers:
-      'The Slugger\'s Suite is the middle ground—same size and comfort as the Loft, but at a lower price point, with the most direct field view without the top-floor climb. Compared to the Bleacher Flat, you get the field view and full privacy indoors, trading the outdoor balcony for unobstructed sightlines from inside.',
+      'The Ivy is the half-basement apartment — 12 steps up to the building porch, then 15 steps down to the unit. Compared to The Addison and The Marquee, you get a lower, more private feel and soundproofed bedrooms at the same 850 sqft. Same proximity to Wrigley, same pets-welcome policy, same 2-bed layout.',
     unitFAQ: [
       {
         question: 'Are pets allowed?',
         answer:
-          "Yes, pets are welcome. We do ask you to message us about your specific pet before booking so we can confirm fit. Assistance animals are always allowed.",
+          "Yes, pets are welcome. A pet fee applies and varies by stay. Please message us about your specific pet before booking so we can confirm fit and share the exact fee.",
       },
       {
         question: "What floor is this unit on?",
@@ -115,7 +124,7 @@ export const unitDetails: UnitDetail[] = [
       {
         question: "How do we check in?",
         answer:
-          "Self check-in with a smart lock. You will get your own personal code in your booking confirmation. No keys, no waiting, no front desk.",
+          "Self check-in with a smart lock. You will get your own personal code 2-3 days before arrival. No keys, no waiting, no front desk.",
       },
     ],
     localProximity: [
@@ -123,17 +132,17 @@ export const unitDetails: UnitDetail[] = [
       { name: 'Murphy\'s Bleachers', time: '1 min walk' },
       { name: 'Gallagher Way (food & drinks)', time: '1 min walk' },
       { name: 'Cubby Bear (bar)', time: '2 min walk' },
-      { name: 'Addison Red Line station', time: '3 min walk' },
+      { name: 'Addison Red Line station', time: 'Across the street' },
       { name: 'Mariano\'s grocery store', time: '5 min walk' },
       { name: 'Lake Michigan shoreline', time: '12 min walk' },
       { name: 'Lincoln Park neighborhood', time: '15 min walk' },
     ],
   },
   {
-    slug: 'bleacher-balcony-flat',
+    slug: 'the-addison',
     heroHeadline: 'First-floor classic. New floors. Bay windows.',
     heroSubhead:
-      'Our 2-bedroom first-floor apartment in Wrigleyville. Sleeps 5 in 780 sqft, 10-foot ceilings, Walk Score 98. Refloored in 2022. 4.68 stars across 117 guest reviews.',
+      'Our 2-bedroom first-floor apartment in Wrigleyville. Sleeps 5 in 850 sqft, 10-foot ceilings, Walk Score 98. Refloored in 2022. 4.68 stars across 117 guest reviews.',
     whatYouLove: [
       {
         title: 'Game day energy from the dining room corner',
@@ -153,7 +162,7 @@ export const unitDetails: UnitDetail[] = [
       {
         title: 'Where guests come back, and bring the dog',
         body:
-          "4.68 stars across 117 guest reviews. Pets are welcome here. Bring them along (assistance animals are always welcome). We ask you to message us about your specific pet before booking so we can confirm fit.",
+          "4.68 stars across 117 guest reviews. Pets are welcome (a pet fee applies, varies by stay). Message us about your specific pet before booking so we can confirm fit and share the fee.",
       },
     ],
     idealFor: [
@@ -216,7 +225,6 @@ export const unitDetails: UnitDetail[] = [
           'No physical key handoff',
           'Private entrance (separate apartment door inside the building)',
           'First floor of a 3-unit building (middle apartment)',
-          'In-building washer and dryer',
           'Free street parking, plus residential parking pass (1 per night)',
           'Pets allowed (message us first)',
         ],
@@ -235,14 +243,14 @@ export const unitDetails: UnitDetail[] = [
       },
     ],
     floorPlan:
-      "Enter from the main building door, then through your own apartment door (the middle of three apartment doors inside the building). You walk into an open living and dining space with the corner-lot bay windows opening onto Sheffield Avenue. The kitchen sits at the back. Both bedrooms are off the main space on the quieter side, each with a queen bed. One full bathroom with a multi-setting rainfall shower. 780 sqft total, with 10-foot ceilings that make the rooms feel taller than the footprint suggests.",
+      "Enter from the main building door, then through your own apartment door (the middle of three apartment doors inside the building). You walk into an open living and dining space with the corner-lot bay windows opening onto Wilton Avenue. The kitchen sits at the back. Both bedrooms are off the main space on the quieter side, each with a queen bed. One full bathroom with a multi-setting rainfall shower. 850 sqft total, with 10-foot ceilings that make the rooms feel taller than the footprint suggests.",
     versusOthers:
-      "Bleacher Balcony Flat is the first-floor (middle) apartment in our 3-unit building. Slightly smaller than the Top Floor's 900 sqft, with the same bay-window views but a different vantage. The classic raised first-floor feel, with new floors in 2022 and real central AC and heat (not window units). It is the most-reviewed unit of the three: 117 stays at 4.68 stars. All three apartments welcome pets.",
+      "The Addison is the first-floor (middle) apartment in our 3-unit building. Slightly smaller than the Top Floor's 900 sqft, with the same bay-window views but a different vantage. The classic raised first-floor feel, with new floors in 2022 and real central AC and heat (not window units). It is the most-reviewed unit of the three: 117 stays at 4.68 stars. All three apartments welcome pets.",
     unitFAQ: [
       {
         question: 'Are pets really allowed?',
         answer:
-          "Yes. We welcome dogs (and other household pets) here, and assistance animals are always allowed. We do ask you to message us about your specific pet before booking so we can confirm fit. All three units in our building allow pets.",
+          "Yes. We welcome dogs and other household pets in all three units. A pet fee applies and varies by stay. Please message us about your specific pet before booking so we can confirm fit and share the fee.",
       },
       {
         question: 'How close exactly is the apartment to Wrigley Field?',
@@ -272,7 +280,7 @@ export const unitDetails: UnitDetail[] = [
       {
         question: 'How do we get in?',
         answer:
-          "Keyless self check-in with a smart lock. You will get your own personal code in your booking confirmation. Main building door first, then your apartment door (the middle of three doors inside). No physical key, no key handoff required.",
+          "Keyless self check-in with a smart lock. You will get your own personal code 2-3 days before arrival. Main building door first, then your apartment door (the middle of three doors inside). No physical key, no key handoff required.",
       },
       {
         question: 'Is there fast WiFi for working remotely?',
@@ -282,7 +290,7 @@ export const unitDetails: UnitDetail[] = [
       {
         question: 'How does this compare to the other two units?',
         answer:
-          "Same building, same 1-minute walk to Wrigley. The Top Floor (Catbird Seat) is the highest and brightest at 900 sqft. The Garden Level (Slugger's Suite) is the closest to street level. This First Floor unit is the most-reviewed of the three (4.68 stars across 117 stays), has the classic raised first-floor feel, and got new floors in 2022. 780 sqft. All three units allow pets.",
+          "Same building, same 1-minute walk to Wrigley. The Marquee (Top Floor) is the highest and brightest at 900 sqft. The Ivy (Garden Level) is the closest to street level. The Addison is the most-reviewed of the three (4.68 stars across 117 stays), has the classic raised first-floor feel, and got new floors in 2022. 850 sqft. All three units allow pets.",
       },
     ],
     localProximity: [
@@ -301,7 +309,7 @@ export const unitDetails: UnitDetail[] = [
     ],
   },
   {
-    slug: 'catbird-seat',
+    slug: 'the-marquee',
     heroHeadline: '1-minute walk to Wrigley. Top floor. Corner-lot bay windows.',
     heroSubhead:
       'Our 2-bedroom top-floor apartment in Wrigleyville. Sleeps 5, 900 sqft, 10-foot ceilings, Walk Score 98. The Red Line is literally next door.',
@@ -406,7 +414,7 @@ export const unitDetails: UnitDetail[] = [
     floorPlan:
       "You enter into a generous open living and dining space along the corner of the building. Bay-like windows on one side, wraparound windows in the dining area on the other. The kitchen is at the back with full appliances and counter space. Two bedrooms sit on the quieter interior side, both with soundproofed double-pane windows. One full bathroom with a multi-setting rainfall shower. 10-foot ceilings throughout make the 900 sqft feel substantially larger than the number suggests.",
     versusOthers:
-      "The Catbird Seat is the top-floor apartment in our 3-unit building. The highest, brightest, and quietest of the three. If you want the corner-lot views and the elevated quiet, this is your unit. The other two apartments (Garden Level and First Floor) are equally close to Wrigley but sit lower in the building. All three are 2-bed, 1-bath.",
+      "The Marquee is the top-floor apartment in our 3-unit building. The highest, brightest, and quietest of the three. If you want the corner-lot views and the elevated quiet, this is your unit. The other two apartments (The Ivy and The Addison) are equally close to Wrigley but sit lower in the building. All three are 2-bed, 1-bath.",
     unitFAQ: [
       {
         question: 'How close exactly is the apartment to Wrigley Field?',
@@ -436,7 +444,7 @@ export const unitDetails: UnitDetail[] = [
       {
         question: 'How do we get in?',
         answer:
-          "Keyless self check-in with a smart lock. You will get your own personal code in your booking confirmation. Main building door first, then your apartment door (the second of three doors inside). No physical key, no key handoff required.",
+          "Keyless self check-in with a smart lock. You will get your own personal code 2-3 days before arrival. Main building door first, then your apartment door (the second of three doors inside). No physical key, no key handoff required.",
       },
       {
         question: 'Is there fast WiFi for working remotely?',
@@ -451,7 +459,7 @@ export const unitDetails: UnitDetail[] = [
       {
         question: 'Are pets allowed?',
         answer:
-          "Yes, pets are welcome. We ask you to message us about your specific pet before booking so we can confirm fit. Assistance animals are always allowed.",
+          "Yes, pets are welcome. A pet fee applies and varies by stay. Message us about your specific pet before booking so we can confirm fit and share the exact fee.",
       },
     ],
     localProximity: [

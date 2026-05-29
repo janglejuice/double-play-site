@@ -23,7 +23,6 @@ const NAV_LINKS = [
   { label: 'Compare', href: '/compare' },
   { label: 'Calendar', href: '/events' },
   { label: 'Guide', href: '/neighborhood' },
-  { label: 'Reviews', href: '/reviews' },
   { label: 'FAQ', href: '/faq' },
 ]
 

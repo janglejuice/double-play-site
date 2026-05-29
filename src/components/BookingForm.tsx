@@ -70,7 +70,7 @@ export default function BookingForm() {
       </button>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 14, fontSize: 12, color: '#6b7585', fontWeight: 600 }}>
         <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#23a06b', display: 'inline-block' }} />
-        Instant confirmation · No service fees
+        Instant confirmation · No service fees · Save $200+ vs. Airbnb
       </div>
     </form>
   )

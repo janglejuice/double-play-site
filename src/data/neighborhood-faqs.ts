@@ -15,7 +15,7 @@ export const neighborhoodFAQs: NeighborhoodFAQ[] = [
   {
     question: 'How do I get from Wrigleyville to downtown Chicago?',
     answer:
-      "The Addison Red Line station is a 3-minute walk from our apartments. The Red Line runs 24/7 and gets you to the Loop (downtown Chicago) in about 15-20 minutes. It's the easiest way to reach Millennium Park, The Bean, the Art Institute, the Riverwalk, and the Magnificent Mile. No rental car needed.",
+      "The Addison Red Line station is directly across the street from our building. The Red Line runs 24/7 and gets you to the Loop (downtown Chicago) in about 15-20 minutes. It's the easiest way to reach Millennium Park, The Bean, the Art Institute, the Riverwalk, and the Magnificent Mile. No rental car needed.",
   },
   {
     question: 'How do I get from Double Play to O\'Hare or Midway airport?',
@@ -30,12 +30,12 @@ export const neighborhoodFAQs: NeighborhoodFAQ[] = [
   {
     question: 'Is parking available at Double Play at Wrigley?',
     answer:
-      "Street parking exists but is genuinely difficult, especially on game days when residential permit zones get strictly enforced. We recommend skipping the rental car entirely — the Addison Red Line is 3 minutes away and gets you anywhere in Chicago without parking stress. If you must drive, there are several paid garages within a 2-minute walk, but expect $30-60/day on game days.",
+      "Street parking exists but is genuinely difficult, especially on game days when residential permit zones get strictly enforced. We recommend skipping the rental car entirely — the Addison Red Line is directly across the street and gets you anywhere in Chicago without parking stress. If you must drive, there are several paid garages within a 2-minute walk, but expect $30-60/day on game days.",
   },
   {
     question: 'Do I need a car when staying in Wrigleyville?',
     answer:
-      "No, and we actively recommend against renting one. The Red Line (3 min walk) takes you to downtown Chicago in 15-20 minutes. The lakefront, parks, museums, restaurants, and nightlife are all reachable by CTA train, CTA bus, Divvy bike, or rideshare. A CTA Ventra pass for 3 days is about $15 — significantly less than a single day of rental car parking.",
+      "No, and we actively recommend against renting one. The Red Line (directly across the street) takes you to downtown Chicago in 15-20 minutes. The lakefront, parks, museums, restaurants, and nightlife are all reachable by CTA train, CTA bus, Divvy bike, or rideshare. A CTA Ventra pass for 3 days is about $15 — significantly less than a single day of rental car parking.",
   },
   {
     question: 'What is there to do in Wrigleyville besides Cubs games?',

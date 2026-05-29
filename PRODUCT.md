@@ -12,7 +12,7 @@ Context: They're planning an experience, not just securing a bed. They're excite
 
 ## Product Purpose
 
-Direct booking site for 3 x 2bd/1ba vacation rental apartments at 3601 N Sheffield Ave, Chicago — directly across from Wrigley Field. Goal: capture bookings without Airbnb/VRBO fees, build an owned guest relationship, and rank on Google Vacation Rentals.
+Direct booking site for 3 x 2bd/1ba vacation rental apartments (The Ivy, The Addison, The Marquee) on Wilton Avenue in Wrigleyville, Chicago, directly across from Wrigley Field. (Do not print the street number in copy; refer to the corner of Wilton Avenue and Addison Street.) Goal: capture bookings without Airbnb/VRBO fees, build an owned guest relationship, and rank on Google Vacation Rentals.
 
 Success = guests who feel they made the right call before they even check in. A repeat guest and a Google review are the ideal outcomes.
 
