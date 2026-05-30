@@ -22,7 +22,7 @@ const NAV_LINKS = [
   { label: 'Apartments', href: '/#apartments' },
   { label: 'Compare', href: '/compare' },
   { label: 'Calendar', href: '/events' },
-  { label: 'Guide', href: '/neighborhood' },
+  { label: 'Guide', href: '/guide' },
   { label: 'FAQ', href: '/faq' },
 ]
 

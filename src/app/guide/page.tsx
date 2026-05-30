@@ -58,12 +58,12 @@ const BG_SOFT = '#f5f6f8'
 const BG_WARM = '#fdf6f1'
 const SHADOW_CARD = '0 1px 2px rgba(15,42,72,.04), 0 12px 28px -12px rgba(15,42,72,.18)'
 
-const WRAP: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' }
+const WRAP: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px)' }
 
 // ============ place card component ============
 function PlaceCard({ spot }: { spot: Spot }) {
   return (
-    <article style={{
+    <article className="nb-card" style={{
       background: '#fff',
       borderRadius: 12,
       overflow: 'hidden',
@@ -167,32 +167,33 @@ function SectionHeader({
   light = false,
 }: { kicker: string; title: string; description: string; light?: boolean }) {
   return (
-    <div style={{
+    <div className="nb-reveal" style={{
       display: 'flex',
       alignItems: 'flex-end',
       justifyContent: 'space-between',
-      paddingBottom: 24,
-      marginBottom: 36,
+      paddingBottom: 26,
+      marginBottom: 40,
       borderBottom: `1px solid ${light ? 'rgba(255,255,255,.10)' : LINE}`,
       gap: 24,
       flexWrap: 'wrap',
     }}>
       <div>
         <div style={{
-          fontSize: 11,
+          fontSize: 12,
           fontWeight: 800,
-          letterSpacing: '.22em',
+          letterSpacing: '.26em',
           color: ACCENT,
           textTransform: 'uppercase',
-          marginBottom: 6,
+          marginBottom: 10,
         }}>{kicker}</div>
         <h2 style={{
           fontFamily: "'DM Serif Display', serif",
-          fontSize: 38,
+          fontSize: 'clamp(38px, 4.6vw, 56px)',
           fontWeight: 400,
           color: light ? '#fff' : NAVY,
           margin: 0,
-          letterSpacing: '-.01em',
+          letterSpacing: '-.015em',
+          lineHeight: 1.0,
         }}>{title}</h2>
       </div>
       <p style={{
@@ -242,16 +243,33 @@ export default function NeighborhoodPage() {
   const coffeeBrunch = COFFEE_BRUNCH.map(findSpot).filter(Boolean) as Spot[]
 
   return (
-    <div style={{ background: '#fff', color: INK }}>
+    <div className="nb-guide" style={{ background: '#fff', color: INK }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getFAQSchema()) }}
       />
+      <style>{`
+        .nb-guide { --nb-quint: cubic-bezier(0.22,1,0.36,1); --nb-expo: cubic-bezier(0.16,1,0.3,1); }
+        @media (prefers-reduced-motion: no-preference) {
+          .nb-enter { opacity: 0; transform: translateY(24px); animation: nbEnter 0.85s var(--nb-expo) forwards; }
+          .nb-d1 { animation-delay: 0.06s } .nb-d2 { animation-delay: 0.16s }
+          .nb-d3 { animation-delay: 0.28s } .nb-d4 { animation-delay: 0.40s }
+          @keyframes nbEnter { to { opacity: 1; transform: none } }
+          @supports (animation-timeline: view()) {
+            .nb-reveal { opacity: 0; transform: translateY(30px); animation: nbReveal 1s var(--nb-expo) both; animation-timeline: view(); animation-range: entry 0% cover 24%; }
+            @keyframes nbReveal { to { opacity: 1; transform: none } }
+          }
+        }
+        .nb-card { transition: transform 0.36s var(--nb-quint), box-shadow 0.36s var(--nb-quint); }
+        .nb-card:hover { transform: translateY(-6px); box-shadow: 0 2px 6px rgba(15,42,72,.08), 0 28px 56px -20px rgba(15,42,72,.40); }
+        .nb-subnav-link { transition: color 0.2s ease, border-color 0.2s ease; }
+        .nb-subnav-link:hover { color: #E85A2C; border-bottom-color: #E85A2C; }
+      `}</style>
 
       {/* ====================== HERO ====================== */}
       <section style={{
         background: NAVY_INK,
-        padding: '88px 0 80px',
+        padding: 'clamp(76px, 9vw, 120px) 0 clamp(60px, 7vw, 92px)',
         position: 'relative',
         overflow: 'hidden',
       }}>
@@ -263,25 +281,25 @@ export default function NeighborhoodPage() {
             alignItems: 'end',
           }} className="hero-split-neighbor">
             <div>
-              <div style={{
-                fontSize: 11,
+              <div className="nb-enter nb-d1" style={{
+                fontSize: 12,
                 fontWeight: 800,
-                letterSpacing: '.22em',
+                letterSpacing: '.28em',
                 color: ACCENT,
                 textTransform: 'uppercase',
-                marginBottom: 16,
+                marginBottom: 20,
               }}>Wrigleyville · Chicago</div>
-              <h1 style={{
+              <h1 className="nb-enter nb-d2" style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 62,
-                lineHeight: 1.03,
+                fontSize: 'clamp(52px, 8.4vw, 104px)',
+                lineHeight: 0.98,
                 color: '#fff',
-                margin: '0 0 22px',
-                letterSpacing: '-.02em',
+                margin: '0 0 26px',
+                letterSpacing: '-.025em',
               }}>
-                A real, lived-in guide<br />to our <em style={{ fontStyle: 'italic' }}>neighborhood.</em>
+                A real, lived-in guide<br />to our <em style={{ fontStyle: 'italic', color: ACCENT }}>neighborhood.</em>
               </h1>
-              <p style={{
+              <p className="nb-enter nb-d3" style={{
                 fontSize: 17,
                 lineHeight: 1.7,
                 color: 'rgba(255,255,255,.68)',
@@ -295,7 +313,7 @@ export default function NeighborhoodPage() {
             </div>
 
             {/* Stats panel */}
-            <div style={{
+            <div className="nb-enter nb-d4" style={{
               background: 'rgba(255,255,255,.05)',
               border: '1px solid rgba(255,255,255,.10)',
               borderRadius: 14,
@@ -350,7 +368,7 @@ export default function NeighborhoodPage() {
             ['Getting Around', '#transit'],
             ['FAQ', '#faq'],
           ].map(([label, href]) => (
-            <a key={label} href={href} style={{
+            <a key={label} href={href} className="nb-subnav-link" style={{
               display: 'inline-block',
               padding: '15px 18px',
               fontSize: 12,
@@ -367,7 +385,7 @@ export default function NeighborhoodPage() {
       </nav>
 
       {/* ====================== HOST TIPS ====================== */}
-      <section id="tips" style={{ background: BG_WARM, padding: '80px 0' }}>
+      <section id="tips" style={{ background: BG_WARM, padding: 'clamp(64px, 8vw, 104px) 0' }}>
         <div style={WRAP}>
           <div style={{
             display: 'flex',
@@ -400,7 +418,7 @@ export default function NeighborhoodPage() {
               <span style={{ opacity: 0.6 }}>Wrigleyville, Chicago, IL</span>
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="tips-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 18 }} className="tips-grid nb-reveal">
             {[
               {
                 num: '01',
@@ -430,7 +448,7 @@ export default function NeighborhoodPage() {
                 ),
               },
             ].map(tip => (
-              <div key={tip.num} style={{
+              <div key={tip.num} className="nb-reveal nb-card" style={{
                 background: '#fff',
                 borderRadius: 12,
                 padding: 28,
@@ -439,11 +457,11 @@ export default function NeighborhoodPage() {
               }}>
                 <span style={{
                   fontFamily: "'DM Serif Display', serif",
-                  fontSize: 56,
-                  lineHeight: 1,
+                  fontSize: 92,
+                  lineHeight: 0.8,
                   color: ACCENT,
-                  opacity: 0.22,
-                  marginBottom: 10,
+                  opacity: 0.18,
+                  marginBottom: 8,
                   display: 'block',
                 }}>{tip.num}</span>
                 <h3 style={{ fontSize: 16, fontWeight: 800, color: NAVY, margin: '0 0 9px' }}>{tip.title}</h3>
@@ -455,14 +473,14 @@ export default function NeighborhoodPage() {
       </section>
 
       {/* ====================== OVERVIEW + QUICK FACTS SIDEBAR ====================== */}
-      <section id="overview" style={{ padding: '88px 0' }}>
+      <section id="overview" style={{ padding: 'clamp(76px, 9.5vw, 124px) 0' }}>
         <div style={WRAP}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 300px',
             gap: 72,
             alignItems: 'start',
-          }} className="overview-grid">
+          }} className="overview-grid nb-reveal">
             <div>
               <div style={{
                 fontSize: 11,
@@ -484,15 +502,17 @@ export default function NeighborhoodPage() {
               <p style={{ fontSize: 16, lineHeight: 1.78, color: INK, margin: '0 0 18px' }}>
                 Wrigleyville is the Chicago neighborhood that grew up around <strong style={{ color: NAVY }}>Wrigley Field</strong>, the second-oldest ballpark in America. On a game day, the streets fill with red and blue jerseys two hours before first pitch and stay loud until last call. Murphy&apos;s Bleachers spills onto Sheffield, the marquee at Clark and Addison glows, and the &quot;Go Cubs Go&quot; chant rolls out of every bar.
               </p>
-              <div style={{ borderLeft: `3px solid ${ACCENT}`, padding: '2px 0 2px 22px', margin: '28px 0' }}>
+              <div style={{ margin: '36px 0' }}>
+                <span aria-hidden style={{ display: 'block', fontFamily: "'DM Serif Display', serif", fontSize: 64, lineHeight: 0.6, color: ACCENT, marginBottom: 6 }}>&ldquo;</span>
                 <p style={{
                   fontFamily: "'DM Serif Display', serif",
                   fontStyle: 'italic',
-                  fontSize: 21,
-                  lineHeight: 1.4,
+                  fontSize: 'clamp(24px, 3vw, 34px)',
+                  lineHeight: 1.3,
                   color: NAVY,
                   margin: 0,
-                }}>&quot;But what surprises most of our guests is how great it is on non-game days.&quot;</p>
+                  letterSpacing: '-.01em',
+                }}>But what surprises most of our guests is how great it is on non-game days.</p>
               </div>
               <p style={{ fontSize: 16, lineHeight: 1.78, color: INK, margin: '0 0 18px' }}>
                 The restaurants on Clark Street are packed with locals year-round. <strong style={{ color: NAVY }}>Gallagher Way</strong>, the plaza next to the ballpark, hosts free concerts, yoga classes, outdoor movies, and a German Christmas market in winter. The Lakefront Trail is a 15-minute walk east.
@@ -544,56 +564,56 @@ export default function NeighborhoodPage() {
       </section>
 
       {/* ====================== BARS & PREGAME ====================== */}
-      <section id="bars" style={{ padding: '80px 0', background: BG_SOFT }}>
+      <section id="bars" style={{ padding: 'clamp(64px, 8vw, 104px) 0', background: BG_SOFT }}>
         <div style={WRAP}>
           <SectionHeader
             kicker="01 — Bars & Pregame"
             title="Drink like a local."
             description="These are the bars we actually go to — not just the ones tourists find on their own."
           />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid nb-reveal">
             {bars.map(spot => <PlaceCard key={spot.name} spot={spot} />)}
           </div>
         </div>
       </section>
 
       {/* ====================== RESTAURANTS ====================== */}
-      <section id="restaurants" style={{ padding: '80px 0' }}>
+      <section id="restaurants" style={{ padding: 'clamp(64px, 8vw, 104px) 0' }}>
         <div style={WRAP}>
           <SectionHeader
             kicker="02 — Restaurants"
             title="Where we actually eat."
             description="From pre-game bites to the date-night spot tourists never find."
           />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid nb-reveal">
             {restaurants.map(spot => <PlaceCard key={spot.name} spot={spot} />)}
           </div>
         </div>
       </section>
 
       {/* ====================== COFFEE & BRUNCH ====================== */}
-      <section id="coffee" style={{ padding: '80px 0', background: BG_SOFT }}>
+      <section id="coffee" style={{ padding: 'clamp(64px, 8vw, 104px) 0', background: BG_SOFT }}>
         <div style={WRAP}>
           <SectionHeader
             kicker="03 — Coffee & Brunch"
             title="Morning done right."
             description="Pre-game prep and slow Sunday mornings, both covered."
           />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }} className="place-grid nb-reveal">
             {coffeeBrunch.map(spot => <PlaceCard key={spot.name} spot={spot} />)}
           </div>
         </div>
       </section>
 
       {/* ====================== THINGS TO DO (EXPLORE) ====================== */}
-      <section id="explore" style={{ padding: '80px 0' }}>
+      <section id="explore" style={{ padding: 'clamp(64px, 8vw, 104px) 0' }}>
         <div style={WRAP}>
           <SectionHeader
             kicker="04 — Things To Do"
             title="Beyond the game."
             description="Wrigleyville is a neighborhood, not just a destination. Here&apos;s what&apos;s around you."
           />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }} className="explore-grid">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 18 }} className="explore-grid nb-reveal">
             {/* Feature card — Gallagher Way */}
             <div style={{
               gridColumn: 'span 2',
@@ -651,7 +671,7 @@ export default function NeighborhoodPage() {
                 dist: 'Red Line · 5 min south',
               },
             ].map((ec, i) => (
-              <div key={i} style={{
+              <div key={i} className="nb-card" style={{
                 background: '#fff',
                 borderRadius: 12,
                 boxShadow: SHADOW_CARD,
@@ -681,7 +701,7 @@ export default function NeighborhoodPage() {
       </section>
 
       {/* ====================== GETTING AROUND (TRANSIT) ====================== */}
-      <section id="transit" style={{ background: NAVY_INK, padding: '80px 0' }}>
+      <section id="transit" style={{ background: NAVY_INK, padding: 'clamp(64px, 8vw, 104px) 0' }}>
         <div style={WRAP}>
           <SectionHeader
             light
@@ -694,7 +714,7 @@ export default function NeighborhoodPage() {
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: 18,
             marginBottom: 18,
-          }} className="transit-grid">
+          }} className="transit-grid nb-reveal">
             {[
               {
                 big: 'Across the street',
@@ -779,14 +799,14 @@ export default function NeighborhoodPage() {
       </section>
 
       {/* ====================== FAQ (kept for GEO/AI citations) ====================== */}
-      <section id="faq" style={{ padding: '80px 0', background: '#fff' }}>
+      <section id="faq" style={{ padding: 'clamp(64px, 8vw, 104px) 0', background: '#fff' }}>
         <div style={WRAP}>
           <SectionHeader
             kicker="06 — Common Questions"
             title="Everything guests ask us."
             description="The same questions we answer in every booking message. Answered in advance."
           />
-          <div style={{ maxWidth: 880, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="nb-reveal" style={{ maxWidth: 880, display: 'flex', flexDirection: 'column', gap: 24 }}>
             {neighborhoodFAQs.map(faq => (
               <div key={faq.question} style={{ paddingBottom: 24, borderBottom: `1px solid ${LINE}` }}>
                 <h3 style={{
@@ -805,7 +825,7 @@ export default function NeighborhoodPage() {
       </section>
 
       {/* ====================== CTA ====================== */}
-      <section style={{ padding: '72px 0 88px', background: NAVY, color: '#fff', textAlign: 'center' }}>
+      <section style={{ padding: 'clamp(64px, 8vw, 104px) 0 clamp(76px, 9vw, 116px)', background: NAVY, color: '#fff', textAlign: 'center' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '0 40px' }}>
           <h2 style={{
             fontFamily: "'DM Serif Display', serif",
