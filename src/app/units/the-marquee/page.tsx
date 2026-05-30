@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import BookingWidget from '@/components/BookingWidget'
+import UnitGallery from '@/components/UnitGallery'
 import { getUnit } from '@/data/units'
 import { getUnitDetail } from '@/data/unit-details'
 import { getVacationRentalSchema } from '@/lib/schema'
@@ -137,80 +138,17 @@ export default function CatbirdSeatPage() {
           padding: '20px 32px 0',
         }}
       >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 0.82fr',
-            gridTemplateRows: '280px 280px',
-            gap: 6,
-            borderRadius: 16,
-            overflow: 'hidden',
-            position: 'relative',
-          }}
-        >
-          <div
-            style={{
-              gridRow: '1 / 3',
-              position: 'relative',
-              overflow: 'hidden',
-              background: '#d4d8e0',
-            }}
-          >
-            <Image
-              src={unit.photos[0]}
-              alt={`${unit.name} corner-lot living room with bay windows facing Wrigleyville`}
-              fill
-              priority
-              sizes="(max-width: 1000px) 100vw, 60vw"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gridTemplateRows: '1fr 1fr',
-              gap: 6,
-            }}
-          >
-            {[
-              { src: '/The%20Marquee/3558%20N%20Wilton%202_004.jpg', label: 'Living room'           },
-              { src: '/The%20Marquee/3558%20N%20Wilton%202_009.jpg', label: 'Dining at the corner'  },
-              { src: '/The%20Marquee/3558%20N%20Wilton%202_015.jpg', label: 'Bedroom 1, queen bed'  },
-              { src: '/The%20Marquee/3558%20N%20Wilton%202_003.jpg', label: 'Corner bay windows'    },
-            ].map((tile, i) => (
-              <div
-                key={i}
-                style={{ position: 'relative', overflow: 'hidden', background: '#d4d8e0' }}
-              >
-                <Image
-                  src={tile.src}
-                  alt={`The Marquee ${tile.label}`}
-                  fill
-                  sizes="(max-width: 1000px) 50vw, 25vw"
-                  style={{ objectFit: 'cover' }}
-                />
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: 10,
-                    bottom: 10,
-                    background: 'rgba(255,255,255,0.92)',
-                    color: T.navy,
-                    fontSize: 9.5,
-                    fontWeight: 700,
-                    letterSpacing: '0.06em',
-                    padding: '4px 9px',
-                    borderRadius: 4,
-                    fontFamily: 'ui-monospace, monospace',
-                  }}
-                >
-                  {tile.label}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <UnitGallery
+          photos={unit.photos}
+          unitName={unit.name}
+          heroAlt={`${unit.name} corner-lot living room with bay windows facing Wrigleyville`}
+          tiles={[
+            { src: '/The%20Marquee/3558%20N%20Wilton%202_004.jpg', label: 'Living room'          },
+            { src: '/The%20Marquee/3558%20N%20Wilton%202_009.jpg', label: 'Dining at the corner' },
+            { src: '/The%20Marquee/3558%20N%20Wilton%202_015.jpg', label: 'Bedroom 1, queen bed' },
+            { src: '/The%20Marquee/3558%20N%20Wilton%202_020.jpg', label: 'Kitchen'              },
+          ]}
+        />
       </section>
 
       {/* ─────────────── Main two-column body ─────────────── */}

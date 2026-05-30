@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { units, getUnit, type Unit } from '@/data/units'
 import { getUnitDetail } from '@/data/unit-details'
-import PhotoGallery from '@/components/PhotoGallery'
+import UnitGallery from '@/components/UnitGallery'
 import BookingWidget from '@/components/BookingWidget'
 import UnitCard from '@/components/UnitCard'
 import Link from 'next/link'
@@ -91,7 +91,7 @@ export default function UnitDetailPage({ slug }: UnitDetailPageProps) {
       {/* GALLERY + BOOKING */}
       <section style={{ maxWidth: 1200, margin: '0 auto', padding: '60px 24px 80px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
         <div>
-          <PhotoGallery photos={unit.photos} name={unit.name} />
+          <UnitGallery variant="compact" photos={unit.photos} unitName={unit.name} heroAlt={`${unit.name} living room`} />
         </div>
         <div>
           <p style={{ fontSize: 16, color: '#1c2433', lineHeight: 1.7, marginBottom: 32 }}>
