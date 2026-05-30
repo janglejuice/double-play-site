@@ -147,7 +147,7 @@ export default function BleacherBalconyFlatPage() {
             { src: '/The%20Addison/download%20(4).png', label: 'Bedroom 1, queen bed'    },
             { src: '/The%20Addison/download%20(5).png', label: 'Dining area'             },
             { src: '/The%20Addison/download%20(11).png', label: 'Kitchen'                 },
-            { src: '/The%20Addison/download%20(8).png', label: 'Sleeper couch in living' },
+            { src: '/The%20Addison/download%20(8).png', label: 'Second bedroom'           },
           ]}
         />
       </section>
