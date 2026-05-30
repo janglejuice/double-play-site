@@ -143,7 +143,7 @@ export default async function HomePage() {
                   <span style={{
                     position: 'absolute', left: 14, bottom: 14,
                     display: 'inline-flex', alignItems: 'center', gap: 7,
-                    background: 'rgba(255,255,255,0.94)', color: '#E85A2C',
+                    background: 'rgba(255,255,255,0.94)', color: '#15375c',
                     fontFamily: 'Manrope', fontSize: 10, fontWeight: 800, letterSpacing: '0.1em',
                     textTransform: 'uppercase', padding: '6px 12px', borderRadius: 100,
                     backdropFilter: 'blur(6px)',
@@ -180,8 +180,8 @@ export default async function HomePage() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
                       {meta.chips.map(c => (
                         <span key={c} style={{
-                          fontFamily: 'Manrope', fontSize: 11.5, fontWeight: 700, color: '#E85A2C',
-                          background: 'rgba(232,90,44,0.09)', border: '1px solid rgba(232,90,44,0.20)',
+                          fontFamily: 'Manrope', fontSize: 11.5, fontWeight: 700, color: '#15375c',
+                          background: 'rgba(232,90,44,0.10)', border: '1px solid rgba(232,90,44,0.22)',
                           padding: '5px 11px', borderRadius: 100,
                         }}>{c}</span>
                       ))}
@@ -261,22 +261,15 @@ export default async function HomePage() {
         <div style={WRAP}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <h2 style={{ fontFamily: 'Manrope', fontWeight: 700, fontSize: 34, letterSpacing: '-0.015em', color: '#15375c', margin: '0 0 10px' }}>Guest Reviews</h2>
-            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>Real testimonials from booked guests.</p>
+            <p style={{ color: '#6b7585', fontSize: 16, margin: '0 auto', maxWidth: 560 }}>What guests tell us after a weekend a block from Wrigley.</p>
           </div>
-          {/* TRUST BADGES — verified host stats (Airbnb host profile: 236 reviews, 4.71 avg, 6 yrs, 100% response) */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginBottom: 48, marginTop: -24 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
-              <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
-              4.71 across 236 reviews
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
-              <span style={{ color: '#E85A2C', fontSize: 16 }}>★</span>
-              6 years hosting
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 20px', background: '#fff', border: '1.5px solid #e6e8ec', borderRadius: 999, fontSize: 13, fontWeight: 700, color: '#15375c', letterSpacing: '0.02em' }}>
-              <span style={{ color: '#23a06b', fontSize: 14 }}>●</span>
-              100% response, replies within the hour
-            </div>
+          {/* Overall rating line — verified host stats (Airbnb host profile: 236 reviews, 4.71 avg, 6 yrs, 100% response) */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', flexWrap: 'wrap', gap: '4px 14px', marginBottom: 48, marginTop: -24 }}>
+            <span style={{ color: '#E85A2C', fontSize: 20, lineHeight: 1 }}>★</span>
+            <span style={{ fontFamily: '"DM Serif Display", serif', fontSize: 30, lineHeight: 1, color: '#15375c' }}>4.71</span>
+            <span style={{ fontSize: 15, fontWeight: 700, color: '#15375c' }}>across 236 guest reviews</span>
+            <span aria-hidden style={{ color: '#c8cdd6' }}>·</span>
+            <span style={{ fontSize: 15, color: '#6b7585' }}>6 years hosting, replies within the hour</span>
           </div>
           <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
             {featuredReviews.map((review, i) => (
@@ -410,7 +403,7 @@ export default async function HomePage() {
                 museum is worth a full day, and how to spend an afternoon on the lakefront like a local.
               </p>
               <Link
-                href="/neighborhood#beyond-wrigleyville"
+                href="/guide"
                 style={{
                   display: 'inline-block',
                   background: '#E85A2C',
@@ -473,13 +466,13 @@ export default async function HomePage() {
               { label: 'Local Restaurants', img: '/Murphys.jpg',               alt: "Murphy's Bleachers, a Wrigleyville staple across from the ballpark" },
               { label: 'Coffee & Brunch',   img: '/dorite.jpg',                alt: 'Do-Rite Donuts near Wrigley Field' },
             ].map(({ label, img, alt }) => (
-              <Link key={label} href="/neighborhood" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
+              <Link key={label} href="/guide" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
                 <Image src={img} alt={alt} fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(11,31,54,0) 38%, rgba(11,31,54,0.85) 100%)' }} />
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 18px 16px', fontWeight: 700, fontSize: 16, lineHeight: 1.3 }}>{label}</div>
               </Link>
             ))}
-            <Link href="/neighborhood" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
+            <Link href="/guide" className="dp-explore-tile" style={{ display: 'block', borderRadius: 10, overflow: 'hidden', aspectRatio: '4/3', background: '#dde1e7', position: 'relative', boxShadow: SHADOW_CARD, textDecoration: 'none' }}>
               <Image src="/image-1779917796814.webp" alt="Gallagher Way plaza at Wrigley Field lit up at night" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(15,55,92,0.45) 0%, rgba(11,31,54,0.92) 100%)' }} />
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, color: '#fff', padding: '24px 18px 16px', fontWeight: 700, fontSize: 16, lineHeight: 1.3 }}>Explore More<br />Neighborhood Guide &#8594;</div>
